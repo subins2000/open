@@ -1,0 +1,40 @@
+ErrorDocument 403 /comps/all_errors_page.php
+ErrorDocument 404 /comps/all_errors_page.php
+ErrorDocument 405 /comps/all_errors_page.php
+ErrorDocument 408 /comps/all_errors_page.php
+ErrorDocument 410 /comps/all_errors_page.php
+ErrorDocument 411 /comps/all_errors_page.php
+ErrorDocument 412 /comps/all_errors_page.php
+ErrorDocument 413 /comps/all_errors_page.php
+ErrorDocument 414 /comps/all_errors_page.php
+ErrorDocument 415 /comps/all_errors_page.php
+ErrorDocument 500 /comps/all_errors_page.php
+ErrorDocument 501 /comps/all_errors_page.php
+ErrorDocument 502 /comps/all_errors_page.php
+ErrorDocument 503 /comps/all_errors_page.php
+ErrorDocument 506 /comps/all_errors_page.php
+DirectoryIndex index.php /comps/all_errors_page.php
+<Files ^(*.php|*.phps)>
+    order deny,allow
+    deny from all
+</Files>
+<IfModule mod_rewrite.c>
+ RewriteEngine On
+ RewriteRule ^(blog|wp-admin)($|/) - [L]
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteCond %{REQUEST_FILENAME}\.php -f
+ RewriteRule .* $0.php
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteCond %{REQUEST_FILENAME}\.png -f
+ RewriteRule .* $0.png
+ RewriteRule ^index\.php$ - [L]
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteRule (.+) ./index.php?request=$1 [L]
+ # browser requests PHP
+ RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.php
+ RewriteRule ^/?(.*)\.php$ /$1 [L,R=301]
+ # check to see if the request is for a PHP file:
+ RewriteCond %{REQUEST_FILENAME}\.php -f
+ RewriteRule ^/?(.*)$ /$1.php [L]
+</IfModule>

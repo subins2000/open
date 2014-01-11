@@ -1,0 +1,23 @@
+.sm_bar{
+ position:absolute;
+ display:none;
+ width: 200px;
+ z-index:9999999999999999999;
+}
+.sm_conts{
+ border:1px solid #CCC;
+}
+.sm_conts .sitem{
+ background:white;
+ padding:2.5px 10px;
+ cursor:pointer;
+}
+.sm_conts .sitem.dark{
+ background:#AAA;
+ color:white;
+}
+.sm_conts .sitem .avatar,.sm_conts .sitem .name{
+ display:inline-block;
+ vertical-align:middle;
+}
+.sm_conts .sitem .name{margin-left:5px;}
