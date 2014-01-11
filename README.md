@@ -25,5 +25,9 @@ If you want to test Open on your Localhost server, you should do the following s
 Libraries used In Open
 ====
 jQuery
+
 The @Mentions have been implemented on Open by using jQuery sMention Plugin (https://github.com/subins2000/smention)
-PHP OAuth Class(http://www.phpclasses.org/package/7700-PHP-Authorize-and-access-APIs-using-OAuth.html). Thanks Manuel Lemos
+
+PHP OAuth Class(http://www.phpclasses.org/package/7700-PHP-Authorize-and-access-APIs-using-OAuth.html). Thanks Manuel Lemos.
+
+Resize image class
