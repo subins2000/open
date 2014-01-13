@@ -18,4 +18,10 @@
 <url>
   <loc>http://open.subinsb.com/search</loc>
 </url>
+<url>
+  <loc>http://open.subinsb.com/chat</loc>
+</url>
+<url>
+  <loc>http://open.subinsb.com/blog</loc>
+</url>
 </urlset>
