@@ -15,7 +15,6 @@ if($_P && ($pr=="pub" || $pr=="fri" || $pr=="meo")){
  if(isset($_POST['facebook'])){
   post_to_fb($rspst,$who,$pr);
  }
- $fVal="";
  $p=filt($_POST['post'],true);
  $sql=$db->prepare("INSERT INTO posts (uid,post,posted,privacy) VALUES (?,?,NOW(),?)");
  $sql->execute(array($who,$p,$pr));

@@ -8,6 +8,7 @@
    <a href="//open.subinsb.com/home"><button class="b-white home" title="Home">Home</button></a>
    <a href="//open.subinsb.com/search"><button class="b-white search" title="Search">Search</button></a>
    <a href="//open.subinsb.com/find"><button class="b-white find" title="Find">Find</button></a>
+   <a href="//open.subinsb.com/chat"><button class="b-white chat" title="Chat">Chat</button></a>
    <div style="position: absolute;right: 50px;top: 28px;">
     <button id="name_button" rid="<?echo$who;?>"><?echo$uname;?></button>
     <div id="short_profile" class="c_c">

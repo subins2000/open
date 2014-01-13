@@ -1,0 +1,47 @@
+.users, .chat{
+ display:table-cell;
+ vertical-align:top;
+ height:400px;
+}
+.users{
+ width:200px;
+ background:white;
+ padding:5px 10px 5px 9px;
+ border-right:1px solid #CCC;
+ background:white;
+ overflow-y:auto;
+}
+.chat{
+ width:450px;
+ padding:5px 14px;
+ background: #CCC;
+}
+.users .user img, .users .user .name, .users .user .status{
+ display:inline-block;
+ vertical-align:middle;
+ margin-left:4px;
+}
+.status{
+ text-indent:-999em;
+ width:12px;
+ height:12px;
+ margin-top:2px;
+}
+.status.on{
+ border-radius:10px;
+ background:#64C235;
+}
+.status.off{
+ border-radius:10px;
+ background:#AAA;
+}
+.chat .msgs{
+ height:370px;
+}
+.chat .chat_form{
+ border-top:1px solid #CCC;
+ padding:5px 15px;
+ margin-right:-14px;
+ margin-left:-14px;
+ height:27px;
+}

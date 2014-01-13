@@ -39,7 +39,9 @@ $lg=$whod==$who ? true:false;
 if($lg){
  $sql=$db->prepare("SELECT id FROM users WHERE id=?");
  $sql->execute(array($who));
- if($sql->rowCount()==0){$lg=false;}
+ if($sql->rowCount()==0){
+  $lg=false;
+ }
 }
 if(!function_exists("ser")){
  function ser($t,$d){
@@ -105,27 +107,30 @@ if(!function_exists("ch_url")){
  }
 }
 if(!function_exists("smention")){
+ $mUsers=array();
  function smention($s,$t){
   $userid=$t[1];
   $nxs=strpos($s,"@$userid");
   $nxs=strlen("@$userid")+$nxs;
   $nxs=substr($s,$nxs,1);
-  global$db;
-  $sql=$db->prepare("SELECT name FROM users WHERE id=?");
+  global$db, $mUsers;
+  $sql=$db->prepare("SELECT username,name FROM users WHERE id=?");
   $sql->execute(array($userid));
   if($sql->rowCount()==0){
    return"@$userid".$nxs;
   }else{
    while($r=$sql->fetch()){
     $name=$r['name'];
+    $mail=$r['username'];
    }
    $html="<a href='//open.subinsb.com/$userid'>@$name</a>".$nxs;
+   $mUsers[$userid]=1;
    return$html;
   }
  }
 }
 if(!function_exists("filt")){
- function filt($s,$r){
+ function filt($s,$r=false){
   $s=htmlspecialchars($s);
   if($r==true){
    $s=preg_replace("/\*\*(.*?)\*\*/",'<b>$1</b>',$s);
@@ -162,25 +167,50 @@ if(!function_exists("get")){
    return$data;
   }elseif($k=='plink'){
    return"http://open.subinsb.com/$u";
+  }elseif($k=="status"){
+   $data=$data['seen'];
+   if($data < date("Y-m-d H:i:s",strtotime('-25 seconds', time()))){
+    return "off";
+   }else{
+    return "on";
+   }
+  }elseif($k=="avatar"){
+   $img=get("img",$u);
+   if(preg_match("/profile\_pics\/om/",$img) || $img==""){
+    $img="http://open.subinsb.com/img/profile_pics/om";
+   }elseif(!preg_match("/imgur/",$img) && !preg_match("/akamaihd/",$img) && !preg_match("/google/",$img) && $img!=""){
+    $img="http://open.subinsb.com/data/{$u}/img/avatar";
+   }
+   return $img;
   }elseif($j==true){
    $data=json_decode($data['udata'],true);
    $data=filt($data[$k]);
    return$data;
+  }elseif($k=="fname"){
+   $data=filt($data["name"]);
+   $data=explode(" ",$data);
+   return $data[0];
   }else{
    return filt($data[$k]);
   }
  }
 }
 if(!function_exists("save")){
- function save($key,$val){
+ function save($key,$val=""){
   global$db;global$who;
-  $sql=$db->prepare("SELECT * FROM users WHERE id=?");
+  $sql=$db->prepare("SELECT udata FROM users WHERE id=?");
   $sql->execute(array($who));
   $data=$sql->fetch();
-  $arr=json_decode($data['udata'],true);
-  $arr[$key]=$val;
-  $sql=$db->prepare("UPDATE users SET udata=? WHERE id=?");
-  $sql->execute(array(json_encode($arr),$who));
+  if($key=="seen"){
+   $val=date("Y-m-d H:i:s",time());
+   $sql=$db->prepare("UPDATE users SET seen=? WHERE id=?");
+   $sql->execute(array($val,$who));
+  }else{
+   $arr=json_decode($data['udata'],true);
+   $arr[$key]=$val;
+   $sql=$db->prepare("UPDATE users SET udata=? WHERE id=?");
+   $sql->execute(array(json_encode($arr),$who));
+  }
  }
 }
 if(!isset($al_coll_dt)){
@@ -190,6 +220,7 @@ if($lg && $al_coll_dt==false){
  $al_coll_dt=true;
  $uimg=get("img");
  $uname=get("name",null,false);
+ save("seen");
 }
 /*Global Variables*/
 $_P=count($_POST)>0 ? true:false; 
@@ -210,7 +241,7 @@ if(!function_exists("foll")){
 }
 if(!function_exists("send_mail")){
  function send_mail($mail,$subject,$msg) {
-  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;border: 3px solid black;padding: 5px 10px;border-radius:5px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">#feedback</a>';
+  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;border: 3px solid black;padding: 5px 10px;border-radius:5px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
   $subject.=" - Open";
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -226,6 +257,19 @@ if(!function_exists("send_mail")){
   $result = curl_exec($ch);
   curl_close($ch);
   return $result;
+ }
+}
+include("notify.php");
+if(!function_exists("sm_notify")){
+ function sm_notify($pid){
+  global $mUsers, $who;
+  if(count($mUsers)!=0){  
+   foreach($mUsers as $k=>$v){
+    if($k!=$who){
+     notify("mention","post",$pid,$k,$who);
+    }
+   }
+  }
  }
 }
 ?>

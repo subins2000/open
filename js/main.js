@@ -1,3 +1,4 @@
+localStorage['onFormSion']=0;
 ht="//open.subinsb.com";
 setInterval(function(){
  $.getScript(ht+"/ajax/check?user="+$("#name_button").attr("rid")+"&fid="+$(".post:first").attr("id")+"&url="+encodeURIComponent(window.location.href)+"&type="+$("meta[name=type]").attr("value"));
@@ -67,8 +68,10 @@ window.post=function(u,dt,s,e,w,t){
  if(e!=null){d.err=e;}
  if(w!=null){msg(w,"m");}
  if(u.match("ajax")){klo="/";}else{klo="/ajax/";}
+ localStorage['onFormSion']=1;
  u=ht+klo+u;
  $.post(u,dt,function(da){
+  localStorage['onFormSion']=0;
   if(da.match("{\"error")){
    var jda=JSON.parse(da);
    msg(jda.msg,"e");

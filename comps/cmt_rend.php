@@ -25,7 +25,7 @@ function show_cmt($pid){
    while($r=$sql->fetch()){
     $id=$r['id'];
     $uid=$r['uid'];
-    $img=get("img",$uid);
+    $img=get("avatar",$uid);
     $nm=get("name",$uid,false);
     $pl=get("plink",$uid,false);
     $lk=array_search($id,$ck)===false ? "Like":"Unlike";

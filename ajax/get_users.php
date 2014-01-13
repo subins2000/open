@@ -10,12 +10,7 @@ $k=0;
 while($r = $sql->fetch()) {
  $k++;
  $name=$r['name'];
- $img=get("img",$r['id']);
- if(preg_match("/profile\_pics\/om/",$img)){
-  $img="http://open.subinsb.com/img/profile_pics/om";
- }elseif(!preg_match("/imgur/",$img) && !preg_match("/akamaihd/",$img) && !preg_match("/google/",$img)){
-  $img="http://open.subinsb.com/data/{$r['id']}/img/avatar";
- }
+ $img=get("avatar",$r['id']);
  $arr[$k]['id']=$r['id'];
  $arr[$k]['name']=$name;
  $arr[$k]['avatar']=$img;

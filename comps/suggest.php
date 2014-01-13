@@ -12,9 +12,7 @@ if($sql->rowCount()!=0){
 while($r=$sql->fetch()){
  $u=$r['id'];
  $nm=get("name",$u,false);
- $md=strlen($nm)>=25 ? "...":"";
- $snm=str_split($nm,25);
- $snm=$snm[0].$md;
+ $snm=get("fname",$u,false);
  echo"<div class='sugg'>";
   echo"<div style='vertical-align:top;display:inline-block;'>";
    echo"<a href='".get("plink",$u)."'>";
@@ -22,7 +20,7 @@ while($r=$sql->fetch()){
    echo"</a>";
   echo"</div>";
   echo"<div style='vertical-align:top;display:inline-block;'>";
-   echo"<a title='$nsm' href='".get("plink",$u)."' style='padding-left:5px;'>$snm</a><br/><cl/>";
+   echo"<a title='$nm' href='".get("plink",$u)."' style='padding-left:5px;'>$snm</a><br/><cl/>";
    echo foll($u);
   echo"</div>";
  echo"</div>";

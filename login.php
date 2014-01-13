@@ -43,7 +43,7 @@ if($_GET['logout']==true){
   </div>
   <div style="display:inline-block;vertical-align:top;background:#AAA;background:-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));background:-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
    <h1>Sign In</h1>
-   <form action="login" method="POST">
+   <form action="login?c=<?echo$c;?>" method="POST">
     E-Mail<br/>
     <input name="user" type="text" size="20"/><br/>
     Password<br/>

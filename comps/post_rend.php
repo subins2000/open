@@ -38,8 +38,8 @@ function show_posts($arr){
      $h.="$p";
     $h.="</div>";
     $h.="<div class='bottom'>";
-     $h.="<div class='like_bar'><a class='pst like' id='$id'>$lk</a> -> <span class='count lk' id='$id'>{$v['likes']}</span></div>";
-     $h.="<div class='cmt_bar'><a class='cmt' id='$id'>Comment</a> -> <span class='count ck' id='$id'>{$v['cmt']}</span></div>";
+     $h.="<div class='like_bar'><a class='pst like' id='$id'>$lk</a><span><span> -> </span></span><span class='count lk' id='$id'>{$v['likes']}</span></div>";
+     $h.="<div class='cmt_bar'><a class='cmt' id='$id'>Comment</a><span><span> -> </span></span><span class='count ck' id='$id'>{$v['cmt']}</span></div>";
      $h.=show_cmt($id);
     $h.="</div>";
    $h.="</div>";
