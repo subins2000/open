@@ -2,12 +2,12 @@
 if($_GET['show_errors']!=""){
  ini_set("display_errors","on");
 }
-$db=getenv('OPENSHIFT_GEAR_NAME');
+$dbname=getenv('OPENSHIFT_GEAR_NAME');
 $host=getenv('OPENSHIFT_MYSQL_DB_HOST');
 $port=getenv('OPENSHIFT_MYSQL_DB_PORT');
 $usr=getenv('OPENSHIFT_MYSQL_DB_USERNAME');
 $pass=getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
-$db=new PDO("mysql:dbname=$db;host=$host;port=".$port, $usr, $pass);
+$db=new PDO("mysql:dbname=$dbname;host=$host;port=".$port, $usr, $pass);
 if(!function_exists("encrypter")){
  function encrypter($value){
   if($value==''){return false;}

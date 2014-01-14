@@ -22,8 +22,8 @@ function post_to_tw($t,$who){
  $client->offline = true;
  $client->debug = false;
  $client->debug_http = true;
- $client->client_id = 'IrZGE5zMhO2W2wsyHjwNyQ';
- $client->client_secret = 'LVws3Gke5kOAHJvVTxKSJQpCqBkpVi13isEnRdm8';
+ $client->client_id = 'client_id';
+ $client->client_secret = 'client_secret';
  if(($success=$client->Initialize())){
   $success=$client->CallAPI(
    "https://api.twitter.com/1.1/statuses/update.json",

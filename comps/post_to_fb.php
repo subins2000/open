@@ -27,8 +27,8 @@ function post_to_fb($t,$who,$pr){
  $client->offline = true;
  $client->debug = false;
  $client->debug_http = false;
- $client->client_id = '670472332987070';
- $client->client_secret = '894580f515279de8238c5a5ae87b2884';
+ $client->client_id = 'client_id';
+ $client->client_secret = 'client_secret';
  if(($success=$client->Initialize())){
   $success=$client->CallAPI(
    "https://graph.facebook.com/me/feed",
