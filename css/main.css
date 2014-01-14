@@ -10,7 +10,7 @@ body{
  border:0px;
  padding:0px;
  line-height:100%;
- font-family: 'Ubuntu', sans-serif;
+ font-family:ubuntu;
 }
 body.cloud{background:url(//open.subinsb.com/img/clouds);background-size:25em;background-color:rgba(100, 172, 400,.8);}
 body.dark{background:-webkit-linear-gradient(#AAA,#EEE);background:-moz-linear-gradient(left,#AAA,#EEE);background-size:800em;}
