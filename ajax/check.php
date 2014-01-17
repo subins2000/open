@@ -8,7 +8,7 @@ window.location=window.location;
 <?
  }
 }
-if($lg && $_GET['user']==$who && $_GET['fid']!="undefined" && $_GET['type']!="profile"){
+if($lg && $_GET['user']==$who && $_GET['fid']!="undefined" && $_GET['type']!="profile" && $_GET['type']!="view"){
  include("../comps/post_rend.php");
  $id=$_GET['fid'];
  $url=urldecode($_GET['url']);

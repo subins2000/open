@@ -53,7 +53,7 @@ $cms=$cms->rowCount();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$cfs="ac,home,profile";$fs="ac,profile,time,home";$t=substr($name,"-1")=='s' ? "$name' Profile":"$name's Profile";include("comps/head.php");?>
+ <?$cfs="ac,home,profile,gadget";$fs="ac,profile,time,home,gadget";$t=substr($name,"-1")=='s' ? "$name' Profile":"$name's Profile";include("comps/head.php");?>
  <meta name="oid" value="<?echo$id;?>"/>
  <meta name="type" value="profile"/>
 </head><body>
@@ -112,22 +112,65 @@ $cms=$cms->rowCount();
     </div>
     <div class="noggler" id="likes" <?if($_GET['part']=="likes"){echo"style='display:block;'";}?>>
      <?
-     $sql=$db->prepare("SELECT * FROM likes WHERE uid=:id AND pid IN (SELECT id FROM posts WHERE (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))))");
+     $sql=$db->prepare("SELECT liked, pid FROM likes WHERE 
+     uid=:id AND pid IN (
+      SELECT id FROM posts WHERE (
+       privacy='pub' OR (
+        privacy='fri' AND uid IN (
+         SELECT fid FROM conn WHERE uid=:who AND fid IN (
+          SELECT uid FROM conn WHERE fid=:who
+         )
+        )
+       )
+      )
+     )
+     ORDER BY liked DESC LIMIT 10");
      $sql->execute(array(":id"=>$id,":who"=>$who));
-     while($r=$sql->fetch()){
-      echo "<div style='background:black;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><div class='time'>{$r['liked']}</div><div clear></div><div style='margin-left:10px;'>$name liked <a href='view?id=".$r['pid']."'>Post #".$r['pid']."</a></div></div>";
-     }
      if($sql->rowCount()==0){
-      echo "<h1>No Likes</h1>";
+      echo "<h1>No Post Likes</h1>";
+     }else{
+      echo "<h1>Post Likes</h1>";
+      while($r=$sql->fetch()){
+       echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><span class='time'>{$r['liked']}</span> : $name liked <a href='view?id={$r['pid']}'>Post #".$r['pid']."</a></div>";
+      }
+     }
+     $sql=$db->prepare("SELECT liked, cid FROM clikes WHERE 
+     uid=:id AND cid IN (
+      SELECT id FROM cmt WHERE pid IN (
+       SELECT id FROM posts WHERE (
+        privacy='pub' OR (
+         privacy='fri' AND uid IN (
+          SELECT fid FROM conn WHERE uid=:who AND fid IN (
+           SELECT uid FROM conn WHERE fid=:who
+          )
+         )
+        )
+       )
+      )
+     )
+     ORDER BY liked DESC");
+     $sql->execute(array(":id"=>$id,":who"=>$who));
+     if($sql->rowCount()==0){
+      echo "<h1>No Comment Likes</h1>";
+     }else{
+      echo "<h1>Comment Likes</h1>";
+      while($r=$sql->fetch()){
+       $cid=$db->prepare("SELECT pid FROM cmt WHERE id=?");
+       $cid->execute(array($r['cid']));
+       $cid=$cid->fetch();
+       $cid=$cid['pid'];
+       echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><span class='time'>{$r['liked']}</span> : $name liked <a href='view?id={$cid}#{$r['cid']}'>Comment # {$r['cid']}</a></div>";
+      }
      }
      ?>
+     Post & Comment Likes are limited to 10 results.
     </div>
     <div class="noggler" id="comments" <?if($_GET['part']=="comments"){echo"style='display:block;'";}?>>
      <?
-     $sql=$db->prepare("SELECT * FROM cmt WHERE uid=:id AND pid IN (SELECT id FROM posts WHERE (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))))");
+     $sql=$db->prepare("SELECT * FROM cmt WHERE uid=:id AND pid IN (SELECT id FROM posts WHERE (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who))))) ORDER BY posted DESC LIMIT 10");
      $sql->execute(array(":id"=>$id,":who"=>$who));
      while($r=$sql->fetch()){
-      echo "<div style='background:black;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><div class='time'>{$r['posted']}</div><div clear></div><div style='margin-left:10px;'>$name commented on <a href='view?id=".$r['pid']."'>Post #".$r['pid']."</a><div clear></div><div style='border:5px dashed white;padding:10px 15px;'>{$r['cmt']}</div></div></div>";
+      echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><div class='time'>{$r['posted']}</div><div clear></div><div style='margin-left:10px;'>$name commented on <a href='view?id=".$r['pid']."'>Post #".$r['pid']."</a><div clear></div><div style='border:5px dashed white;padding:10px 15px;'>{$r['cmt']}</div></div></div>";
      }
      if($sql->rowCount()==0){
       echo "<h1>No Comments</h1>";
@@ -145,26 +188,27 @@ $cms=$cms->rowCount();
      <div val><span>Comments</span><c>:</c><v><?echo$cms;?></v></div>
      <div class="following" style="text-align:center;">
       <?
-      $sql=$db->prepare("SELECT * FROM conn WHERE uid=? LIMIT 6");
+      $sql=$db->prepare("SELECT fid FROM conn WHERE uid=? LIMIT 6");
       $sql->execute(array($id));
       while($r=$sql->fetch()){
        $f=$r['fid'];
        echo "<a href='".get("ploc",$f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name",$f,false)."' height='32' width='32' src='".get('img',$f)."'></a>";
       }
-      $sql=$db->prepare("SELECT * FROM conn WHERE uid=?");
+      $sql=$db->prepare("SELECT COUNT(uid) FROM conn WHERE uid=?");
       $sql->execute(array($id));
-      echo "<div><div>Following</div><b style='font-size:20px;'>{$sql->rowCount()}</b></div>";
+      $sql=$sql->fetchColumn();
+      echo "<div><div>Following</div><b style='font-size:20px;'>{$sql}</b></div>";
       ?>
      </div>
      <div class="followers" style="text-align:center;">
       <?
-      $sql=$db->prepare("SELECT * FROM conn WHERE fid=? LIMIT 6");
+      $sql=$db->prepare("SELECT uid FROM conn WHERE fid=? LIMIT 6");
       $sql->execute(array($id));
       while($r=$sql->fetch()){
        $f=$r['uid'];
        echo "<a href='".get("ploc",$f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name",$f,false)."' height='32' width='32' src='".get('img',$f)."'></a>";
       }
-      $sql=$db->prepare("SELECT * FROM conn WHERE fid=?");
+      $sql=$db->prepare("SELECT 1 FROM conn WHERE fid=?");
       $sql->execute(array($id));
       echo "<div><b style='font-size:20px;'>{$sql->rowCount()}</b><div>Followers</div></div>";
       ?>
@@ -176,4 +220,5 @@ $cms=$cms->rowCount();
  <?if($who==$id){?>
  <button id="editBox" style="margin:0px;position:fixed;top:95px;left:0px;width:200px;text-align:center;">Edit Profile</button>
  <?}?>
+ <?include("comps/gadget.php");?>
 </body></html>

@@ -41,6 +41,14 @@ if(!function_exists("notify")){
    $m.="<a href='http://open.subinsb.com/$w' target='_blank'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
    $title="$sn Mentioned You In His $t";
   }
+  if($a=="msg" && $tu!=$who){
+   $m="$n sent you a message :";
+   $m.="<blockquote>$t</blockquote>";
+   $m.="See the messages page to see other messages sent by $sn.";
+   $m.="<a href='http://open.subinsb.com/chat?id=$w'><button style='padding:5px 15px;'>See $sn's Messages</button></a>&nbsp;&nbsp;&nbsp;";
+   $m.="<a href='http://open.subinsb.com/$w'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
+   $title="$sn Sent you a message";
+  }
   if($dontSend==0){
    send_mail($mail,$title,$m);
   }

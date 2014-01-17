@@ -1,10 +1,10 @@
 <?
 function show_chat($fid,$single=false){
  global$who, $db;
- if($single==false){
+ if($single==false || $single==true){
   $sql=$db->prepare("SELECT * FROM chat WHERE (uid=? AND fid=?) OR (uid=? AND fid=?) ORDER BY id ASC");
   $sql->execute(array($who,$fid,$fid,$who));
- }else{
+ }elseif($single!=true){
   $sql=$db->prepare("SELECT * FROM chat WHERE id=?");
   $sql->execute(array($single));
  }
@@ -59,8 +59,8 @@ function show_chat($fid,$single=false){
  if($single==false){
   $h.="<form action='ajax/msg' method='POST' class='ajax_form chat_form' id='$fid' succ='Sent Successfully' err='Sending Failed. Try again.' while='Sending'>";
    $h.="<input type='hidden' name='to' value='$fid'/>";
-   $h.="<input type='text' class='msgEditor' name='msg' style='width:73%;'/>";
-   $h.="<input type='submit' name='submit' style='width:21%;' value='Send'/>";
+   $h.="<input type='text' class='msgEditor' name='msg' style='width:70%;min-width: 0px;'/>";
+   $h.="<input type='submit' name='submit' style='width:18%;padding: 5px;min-width: 0px;' value='Send'/>";
   $h.="</form>";
  }
  $sql=$db->prepare("UPDATE chat SET red='1' WHERE uid=? AND fid=? AND red='0'");

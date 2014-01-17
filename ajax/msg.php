@@ -1,6 +1,7 @@
 <?
 include("config.php");
 include("../comps/chat_rend.php");
+include("../comps/notify.php");
 ch();
 $msg=filt($_POST['msg'],true);
 $to=$_POST['to'];
@@ -24,6 +25,9 @@ if($_P && $msg!="" && $to!=""){
  }else{
   $sql=$db->prepare("INSERT INTO chat (uid,fid,msg,posted) VALUES (?,?,?,NOW())");
   $sql->execute(array($who,$to,$msg));
+ }
+ if(get("status",$to)=="off"){
+  notify("msg",$msg,0,$to,$who);
  }
  $sql=$db->prepare("SELECT id FROM chat WHERE uid=? AND fid=? ORDER BY id DESC LIMIT 1");
  $sql->execute(array($who,$to));

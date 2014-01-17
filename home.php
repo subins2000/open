@@ -1,7 +1,7 @@
 <?include("comps/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Home";$cfs="home,post_form,ac";$fs="ac,post_form,home,time";include("comps/head.php");?>
+ <?$t="Home";$cfs="home,post_form,ac,gadget";$fs="ac,post_form,home,time,gadget";include("comps/head.php");?>
 </head><body>
  <?include("comps/header.php");?>
  <div class="content">
@@ -22,4 +22,5 @@
    </div>
   </div>
  </div>
+ <?include("comps/gadget.php");?>
 </body></html>

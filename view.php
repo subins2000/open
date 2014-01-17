@@ -1,6 +1,7 @@
 <?include("comps/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
+ <meta name="type" value="view"></meta>
  <?$t="View Post";$cfs="ac,home,post_form";$fs="ac,post_form,home,time";include("comps/head.php");?>
 </head><body>
  <?include("comps/header.php");?>
