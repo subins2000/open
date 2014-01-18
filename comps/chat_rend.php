@@ -1,10 +1,10 @@
 <?
 function show_chat($fid,$single=false){
  global$who, $db;
- if($single==false || $single==true){
+ if($single===false || $single===true){
   $sql=$db->prepare("SELECT * FROM chat WHERE (uid=? AND fid=?) OR (uid=? AND fid=?) ORDER BY id ASC");
   $sql->execute(array($who,$fid,$fid,$who));
- }elseif($single!=true){
+ }elseif($single!==true){
   $sql=$db->prepare("SELECT * FROM chat WHERE id=?");
   $sql->execute(array($single));
  }
@@ -53,10 +53,10 @@ function show_chat($fid,$single=false){
   }else{
    $h.="<h2>No Messages</h2>You haven't exchanged messages with this gal. Spark up a conversation.";
   }
- if($single==false){
+ if($single===false){
   $h.="</div>";
  }
- if($single==false){
+ if($single===false){
   $h.="<form action='ajax/msg' method='POST' class='ajax_form chat_form' id='$fid' succ='Sent Successfully' err='Sending Failed. Try again.' while='Sending'>";
    $h.="<input type='hidden' name='to' value='$fid'/>";
    $h.="<input type='text' class='msgEditor' name='msg' style='width:70%;min-width: 0px;'/>";
