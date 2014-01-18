@@ -12,8 +12,9 @@ setInterval(function(){
  $(".time").each(function(){
   if($(this).attr('ran-over')!="kerala"){
    loc=localize($(this).text());
-   $(this).attr("title",new Date(loc).toString());
-   $(this).text($.timeago(new Date(loc)));
+   $(this).attr("title",loc);
+   $(this).text(new Date(loc).toString());
+   $(this).timeago();
    $(this).attr('ran-over',"kerala");
   }
  });
