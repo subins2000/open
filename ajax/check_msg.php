@@ -5,12 +5,15 @@ ch();
 $to=$_GET['to'];
 $lid=$_GET['lid'];
 $lup=false;
-if($lid!="" && $to!="gadget"){
+$isFri=false;
+if($to!="gadget"){
  $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
  $sql->execute(array(":who"=>$who,":fid"=>$to));
  if($sql->rowCount()==0){
   ser();
  }
+}
+if($lid!="" && $to!="gadget"){
  $sql=$db->prepare("SELECT id,red FROM chat WHERE (id > :ex OR id=:ex) AND (uid=:fid AND fid=:uid) ORDER BY id ASC LIMIT 1");
  $sql->execute(array(":ex"=>$lid,":uid"=>$who,":fid"=>$to));
  if($sql->rowCount()!=0){
@@ -38,11 +41,13 @@ if($lid!="" && $to!="gadget"){
     if($lup){
     ?>
      $("#<?echo$to;?>.msgs #<?echo$lid;?>.msg").replaceWith(p);
+     $(".msggt").show();
     <?
     }else{
     ?>
      if($("#<?echo$to;?>.msgs .msg").length==0){$("#<?echo$to;?>.msgs").html("");}
      $("#<?echo$to;?>.msgs").append(p);
+     $(".msggt").show();
     <?
     }
     ?>
@@ -60,7 +65,7 @@ if($lid!="" && $to!="gadget"){
  $userstatus=json_encode($userstatus);
 ?>
  var userstatus=<?echo$userstatus;?>;
- $(".user").each(function(){
+ $(".users .user").each(function(){
   id=$(this)[0].id;
   if($(this).find(".status").text()!=userstatus[id]){
    $(this).find(".status").replaceWith("<span class='status "+userstatus[id]+"'>"+userstatus[id]+"</span>");
@@ -75,15 +80,22 @@ if($lid!="" && $to!="gadget"){
  }
  $ht=str_replace('"','\"',show_chat($to,true));
 ?>
- $("#<?echo$to;?>.msgs").html("<?echo$ht;?>");mcTop();
+ $("#<?echo$to;?>.msgs").html("<?echo$ht;?>");
+ mcTop();
+ t=$(".users #<?echo$to;?>.user");
+ t.css({background:"white",color:"black"});
+ t.attr("title","Unread Messages");
 <?
-}elseif($to=="gadget"){
+}
+if($to!=""){
  $sql=$db->prepare("SELECT uid FROM chat WHERE fid=:uid AND red='0' ORDER BY id LIMIT 1");
  $sql->execute(array(":uid"=>$who));
  if($sql->rowCount()!=0){
   $id=$sql->fetchColumn();
 ?>
-  $(".usersgt #<?echo$id;?>.user")[0].click();
+  t=$(".users #<?echo$id;?>.user");
+  t.css({background:"red",color:"white"});
+  t.attr("title","Unread Messages");
 <?
  }
 }else{

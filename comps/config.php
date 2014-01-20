@@ -93,9 +93,11 @@ if(!function_exists("ch")){
   if(!$lg || $t===true){
    if(array_search($_SERVER['REQUEST_URI'],$no_login_required_ps)==false){
     header("Location: http://open.subinsb.com/login?c=//open.subinsb.com".$_SERVER['REQUEST_URI']);
+    exit;
    }
   }elseif(array_search($_SERVER['REQUEST_URI'],$no_login_required_ps)!=false){
    header("Location: //open.subinsb.com/home");
+   exit;
   }
  }
 }

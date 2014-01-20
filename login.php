@@ -36,12 +36,12 @@ if($_GET['logout']==true){
 </head><body>
  <?include("comps/header.php");?>
  <div class="content" style="text-align:center;">
-  <div style="display:inline-block;width:200px;text-align:left;background:#CCC;background:-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));background:-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));height:260px;padding:10px 20px 20px;">
+  <div style="display:inline-block;width:200px;text-align:left;height:260px;padding:10px 20px 20px;">
    <h1>Social Sign In</h1>
    <a href="//open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="//open.subinsb.com/img/fb_login.png"/></a><cl/>
    <a href="//open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="//open.subinsb.com/img/google_login.png"/></a>
   </div>
-  <div style="display:inline-block;vertical-align:top;background:#AAA;background:-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));background:-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
+  <div style="display:inline-block;vertical-align:top;width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
    <h1>Sign In</h1>
    <form action="login?c=<?echo$c;?>" method="POST">
     E-Mail<br/>
@@ -54,8 +54,8 @@ if($_GET['logout']==true){
      ser($er,"");
     }
     ?>
-    <a href="//open.subinsb.com/register"><input type="button" value="Sign Up"/></a><cl/>
-    <a href="//open.subinsb.com/me/ResetPassword"><input type="button" value="Forgot Password ?"/></a>
+    <a href="//open.subinsb.com/register"><button type="button" class="b-green">Sign Up</button></a><cl/>
+    <a href="//open.subinsb.com/me/ResetPassword"><button type="button" class="b-red">Forgot Password ?</button></a>
    </form>
   </div>
  </div>

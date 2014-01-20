@@ -23,10 +23,11 @@ header{
  top:0px;
  background:rgb(100, 194, 53);
  color:white;
- height: 85px;
+ height: 48px;
  z-index:999;
  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
  box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
+ text-align:center;
 }
 /*Global*/
 h1,h2,h3,h4,h5{
@@ -41,16 +42,18 @@ h1,h2,h3,h4,h5{
  display: inline-block;
  position: relative;
  width: 130px;
-}
-.logo span{
- text-align:center;
- position: absolute;
- left: 0px;
- top: 45px;
+ vertical-align:middle;
+ height: 48px;
 }
 header nav{
- margin: -25px auto;
  text-align: center;
+ display:inline-block;
+ vertical-align:middle;
+ width: 45%;
+}
+header .curuserinfo{
+ display:inline-block;
+ vertical-align:middle;
 }
 header nav .home,header nav .search,header nav .find, header nav .chat{
  background:url(//open.subinsb.com/img/sprites/menu) white !important;
@@ -75,7 +78,7 @@ header nav .chat{
  margin:0px auto 20px auto;
  width: auto;
  position: relative;
- padding: 95px 14px 15px 14px;
+ padding: 60px 14px 15px 14px;
  width: 700px;
  line-height: 18px;
  background:#EEE !important;
@@ -269,6 +272,7 @@ a[href]:hover{
  background:white !important;
  color:#000;
  border:0px solid black;
+ background-image:none !important;
 }
 .b-green{
  background:rgb(100, 194, 53) !important;
@@ -279,7 +283,8 @@ a[href]:hover{
 .b-red{
  background:rgb(231, 38, 54) !important;
  color:white;
- border:1px solid #AAA;
+ border:1px solid rgb(231, 38, 54);
+ background-image:none !important;
 }
 /*Dialog*/
 #dialog{
@@ -313,4 +318,21 @@ a[href]:hover{
  background:#CCC;
  padding:8px;
  cursor:pointer;
+}
+/*Responsive Design*/
+@media screen and (max-width: 745px){
+ .content{width:auto;margin-left:10px;margin-right:10px;}
+ header{padding:0px;}
+ header nav{width:auto;}
+ header nav div{right: 0px;}
+ .viewpoint{width:auto !important;display:block !important;}
+ .post_form .right{width:auto !important;}
+ .post .left{width: 13% !important;}
+ .post .right{width:80% !important;}
+}
+@media screen and (max-width: 480px){
+ header{height:auto;padding: 0px 0px 10px;position: relative;}
+ .content{padding-top: 10px;margin-top: -10px;}
+ .post .left{width: 20% !important;}
+ .post .right{width:76% !important;}
 }

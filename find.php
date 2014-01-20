@@ -4,7 +4,7 @@ ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$cfs="gadget";$fs="time,gadget";include("comps/head.php");?>
+ <?$cfs="ac,gadget";$fs="ac,time,gadget";include("comps/head.php");?>
 </head><body>
  <?include("comps/header.php");?>
  <div class="content">

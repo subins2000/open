@@ -1,7 +1,7 @@
 isFmCh=0;
 window.mcTop=function(){
  $('.msgs').animate({
-  scrollTop: parseFloat($(".msgs").height()) + $(".msgs").innerHeight()
+  scrollTop: $(".msgs")[0].scrollHeight
  },1000);
 };
 mcTop();
@@ -28,7 +28,8 @@ doMchecks();
 $(".usersgt .user").live("click",function(){
  id=$(this)[0].id;
  $(".msggt").show();
- $("input[name=to]").val(id);
+ $(".msggt input[name=to]").val(id);
+ $(".msggt #cwinopen").attr("href", "chat?id="+id);
  $(".chatgt .msgs, .chat_form").attr("id",id);
  if(isFmCh!=id){
   $("#"+id+".msgs").html("<h3>Initiating Chat...</h3>Every famous sites in the world was made by Nerds. A bot nerd is working for you right now to get the messages.");
@@ -39,3 +40,23 @@ $(".usersgt .user").live("click",function(){
 $(".msggt .close").live("click",function(){
  $(".msggt").hide();
 });
+$(".cusgt .close").live("click",function(){
+ $(".content").css("margin-right","auto");
+ $(".usersgt").hide();
+ $(".openugt").show();
+ $(".msggt").css("right","30px");
+ localStorage['chatgtopen']=0;
+});
+$(".chatgt .openugt").live("click",function(){
+ if($(window).width() > 720){
+  $(".content").css("margin-right","1083px");
+ }
+ $(".usersgt").show();
+ $(".openugt").hide();
+ $(".msggt").css("right","235px");
+ localStorage['chatgtopen']=1;
+});
+if(localStorage['chatgtopen']==0){
+ $(".usersgt").hide();
+ $(".openugt").show();
+}

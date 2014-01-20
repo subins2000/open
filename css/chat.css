@@ -31,3 +31,11 @@
  margin-left:-14px;
  height:27px;
 }
+@media screen and (max-width: 745px){
+ .content .users{display: block;height: 100px;width: auto;}
+ .content .chat{display:block;width: auto;padding-bottom: 15px;}
+ 
+}
+@media screen and (max-width: 335px){
+ .content .chat .chat_form input[type=text], .content .chat .chat_form input[type=submit]{width:93% !important;}
+}

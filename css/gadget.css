@@ -27,11 +27,12 @@
 .usersgt{
  position:fixed;
  right:0px;
- top:80px;
- padding:15px 0px;
+ top:40px;
+ padding: 15px 10px;
  background:white;
  bottom:0px;
  width:200px;
+ z-index:14;
 }
 .usersgt .user img, .usersgt .user .name, .usersgt .user .status{
  display:inline-block;
@@ -57,7 +58,7 @@
 }
 .msggt{
  position:fixed;
- right:210px;
+ right:235px;
  bottom: 0px;
  width: 250px;
  background: rgb(238, 238, 238);
@@ -69,7 +70,7 @@
  display:none;
 }
 .chatgt .msggt .msgs{
- height:270px;
+ height:250px;
  overflow-y:auto;
 }
 .chatgt .chat_form{
@@ -78,12 +79,52 @@
 }
 .usersgt .user{
  cursor:pointer;
+ margin:5px;
 }
-.chatgt .msggt .close{
+.chatgt .close{
  position:absolute;
- right:0px;
+ right:5px;
  padding:0px 5px 5px;
  background:#AAA;
  color:white;
  cursor:pointer;
+}
+.cusgt{
+ margin-bottom:5px;
+ padding-bottom:5px;
+ border-bottom:1px solid black;
+}
+.cusgt img{
+ vertical-align:top;
+ height:48px;
+ width:48px;
+}
+.cusgt .otd{
+ display:inline-block;
+ vertical-align:top;
+}
+.cusgt .otd span{
+ display:inline-block;
+ vertical-align:middle;
+ margin-right:5px;
+}
+.openugt{
+ position:fixed;
+ bottom:0px;
+ right:30px;
+ width:100px;
+ height:20px;
+ text-align:center;
+ display:none;
+ background:white;
+ border:1px solid black;
+ border-radius:5px;
+ z-index:9999999;
+}
+.msggt .chattop{
+ border-bottom:1px solid black;
+ padding-bottom:5px;
+}
+@media screen and (max-width: 1085px){
+ .content{margin-right:auto !important;}
 }

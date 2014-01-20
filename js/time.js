@@ -18,4 +18,4 @@ setInterval(function(){
    $(this).attr('ran-over',"kerala");
   }
  });
-},1);
+},1000);

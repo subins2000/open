@@ -82,6 +82,7 @@
  font-size:16px;
  margin-top:3px;
  white-space: pre-wrap;
+ word-wrap: break-word;
 }
 .post .author_box{
  background:url(//open.subinsb.com/img/sprites/triangle.png);
