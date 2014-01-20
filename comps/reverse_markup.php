@@ -1,6 +1,6 @@
 <?
 function rch_url($m){
- $u=urlencode($m[0]);
+ $u=urldecode($m[0]);
  $t=$m[2]=='http://' ? $m[1]:$m[2];
  return $t."($u)";
 }
