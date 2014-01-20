@@ -49,7 +49,7 @@ $(".cusgt .close").live("click",function(){
 });
 $(".chatgt .openugt").live("click",function(){
  if($(window).width() > 720){
-  $(".content").css("margin-right","1083px");
+  $(".content").css("margin-right","350px");
  }
  $(".usersgt").show();
  $(".openugt").hide();
