@@ -65,12 +65,12 @@ ch();
    $count=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
    $count->execute(array(":who"=>$who,":q"=>"%$q%"));
   }
-  $count=80;
+  $count=$count->rowCount();
   $tW=86 * $count;
   echo"<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
    echo"<div style='width:".$tW."px'>";
     for($i=1;$i<$count;$i++){
-     $isC=$i==$_GET['p'] ? "class='b-green'":"";
+     
      echo "<a href='?p=$i'><button $isC>$i</button></a>";
     }
    echo"</div>";

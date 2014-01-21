@@ -140,7 +140,7 @@ if(!function_exists("filt")){
    $s=preg_replace_callback("/\(\[(.*?)\](.*?)\)/","ch_url",$s);
    $s=preg_replace_callback('@((www|http://|https://)[^ ]+)@',"ch_url",$s);
    $s=preg_replace('@(\#[^ ]+)@','<a href="http://open.subinsb.com/search?q=\1">\1</a>',$s);
-   $s=str_replace("//open.subinsb.com/search?q=#","//open.subinsb.com/search?q=%23",$s);
+   $s=str_replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23",$s);
    $s=preg_replace_callback("/\@(.*?)(\s|\z|[^0-9])/", function($t) use ($s){return smention($s,$t);},$s);
   }
   return $s;
@@ -156,7 +156,7 @@ if(!function_exists("get")){
    $sql->execute(array($u));
    $data=$sql->fetch();
    $uvno=json_decode($data['udata'],true);
-   $uvno['ploc']="//open.subinsb.com/".$u;
+   $uvno['ploc']="http://open.subinsb.com/".$u;
    $data['udata']=json_encode($uvno);
    $load_cache[$u]=$data;
   }else{
@@ -165,7 +165,7 @@ if(!function_exists("get")){
   if($k=='img'){
    $data=json_decode($data['udata'],true);
    $data=filt($data["img"]);
-   $data=$data=='' ? "//open.subinsb.com/img/profile_pics/om":$data;
+   $data=$data=='' ? "http://open.subinsb.com/img/profile_pics/om":$data;
    return$data;
   }elseif($k=='plink'){
    return"http://open.subinsb.com/$u";
