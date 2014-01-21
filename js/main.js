@@ -1,5 +1,5 @@
 localStorage['onFormSion']=0;
-ht="//open.subinsb.com";
+ht="http://open.subinsb.com";
 setInterval(function(){
  $.getScript(ht+"/ajax/check?user="+$("#name_button").attr("rid")+"&fid="+$(".post:first").attr("id")+"&url="+encodeURIComponent(window.location.href)+"&type="+$("meta[name=type]").attr("value"));
 },15000);
@@ -9,11 +9,11 @@ window.filt=function($msg){$msg=$msg.replace(/\</g,'&lt;');
  $msg=$msg.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
  $msg=$msg.replace(/"/g,'\"');
  $msg=$msg.replace(/\*\/(.*?)\/\*/g,'<i>$1</i>');
- $msg=$msg.replace(/\(\[(.*?)\](.*?)\)/g,'<a target="_blank" href="//open.subinsb.com/url?url=$1">$2</a>');
- $msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="//open.subinsb.com/url?url=$1">$1</a>');
+ $msg=$msg.replace(/\(\[(.*?)\](.*?)\)/g,'<a target="_blank" href="http://open.subinsb.com/url?url=$1">$2</a>');
+ $msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="http://open.subinsb.com/url?url=$1">$1</a>');
  $msg=$msg.replace("\n","<br/>");
- $msg=$msg.replace(RegExp('(\#[^ ]+)','g'),'<a href="//open.subinsb.com/search?q=$1">$1</a>');
- $msg=$msg.replace("//open.subinsb.com/search?q=#","//open.subinsb.com/search?q=%23");
+ $msg=$msg.replace(RegExp('(\#[^ ]+)','g'),'<a href="http://open.subinsb.com/search?q=$1">$1</a>');
+ $msg=$msg.replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23");
  return $msg;
 };
 window.msg=function(m,t){

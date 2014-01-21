@@ -102,6 +102,9 @@
 .cusgt .otd{
  display:inline-block;
  vertical-align:top;
+ margin-left:3px;
+ font-weight:bold;
+ width: 145px;
 }
 .cusgt .otd span{
  display:inline-block;

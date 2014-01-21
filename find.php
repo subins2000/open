@@ -17,10 +17,10 @@ ch();
   <?
   $q=filt($_GET['q']);
   if($q==''){
-   $sql=$db->prepare("SELECT id FROM users WHERE id!=:who");
+   $sql=$db->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT 10");
    $sql->execute(array(":who"=>$who));
   }else{
-   $sql=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who");
+   $sql=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT 10");
    $sql->execute(array(":who"=>$who,":q"=>"%$q%"));
   }
   if($sql->rowCount()==0){
@@ -58,6 +58,23 @@ ch();
    </div>
   <?
   }
+  if($q==''){
+   $count=$db->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id");
+   $count->execute(array(":who"=>$who));
+  }else{
+   $count=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
+   $count->execute(array(":who"=>$who,":q"=>"%$q%"));
+  }
+  $count=80;
+  $tW=86 * $count;
+  echo"<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
+   echo"<div style='width:".$tW."px'>";
+    for($i=1;$i<$count;$i++){
+     $isC=$i==$_GET['p'] ? "class='b-green'":"";
+     echo "<a href='?p=$i'><button $isC>$i</button></a>";
+    }
+   echo"</div>";
+  echo"</center>";
   ?>
   <style>div[field]{margin:5px;}</style>
  </div>

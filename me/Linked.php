@@ -26,13 +26,13 @@ ch();
   if($fb==1){
    echo"<b>Facebook</b> - Connected - <form method='POST' cp><button name='service' value='0' type='submit'>Remove Connection</button></form>";
   }else{
-   echo"<b>Facebook</b> - Not Connected - <a href='//open.subinsb.com/oauth/login_with_facebook'><button>Add Connection</button></a>";
+   echo"<b>Facebook</b> - Not Connected - <a href='http://open.subinsb.com/oauth/login_with_facebook'><button>Add Connection</button></a>";
   }
   echo"<br/><cl/>";
   if($tw==1){
    echo"<b>Twitter</b> - Connected - <form method='POST' cp><button name='service' value='1' type='submit'>Remove Connection</button></form>";
   }else{
-   echo"<b>Twitter</b> - Not Connected - <a href='//open.subinsb.com/oauth/login_with_twitter'><button>Add Connection</button></a>";
+   echo"<b>Twitter</b> - Not Connected - <a href='http://open.subinsb.com/oauth/login_with_twitter'><button>Add Connection</button></a>";
   }
   ?>
   <br/><cl/>Note that <b>Google+</b> sessions are not stored.

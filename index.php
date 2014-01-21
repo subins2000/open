@@ -1,7 +1,5 @@
 <?
 include("comps/config.php");
-$tme=time()*60+1200;
-$id=1;
 $ceb=$_GET['request'];
 if(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!="" && preg_match("/[1-9]/",$ceb)){
  $_GET['id']=$ceb;
@@ -16,7 +14,7 @@ ch();
  <?include("comps/head.php");?>
 </head><body>
  <?include("comps/header.php");?>
- <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:85px;color:white;">
+ <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
   <div class="icontent">
    <div class="left">
     <img src="img/logo"/>

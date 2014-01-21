@@ -4,7 +4,7 @@
 <style>*{font-family:ubuntu;}</style>
 </head><body>
  <h1>Upload A Profile Picture</h1>
- <form method="POST" enctype="multipart/form-data" action="//open.subinsb.com/comps/profile_pic">
+ <form method="POST" enctype="multipart/form-data" action="http://open.subinsb.com/comps/profile_pic">
   <input type="file" name="file"/>
   <input type="submit" value="Upload Picture"/>
  </form>

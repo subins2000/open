@@ -1,7 +1,7 @@
 <?
 include("comps/config.php");
 $c=filt($_GET['c']);
-$c=$c=="" ? "//open.subinsb.com/home":$c;
+$c=$c=="" ? "http://open.subinsb.com/home":$c;
 if(isset($_POST['submit'])){
  $u=filt($_POST['user']);
  $pa=filt($_POST['pass']);
@@ -38,8 +38,8 @@ if($_GET['logout']==true){
  <div class="content" style="text-align:center;">
   <div style="display:inline-block;width:200px;text-align:left;height:260px;padding:10px 20px 20px;">
    <h1>Social Sign In</h1>
-   <a href="//open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="//open.subinsb.com/img/fb_login.png"/></a><cl/>
-   <a href="//open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="//open.subinsb.com/img/google_login.png"/></a>
+   <a href="http://open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="http://open.subinsb.com/img/fb_login.png"/></a><cl/>
+   <a href="http://open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="http://open.subinsb.com/img/google_login.png"/></a>
   </div>
   <div style="display:inline-block;vertical-align:top;width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
    <h1>Sign In</h1>
@@ -54,8 +54,8 @@ if($_GET['logout']==true){
      ser($er,"");
     }
     ?>
-    <a href="//open.subinsb.com/register"><button type="button" class="b-green">Sign Up</button></a><cl/>
-    <a href="//open.subinsb.com/me/ResetPassword"><button type="button" class="b-red">Forgot Password ?</button></a>
+    <a href="http://open.subinsb.com/register"><button type="button" class="b-green">Sign Up</button></a><cl/>
+    <a href="http://open.subinsb.com/me/ResetPassword"><button type="button" class="b-red">Forgot Password ?</button></a>
    </form>
   </div>
  </div>

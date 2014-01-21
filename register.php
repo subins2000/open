@@ -8,8 +8,8 @@
   <button style="padding:5px 25px;" onclick="$('#social').show();$('#classic').hide();">Social Sign Up</button><button style="padding:5px 25px;" onclick="$('#social').hide();$('#classic').show();">Form Sign Up</button>
   <div id="social" style="<?if(isset($_POST['submit']) || isset($_POST['verify'])){?>display:none;<?}?>">
    <h1>Social Sign Up</h1>
-   <a href="//open.subinsb.com/oauth/login_with_facebook"><img src="//open.subinsb.com/img/fb_login.png"/></a><cl/>
-   <a href="//open.subinsb.com/oauth/login_with_google"><img src="//open.subinsb.com/img/google_login.png"/></a>
+   <a href="http://open.subinsb.com/oauth/login_with_facebook"><img src="http://open.subinsb.com/img/fb_login.png"/></a><cl/>
+   <a href="http://open.subinsb.com/oauth/login_with_google"><img src="http://open.subinsb.com/img/google_login.png"/></a>
   </div>
   <div style="<?if(!isset($_POST['submit']) && !isset($_POST['verify'])){?>display:none;<?}?>" id="classic">
    <h1>Sign Up</h1>
@@ -41,7 +41,7 @@
     <input name="name" style="width:290px;" id="user" placeholder="You Must Have a Name" type="text"/><br/><cl/>
     <input name="submit" type="submit" value="Sign Up"/><cl/>
     Already Have An Account ?
-    <a href="//open.subinsb.com/login"><input type="button" value="Sign In"/></a>
+    <a href="http://open.subinsb.com/login"><input type="button" value="Sign In"/></a>
    </form>
    <?
    }elseif(!isset($_POST['verify']) && !isset($_POST['submit'])){

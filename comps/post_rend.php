@@ -28,7 +28,7 @@ function show_posts($arr){
    $h.="<div class='right'>";
     $h.="<div class='top'>";
      $h.="<a href='$plink'>".get("name",$v['uid'],false)."</a>";
-     $h.="<a class='time slink' href='//open.subinsb.com/view?id={$id}'>{$v['time']}</a>";
+     $h.="<a class='time slink' href='http://open.subinsb.com/view?id={$id}'>{$v['time']}</a>";
      $h.="<span class='slink' title='{$prd}'>{$prs}</span>";
      if($v['uid']==$who){
       $h.="<div class='author_box'><div class='author_panel c_c'><button class='de_post' id='$id'>Delete Post</button></div></div>";

@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
   $tme=time()-301014600;
   setcookie("curuser", "", $tme, "/", $_SERVER['HTTP_HOST']);
   setcookie("wervsi", "", $tme, "/", $_SERVER['HTTP_HOST']);
-  $ss=array("Password Changed","Your Password was successfully changed.<br/><a href='//open.subinsb.com/login'>Log In with your new password.</a>");
+  $ss=array("Password Changed","Your Password was successfully changed.<br/><a href='http://open.subinsb.com/login'>Log In with your new password.</a>");
  }else{
   $er=array("Fields Left Blank!","Please fill up all the fields.");
  }

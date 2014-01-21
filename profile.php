@@ -26,7 +26,7 @@ while($r=$sql->fetch()){
  $mail=$r['username'];
  $json=json_decode($r['udata'],true);
  $img=filt($json["img"]);
- $img=$img=='' ? "//open.subinsb.com/img/profile_pics/om":$img;
+ $img=$img=='' ? "http://open.subinsb.com/img/profile_pics/om":$img;
  $about=$json['about']=="" ? $plnmsg:$json['about'];
  $joined=$json['joined'];
  $bir=$json['birth']=="" ? "DD/MM/YYYY":$json['birth'];
@@ -60,7 +60,7 @@ $cms=$cms->rowCount();
  <?include("comps/header.php");?>
  <div class="content profile">
   <div class="header">
-   <img src="//open.subinsb.com/img/headers/00.png" width="704" height="134"/>
+   <img src="http://open.subinsb.com/img/headers/00.png" width="704" height="134"/>
    <div class="holder">
     <?echo$name.foll($id);?>
    </div>

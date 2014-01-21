@@ -54,6 +54,7 @@ header nav{
 header .curuserinfo{
  display:inline-block;
  vertical-align:middle;
+ position: relative;
 }
 header nav .home,header nav .search,header nav .find, header nav .chat{
  background:url(//open.subinsb.com/img/sprites/menu) white !important;
