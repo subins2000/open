@@ -16,16 +16,35 @@ ch();
   <cl/>
   <?
   $q=filt($_GET['q']);
-  if($q==''){
-   $sql=$db->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT 10");
-   $sql->execute(array(":who"=>$who));
-  }else{
+  $_GET['p']=$_GET['p']=="" ? 1:$_GET['p'];
+  $p=$_GET['p'];
+  if($q!='' && $p=='1'){
    $sql=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT 10");
    $sql->execute(array(":who"=>$who,":q"=>"%$q%"));
+  }elseif($p!="1"){
+   $start=($p-1)*10;
+   $limit=10;
+   if($q==""){
+    $sql=$db->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT :start,:limit");
+    $sql->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $sql->bindValue(':start', $start, PDO::PARAM_INT);
+    $sql->bindValue(':who', $who);
+    $sql->execute();
+   }else{
+    $sql=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT :start,:limit");
+    $sql->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $sql->bindValue(':start', $start, PDO::PARAM_INT);
+    $sql->bindValue(':who', $who);
+    $sql->bindValue(':q', "%$q%");
+    $sql->execute();
+   }
+  }else{
+   $sql=$db->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT 10");
+   $sql->execute(array(":who"=>$who));
   }
   if($sql->rowCount()==0){
    if($q==''){
-    sss("No Person Found !","You followed every single homosapien who joined <b>Open</b>");exit;
+    ser("No Person Found !","No Person was found.");exit;
    }else{
     ser("No Person Found !","No Person was found with the name you searched for.");exit;
    }
@@ -37,7 +56,7 @@ ch();
    $loc=get("ploc",$id);
    $live=get("live",$id);
    $birth=get("birth",$id);
-   $foll=$db->prepare("SELECT COUNT(uid) FROM conn WHERE uid=?");
+   $foll=$db->prepare("SELECT COUNT(uid) FROM conn WHERE fid=?");
    $foll->execute(array($id));
    $foll=$foll->fetchColumn();
   ?>
@@ -66,15 +85,17 @@ ch();
    $count->execute(array(":who"=>$who,":q"=>"%$q%"));
   }
   $count=$count->rowCount();
-  $tW=86 * $count;
+  $countP=ceil($count/10);
+  $tW=($countP*84) + $countP;
   echo"<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
    echo"<div style='width:".$tW."px'>";
-    for($i=1;$i<$count;$i++){
-     
+    for($i=1;$i<$countP;$i++){
+     $isC=$i==$_GET['p'] ? "class='b-green'":"";
      echo "<a href='?p=$i'><button $isC>$i</button></a>";
     }
    echo"</div>";
   echo"</center>";
+  echo"<cl/>$count Results Found.";
   ?>
   <style>div[field]{margin:5px;}</style>
  </div>
