@@ -103,9 +103,20 @@ if(!function_exists("ch")){
 }
 if(!function_exists("ch_url")){
  function ch_url($m){
-  $u=urlencode($m[0]);
-  $t=$m[2]=='http://' ? $m[1]:$m[2];
-  return'<a target="_blank" href="http://open.subinsb.com/url?url='.$u.'">'.$t.'</a>';
+  $u=str_replace("\n","",str_replace("\s","",$m[0]));
+  if($m[2]=='http://' || $m[2]=='https://' || $m[2]=='www'){
+   $t=$m[1];
+  }else{
+   $t=$m[2];
+  }
+  if(preg_match("\n",$t)){
+   $t=str_replace("\n","",$t);
+   $ots="\n";
+   }
+  if($m[2]=='www'){
+   $u="http://$u";
+  }
+  return '<a href="'.$u.'">'.$t.'</a>'.$ots;
  }
 }
 if(!function_exists("smention")){
@@ -138,7 +149,7 @@ if(!function_exists("filt")){
    $s=preg_replace("/\*\*(.*?)\*\*/",'<b>$1</b>',$s);
    $s=preg_replace("/\*\/(.*?)\/\*/",'<i>$1</i>',$s);
    $s=preg_replace_callback("/\(\[(.*?)\](.*?)\)/","ch_url",$s);
-   $s=preg_replace_callback('@((www|http://|https://)[^ ]+)@',"ch_url",$s);
+   $s=preg_replace_callback('@((www|http://|https://)(.*?)(\s|\z|\n)+)@',"ch_url",$s);
    $s=preg_replace('@(\#[^ ]+)@','<a href="http://open.subinsb.com/search?q=\1">\1</a>',$s);
    $s=str_replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23",$s);
    $s=preg_replace_callback("/\@(.*?)(\s|\z|[^0-9])/", function($t) use ($s){return smention($s,$t);},$s);
