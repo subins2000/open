@@ -113,6 +113,9 @@
    }
    ?>
   </div>
+  <p style="margin-top:10px;border-top:1px solid black;">
+   By using Open after signing up, you are agreeing to our <a href="open.pdf">Terms & Conditions</a>.
+  </p>
  </div>
  <style>#ppbar{background:#CCC;width:300px;height:15px;margin:5px;}#pbar{margin:0px;width:0px;background:lightgreen;height: 100%;}#ppbartxt{text-align:right;margin:2px;}</style>
 </body></html>
