@@ -1,8 +1,10 @@
 isFmCh=0;
 window.mcTop=function(){
- $('.msgs').animate({
-  scrollTop: $(".msgs")[0].scrollHeight
- },1000);
+ if($('.msgs').length!=0){
+  $('.msgs').animate({
+   scrollTop: $(".msgs")[0].scrollHeight
+  },1000);
+ }
 };
 mcTop();
 function doMchecks(isG){

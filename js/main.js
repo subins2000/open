@@ -118,3 +118,15 @@ window.scrollTo=function(top){
   scrollTop: parseFloat(top) - ($("header").height() + 5 )
  }, 1000);
 };
+window.tURL=function(t){
+ t.each(function(){
+  $(this).find("a[href]").die("mousedown").live("mousedown",function(){
+   url=$(this).attr("href");
+   if(/open\.subinsb\.com\/url\?/.test(url)==false){
+    url="http://open.subinsb.com/url?url="+encodeURIComponent(url);
+    $(this).attr("href",url);
+    $(this).attr("target","_blank");
+   }
+  });
+ });
+};

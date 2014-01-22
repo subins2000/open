@@ -1,4 +1,5 @@
-localStorage['requested'], localStorage['crequested']=0;
+localStorage['requested']=0;
+localStorage['crequested']=0;
 $(".post .author_box").live("click",function(){
  $(this).find(".author_panel").toggle();
 });
@@ -109,3 +110,5 @@ $(".textEditor").smention(ht+"/ajax/get_users",{
  avatar:true,
  width:300
 });
+tURL($(".post .cont"));
+tURL($(".comment .cont"));
