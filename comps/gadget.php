@@ -1,3 +1,4 @@
+<?if($lg){?>
 <div class="chatgt">
  <div class="msggt">
   <div class="close">x</div>
@@ -35,3 +36,4 @@
  <a class="openugt" href="javascript:;">Open Chat</a>
 </div>
 <script>if(localStorage['chatgtopen']!=0){$(".content").css("margin-right","350px");}</script>
+<?}?>
