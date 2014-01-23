@@ -56,7 +56,7 @@ ch();
    $loc=get("ploc",$id);
    $live=get("live",$id);
    $obirth=str_replace("/","-",get("birth",$id));
-   $birth=date("Y-m-d H:i:s",strtotime($birth));
+   $birth=date("Y-m-d H:i:s",strtotime($obirth));
    $foll=$db->prepare("SELECT COUNT(uid) FROM conn WHERE fid=?");
    $foll->execute(array($id));
    $foll=$foll->fetchColumn();
