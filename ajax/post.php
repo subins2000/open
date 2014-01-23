@@ -31,7 +31,7 @@ if($_P && ($pr=="pub" || $pr=="fri" || $pr=="meo")){
   $tp[$k]['prs']=$r['privacy'];
  }
  sm_notify($k);
- $ht=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace('"','\"',str_replace("\r","",show_posts($tp)))));
+ $ht=str_replace("\n","<br/>",str_replace('"','\"',str_replace("\r","",show_posts($tp))));
 ?>
 p="<?echo$ht;?>";if($(".post").length==0){$(".feed").html(p);}else{$(".post:first").before(p);}
 <?

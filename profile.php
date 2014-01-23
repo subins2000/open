@@ -44,12 +44,12 @@ while($r=$sql->fetch()){
  $pin=$json['pin']=="" ? $plnmsg:$json['pin'];
 }
 $pvals=array($about,$bir);
-$lks=$db->prepare("SELECT uid FROM likes WHERE uid=?");
+$lks=$db->prepare("SELECT COUNT(uid) FROM likes WHERE uid=?");
 $lks->execute(array($id));
-$lks=$lks->rowCount();
-$cms=$db->prepare("SELECT uid FROM cmt WHERE uid=?");
+$lks=$lks->fetchColumn();
+$cms=$db->prepare("SELECT COUNT(uid) FROM cmt WHERE uid=?");
 $cms->execute(array($id));
-$cms=$cms->rowCount();
+$cms=$cms->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html><head>

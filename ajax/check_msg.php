@@ -46,7 +46,9 @@ if($lid!="" && $to!="gadget"){
     }else{
     ?>
      if($("#<?echo$to;?>.msgs .msg").length==0){$("#<?echo$to;?>.msgs").html("");}
-     $("#<?echo$to;?>.msgs").append(p);
+     if($("#<?echo$to;?>.msgs #<?echo$mid;?>.msg").length==0){
+      $("#<?echo$to;?>.msgs").append(p);
+     }
      $(".msggt").show();
     <?
     }

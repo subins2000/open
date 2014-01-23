@@ -55,7 +55,8 @@ ch();
    $img=get("img",$id);
    $loc=get("ploc",$id);
    $live=get("live",$id);
-   $birth=get("birth",$id);
+   $obirth=str_replace("/","-",get("birth",$id));
+   $birth=date("Y-m-d H:i:s",strtotime($birth));
    $foll=$db->prepare("SELECT COUNT(uid) FROM conn WHERE fid=?");
    $foll->execute(array($id));
    $foll=$foll->fetchColumn();
@@ -70,7 +71,7 @@ ch();
      <div><a href="<?echo$loc;?>"><strong style='font-size:18px;'><?echo$name;?></strong></a></div>
      <?if($live!=""){?><div field>Lives In <?echo $live;?></div><?}?>
      <div field>Joined <span class="time"><?echo get("joined",$id);?></span></div>
-     <?if($birth!=""){?><div field>Born <span class="time"><?echo $birth;?></span></div><?}?>
+     <?if($obirth!=""){?><div field>Born <span class="time"><?echo $birth;?></span></div><?}?>
      <div field><strong><?echo$foll;?></strong> Followers</div>
      <?echo foll($id);?>
     </div>
@@ -85,13 +86,13 @@ ch();
    $count->execute(array(":who"=>$who,":q"=>"%$q%"));
   }
   $count=$count->rowCount();
-  $countP=ceil($count/10);
+  $countP=(ceil($count/10)) + 1;
   $tW=($countP*84) + $countP;
   echo"<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
    echo"<div style='width:".$tW."px'>";
     for($i=1;$i<$countP;$i++){
      $isC=$i==$_GET['p'] ? "class='b-green'":"";
-     echo "<a href='?p=$i'><button $isC>$i</button></a>";
+     echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
     }
    echo"</div>";
   echo"</center>";

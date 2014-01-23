@@ -21,14 +21,12 @@
  position:relative;
 }
 .post:hover{background:rgba(400,100,100,.8);}
-.post.yell{background:rgb(222, 236, 61);color:black;}
-.post.yell:hover{background:rgb(230, 247, 44);}
 .post.gree{background:rgba(65, 199, 53, .7);color:white;}
 .post.gree:hover{background:rgba(65, 199, 53, .8);}
 .post.blu{background:rgba(100, 172, 400, .7);color:white;}
 .post.blu:hover{background:rgba(100, 172, 400,1);}
-.post.or{background:rgba(241, 158, 32, 0.6);color:white;}
-.post.or:hover{background:rgba(241, 158, 32, 0.7);}
+.post.or{background:#FFA500;color:white;}
+.post.or:hover{background:#F7A200;}
 .post .left{
  display:inline-block;
  width:50px;
