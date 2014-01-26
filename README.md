@@ -18,7 +18,7 @@ If you want to test Open on your Localhost server, you should do the following s
 
 4) Create a MySQL database named "open"
 
-5) Execute The SQL Code : http://pastebin.com/F9qX8MXx
+5) Execute The SQL Code : http://pastebin.com/uVNucXHp
 
 6) Replace $dbname, $host, $port, $usr, $pass values with Database credentials.
 

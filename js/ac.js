@@ -1,5 +1,5 @@
 /*
- * jQuery sMention plugin 0.1
+ * jQuery sMention plugin 0.2
  *
  * Copyright (c) 2014 Subin Siby
  *
@@ -10,6 +10,9 @@
  $.fn.smention=function(url,options){
   if($(".sm_bar").length==0){
    $("body").append("<div class='sm_bar'><div class='sm_conts'></div><div class='sm_close'></div></div>");
+  }
+  if(typeof options.cache === "undefined"){
+   options.cache=true;
   }
   localStorage['smlto']="";
   localStorage['smloc']="";
@@ -35,6 +38,7 @@
    });
   });
  };
+ var cache={};
  $.fn.enSmen=function(url,options){
   return this.each(function(){
    if($(this).data("squed")==undefined){
@@ -48,7 +52,19 @@
       data={q:smlto};
      }
      if($(this).data("callNow")!="disabled" && e.keyCode!=16 && data.q!=""){
-      $.post(url,data,function(obj){makeList(obj,options,t);},'JSON');
+      if(cache[smlto] && options.cache===true){
+       makeList(cache[smlto],options,t);
+      }
+      $.post(url,data,function(obj){
+       if(!cache[smlto] && options.cache===true){
+        makeList(obj,options,t);
+       }
+       if(options.cache===true){
+        cache[smlto]=obj;
+       }else{
+        makeList(obj,options,t);
+       }
+      },'JSON');
      }
     });
    }
@@ -64,6 +80,9 @@
   qlist="";
   $.each(obj,function(i,elem){
    whb=i%2 == 0 ? "dark":"";
+   if(options["after"]){
+    elem.id+=options["after"];
+   }
    qlist+="<div id='"+elem.id+"' class='sitem "+whb+"' title='"+elem.name+"'>";
     if(options.avatar==true){
      qlist+="<img class='avatar' height='24' width='24' src='"+elem.avatar+"'/>";
@@ -80,7 +99,11 @@
   }
   $(".sm_bar").data("from",t);
   $(".sm_bar").css("left",t.offset().left);
-  $(".sm_bar").css("top",parseFloat(t.offset().top)-$(".sm_bar").height());
+  if(options.position=="below"){
+   $(".sm_bar").css("top",parseFloat(t.offset().top)+t.outerHeight());
+  }else{
+   $(".sm_bar").css("top",parseFloat(t.offset().top)-$(".sm_bar").height());
+  }
   $(".sm_bar").show();
  }
 })(jQuery);

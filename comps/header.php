@@ -15,7 +15,7 @@
  </nav>
  <?if($lg){?>
   <div class="curuserinfo">
-   <button id="name_button" class="b-red" rid="<?echo$who;?>"><?echo$uname;?></button>
+   <button id="name_button" class="b-white" rid="<?echo$who;?>"><?echo$uname;?></button>
    <div id="short_profile" class="c_c">
     <div class="left">
      <b><?$uname=explode(" ",$uname);echo$uname[0];?></b><br/>
@@ -29,6 +29,18 @@
      <a href="http://open.subinsb.com/me"><button style="position:absolute;left: 10px;top:3px;">Account</button></a>
      <a href="http://open.subinsb.com/login?logout=true"><button style="position:absolute;right: 10px;top:3px;" class="b-red">Sign Out</button></a>
     </div>
+   </div>
+  </div>
+  <div class="notifications">
+   <?
+   $sql=$db->prepare("SELECT red FROM notify WHERE red='0' AND uid=?");
+   $sql->execute(array($who));
+   $count=$sql->rowCount();
+   ?>
+   <button id="nfn_button" class="b-white<?if($count!=0){echo' b-red';}?>"><?echo$count;?></button>
+   <div id="nfn" class="c_c">
+    <center class="loading"><br/><br/><img src="http://open.subinsb.com/img/load.gif"/><br/>Loading</center>
+    <div class="nfs"></div>
    </div>
   </div>
  <?}?>

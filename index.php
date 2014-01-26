@@ -22,7 +22,7 @@ ch();
    <div class="right">
     <h2>Let the Doors Open</h2>
     <p>
-     By reading the name Open, you might not get <br/>the idea of this site. Open is a Social<br/>Network like Twitter and Facebok.<br/>&nbsp;&nbsp;&nbsp;The only difference is that Open is <br/> an Open Source Social Network unlike others.
+     Open is a Social Network like Twitter and Facebook.<br/>&nbsp;&nbsp;&nbsp;The only difference is that Open is an Open Source <br/>Social Network unlike others.
     </p>
    </div>
   </div>
@@ -31,6 +31,17 @@ ch();
   <div class="icontent">
    <a href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/img/fb_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
    <a href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(//open.subinsb.com/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
+   <div style="font-size: 30px;margin-top: 20px;height: 25px;">
+    <?
+    $sql=$db->prepare("SELECT COUNT(seen) FROM users");
+    $sql->execute();
+    $count=$sql->fetchColumn();
+    foreach(str_split($count) as $v){
+     echo "<span style='background:black;padding: 2px 10px;border-right: 1px solid white;'>$v</span>";
+    }
+    ?>
+   </div>
+   <div style="background: rgb(100, 172, 255);width: 100px;margin: 10px auto 0px;padding: 5px 30px;">Users So Far</div>
   </div>
  </div>
  <div style="width:100%;background:rgba(241, 158, 32, 0.7);color:white;">
@@ -72,19 +83,19 @@ ch();
       <li>Safe Browsing</li>
       <li>Post To Facebook</li>
       <li>Post To Twitter</li>
-      <li>No Vulnerabilities found yet</li>
+      <li>No Vulnerabilities Found</li>
       <li>Privacy Settings</li>
      </ol>
     </p>
    </div>
   </div>
  </div>
- <div style="width:100%;background:rgba(100, 172, 400,1);color:white;">
+ <div style="width:100%;background:#64ACFF;color:white;">
   <div class="icontent">
    <div class="left">
     <h2>How Can I contribute ?</h2>
     <p>
-     Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><font size="5">WE NEED YOUR HELP</font><?include("comps/project_urls.php");?>
+     Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><?include("comps/project_urls.php");?>
      <br/>You can Find Documentation, news, info <br/>about Open on our blog.<br/><cl/>
      <a href="blog"><button class="b-white">Blog</button></a>
     </p>

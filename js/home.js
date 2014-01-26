@@ -108,7 +108,9 @@ $(".load_more_comments").live("click",function(){
 });
 $(".textEditor").smention(ht+"/ajax/get_users",{
  avatar:true,
- width:300
+ width:300,
+ position:"below",
+ cache:true
 });
 tURL($(".post .cont"));
 tURL($(".comment .cont"));

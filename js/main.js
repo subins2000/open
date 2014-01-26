@@ -128,3 +128,13 @@ window.tURL=function(t){
   }
  });
 };
+$("#nfn_button").live("click",function(){
+ $(".notifications #nfn").toggle();
+ if($(".notifications .nfs .nfsi").length==0 || $(".notifications #nfn_button").text()!="0"){
+  $(".notifications .loading").show();
+ }
+ post("ajax/nfs",{load:1});
+});
+$(".nfsi").live("click",function(){
+ window.location=$(this).attr("href");
+});

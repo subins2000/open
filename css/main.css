@@ -51,7 +51,7 @@ header nav{
  vertical-align:middle;
  width: 45%;
 }
-header .curuserinfo{
+header .curuserinfo, header .notifications{
  display:inline-block;
  vertical-align:middle;
  position: relative;
@@ -155,7 +155,56 @@ a[href]{
  color:inherit;
 }
 a[href]:hover{
- color:#BEBEF2;
+ color:#E0520A;
+}
+/*Notifications*/
+header .notifications #nfn_button{
+ padding: 5px;
+ width: 30px;
+}
+header .notifications #nfn{
+ position:absolute;
+ top:35px;
+ right:5px;
+ background:white;
+ padding:10px;
+ color:black;
+ padding: 0 13px;
+ height: 300px;
+ width: 230px;
+ border: 1px solid black;
+ border-radius: .6em;
+ box-shadow: 0 7px 60px -6px black;
+ z-index: 10;
+ text-align: left;
+ display:none;
+ padding: 0px 5px;
+ overflow:auto;
+}
+.notifications .nfsi .left, .notifications .nfsi .right{
+ display:inline-block;
+ vertical-align:top;
+}
+.notifications .nfsi .right{
+ margin-left:5px;
+}
+.notifications .nfsi.nred{
+ background: black;
+ color: white;
+}
+.notifications .nfsi{
+ font-size:13px;
+ border-bottom:1px solid black;
+ cursor:pointer;
+ margin-top:5px;
+}
+.notifications .nfsi:hover{
+ background:#EEE;
+ color:black;
+}
+.notifications .nfsi .time{
+ color:#AAA;
+ margin-left:8px;
 }
 /*Short Profile*/
 #short_profile{
@@ -254,6 +303,7 @@ a[href]:hover{
  height:30px;
  line-height:20px;
  width:30px;
+ border-color: #fe1a00;
 }
 .unfollow:hover{
  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
@@ -321,7 +371,7 @@ a[href]:hover{
  cursor:pointer;
 }
 /*Responsive Design*/
-@media screen and (max-width: 745px){
+@media screen and (max-width: 778px){
  .content{width:auto;margin-left:10px;margin-right:10px;}
  header{padding:0px;}
  header nav{width:auto;}
@@ -331,7 +381,7 @@ a[href]:hover{
  .post .left{width: 13% !important;}
  .post .right{width:80% !important;}
 }
-@media screen and (max-width: 480px){
+@media screen and (max-width: 515px){
  header{height:auto;padding: 0px 0px 10px;position: relative;}
  .content{padding-top: 10px;margin-top: -10px;}
  .post .left{width: 20% !important;}

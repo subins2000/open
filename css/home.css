@@ -13,20 +13,14 @@
  margin-left:5px;
 }
 .post{
- background:rgba(400,100,100,.7);
+ background:rgba(100, 172, 400, .7);
  border-radius:10px;
  padding:10px 10px;
  color:white;
  border-bottom:1px solid white;
  position:relative;
 }
-.post:hover{background:rgba(400,100,100,.8);}
-.post.gree{background:rgba(65, 199, 53, .7);color:white;}
-.post.gree:hover{background:rgba(65, 199, 53, .8);}
-.post.blu{background:rgba(100, 172, 400, .7);color:white;}
-.post.blu:hover{background:rgba(100, 172, 400,1);}
-.post.or{background:#FFA500;color:white;}
-.post.or:hover{background:#F7A200;}
+.post:hover{background:rgba(100, 172, 400,1);;}
 .post .left{
  display:inline-block;
  width:50px;

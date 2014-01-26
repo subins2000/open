@@ -182,7 +182,7 @@ if(!function_exists("get")){
    return"http://open.subinsb.com/$u";
   }elseif($k=="status"){
    $data=$data['seen'];
-   if($data < date("Y-m-d H:i:s",strtotime('-25 seconds', time()))){
+   if($data < date("Y-m-d H:i:s",strtotime('-20 seconds', time()))){
     return "off";
    }else{
     return "on";

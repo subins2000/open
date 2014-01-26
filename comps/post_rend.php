@@ -7,19 +7,14 @@ function show_posts($arr){
  $pk=array();
  while($r=$sql->fetch()){$pk[]=$r['pid'];}
  $h="";
- $lcor=0;
  foreach($arr as $k=>$v){
   $id=$k;
   $prs=str_replace('pub','Public',str_replace('meo','Only Me',str_replace('fri','Friends',$v['prs'])));
   $prd=str_replace('pub','Everyone can see this post',str_replace('meo','Only You can see this post',str_replace('fri','Only your Friends can see this post',$v['prs'])));
   $lk=array_search($id,$pk)===false ? "Like":"Unlike";
-  $cor=array("red","blu","or","gree");
-  $lcor++;
-  $lcor=$lcor==4 ? 0:$lcor;
-  $co=$cor[$lcor];
   $p=$v['p'];
   $plink=get("plink",$v['uid']);
-  $h.="<div class='post $co' id='$id'>";
+  $h.="<div class='post' id='$id'>";
    $h.="<div class='left'>";
     $h.="<a href='$plink'><img src='".get("img",$v['uid'])."' class='pimg'/></a>";
    $h.="</div>";
