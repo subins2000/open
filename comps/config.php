@@ -112,7 +112,7 @@ if(!function_exists("ch_url")){
   if(preg_match("\n",$t)){
    $t=str_replace("\n","",$t);
    $ots="\n";
-   }
+  }
   if($m[2]=='www'){
    $u="http://$u";
   }
@@ -148,7 +148,6 @@ if(!function_exists("filt")){
   if($r==true){
    $s=preg_replace("/\*\*(.*?)\*\*/",'<b>$1</b>',$s);
    $s=preg_replace("/\*\/(.*?)\/\*/",'<i>$1</i>',$s);
-   $s=preg_replace_callback("/\(\[(.*?)\](.*?)\)/","ch_url",$s);
    $s=preg_replace_callback('@((www|http://|https://)(.*?)(\s|\z|\n)+)@',"ch_url",$s);
    $s=preg_replace('@(\#[^ ]+)@','<a href="http://open.subinsb.com/search?q=\1">\1</a>',$s);
    $s=str_replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23",$s);
