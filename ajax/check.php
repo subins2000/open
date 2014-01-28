@@ -4,7 +4,7 @@ include('config.php');
 if(isset($_GET)){
  if($_GET['user']!=$who && $_GET['user']!="undefined"){
 ?>
-window.location=window.location;
+window.location.reload();
 <?
  }
 }
