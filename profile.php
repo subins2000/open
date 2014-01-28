@@ -66,7 +66,7 @@ $cms=$cms->fetchColumn();
    <div class="holder">
     <?echo$name.foll($id);?>
    </div>
-   <button id="ch_hi" class="b-white">Change Header Image</button>
+   <?if($id==$who){?><button id="ch_hi" class="b-white">Change Header Image</button><?}?>
   </div>
   <div class="main">
    <div class="clearfix left">

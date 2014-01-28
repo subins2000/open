@@ -15,7 +15,7 @@ if($sql->rowCount()!=0){
   echo"<div class='sugg'>";
    echo"<div style='vertical-align:top;display:inline-block;'>";
     echo"<a href='".get("plink",$u)."'>";
-     echo"<img height='32' width='32' src='".get("img",$u)."'/>";
+     echo"<img height='32' width='32' src='".get("avatar",$u)."'/>";
     echo"</a>";
    echo"</div>";
    echo"<div style='vertical-align:top;display:inline-block;'>";
@@ -24,8 +24,8 @@ if($sql->rowCount()!=0){
    echo"</div>";
   echo"</div>";
  }
+ echo "<center><cl/><a href='find'>See More People</a></center>";
  echo'</div>';
  echo'<style>.sugg{margin:5px;border-top:1px solid white;padding-top:5px;}</style>';
- echo "<div><cl/><a href='find'>See More People</a></div>";
 }
 ?>

@@ -22,7 +22,7 @@ $("#editBox").live("click",function(){
   post("update_profile",$("#about").serializeAny(),"Updated Profile","Updation Failed","Updating....");
   $("it[editable]").each(function(){
    v=$(this).find("#editField");
-   aap='<v>'+v.val()+'</v>';
+   aap='<v>'+filt(v.val())+'</v>';
    v.replaceWith(aap);
   });
   $("#editBox").text("Edit Profile");

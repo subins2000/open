@@ -25,6 +25,7 @@
 .main .right.clearfix{
  display:inline-block;
  width:150px;
+ margin-left: 5px;
 }
 .main .right.clearfix .image{
  margin-top:-88px;

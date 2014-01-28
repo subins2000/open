@@ -34,7 +34,7 @@ if(!function_exists("notify")){
   if($a=="follow" && $tu!=$who){
    $sql=$db->prepare("SELECT COUNT(red) FROM notify WHERE uid=? AND fid=? AND ty=?");
    $sql->execute(array($tu,$who,"fol"));
-   if($sql->fetchColumn()==0){
+   if($sql->rowCount()==0){
     $sql=$db->prepare("INSERT INTO notify(uid,fid,ty,post,posted) VALUES (?,?,?,?,NOW())");
     $sql->execute(array($tu,$who,"fol",""));
     $sql=$db->prepare("SELECT fid FROM conn WHERE fid=?");
@@ -44,6 +44,8 @@ if(!function_exists("notify")){
     $m.="<div style='margin: 10px;'><img src='".get("img",$w)."' style='display:inline-block;vertical-align:top;' height='120' width='120'/><div style='display:inline-block;vertical-align:top;width: 200px;margin-left:10px;'>$sn added you to his following list. You now have <b>$cFoll</b> followers. If you now follow this person back, you will become friends with $sn.</div></div>";
     $m.="<a href='http://open.subinsb.com/$w' target='_blank'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
     $title="You Have a New Follower";
+   }else{
+    $dontSend=1;
    }
   }
   if($a=="mention" && $tu!=$who){
@@ -67,7 +69,9 @@ if(!function_exists("notify")){
     $m.="See the messages page to see other messages sent by $sn.";
     $m.="<a href='http://open.subinsb.com/chat?id=$w'><button style='padding:5px 15px;'>See $sn's Messages</button></a>&nbsp;&nbsp;&nbsp;";
     $m.="<a href='http://open.subinsb.com/$w'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
-    $title="$sn Sent you a message";
+    $title="$sn Sent you a message";   
+   }else{
+    $dontSend=1;
    }
   }
   if($dontSend==0){
