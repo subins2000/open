@@ -16,7 +16,7 @@ function show_posts($arr){
   $plink=get("plink",$v['uid']);
   $h.="<div class='post' id='$id'>";
    $h.="<div class='left'>";
-    $h.="<a href='$plink'><img src='".get("img",$v['uid'])."' class='pimg'/></a>";
+    $h.="<a href='$plink'><img src='".get("avatar",$v['uid'])."' class='pimg'/></a>";
    $h.="</div>";
    $h.="<div class='right'>";
     $h.="<div class='top'>";

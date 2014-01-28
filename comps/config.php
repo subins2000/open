@@ -231,6 +231,7 @@ if(!isset($al_coll_dt)){
 if($lg && $al_coll_dt==false){
  $al_coll_dt=true;
  $uimg=get("img");
+ $uaimg=get("avatar");
  $uname=get("name",null,false);
  save("seen");
 }

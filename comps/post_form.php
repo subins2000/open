@@ -25,7 +25,7 @@ while($r=$sql->fetch()){
 <div class="post_form" id="post_form">
  <form action="ajax/post" method="POST" class="ajax_form" succ="Posted Successfully" err="Posting Failed. Try again." while="Posting">
   <div class="left">
-   <img src="<?echo$uimg;?>" height="62" width="62"/>
+   <img src="<?echo$uaimg;?>" height="62" width="62"/>
   </div>
   <div class="right">
    <input type="text" id="show_form" style="width:100%;" placeholder="Have Something To Share ?">
