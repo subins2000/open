@@ -17,7 +17,7 @@ if(($success = $client->Initialize())){
    $client->error = $client->authorization_error;
    $success = false;
   }elseif(strlen($client->access_token)){
-   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=100','GET', array(), array('FailOnAccessError'=>true), $data);
+   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=50','GET', array(), array('FailOnAccessError'=>true), $data);
   }
  }
  $success = $client->Finalize($success);
