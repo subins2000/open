@@ -10,9 +10,9 @@ class mysqli_oauth_client_class extends database_oauth_client_class
 {
 	var $db;
 	var $database = array(
-		'host'=>'localhost',
-		'user'=>'root',
-		'password'=>'backstreetboys',
+		'host'=>'',
+		'user'=>'',
+		'password'=>'',
 		'name'=>'',
 		'port'=>0,
 		'socket'=>''

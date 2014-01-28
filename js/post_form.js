@@ -26,3 +26,18 @@ $(prntf+"#pfbit").live("click",function(){
   $(this).find('input[type=checkbox]')[0].click();
  }
 });
+$(".short_news .close").live("click",function(){
+ id=$(this).parents(".short_news")[0].id;
+ localStorage["shnews"]=id;
+ $(".short_news").hide();
+});
+if(typeof localStorage["shnews"] != "undefined"){
+ id=$(".short_news")[0].id;
+ if(localStorage["shnews"]!=id && $(".short_news").is(":hidden")){
+  $(".short_news").show();
+ }else{
+  $(".short_news").hide();
+ }
+}else{
+ $(".short_news").show();
+}

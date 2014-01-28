@@ -52,8 +52,8 @@ window.dialog=function(u){
  }else{
   msg("Loaded");
  }
- $(window).keyup(function(e){
-  if(e.keyCode==21){
+ $(window).live("keyup",function(e){
+  if(e.keyCode==27){
    $("#dialog").hide();
    $("body").css("overflow","auto");
   }

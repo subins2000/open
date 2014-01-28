@@ -29,3 +29,6 @@ $("#editBox").live("click",function(){
   edopened=0;
  }
 });
+$("#ch_hi").live("click",function(){
+ dialog("http://open.subinsb.com/ajax/dialog/header");
+});

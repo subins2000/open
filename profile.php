@@ -42,6 +42,8 @@ while($r=$sql->fetch()){
  $tw=$json['tw']=="" ? $plnmsg:$json['tw'];
  $gplus=$json['gplus']=="" ? $plnmsg:$json['gplus'];
  $pin=$json['pin']=="" ? $plnmsg:$json['pin'];
+ $himg=$json['header'];
+ $himg=$himg=="" ? "http://open.subinsb.com/img/headers/00.png":$himg;
 }
 $pvals=array($about,$bir);
 $lks=$db->prepare("SELECT COUNT(uid) FROM likes WHERE uid=?");
@@ -60,10 +62,11 @@ $cms=$cms->fetchColumn();
  <?include("comps/header.php");?>
  <div class="content profile">
   <div class="header">
-   <img src="http://open.subinsb.com/img/headers/00.png" width="704" height="134"/>
+   <img src="<?echo$himg;?>" width="704" height="180"/>
    <div class="holder">
     <?echo$name.foll($id);?>
    </div>
+   <button id="ch_hi" class="b-white">Change Header Image</button>
   </div>
   <div class="main">
    <div class="clearfix left">

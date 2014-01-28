@@ -194,14 +194,14 @@ if(!function_exists("get")){
     $img="http://open.subinsb.com/data/{$u}/img/avatar";
    }
    return $img;
-  }elseif($j==true){
-   $data=json_decode($data['udata'],true);
-   $data=filt($data[$k]);
-   return$data;
   }elseif($k=="fname"){
    $data=filt($data["name"]);
    $data=explode(" ",$data);
    return $data[0];
+  }elseif($j==true){
+   $data=json_decode($data['udata'],true);
+   $data=filt($data[$k]);
+   return$data;
   }else{
    return filt($data[$k]);
   }
@@ -252,22 +252,27 @@ if(!function_exists("foll")){
  }
 }
 if(!function_exists("send_mail")){
+ include("$sroot/comps/mailer/class.phpmailer.php");
  function send_mail($mail,$subject,$msg) {
   $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;border: 3px solid black;padding: 5px 10px;border-radius:5px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
   $subject.=" - Open";
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-  curl_setopt($ch, CURLOPT_USERPWD, 'mailgun_key');
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-  curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v2/open.subinsb.com/messages');
-  curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-   'from' => 'Open <noreply@open.subinsb.com>',
-   'to' => $mail,
-   'subject' => $subject,
-   'html' => $msg));
-  $result = curl_exec($ch);
-  curl_close($ch);
+  $pass=base64_decode("T3Blbk9hTWFpbA==");
+  $mail = new PHPMailer();
+  $mail->IsSMTP();
+  $mail->CharSet    = 'UTF-8';
+  $mail->Host       = "smtp.live.com";
+  $mail->SMTPAuth   = true;
+  $mail->Port       = 587;
+  $mail->Username   = "noreply@open.subinsb.com";
+  $mail->Password   = $pass;
+  $mail->SMTPSecure = 'tls';
+  $mail->From       = 'noreply@open.subinsb.com';
+  $mail->FromName   = 'Open Automated Mail';
+  $mail->isHTML(true);
+  $mail->Subject    = $subject;
+  $mail->Body       = $msg;
+  $mail->addAddress($mail);
+  $result=$mail->send();
   return $result;
  }
 }

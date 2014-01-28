@@ -50,3 +50,21 @@
  background-color:white;
  background-size: 33px !important;
 }
+.short_news{
+ background:#FAB359;
+ padding:10px;
+ border-radius:10px;
+ position:relative;
+}
+.short_news h2{
+ margin:5px 0px;
+ font-size:25px;
+ color:white;
+}
+.short_news .close{
+ position:absolute;
+ top:0px;
+ right:10px;
+ cursor:pointer;
+ font-size:15px;
+}

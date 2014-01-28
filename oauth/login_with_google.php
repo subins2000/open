@@ -7,7 +7,7 @@ $host=parse_url($_GET['c']);
 if(($_GET['c']=='' && $_SESSION['continue']=='') || $host['host']!='open.subinsb.com'){
  $_SESSION['continue']="http://open.subinsb.com";
 }else{
- $_SESSION['continue']=$_GET['c'];
+ $_SESSION['continue']=urldecode($_GET['c']);
 }
 $client = new oauth_client_class;
 $client->server = 'Google';

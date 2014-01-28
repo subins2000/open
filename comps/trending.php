@@ -28,3 +28,6 @@ if($_SERVER['PHP_SELF']=="/search.php"){
   ?>
  </div>
 </div>
+<div style="background:#FAB359;border-radius: 10px;text-align:center;padding:5px;margin:5px -10px 0px -15px;">
+ <a href="invite">Invite your Friends</a>
+</div>

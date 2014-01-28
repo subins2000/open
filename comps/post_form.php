@@ -14,6 +14,14 @@ while($r=$sql->fetch()){
  }
 }
 ?>
+<div class="short_news" id="2014-01-28 01:05" hide>
+ <h2>New</h2>
+ <p>You can now change your header image. Just go to <a href="profile">your profile</a> and click "Change Header Image" button.</p>
+ <a href="invite"><h2>Invite</h2></a>
+ <p>You can also invite your friends to join Open via our <a href="invite">Invite Page</a>.</p>
+ <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.4.7</b></p>
+ <div class="close">x</div>
+</div>
 <div class="post_form" id="post_form">
  <form action="ajax/post" method="POST" class="ajax_form" succ="Posted Successfully" err="Posting Failed. Try again." while="Posting">
   <div class="left">

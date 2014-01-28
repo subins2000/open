@@ -37,18 +37,22 @@ class database_oauth_client_class extends oauth_client_class
 
 	Function SetupSession(&$session)
 	{
-		if(strlen($this->session) || IsSet($_COOKIE[$this->session_cookie]))
+		if(strlen($this->session)
+		|| IsSet($_COOKIE[$this->session_cookie]))
 		{
 			if($this->debug)
 				$this->OutputDebug(strlen($this->session) ? 'Checking OAuth session '.$this->session : 'Checking OAuth session from cookie '.$_COOKIE[$this->session_cookie]);
 			if(!$this->GetOAuthSession(strlen($this->session) ? $this->session : $_COOKIE[$this->session_cookie], $this->server, $session))
 				return($this->SetError('OAuth session error: '.$this->error));
-		}else{
+		}
+		else
+		{
 			if($this->debug)
 				$this->OutputDebug('No OAuth session is set');
 			$session = null;
 		}
-		if(!IsSet($session)){
+		if(!IsSet($session))
+		{
 			if($this->debug)
 				$this->OutputDebug('Creating a new OAuth session');
 			if(!$this->CreateOAuthSession($this->server, $session))

@@ -1,5 +1,5 @@
 .header{
- height:130px;
+ height:180px;
  border:2px solid white;
  width:100%;
  position:relative;
@@ -14,7 +14,7 @@
  font-weight:bold;
 }
 .main{
- margin-top:10px;
+ margin-top:7px;
  z-index:5;
 }
 .main .left.clearfix{
@@ -107,3 +107,9 @@
 .smallbox m{padding:2px 10px 2px 10px;}
 .smallbox v{word-break: break-word;}
 #editField{max-width: 130px;min-width: 130px;}
+#ch_hi{
+ position:absolute;
+ right:-6px;
+ top:3px;
+ padding:5px 15px;
+}
