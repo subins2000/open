@@ -258,22 +258,22 @@ if(!function_exists("send_mail")){
   $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;border: 3px solid black;padding: 5px 10px;border-radius:5px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
   $subject.=" - Open";
   $pass=base64_decode("T3Blbk9hTWFpbA==");
-  $mail = new PHPMailer();
-  $mail->IsSMTP();
-  $mail->CharSet    = 'UTF-8';
-  $mail->Host       = "smtp.live.com";
-  $mail->SMTPAuth   = true;
-  $mail->Port       = 587;
-  $mail->Username   = "noreply@open.subinsb.com";
-  $mail->Password   = $pass;
-  $mail->SMTPSecure = 'tls';
-  $mail->From       = 'noreply@open.subinsb.com';
-  $mail->FromName   = 'Open Automated Mail';
-  $mail->isHTML(true);
-  $mail->Subject    = $subject;
-  $mail->Body       = $msg;
-  $mail->addAddress($mail);
-  $result=$mail->send();
+  $smail = new PHPMailer();
+  $smail->IsSMTP();
+  $smail->CharSet    = 'UTF-8';
+  $smail->Host       = "smtp.live.com";
+  $smail->SMTPAuth   = true;
+  $smail->Port       = 587;
+  $smail->Username   = "noreply@open.subinsb.com";
+  $smail->Password   = $pass;
+  $smail->SMTPSecure = 'tls';
+  $smail->From       = 'noreply@open.subinsb.com';
+  $smail->FromName   = 'Open Automated Mail';
+  $smail->isHTML(true);
+  $smail->Subject    = $subject;
+  $smail->Body       = $msg;
+  $smail->addAddress($mail);
+  $result=$smail->send();
   return $result;
  }
 }

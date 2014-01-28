@@ -17,7 +17,7 @@ if(($success = $client->Initialize())){
    $client->error = $client->authorization_error;
    $success = false;
   }elseif(strlen($client->access_token)){
-   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=2500','GET', array(), array('FailOnAccessError'=>true), $user);
+   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=2500','GET', array(), array('FailOnAccessError'=>true), $data);
   }
  }
  $success = $client->Finalize($success);
@@ -28,7 +28,7 @@ if($client->exit){
 if($success){
  $sn=get("fname");
  $n=get("name",$who,false);
- $xml= new SimpleXMLElement($xmlresponse);
+ $xml= new SimpleXMLElement($data);
  $xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
  $result = $xml->xpath('//gd:email');
  foreach ($result as $title) {
