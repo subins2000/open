@@ -14,7 +14,7 @@ ch();
   $sql=$db->prepare("SELECT id FROM notify WHERE uid=? ORDER BY id DESC");
   $sql->execute(array($who));
   if($sql->rowCount()==0){
-   exit;
+   ser("No Notifications", "You don't have any notifications.");
   }else{
    $nfs="";
    while($r=$sql->fetch()){
