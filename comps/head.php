@@ -15,9 +15,9 @@ if(isset($t)){
  echo "<title>Open - An Open Source Social Network</title>";
 }
 if(!isset($fs)){
- $fs="main,stats";
+ $fs="main";
 }else{
- $fs="main,stats,$fs";
+ $fs="main,$fs";
 }
 echo"<script>";
  echo file_get_contents("$sroot/js/jquery.js").";";
@@ -37,6 +37,7 @@ echo"<script>";
     echo"$('body').addClass('$theme');";
    }
    echo "});";
+   echo file_get_contents("$sroot/js/stats.js");
   }
  }
 echo"</script>";

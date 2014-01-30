@@ -1,7 +1,7 @@
 <?include("comps/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Home";$cfs="home,post_form,ac,gadget";$fs="ac,post_form,home,time,gadget";include("comps/head.php");?>
+ <?$t="Invite";$cfs="ac,gadget";$fs="time,ac,gadget";include("comps/head.php");?>
 </head><body>
  <?include("comps/header.php");?>
  <div class="content">
@@ -10,7 +10,7 @@
   <?
   if(isset($_GET['gmail'])){
    if($_GET['gmail']=="success"){
-    sss("Invited GMail Contacts","Your GMail contacts have been successfully invited. Thank You.<br/><cl/>");
+    sss("Invited GMail Contacts","The Invitations to your GMail Contacts have been added to the Mail Server. It will be processed soon. Thank You.<br/><cl/>");
    }
   }
   ?>
@@ -41,4 +41,5 @@
    <a href="oauth/invite_gmail" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:#4F9FCA url(//open.subinsb.com/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Invite GMail Contacts</a>
   </center>
  </div>
+ <?include("comps/gadget.php");?>
 </body></html>

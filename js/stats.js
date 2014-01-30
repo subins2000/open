@@ -1,1 +1,10 @@
-$("body").append('\<script\>var sc_project="9454959";var sc_invisible="1";var sc_security="32cc0826";var scJsHost=(("https:"==document.location.protocol)?"https://secure.":"http://www.");$("body").append("<script type=\'text/javascript\' src=\'"+scJsHost+"statcounter.com/counter/counter.js\'><"+"/"+"script>");\<\/script\>');
+var sc_project = 9454959,
+    sc_invisible = 1,
+    sc_security = "32cc0826";
+window.onload = function(){
+ var oHead = document.getElementsByTagName('head').item(0),
+     oScript = document.createElement("script");
+ oScript.setAttribute("type", "text/javascript");
+ oScript.setAttribute("src", "http://www.statcounter.com/counter/counter.js");
+ oHead.appendChild(oScript);
+};

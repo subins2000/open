@@ -75,7 +75,9 @@ if(!function_exists("notify")){
    }
   }
   if($dontSend==0){
-   send_mail($mail,$title,$m);
+   /*send_mail($mail,$title,$m); -- Not Needed Anymore*/
+   $sql=$db->prepare("INSERT INTO mails(email,sub,message) VALUES (?,?,?)");
+   $sql->execute(array($mail, $title, $m));
   }
  }
 }

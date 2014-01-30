@@ -6,6 +6,8 @@ Feel free to contribute and please report bugs if you find any.
 If you need help, documentation and other info about Open, please see our blog : http://open.subinsb.com/blog
 
 Note that the blog folder is not included in source code. The blog is ran using Wordpress.
+
+The folder "cron_minute_job" contains the CRON job files. The files in it are ran every minute.
 Run On Localhost
 ====
 If you want to test Open on your Localhost server, you should do the following steps :

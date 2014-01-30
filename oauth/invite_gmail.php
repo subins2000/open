@@ -17,7 +17,7 @@ if(($success = $client->Initialize())){
    $client->error = $client->authorization_error;
    $success = false;
   }elseif(strlen($client->access_token)){
-   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=50','GET', array(), array('FailOnAccessError'=>true), $data);
+   $success = $client->CallAPI('https://www.google.com/m8/feeds/contacts/default/full?max-results=2500','GET', array(), array('FailOnAccessError'=>true), $data);
   }
  }
  $success = $client->Finalize($success);
@@ -31,13 +31,14 @@ if($success){
  $xml= new SimpleXMLElement($data);
  $xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
  $result = $xml->xpath('//gd:email');
- foreach ($result as $title) {
+ foreach($result as $title) {
   $m=$title->attributes()->address;
   $sql=$db->prepare("SELECT COUNT(id) FROM users WHERE username=?");
   $sql->execute(array($m));
-  if($sql->fetchColumn()==0){
+  if($sql->rowCount()==0){
    $msg=$n." has sent you an inviation to join <a href='http://open.subinsb.com'>Open</a>.<br/>Open is an open source social network. It's growing by the support of developers and people like you. Please join <a href='http://open.subinsb.com'>Open</a> and enjoy Privacy like never before.<br/>You can connect with $n and hunderds of others.<br/><a href='http://open.subinsb.com/register'><button style='padding:5px 15px;'>Accept Invitation</button></a>&nbsp;&nbsp;&nbsp;<a href='http://open.subinsb.com/$who'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
-   send_mail($m, $sn." Sent You An Invitation", $msg);
+   $sql=$db->prepare("INSERT INTO mails(email,sub,message) VALUES (?,?,?)");
+   $sql->execute(array($m, "$sn Sent You An Invitation", $msg));
   }
  }
  header("Location: http://open.subinsb.com/invite?gmail=success");
