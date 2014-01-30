@@ -44,5 +44,6 @@ ch();
    }
    ?>
   </div>
+  <?if($sql->rowCount()!=0){echo"<br/><cl/>You are Chatting With <a href='".get("plink",$gid)."'>".get("name",$gid,false)."</a>";}?>
  </div>
 </body></html>
