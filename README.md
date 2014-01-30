@@ -37,3 +37,6 @@ The @Mentions have been implemented on Open by using jQuery sMention Plugin (htt
 PHP OAuth Class(http://www.phpclasses.org/package/7700-PHP-Authorize-and-access-APIs-using-OAuth.html). Thanks Manuel Lemos.
 
 Resize image class
+Debug
+=====
+Pass "?show_errors=1" with the URL to see the errors, warnings omitted by PHP. Example : http://open.subinsb.com/?show_errors=1

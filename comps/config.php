@@ -236,8 +236,12 @@ if($lg && $al_coll_dt==false){
  save("seen");
 }
 /*Global Variables*/
-$_P=count($_POST)>0 ? true:false; 
-$sroot=$_SERVER['DOCUMENT_ROOT'];
+$_P=count($_POST)>0 ? true:false;
+if($usr=="root"){
+ $sroot=$_SERVER['DOCUMENT_ROOT']; /* If Localhost*/
+}else{
+ $sroot=getenv('OPENSHIFT_REPO_DIR')."php";
+}
 /*Other Functions*/
 if(!function_exists("foll")){
  function foll($id){
