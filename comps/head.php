@@ -20,6 +20,7 @@ if(!isset($fs)){
  $fs="main,$fs";
 }
 echo"<script>";
+ echo file_get_contents("$sroot/js/stats.js");
  echo file_get_contents("$sroot/js/jquery.js").";";
  $fs=explode(",",$fs);
  $al_d_ready=false;
@@ -37,7 +38,6 @@ echo"<script>";
     echo"$('body').addClass('$theme');";
    }
    echo "});";
-   echo file_get_contents("$sroot/js/stats.js");
   }
  }
 echo"</script>";

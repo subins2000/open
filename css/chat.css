@@ -1,7 +1,7 @@
 .users, .chat{
- display:table-cell;
+ display:inline-block;
  vertical-align:top;
- height:400px;
+ height:410px;
 }
 .users{
  width:200px;
@@ -12,9 +12,9 @@
  overflow-y:auto;
 }
 .chat{
- width:450px;
+ width:440px;
  padding:5px 14px;
- background: #CCC;
+ background: #FAB359;
 }
 .users .user img, .users .user .name, .users .user .status{
  display:inline-block;

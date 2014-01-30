@@ -56,7 +56,7 @@ while($r=$sql->fetch()){
 </div>
 <?
 if($_SERVER['PHP_SELF']=="/search.php"){
- $d="<div style='background:#CCC;padding:10px 15px;border-radius:10px;'>";
+ $d="<div style='background:#FAB359;color:white;padding:10px 15px;border-radius:10px;margin-bottom: 5px;'>";
  if($q!=""){
   echo "$d Showing posts that match \"<b>$q</b>\"</div>";
  }else{
