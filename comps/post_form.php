@@ -30,6 +30,7 @@ while($r=$sql->fetch()){
   <div class="right">
    <input type="text" id="show_form" style="width:100%;" placeholder="Have Something To Share ?">
    <div id="post_full_form" hide>
+    <div class="close" title="Close">x</div>
     <textarea placeholder="Share What's New :-)" class="textEditor" name="post"><?if($_SERVER['PHP_SELF']=="/search.php" && $q!=""){echo"$q : ";}?></textarea>
     <div style="float:left;position: relative;">
      <button type="button" id="prtoggle"></button>

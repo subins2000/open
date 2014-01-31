@@ -41,3 +41,7 @@ if(typeof localStorage["shnews"] != "undefined"){
 }else{
  $(".short_news").show();
 }
+$(prntf+".close").live("click",function(){
+ $(prntf+"#post_full_form").hide();
+ $(prntf+"#show_form").show();
+});

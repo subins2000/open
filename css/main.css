@@ -129,6 +129,7 @@ input[type=text],input[type=number],textarea,input[type=password],.textEditor{
  box-shadow:inset 0 1px 0 rgba(0, 0, 0, 0.08),inset 0 1px 2px rgba(255, 255, 255, 0.75);
  border:1px solid rgba(204, 204, 204, .7);
  background: rgba(255, 255, 255, .7);
+ vertical-align: middle;
 }
 input[type=text]:hover,input[type=number]:hover,textarea:hover,input[type=password]:hover,.textEditor:hover{
  border:1px solid rgba(204, 204, 204,1);

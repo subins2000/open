@@ -17,7 +17,7 @@ function show_cmt($pid){
  $h="<div class='comments' id='$pid'>";
   $h.="<form class='cmt_form ajax_form' id='$pid' action='ajax/comment' succ='Commented' err='Failed To Comment' while='Commenting'>";
    $h.="<input type='hidden' id='clod' name='clod' value='0'/>";
-   $h.="<input name='cmt' type='text' class='textEditor' placeholder='Your Comment Here'/>";
+   $h.="<textarea name='cmt' type='text' class='textEditor' placeholder='Your Comment Here'></textarea>";
    $h.="<input name='id' type='hidden' value='$pid'/>";
    $h.="<input type='submit' value='Comment'/>";
   $h.="</form>";

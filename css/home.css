@@ -71,7 +71,6 @@
  color:black;
 }
 .post .cont{
- font-size:16px;
  margin-top:3px;
  white-space: pre-wrap;
  word-wrap: break-word;
@@ -111,8 +110,9 @@
  border-radius:5px;
  display:none;
 }
-.comments .cmt_form input[type=text]{
+.comments .cmt_form .textEditor{
  width:235px;
+ height:20px;
 }
 .comment .left{
  display:inline-block;

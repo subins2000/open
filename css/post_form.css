@@ -3,10 +3,13 @@
  padding:10px;
  border-radius:10px;
  margin-bottom: 5px;
+ position:relative;
 }
 .post_form textarea{
- width:400px;
+ width:395px;
  height:80px;
+ resize: none;
+ margin-bottom: 5px;
 }
 .post_form #show_form{
  width:200px;
@@ -68,4 +71,12 @@
  right:10px;
  cursor:pointer;
  font-size:15px;
+}
+.post_form .close{
+ position:absolute;
+ right:5px;
+ padding:0px 5px 4px;
+ background:#AAA;
+ color:white;
+ cursor:pointer;
 }

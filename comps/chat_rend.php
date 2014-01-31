@@ -59,7 +59,7 @@ function show_chat($fid,$single=false){
  if($single===false){
   $h.="<form action='ajax/msg' method='POST' class='ajax_form chat_form' id='$fid' succ='Sent Successfully' err='Sending Failed. Try again.' while='Sending'>";
    $h.="<input type='hidden' name='to' value='$fid'/>";
-   $h.="<input type='text' class='msgEditor' name='msg' style='width:70%;min-width: 0px;'/>";
+   $h.="<textarea type='text' class='msgEditor' name='msg' style='width:70%;min-width: 0px;'></textarea>";
    $h.="<input type='submit' name='submit' style='width:18%;padding: 5px;min-width: 0px;' value='Send'/>";
   $h.="</form>";
  }

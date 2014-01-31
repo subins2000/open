@@ -110,15 +110,13 @@
 String.prototype.replaceBetween = function(start, end, what) {
  return this.substring(0, start) + what + this.substring(end);
 };
-$(document).ready(function(){
- $("body").on("click",".sm_bar .sitem",function(){
-  var id=$(this).attr("id");
-  parts=localStorage['smloc'].split(",");
-  start=parseFloat(parts[0])+1;
-  end=parts[1];
-  t=$(".sm_bar").data("from");
-  t.val(t.val().replaceBetween(start,end,id));
-  $(".sm_bar").hide();
-  t.focus();
- });
+$("body").on("click",".sm_bar .sitem",function(){
+ var id=$(this).attr("id");
+ parts=localStorage['smloc'].split(",");
+ start=parseFloat(parts[0])+1;
+ end=parts[1];
+ t=$(".sm_bar").data("from");
+ t.val(t.val().replaceBetween(start,end,id));
+ $(".sm_bar").hide();
+ t.focus();
 });

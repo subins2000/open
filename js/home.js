@@ -40,7 +40,7 @@ $(".post .cmt").live("click",function(){
  id=$(this)[0].id;
  c=$("#"+id+".comments");
  c.toggle();
- c.find("input[name=cmt]").focus();
+ c.find(".textEditor")[0].click();
 });
 $(".comment .author_cmt_box").live("click",function(){
  $(this).find(".author_cmt_panel").toggle();
@@ -51,8 +51,7 @@ $(".de_cmt").live("click",function(){
 });
 $(".reply_cmt").live("click",function(){
  id=$(this).attr("id");
- $("#"+id+".cmt_form").find("input[name=cmt]").val("@"+$(this).attr("data-user")+" ");
- $("#"+id+".cmt_form").find("input[name=cmt]").focus();
+ $("#"+id+".cmt_form").find(".textEditor").focus().val("@"+$(this).attr("data-user")+" ");
  scrollTo($("#"+id+".cmt_form").offset().top);
 });
 function load_more_posts(){
@@ -111,6 +110,8 @@ $(".textEditor").smention(ht+"/ajax/get_users",{
  width:300,
  position:"below",
  cache:true
+}).live("keyup",function(){
+ $(this).innerHeight($(this)[0].scrollHeight);
 });
 tURL($(".post .cont"));
 tURL($(".comment .cont"));
