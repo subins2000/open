@@ -18,6 +18,6 @@ echo "<script>".file_get_contents("$sroot/js/stats.js")."</script>";
 echo "<script src='http://open.subinsb.com/js/get?f=$fs'></script>";
 $theme=get("theme");
 if($theme!=""){
- echo"$('body').addClass('$theme');";
+ echo'<script>$(document).ready(function(){$("body").addClass("'.$theme.'");});</script>';
 }
 ?>
