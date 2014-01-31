@@ -124,7 +124,7 @@ window.scrollTo=function(top){
 window.tURL=function(t){
  t.find("a[href]").die("mousedown").live("mousedown",function(){
   url=$(this).attr("href");
-  if(/open\.subinsb\.com\/url\?/.test(url)==false){
+  if(/open\.subinsb\.com/.test(url)==false){
    url="http://open.subinsb.com/url?url="+encodeURIComponent(url);
    $(this).attr("href",url);
    $(this).attr("target","_blank");
