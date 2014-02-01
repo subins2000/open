@@ -38,7 +38,11 @@ if($_P && $msg!="" && $to!=""){
 ?>
   p="<?echo$ht;?>";
   <?if($udte==false){?>
-   $("#<?echo$to;?>.msgs").append(p);
+   if($("#<?echo$to;?>.msgs .msg").length==0){
+    $("#<?echo$to;?>.msgs").html(p);
+   }else{
+    $("#<?echo$to;?>.msgs").append(p);
+   }
   <?}else{?>
    $("#<?echo$cid;?>.msg").replaceWith(p);
   <?}?>
