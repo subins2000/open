@@ -26,18 +26,20 @@ function show_not($id){
   }
   $iuR=$r['red']==0 ? "nred":"";
   $iuT=$r['red']==0 ? "Unread Notification":"";
-  $nfs="<div class='nfsi $iuR' id='$id' href='$alnk' title='$iuT'>";
-   $nfs.="<div class='left'>";
-    $nfs.="<img height='48' width='48' src='$img'/>";
-   $nfs.="</div>";
-   $nfs.="<div class='right'>";
-    $nfs.="<a class='name'>$name</a><br/>";
-    $nfs.="<span class='time'>{$r['posted']}</span>";
-    $nfs.="<div class='cont'>";
-     $nfs.=$amsg;
+  $nfs="<a href='$alnk'>";
+   $nfs.="<div class='nfsi $iuR' id='$id' title='$iuT'>";
+    $nfs.="<div class='left'>";
+     $nfs.="<img height='48' width='48' src='$img'/>";
+    $nfs.="</div>";
+    $nfs.="<div class='right'>";
+     $nfs.="<span class='name'>$name</span><br/>";
+     $nfs.="<span class='time'>{$r['posted']}</span>";
+     $nfs.="<div class='cont'>";
+      $nfs.=$amsg;
+     $nfs.="</div>";
     $nfs.="</div>";
    $nfs.="</div>";
-  $nfs.="</div>";
+  $nfs.="</a>";
  }
  $sql=$db->prepare("UPDATE notify SET red='1' WHERE id=?");
  $sql->execute(array($id));

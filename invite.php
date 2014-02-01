@@ -32,7 +32,7 @@
     } else {
       alert('Failed To Invite');
     }
-  });
+   });
   }
   </script><br/>
   <center>

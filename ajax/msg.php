@@ -34,7 +34,7 @@ if($_P && $msg!="" && $to!=""){
  while($r=$sql->fetch()){
   $cid=$r['id'];
  }
- $ht=str_replace('"','\"',show_chat($to,$cid));
+ $ht=rendFilt(show_chat($to,$cid));
 ?>
   p="<?echo$ht;?>";
   <?if($udte==false){?>

@@ -32,7 +32,7 @@ if($id!=""){
   $tp[$k]['cmt']=$r['cmts'];
   $tp[$k]['prs']=$r['privacy'];
  }
- $ht=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace('"','\"',str_replace(">\n","",str_replace("\r","",show_posts($tp))))));
+ $ht=rendFilt(show_posts($tp));
 ?>
 localStorage['requested']=0;
 <?if($cany==0){?>$(".load_more_posts").find(".normal").text("No More Posts To Show");<?}else{?>p="<?echo$ht;?>";$(".post:last").after(p);<?}?>$(".load_more_posts").find(".normal").show();$(".load_more_posts .loader").hide();

@@ -319,4 +319,10 @@ if(!function_exists("sm_notify")){
   }
  }
 }
+if(!function_exists("rendFilt")){
+ function rendFilt($h){
+  $h=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace("\r","",$h)));
+  return $h;
+ }
+}
 ?>

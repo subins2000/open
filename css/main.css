@@ -4,13 +4,13 @@
 [show]{
  display:block !important;
 }
+*{font-family: 'Ubuntu', sans-serif;}
 body{
  background:url(//open.subinsb.com/img/dot.gif);
  margin:0px;
  border:0px;
  padding:0px;
  line-height:100%;
- font-family: 'Ubuntu', sans-serif;
 }
 body.cloud{background:url(//open.subinsb.com/img/clouds);background-size:25em;background-color:rgba(100, 172, 400,.8);}
 body.dark{background:-webkit-linear-gradient(#AAA,#EEE);background:-moz-linear-gradient(left,#AAA,#EEE);background-size:800em;}
@@ -82,10 +82,11 @@ header nav .chat{
  padding: 60px 14px 15px 14px;
  width: 700px;
  line-height: 18px;
- background:#EEE !important;
- -webkit-background-clip: padding;
+ background: -webkit-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
+ background: -moz-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
+ background: -ms-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
+ background: -o-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
  background-clip: padding-box;
- -webkit-box-shadow: 0 4px 4px rgb(102, 102, 102);
  box-shadow: 0 4px 4px rgb(102, 102, 102);
  border-bottom-left-radius:10px;
  border-bottom-right-radius:10px;
@@ -106,10 +107,10 @@ button, input[type=submit], input[type=button]{
  background-image: linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
  outline:none;
  color:white;
- font-family:ubuntu;
  font-weight:bold;
  font-size:13px;
  display:inline-block;
+ vertical-align: middle;
 }
 button:hover, input[type=submit]:hover, input[type=button]:hover{
  background: rgb(255, 255, 255);
@@ -156,7 +157,8 @@ a[href]{
  color:inherit;
 }
 a[href]:hover{
- color:#E0520A;
+ /*color:#E0520A;*/
+ text-decoration: underline;
 }
 /*Notifications*/
 header .notifications #nfn_button{

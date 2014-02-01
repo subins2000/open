@@ -11,7 +11,7 @@ ch();
   <h1>Chat</h1>
   <div class="users">
    <?
-   $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
+   $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who) ORDER BY since");
    $sql->execute(array(":who"=>$who));
    while($r=$sql->fetch()){
     $id=$r['fid'];

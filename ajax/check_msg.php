@@ -27,10 +27,10 @@ if($lid!="" && $to!="gadget"){
    }
   }
   if($lup){
-   $msg=str_replace('"','\"',show_chat($to,$lid));  
+   $msg=rendFilt(show_chat($to,$lid));  
   }else{
    if($mid!=""){
-    $msg=str_replace('"','\"',show_chat($to,$mid));
+    $msg=rendFilt(show_chat($to,$mid));
    }
   }
   if($msg!=""){
@@ -80,7 +80,7 @@ if($lid!="" && $to!="gadget"){
  if($sql->rowCount()==0){
   ser();
  }
- $ht=str_replace('"','\"',show_chat($to,true));
+ $ht=rendFilt(show_chat($to,true));
 ?>
  $("#<?echo$to;?>.msgs").html("<?echo$ht;?>");
  mcTop();

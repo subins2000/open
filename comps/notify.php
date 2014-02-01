@@ -34,7 +34,7 @@ if(!function_exists("notify")){
   if($a=="follow" && $tu!=$who){
    $sql=$db->prepare("SELECT COUNT(red) FROM notify WHERE uid=? AND fid=? AND ty=?");
    $sql->execute(array($tu,$who,"fol"));
-   if($sql->rowCount()==0){
+   if($sql->fetchColumn()==0){
     $sql=$db->prepare("INSERT INTO notify(uid,fid,ty,post,posted) VALUES (?,?,?,?,NOW())");
     $sql->execute(array($tu,$who,"fol",""));
     $sql=$db->prepare("SELECT fid FROM conn WHERE fid=?");
@@ -61,7 +61,7 @@ if(!function_exists("notify")){
   if($a=="msg" && $tu!=$who){
    $sql=$db->prepare("SELECT posted FROM notify WHERE uid=? AND fid=? AND ty=? ORDER BY id DESC LIMIT 1");
    $sql->execute(array($tu,$who,"msg"));
-   if((strtotime($sql->fetchColumn()) < strtotime("-1 day", time())) || $sql->fetchColumn()==""){
+   if((strtotime($sql->fetchColumn()) < strtotime("-10 minutes", time())) || $sql->fetchColumn()==""){
     $sql=$db->prepare("INSERT INTO notify(uid,fid,ty,post,posted) VALUES (?,?,?,?,NOW())");
     $sql->execute(array($tu,$who,"msg",""));
     $m="$n sent you a message :";

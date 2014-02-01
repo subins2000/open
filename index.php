@@ -115,13 +115,13 @@ ch();
    margin:0px auto;
    padding:15px;
   }
-  .right,.left{
+  .icontent .right,.icontent .left{
    display:inline-block;
    vertical-align:top;
    margin-left:10px;
    line-height:20px;
   }
-  .right{
+  .icontent .right{
    border-left:1px solid black;
    padding-left:10px;
   }

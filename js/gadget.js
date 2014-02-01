@@ -25,6 +25,11 @@ function doMchecks(isG){
 $(".msgEditor").smention(ht+"/ajax/get_users",{
  avatar:true,
  width:300
+}).live("keypress",function(e){
+ if (e.keyCode == 13 && !e.shiftKey) {
+  e.preventDefault();
+  $(".chat_form").submit();
+ }
 });
 doMchecks();
 $(".usersgt .user").live("click",function(){

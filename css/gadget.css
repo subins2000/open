@@ -1,8 +1,7 @@
 .msg{
  display: table;
  width:100%;
- border-bottom:1px solid black;
- padding:8px 0px;
+ padding:4px 0px;
 }
 .msg .left{
  background: white;
@@ -33,6 +32,7 @@
  bottom:0px;
  width:200px;
  z-index:14;
+ box-shadow: 0 4px 4px rgb(102, 102, 102);
 }
 .usersgt .user img, .usersgt .user .name, .usersgt .user .status{
  display:inline-block;
@@ -80,6 +80,7 @@
 .usersgt .user{
  cursor:pointer;
  margin:5px;
+ font-size: 14px;
 }
 .chatgt .close{
  position:absolute;
@@ -91,8 +92,12 @@
 }
 .cusgt{
  margin-bottom:5px;
- padding-bottom:5px;
+ padding: 0px 5px 5px;
  border-bottom:1px solid black;
+ position: absolute;
+ background: white;
+ right: 0px;
+ left: 0px;
 }
 .cusgt img{
  vertical-align:top;
@@ -131,6 +136,11 @@
 .chat_form .msgEditor{
  height: 18px;
  resize: none;
+}
+.usersgt .users{
+ overflow-y: auto;
+ height: 100%;
+ margin-right: -40px;
 }
 @media screen and (max-width: 1085px){
  .content{margin-right:auto !important;}

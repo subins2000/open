@@ -138,6 +138,3 @@ $("#nfn_button").live("click",function(){
  }
  post("ajax/nfs",{load:1});
 });
-$(".nfsi").live("click",function(){
- window.location=$(this).attr("href");
-});

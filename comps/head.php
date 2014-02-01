@@ -7,6 +7,7 @@ if(isset($t)){
 }
 $cfs=$cfs=="" ? "main":"main,$cfs";
 echo "<link rel='icon' href='http://open.subinsb.com/img/favicon.ico' />";
+echo "<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>";
 echo "<link type='text/css' rel='stylesheet' href='http://open.subinsb.com/css/get?f=$cfs' />";
 if(!isset($fs)){
  $fs="main";

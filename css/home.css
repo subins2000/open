@@ -30,15 +30,9 @@
  display:inline-block;
  width:400px;
  vertical-align: top;
- border-left:1px solid black;
  padding-left:7px;
 }
-.post .top{
- border-bottom:1px solid white;
- padding-bottom:2px;
-}
 .post .bottom{
- border-top:1px solid black;
  margin-top:5px;
 }
 .like,.cmt{
@@ -55,7 +49,6 @@
 .post .like_bar,.post .cmt_bar{
  margin-right:5px;
  display:inline-block;
- border-right:1px solid black;
  padding-right:5px;
 }
 .post .pimg{
@@ -122,15 +115,10 @@
  display:inline-block;
  width:330px;
  vertical-align: top;
- border-left:1px solid black;
  padding-left:7px;
-}
-.comment .top{
- border-bottom: 1px solid black;
 }
 .comments .cmt_form{
  margin-bottom:10px;
- 
 }
 .comment{
  position:relative;
@@ -183,7 +171,9 @@
  margin-left: 10px;
 }
 .comment .like_bar{border:none;}
-.comment .actions{border-top:1px solid black;margin-top:5px;padding:0px 10px 6px;}
+.comment .actions{
+ padding:0px 10px 6px;
+}
 .comments .load_more_comments{
  display:block;
  margin:5px auto 0px;

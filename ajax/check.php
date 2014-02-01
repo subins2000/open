@@ -36,7 +36,7 @@ if($lg && $_GET['user']==$who){
     $tp[$k]['cmt']=$r['cmts'];
     $tp[$k]['prs']=$r['privacy'];
    }
-   $ht=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace('"','\"',str_replace(">\n","",str_replace("\r","",show_posts($tp))))));
+   $ht=rendFilt(show_posts($tp));
    $effect="";
    foreach($tp as $k=>$v){
     $effect.="$('#$k.post').hide().fadeIn(2000);";

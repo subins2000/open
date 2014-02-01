@@ -12,7 +12,7 @@ if(isset($_POST['load'])){
   while($r=$sql->fetch()){
    $nfs.=show_not($r['id']);
   }
-  $nfs=str_replace('"','\"',$nfs);
+  $nfs=rendFilt($nfs);
   $nfs.="<br/><a href='notifications' style='text-align:center;display:block;'>See All Notifications</a><br/>";
 ?>
 $(".notifications .loading").hide();
