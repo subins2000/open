@@ -13,7 +13,7 @@ if($_SERVER['PHP_SELF']=="/search.php"){
 ?>
 <div style="background: black;border-radius: 10px;padding:15px;margin:5px -10px 0px -15px;">
  <font size="5" style="color:rgb(0,250,120);">Trending</font>
- <div style="color:lightblue;padding-left:10px;margin-top:10px;">
+ <div style="color:#fff;padding-left:10px;margin-top:10px;">
   <?
   $sql=$db->query("SELECT * FROM trend ORDER BY hits DESC LIMIT 9");
   foreach($sql as $r){
