@@ -61,7 +61,8 @@ if(!function_exists("notify")){
   if($a=="msg" && $tu!=$who){
    $sql=$db->prepare("SELECT posted FROM notify WHERE uid=? AND fid=? AND ty=? ORDER BY id DESC LIMIT 1");
    $sql->execute(array($tu,$who,"msg"));
-   if((strtotime($sql->fetchColumn()) < strtotime("-10 minutes", time())) || $sql->fetchColumn()==""){
+   $lps=$sql->fetchColumn();
+   if(strtotime($lps) < strtotime("-20 minutes") || $lps==""){
     $sql=$db->prepare("INSERT INTO notify(uid,fid,ty,post,posted) VALUES (?,?,?,?,NOW())");
     $sql->execute(array($tu,$who,"msg",""));
     $m="$n sent you a message :";
