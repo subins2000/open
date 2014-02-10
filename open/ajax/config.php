@@ -1,0 +1,3 @@
+<?
+include("../comps/config.php");
+?>

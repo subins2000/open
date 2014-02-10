@@ -1,0 +1,3 @@
+<?
+echo "How Did You ?";
+?>

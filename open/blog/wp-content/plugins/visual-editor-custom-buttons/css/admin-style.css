@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.recb_inputblock {
+	margin:20px 0 20px 0;
+}
+
+#editor-custom-buttons label, .recb_inputblock .vecb_label, .recb_label {
+	color: #333 !important;
+	font-size: 13px !important;
+	font-weight: bold !important;
+	padding: 0 !important;
+	margin: 0 0 7px !important;
+	display: block !important;
+	vertical-align: text-bottom !important;
+	text-shadow: 0 1px 0 white;
+	line-height: 1.1em;
+}
+
+.recb_inputblock textarea, .recb_inputblock .vecb_text  {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+	width:100%;
+	border-color:#ccc;
+}
+
+.vecb_preview {
+	background:url(../previewback.png) 0 16px no-repeat;
+	width:106px;
+	height:50px;
+	display:inline-block;
+	margin-left:60px;
+	vertical-align:top;
+	margin-top:3px;
+}
+
+.vecb_preview_text {
+	padding-right:20px;
+	padding-top:1px;
+	height:21px;
+	font-weight:bold;
+	float:right;
+	vertical-align:top
+
+}
+
+.vecb_iconselect {
+	display:inline-block;
+	vertical-align:top;
+}
+
+.recb_inputblock .vecb_text {
+ 	width:99% !important;	
+}
+
+.recb_inputblock textarea {
+	resize:vertical;
+}
+
+.recb_inputblock .vecb_desc {
+	font-size: 11px;
+	line-height: 1.1em;
+	margin: 0 0 1em;
+	padding: 0;
+	color: #666;
+	text-shadow: 0 1px 0 white;
+}
+
+.vecb_less_space {
+	margin-top:10px !important;
+}
+
+.vecb_no_top {
+	margin-top:0 !important;
+}
+
+#menu-posts-vecb_editor_buttons .wp-menu-image {
+   background: url(../block--plus.png) no-repeat 6px -17px !important;
+}
+
+
+#menu-posts-vecb_editor_buttons:hover .wp-menu-image, #menu-posts-vecb_editor_buttons.wp-has-current-submenu .wp-menu-image {
+   background-position:6px 7px!important;
+}
+
+.icon32-posts-vecb_editor_buttons {
+	background-position: -370px -5px !important;
+}
+
+

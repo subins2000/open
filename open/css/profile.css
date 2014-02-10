@@ -1,0 +1,116 @@
+.header{
+ height:180px;
+ border:2px solid white;
+ width:100%;
+ position:relative;
+}
+.header .holder{
+ background:rgba(0,0,0,.7);
+ position:absolute;
+ top:0px;
+ left:0px;
+ color:white;
+ padding:5px 15px;
+ font-weight:bold;
+}
+.main{
+ margin-top:7px;
+ z-index:5;
+}
+.main .left.clearfix{
+ display:inline-block;
+ width:530px;
+ vertical-align: top;
+}
+.main .right.clearfix{
+ display:inline-block;
+ width:150px;
+ margin-left: 5px;
+}
+.main .right.clearfix .image{
+ margin-top:-88px;
+ border:6px solid white;
+ height:150px;
+ width:152px;
+ background:white;
+ position: relative;
+ box-shadow:inset 0px 0px 8px 1px rgba(0, 0, 0, .4);
+}
+.main .left.clearfix .navigation{
+ text-align: center;
+}
+.main .right.clearfix .osin{
+ margin-top:5px;
+}
+.main .right.clearfix .osin div[val] span,.main .right.clearfix .osin div[val] v,.main .right.clearfix .osin div[val] c{
+ display:table-cell;
+ padding-left:10px;
+}
+.main .right.clearfix .osin div[val] v{font-weight:bold;}
+.main .right.clearfix .osin div[val]{
+ display: table-row;
+ margin-left:-10px;
+}
+.main .right.clearfix .osin .followers,.main .right.clearfix .osin .following{
+ background:black;
+ border-radius:10px;
+ padding:5px 10px;
+ margin-top:10px;
+ color:white;
+}
+.main .left.clearfix .noggler{
+ margin-top:10px;
+}
+.noggler{
+ display:none;
+}
+.main .left.clearfix .navigation part{
+ font-size:16px;
+ margin-left:20px;
+ padding:0px 10px 0px 10px;
+ display:inline-block;
+ cursor:pointer;
+}
+.main .left.clearfix .navigation part[act]{
+ font-weight:bold;
+ border-bottom:5px solid black;
+}
+#about .smallbox{
+ background:white;
+ box-shadow:outset 0px 0px 8px 1px rgba(0, 0, 0, .4);
+ padding:10px;
+ display:inline-block;
+ vertical-align:top;
+ margin:2px;
+ width:235px;
+ border-radius:10px;
+ border-top-width:5px;
+ border-top-style:solid;
+}
+#about .smallbox h{
+ font-size:25px;
+ margin-bottom:12px;
+ font-weight:bold;
+ display:block;
+}
+.smallbox.basic{border-color:red;}
+.smallbox.contact{border-color:blue;}
+.smallbox.profiles{border-color:yellow;}
+.smallbox.life{border-color:rgb(100, 194, 53);}
+.smallbox it{
+ display: table-row;
+ margin-top:5px;
+}
+.smallbox m,.smallbox n,.smallbox v{
+ display:table-cell;
+ vertical-align:top;
+}
+.smallbox m{padding:2px 10px 2px 10px;}
+.smallbox v{word-break: break-word;}
+#editField{max-width: 130px;min-width: 130px;}
+#ch_hi{
+ position:absolute;
+ right:-6px;
+ top:3px;
+ padding:5px 15px;
+}
