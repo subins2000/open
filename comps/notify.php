@@ -8,7 +8,7 @@ $w  - Current User ID
 */
 if(!function_exists("notify")){
  function notify($a,$t,$p,$tu,$w){
-  global $db, $who;
+  global $db, $who, $sroot;
   $dontSend=0;
   $n=get("name",$w,false);
   $sn=explode(" ",$n);
@@ -62,6 +62,7 @@ if(!function_exists("notify")){
    $sql=$db->prepare("SELECT posted FROM notify WHERE uid=? AND fid=? AND ty=? ORDER BY id DESC LIMIT 1");
    $sql->execute(array($tu,$who,"msg"));
    $lps=$sql->fetchColumn();
+   date_default_timezone_set("EST");
    if(strtotime($lps) < strtotime("-20 minutes") || $lps==""){
     $sql=$db->prepare("INSERT INTO notify(uid,fid,ty,post,posted) VALUES (?,?,?,?,NOW())");
     $sql->execute(array($tu,$who,"msg",""));

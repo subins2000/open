@@ -67,8 +67,6 @@ if(!function_exists("sss")){
   }
   if($d!=''){
    $s.="<span style='color:green;font-family:ubuntu;'>$d</span>";
-  }else{
-   $s.="<span style='color:green;font-family:ubuntu;'>$d</span>";
   }
   echo $s;
  }
@@ -260,7 +258,7 @@ if(!function_exists("send_mail")){
  include("$sroot/comps/mailer/class.phpmailer.php");
  function send_mail($mail,$subject,$msg) {
   global $sroot;
-  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;border: 3px solid black;padding: 5px 10px;border-radius:5px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
+  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
   $subject.=" - Open";
   $lufp="$sroot/comps/lastused.txt";
   $lastu=file_get_contents($lufp);
@@ -321,7 +319,7 @@ if(!function_exists("sm_notify")){
 }
 if(!function_exists("rendFilt")){
  function rendFilt($h){
-  $h=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace("\r","",$h)));
+  $h=str_replace("\n","<br/>",str_replace("/",'"+"/"+"',str_replace('"',"'",str_replace("\r","",$h))));
   return $h;
  }
 }

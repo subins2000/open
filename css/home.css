@@ -155,10 +155,9 @@
  display:block;
 }
 .load_more_posts{
- background:#DDD;
- border:2px solid black;
- border-radius:10px;
- padding:5px 10px;
+ background: #FAB359;
+ border-radius: 10px;
+ padding: 7px 25px;
  margin-top:5px;
 }
 .load_more_posts .normal{
