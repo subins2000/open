@@ -11,7 +11,7 @@ ch();
   <h1>Find People</h1>
   Here are some of the users of <b>Open</b>. You can search for a specific user using the form below. <b>You wouldn't get any results if you search yourself.</b><cl/>
   <form method="GET" action="find" style="border-bottom:1px solid black;padding-bottom:5px;">
-   <span>Search :</span><input type="text" name="q" value="<?echo$_GET['q'];?>" size="35"/>
+   <span>Search :</span><input type="text" name="q" value="<?echo filt($_GET['q']);?>" size="35"/>
   </form>
   <cl/>
   <?

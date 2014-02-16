@@ -11,7 +11,6 @@
  vertical-align:top;
 }
 .msg .up{
- border-bottom:1px solid #EEE;
  padding-bottom: 2px;
 }
 .msg .up .time{
@@ -22,6 +21,9 @@
  overflow-y:auto;
 }
 .msgs::-webkit-scrollbar-thumb{background-color: rgba(0, 0, 0, .2);background-clip: padding-box;border: solid transparent;border-width: 1px 1px 1px 6px;min-height: 28px;padding: 100px 0 0;box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1),inset 0 -1px 0 rgba(0, 0, 0, .07);}.msgs::-webkit-scrollbar-thumb:hover{background-color: rgba(0, 0, 0, .5);}.msgs::-webkit-scrollbar{width: 15px;border-width: 0 1px 0 2px;}.msgs::-webkit-scrollbar-track{background-clip: padding-box;border: solid transparent;border-width: 0 0 0 4px;border-width: 0;}.msgs::-webkit-scrollbar-corner {background: transparent;}
+.msg .cmsg{
+ padding: 1px 0px 0px 0px;
+}
 .usersgt{
  position:fixed;
  right:0px;
