@@ -169,7 +169,7 @@ header .notifications #nfn{
  position:absolute;
  top:35px;
  right:5px;
- background:white;
+ background:#DDD;
  padding:10px;
  color:black;
  padding: 0 13px;
@@ -192,14 +192,14 @@ header .notifications #nfn{
  margin-left:5px;
 }
 .notifications .nfsi.nred{
- background: black;
- color: white;
+ background: white;
 }
 .notifications .nfsi{
  font-size:13px;
  border-bottom:1px solid black;
  cursor:pointer;
  margin-top:5px;
+ background:#DDD;
 }
 .notifications .nfsi:hover{
  background:#EEE;

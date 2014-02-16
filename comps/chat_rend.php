@@ -22,7 +22,7 @@ function show_chat($fid,$single=false){
     $snm=$snm[0];
     $h.="<div class='msg' id='$id'>";
      if($uid==$who){
-      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 6px;padding-top:1px;'>";
+      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 1px 6px 8px;padding-top:1px;'>";
        $h.="<div class='up'>";
         $h.="<a target='_blank' href='$pl'>$snm</a>";
         $h.="<span class='time'>{$r['posted']}</span>";
@@ -31,16 +31,16 @@ function show_chat($fid,$single=false){
       $h.="</div>";
       $h.="<div style='display: table-cell;vertical-align: top;width:9%;'>";
        $h.="<a target='_blank' href='$pl'>";
-        $h.="<img class='left' style='border-left:1px solid black;' height='32' width='32' src='$img'>";
+        $h.="<img class='left' height='32' width='32' src='$img'>";
        $h.="</a>";
       $h.="</div>";
      }else{      
-      $h.="<div style='display: table-cell;vertical-align: top;width:9%;'>";
+      $h.="<div style='float:left;'>";
        $h.="<a target='_blank' href='$pl'>";
-        $h.="<img class='left' style='border-right:1px solid black;' height='32' width='32' src='$img'>";
+        $h.="<img class='left' height='32' width='32' src='$img'>";
        $h.="</a>";
       $h.="</div>";
-      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 1px 6px;'>";
+      $h.="<div style='background: white;padding: 1px 6px 8px;max-width: 100%;margin-left: 45px;white-space: pre;word-wrap: break-word;'>";
        $h.="<div class='up'>";
         $h.="<a target='_blank' href='$pl'>$snm</a>";
         $h.="<span class='time'>{$r['posted']}</span>";

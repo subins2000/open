@@ -19,7 +19,7 @@ while($r=$sql->fetch()){
  <p>You can now change your header image. Just go to <a href="profile">your profile</a> and click "Change Header Image" button.</p>
  <a href="invite"><h2>Invite</h2></a>
  <p>You can also invite your friends to join Open via our <a href="invite">Invite Page</a>.</p>
- <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.4.7</b></p>
+ <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.4.8.4</b></p>
  <div class="close">x</div>
 </div>
 <div class="post_form" id="post_form">
