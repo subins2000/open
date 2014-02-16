@@ -25,7 +25,7 @@ ch();
   </div>
   <div class="chat">
    <?
-   $gid=$_GET['id'];
+   $gid=filt($_GET['id']);
    if($gid!=""){
     $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
     $sql->execute(array(":who"=>$who,":fid"=>$gid));
