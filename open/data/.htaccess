@@ -1,7 +1,0 @@
-<IfModule mod_rewrite.c>
- RewriteEngine On
- RewriteRule ^handle\.php$ - [L]
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteRule (.+) ./handle.php?request=$1 [L]
-</IfModule>
