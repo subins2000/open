@@ -7,7 +7,7 @@ if($sql->rowCount()==0){
  $sql->execute(array(":who"=>$who));
 }
 if($sql->rowCount()!=0){
- echo'<div class="suggestions" style="background: black;border-radius: 10px;padding:5px;margin:5px -10px 0px -15px;"><h2>Suggestions</h2>';
+ echo'<div class="suggestions" style="padding: 5px 0px;margin: 5px -10px 0px -15px;color: black;"><h2>Suggestions</h2>';
  while($r=$sql->fetch()){
   $u=$r['id'];
   $nm=get("name",$u,false);
@@ -24,8 +24,8 @@ if($sql->rowCount()!=0){
    echo"</div>";
   echo"</div>";
  }
- echo "<center><cl/><a href='find'>See More People</a></center>";
+ echo "<center><cl/><a href='find'>See More Suggestions</a></center>";
  echo'</div>';
- echo'<style>.sugg{margin:5px;border-top:1px solid white;padding-top:5px;}</style>';
+ echo'<style>.sugg{margin:5px;padding-top:5px;}</style>';
 }
 ?>

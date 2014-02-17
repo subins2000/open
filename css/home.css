@@ -19,6 +19,7 @@
  color:white;
  border-bottom:1px solid white;
  position:relative;
+ margin: 5px 0px;
 }
 .post:hover{background:rgba(100, 172, 400,1);;}
 .post .left{
@@ -33,23 +34,29 @@
  padding-left:7px;
 }
 .post .bottom{
- margin-top:5px;
+ margin-top:2px;
 }
-.like,.cmt{
+.post .like, .post .cmt{
  cursor:pointer;
- padding:0px 10px;
- background:white;
- color:black;
+ background: url(http://open.subinsb.com/img/sprites/post_action_bar.png);
  margin-top:5px;
  display:inline-block;
+ text-indent: -999em;
+ width: 19px;
+ height: 15px;
+ background-size: 62px;
+ vertical-align: middle;
 }
-.like:hover,.cmt:hover{
- background:#EEE;
+.post .pst.cmt{
+ background-position: -40px 0px;
+}
+.post .unlike{
+ background-position: -18px 0px;
+ margin-top: 10px;
 }
 .post .like_bar,.post .cmt_bar{
- margin-right:5px;
+ margin-left: 10px;
  display:inline-block;
- padding-right:5px;
 }
 .post .pimg{
  height:48px;
@@ -87,10 +94,13 @@
  top:10px;
  right:0px;
  padding:5px;
- width:148px;
+ width:100px;
  background:white;
  border-radius:10px;
  display:none;
+ color: black;
+ text-align: center;
+ cursor:default;
 }
 .comments{
  border-top:1px solid black;
@@ -159,6 +169,7 @@
  border-radius: 10px;
  padding: 7px 25px;
  margin-top:5px;
+ color: white;
 }
 .load_more_posts .normal{
  cursor:pointer;
@@ -179,4 +190,9 @@
  width:300px;
 }
 .count{color:#E0520A;}
-.post .count{margin-left: 5px;}
+.post .count{
+ margin-left: 8px;
+ vertical-align: middle;
+ display: inline-block;
+ height: 13px;
+}

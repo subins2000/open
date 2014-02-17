@@ -41,12 +41,12 @@ while($r=$sql->fetch()){
      </select>
      <button type="button" title="Post To Facebook" class="small" id="pfbit">
       <input type="hidden" id="fbverify" value="<?echo$fbv;?>"/>
-      <input <?echo$fb;?> onclick="$(this)[0].click();" name="facebook" type="checkbox"/>
+      <input <?echo$fb;?> onclick="$(this).click();" name="facebook" type="checkbox"/>
       <span>Facebook</span>
      </button>
      <button type="button" title="Post To Twitter" class="small" id="ptwit">
       <input type="hidden" id="twverify" value="<?echo$twv;?>"/>
-      <input <?echo$tw;?> onclick="$(this)[0].click();" name="twitter" type="checkbox"/>
+      <input <?echo$tw;?> onclick="$(this).click();" name="twitter" type="checkbox"/>
       <span>Twitter</span>
      </button>
     </div>

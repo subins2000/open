@@ -198,7 +198,7 @@ if(!function_exists("get")){
    return $data[0];
   }elseif($j==true){
    $data=json_decode($data['udata'],true);
-   $data=filt($data[$k]);
+   $data=is_array($data[$k]) ? $data[$k]:filt($data[$k]);
    return$data;
   }else{
    return filt($data[$k]);

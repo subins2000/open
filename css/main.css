@@ -82,10 +82,7 @@ header nav .chat{
  padding: 60px 14px 15px 14px;
  width: 700px;
  line-height: 18px;
- background: -webkit-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
- background: -moz-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
- background: -ms-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
- background: -o-linear-gradient(top, rgb(238, 238, 238), rgb(204, 204, 204));
+ background: #E8EBED;
  background-clip: padding-box;
  box-shadow: 0 4px 4px rgb(102, 102, 102);
  border-bottom-left-radius:10px;
@@ -169,9 +166,8 @@ header .notifications #nfn{
  position:absolute;
  top:35px;
  right:5px;
- background:#DDD;
+ background: #FAB359;
  padding:10px;
- color:black;
  padding: 0 13px;
  height: 300px;
  width: 230px;
@@ -193,13 +189,13 @@ header .notifications #nfn{
 }
 .notifications .nfsi.nred{
  background: white;
+ color:black;
 }
 .notifications .nfsi{
  font-size:13px;
  border-bottom:1px solid black;
  cursor:pointer;
  margin-top:5px;
- background:#DDD;
 }
 .notifications .nfsi:hover{
  background:#EEE;

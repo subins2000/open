@@ -11,9 +11,9 @@ if($_SERVER['PHP_SELF']=="/search.php"){
  }
 }
 ?>
-<div style="background: black;border-radius: 10px;padding:15px;margin:5px -10px 0px -15px;">
- <font size="5" style="color:rgb(0,250,120);">Trending</font>
- <div style="color:#fff;padding-left:10px;margin-top:10px;">
+<div style="padding: 0px 15px;margin: 0px -10px 0px -15px;">
+ <font size="5" style="color:#74ACE9;background: url(http://open.subinsb.com/img/up.png);background-position: left;background-size: 22px;background-repeat: no-repeat;padding-left: 28px;">Trending</font>
+ <div style="padding-left:10px;margin-top:10px;color:black;">
   <?
   $sql=$db->query("SELECT * FROM trend ORDER BY hits DESC LIMIT 9");
   foreach($sql as $r){

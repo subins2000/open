@@ -6,7 +6,7 @@ if(isset($_POST['load'])){
  $sql=$db->prepare("SELECT id FROM notify WHERE uid=? ORDER BY id DESC LIMIT 10");
  $sql->execute(array($who));
  if($sql->rowCount()==0){
-  echo '$(".notifications .loading").hide();$(".notifications .nfs").html("<center>No Notifications</center>");';
+  echo '$(".notifications .loading").hide();$(".notifications .nfs").html("<br/><br/><center><h2>No Notifications</h2></center>");';
  }else{
   $nfs="";
   while($r=$sql->fetch()){

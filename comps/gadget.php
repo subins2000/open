@@ -19,7 +19,7 @@
    </div>
   </div>
   <div class="users">
-   <div style="margin-top: 54px;">
+   <div style="margin-top: 60px;">
     <?
      $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
      $sql->execute(array(":who"=>$who));

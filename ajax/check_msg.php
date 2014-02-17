@@ -68,7 +68,7 @@ if($lid!="" && $to!="gadget"){
 ?>
  var userstatus=<?echo$userstatus;?>;
  $(".users .user").each(function(){
-  id=$(this)[0].id;
+  id=$(this).attr("id");
   if($(this).find(".status").text()!=userstatus[id]){
    $(this).find(".status").replaceWith("<span class='status "+userstatus[id]+"'>"+userstatus[id]+"</span>");
   }

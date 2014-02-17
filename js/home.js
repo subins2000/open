@@ -4,7 +4,7 @@ $(".post .author_box").live("click",function(){
  $(this).find(".author_panel").toggle();
 });
 $(".de_post").live("click",function(){
- id=$(this)[0].id;
+ id=$(this).attr("id");
  cfm=confirm("Are you really sure that you want to delete this post ?");
  if(cfm==true){
   post("delete_post",{id:id},"Deleted Post","Failed To Delete Post","Deleting");
@@ -12,12 +12,14 @@ $(".de_post").live("click",function(){
 });
 $(".post .pst.like").live("click",function(){
  t=$(this);
- id=t[0].id;
+ id=t.attr("id");
  co=$("#"+id+".lk.count");
  k=t.text()=="Like" ? "Unlike":"Like";
  t.text(k);
  n=t.text()=="Like" ? parseFloat(co.text())-1:parseFloat(co.text())+1;
  co.text(n);
+ t.removeClass("unlike");
+ t.addClass(k.toLowerCase());
  $.post(ht+"/ajax/like",{id:id}).error(function(){
   t.text(k);
   t.click();
@@ -25,28 +27,30 @@ $(".post .pst.like").live("click",function(){
 });
 $(".post .cmt.like").live("click",function(){
  t=$(this);
- id=t[0].id;
+ id=t.attr("id");
  co=$(".comments").find("#"+id+".lk.count");
  k=t.text()=="Like" ? "Unlike":"Like";
  t.text(k);
  n=t.text()=="Like" ? parseFloat(co.text())-1:parseFloat(co.text())+1;
  co.text(n);
+ t.removeClass("unlike");
+ t.addClass(k.toLowerCase());
  $.post(ht+"/ajax/clike",{id:id}).error(function(){
   t.text(k);
   t.click();
  });
 });
-$(".post .cmt").live("click",function(){
- id=$(this)[0].id;
+$(".post .pst.cmt").live("click",function(){
+ id=$(this).attr("id");
  c=$("#"+id+".comments");
  c.toggle();
- c.find(".textEditor")[0].click();
+ c.find(".textEditor").click();
 });
 $(".comment .author_cmt_box").live("click",function(){
  $(this).find(".author_cmt_panel").toggle();
 });
 $(".de_cmt").live("click",function(){
- id=$(this)[0].id;
+ id=$(this).attr("id");
  post("delete_cmt",{id:id},"Deleted Comment","Failed To Delete Comment","Deleting");
 });
 $(".reply_cmt").live("click",function(){

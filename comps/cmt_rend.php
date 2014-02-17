@@ -45,7 +45,7 @@ function show_cmt($pid){
        $h.=$r['cmt'];
       $h.="</div>";
       $h.="<div class='actions'>";
-       $h.="<div class='like_bar'><a class='cmt like' id='$id'>$lk</a>&nbsp;&nbsp;<span class='count lk' id='$id'>{$r['likes']}</span><a style='margin-left:20px;' class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a></div>";
+       $h.="<div class='like_bar'><a class='cmt like' id='$id'>$lk</a>&nbsp;&nbsp;<span class='count lk' id='$id'>{$r['likes']}</span><a style='margin-left:20px;display: inline-block;vertical-align: bottom;' class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a></div>";
       $h.="</div>";
      $h.="</div>";
     $h.="</div>";

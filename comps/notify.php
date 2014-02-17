@@ -76,6 +76,11 @@ if(!function_exists("notify")){
     $dontSend=1;
    }
   }
+  $settings=get("NfS",$tu);
+  $a=str_replace("mention","men",str_replace("follow","fol",str_replace("comment","cmt",$a)));
+  if(isset($settings[$a])){
+   $dontSend=1;
+  }
   if($dontSend==0){
    /*send_mail($mail,$title,$m); -- Not Needed Anymore*/
    $sql=$db->prepare("INSERT INTO mails(email,sub,message) VALUES (?,?,?)");

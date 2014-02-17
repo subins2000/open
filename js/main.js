@@ -132,9 +132,11 @@ window.tURL=function(t){
  });
 };
 $("#nfn_button").live("click",function(){
- $(".notifications #nfn").toggle();
  if($(".notifications .nfs .nfsi").length==0 || $(".notifications #nfn_button").text()!="0"){
   $(".notifications .loading").show();
  }
- post("ajax/nfs",{load:1});
+ if($(".notifications #nfn").is(":hidden")){
+  post("ajax/nfs",{load:1});
+  $(".notifications #nfn").show();
+ }else{$(".notifications #nfn").hide();}
 });

@@ -24,15 +24,15 @@ function show_posts($arr){
      $h.="<a class='time slink' href='http://open.subinsb.com/view?id={$id}'>{$v['time']}</a>";
      $h.="<span class='slink' title='{$prd}'>{$prs}</span>";
      if($v['uid']==$who){
-      $h.="<div class='author_box'><div class='author_panel c_c'><button class='de_post' id='$id'>Delete Post</button></div></div>";
+      $h.="<div class='author_box'><div class='author_panel c_c'><a class='de_post pointer' id='$id'>Delete Post</a><br/><a class='pointer' onclick='alert(\"http://open.subinsb.com/view?id={$id}\")' id='$id'>Get Link</a></div></div>";
      }
     $h.="</div>";
     $h.="<div class='cont'>";
      $h.="$p";
     $h.="</div>";
     $h.="<div class='bottom'>";
-     $h.="<div class='like_bar'><a class='pst like' id='$id'>$lk</a><span><span> -> </span></span><span class='count lk' id='$id'>{$v['likes']}</span></div>";
-     $h.="<div class='cmt_bar'><a class='cmt' id='$id'>Comment</a><span><span> -> </span></span><span class='count ck' id='$id'>{$v['cmt']}</span></div>";
+     $h.="<div class='like_bar'><a class='pst like' id='$id'>$lk</a><span class='count lk' id='$id'>{$v['likes']}</span></div>";
+     $h.="<div class='cmt_bar'><a class='pst cmt' id='$id'>Comment</a><span class='count ck' id='$id'>{$v['cmt']}</span></div>";
      $h.=show_cmt($id);
     $h.="</div>";
    $h.="</div>";
