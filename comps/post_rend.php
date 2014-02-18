@@ -12,6 +12,7 @@ function show_posts($arr){
   $prs=str_replace('pub','Public',str_replace('meo','Only Me',str_replace('fri','Friends',$v['prs'])));
   $prd=str_replace('pub','Everyone can see this post',str_replace('meo','Only You can see this post',str_replace('fri','Only your Friends can see this post',$v['prs'])));
   $lk=array_search($id,$pk)===false ? "Like":"Unlike";
+  $class=strtolower($lk)=="unlike" ? " unlike":"";
   $p=$v['p'];
   $plink=get("plink",$v['uid']);
   $h.="<div class='post' id='$id'>";
@@ -31,7 +32,7 @@ function show_posts($arr){
      $h.="$p";
     $h.="</div>";
     $h.="<div class='bottom'>";
-     $h.="<div class='like_bar'><a class='pst like' id='$id'>$lk</a><span class='count lk' id='$id'>{$v['likes']}</span></div>";
+     $h.="<div class='like_bar'><a class='pst like$class' id='$id'>$lk</a><span class='count lk' id='$id'>{$v['likes']}</span></div>";
      $h.="<div class='cmt_bar'><a class='pst cmt' id='$id'>Comment</a><span class='count ck' id='$id'>{$v['cmt']}</span></div>";
      $h.=show_cmt($id);
     $h.="</div>";
