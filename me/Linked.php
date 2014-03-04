@@ -38,7 +38,7 @@ ch();
   <br/><cl/>Note that <b>Google+</b> sessions are not stored.
   <style>form[cp]{display:inline-block;}</style>
   <?
-  $ser=$_POST['service'];
+  $ser=isset($_POST['service']) ? $_POST['service']:"";
   if($ser!=""){
    if($ser=='0'){
     $sql=$db->prepare("DELETE FROM oauth_session WHERE user=? AND server=?");

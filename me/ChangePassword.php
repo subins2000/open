@@ -1,6 +1,8 @@
 <?
 include('../comps/config.php');
 ch();
+$er=array();
+$ss=array();
 if(isset($_POST['submit'])){
  if($_POST['old']=="OAuth_Login_Password"){
   $_POST['old']="a_password";
@@ -23,24 +25,26 @@ if(isset($_POST['submit'])){
   if(preg_match('/.{6,100}/',$_POST['new'])==false){
    $er=array("Error","Password must contain atleast 6 characters.");
   }
-  $sql=$db->prepare("UPDATE users SET password=?,psalt=? WHERE id=?");
-  function ras($length){$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
-  $rsalt=ras('25');
-  $salted_hash = hash('sha256',$_POST['new'].$site_salt.$rsalt);
-  $sql->execute(array($salted_hash,$rsalt,$who));
-  $tme=time()-301014600;
-  setcookie("curuser", "", $tme, "/", $_SERVER['HTTP_HOST']);
-  setcookie("wervsi", "", $tme, "/", $_SERVER['HTTP_HOST']);
+  if(count($er)!=2){
+   $sql=$db->prepare("UPDATE users SET password=?,psalt=? WHERE id=?");
+   function ras($length){$str="";$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
+   $rsalt=ras('25');
+   $salted_hash = hash('sha256',$_POST['new'].$site_salt.$rsalt);
+   $sql->execute(array($salted_hash,$rsalt,$who));
+   $tme=time()-301014600;
+   setcookie("curuser", "", $tme, "/", $_SERVER['HTTP_HOST']);
+   setcookie("wervsi", "", $tme, "/", $_SERVER['HTTP_HOST']);
+  }
   $ss=array("Password Changed","Your Password was successfully changed.<br/><a href='http://open.subinsb.com/login'>Log In with your new password.</a>");
  }else{
   $er=array("Fields Left Blank!","Please fill up all the fields.");
  }
 }
+$Opass="";
 $upa=get("password",$who,false);
 $p_salt=get("psalt",$who,false);
 $site_salt="a_salt_key";
 $salted_hash = hash('sha256',"a_password".$site_salt.$p_salt);
-echo$salted_hash;
 if($upa==$salted_hash){
  $Opass="OAuth_Login_Password";
 }

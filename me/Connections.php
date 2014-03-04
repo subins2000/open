@@ -26,7 +26,7 @@ ch();
    echo$h;
   }
   $sql=$db->prepare("SELECT * FROM users WHERE id!=:who AND id IN (SELECT fid FROM conn WHERE uid=:who)");
-  $sql->execute(array(":who"=>$who,":q"=>"%$q%"));
+  $sql->execute(array(":who"=>$who));
   if($sql->rowCount()==0){
    if($q==''){sss("You're Lonely","Friends make everything better. Follow Some Persons to enjoy <b>Open</b> more.");exit;}
   }
@@ -39,7 +39,7 @@ ch();
   <h2>Followers</h2>
   <?
   $sql=$db->prepare("SELECT * FROM users WHERE id!=:who AND id IN (SELECT uid FROM conn WHERE fid=:who)");
-  $sql->execute(array(":who"=>$who,":q"=>"%$q%"));
+  $sql->execute(array(":who"=>$who));
   if($sql->rowCount()==0){
    if($q==''){sss("No One Found","No one is following you. Sorry.");exit;}
   }
@@ -53,7 +53,7 @@ ch();
   Friends are people who follow you and you follow them.<cl/>
   <?
   $sql=$db->prepare("SELECT * FROM users WHERE id!=:who AND id IN (SELECT uid FROM conn WHERE fid=:who AND uid IN (SELECT fid FROM conn WHERE uid=:who))");
-  $sql->execute(array(":who"=>$who,":q"=>"%$q%"));
+  $sql->execute(array(":who"=>$who));
   if($sql->rowCount()==0){
    if($q==''){sss("You're Lonely","Friends make everything better. Follow Some Persons to enjoy <b>Open</b> more.");exit;}
   }

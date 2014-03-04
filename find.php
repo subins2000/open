@@ -6,17 +6,20 @@ ch();
 <html><head>
  <?$cfs="ac,gadget";$fs="ac,time,gadget";include("comps/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?
+ include("comps/header.php");
+ $_GET['q']=isset($_GET['q']) ? $_GET['q']:"";
+ $q=filt($_GET['q']);
+ ?>
  <div class="content">
   <h1>Find People</h1>
   Here are some of the users of <b>Open</b>. You can search for a specific user using the form below. <b>You wouldn't get any results if you search yourself.</b><cl/>
   <form method="GET" action="find" style="border-bottom:1px solid black;padding-bottom:5px;">
-   <span>Search :</span><input type="text" name="q" value="<?echo filt($_GET['q']);?>" size="35"/>
+   <span>Search :</span><input type="text" name="q" value="<?echo $q;?>" size="35"/>
   </form>
   <cl/>
   <?
-  $q=filt($_GET['q']);
-  $_GET['p']=$_GET['p']=="" ? 1:$_GET['p'];
+  $_GET['p']=!isset($_GET['p']) || $_GET['p']=="" ? 1:$_GET['p'];
   $p=$_GET['p'];
   if($q!='' && $p=='1'){
    $sql=$db->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT 10");

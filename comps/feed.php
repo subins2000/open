@@ -1,16 +1,16 @@
 <?
 include("post_rend.php");
-if($_POST['user']!=''){
+if(isset($_POST['user']) && $_POST['user']!=''){
  $sql=$db->prepare("SELECT * FROM posts WHERE uid=:id AND (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))) ORDER BY id DESC LIMIT 5");
  $sql->execute(array(":id"=>$_POST['user'],":who"=>$who));
-}elseif($_GET['q']!="" && $_SERVER['PHP_SELF']=="/search.php"){
+}elseif(isset($_GET['q']) && $_GET['q']!="" && $_SERVER['PHP_SELF']=="/search.php"){
  $_GET['q']=urldecode($_GET['q']);
  $sql=$db->prepare("SELECT * FROM posts WHERE post LIKE :q AND (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))) ORDER BY id DESC LIMIT 4");
  $sql->execute(array(":q"=>"%".$_GET['q']."%",":who"=>$who));
-}elseif($_GET['q']=="" && $_SERVER['PHP_SELF']=="/search.php"){
+}elseif(isset($_GET['q']) && $_GET['q']=="" && $_SERVER['PHP_SELF']=="/search.php"){
  $sql=$db->prepare("SELECT * FROM posts WHERE privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who))) ORDER BY id DESC LIMIT 10");
  $sql->execute(array(":who"=>$who));
-}elseif($_GET['id']!="" && $_SERVER['PHP_SELF']=="/view.php"){
+}elseif(isset($_GET['id']) && $_GET['id']!="" && $_SERVER['PHP_SELF']=="/view.php"){
  $sql=$db->prepare("SELECT * FROM posts WHERE id=:id AND (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))) ORDER BY id DESC LIMIT 1");
  $sql->execute(array(":who"=>$who,":id"=>$_GET['id']));
 }else{

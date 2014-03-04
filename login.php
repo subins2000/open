@@ -1,5 +1,6 @@
 <?
 include("comps/config.php");
+$_GET['c']=isset($_GET['c']) ? $_GET['c']:"";
 $c=filt($_GET['c']);
 $c=$c=="" ? "http://open.subinsb.com/home":$c;
 if(isset($_POST['submit'])){
@@ -23,7 +24,7 @@ if(isset($_POST['submit'])){
   $er='Username/Password is Incorrect.';
  }
 }
-if($_GET['logout']==true){
+if(isset($_GET['logout']) && $_GET['logout']=="true"){
  $tme=time()-301014600;
  setcookie("curuser", "", $tme, "/", $_SERVER['HTTP_HOST']);
  setcookie("wervsi", "", $tme, "/", $_SERVER['HTTP_HOST']);

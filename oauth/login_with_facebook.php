@@ -18,7 +18,7 @@ $client->database = array(
  'user'=>$usr,
  'password'=>$pass,
  'name'=>"open",
- 'port'=>$port=='' ? 3306:$port,
+ 'port'=>!isset($port) || $port=='' ? 3306:$port,
  'socket'=>'/var/lib/mysql/mysql.sock'
 );
 $client->server = 'Facebook';

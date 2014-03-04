@@ -7,7 +7,9 @@ function show_not($id){
   $fid=$r['fid'];
   $img=get("avatar",$fid);
   $name=get("fname",$fid,false);
-  list($aid,$pid)=explode("-",$r['post']);
+  if(preg_match("/\-/", $r['post'])){
+   list($aid,$pid)=explode("-",$r['post']);
+  }
   $amsg=$r['ty']=="cmt" ? "Commented on your post":"";
   if($r['ty']=="fol"){
    $amsg="Is Following You";

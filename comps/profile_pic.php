@@ -9,8 +9,8 @@
   <input type="submit" value="Upload Picture"/>
  </form>
  <?
- $f=$_FILES['file'];
- if(isset($f)){
+ if(isset($_FILES['file'])){
+  $f=$_FILES['file'];
   include("../data/add.php");
   $up=upload($who,"img",$f);
   if($up){

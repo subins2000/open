@@ -14,7 +14,8 @@
   <div style="<?if(!isset($_POST['submit']) && !isset($_POST['verify'])){?>display:none;<?}?>" id="classic">
    <h1>Sign Up</h1>
    <?
-   $cde=$_POST['code'];
+   $verified=0;
+   $cde=isset($_POST['code']) ? $_POST['code']:"";
    if(isset($_POST['verify']) && $cde!=""){
     $dcde=decrypter($cde);
     $vfr=$_POST['user']."a_password";

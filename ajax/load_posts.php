@@ -1,12 +1,12 @@
 <?
 include("config.php");
 include("../comps/post_rend.php");
-if($_POST['uid']==''){
+if(isset($_POST['uid']) && $_POST['uid']==''){
  ch();
 }
-$id=filt($_POST['id']);
-$usr=filt($_POST['uid']);
-$q=filt(urldecode($_POST['q']));
+$id=isset($_POST['id']) ? filt($_POST['id']):"";
+$usr=isset($_POST['uid']) ? filt($_POST['uid']):"";
+$q=isset($_POST['q']) ? filt(urldecode($_POST['q'])):"";
 if($id!=""){
  if($usr!=""){
   $sql=$db->prepare("SELECT * FROM posts WHERE id < :lid AND uid=:id AND (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)))) ORDER BY id DESC LIMIT 10");

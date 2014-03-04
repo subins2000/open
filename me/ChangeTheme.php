@@ -1,6 +1,8 @@
 <?
 include('../comps/config.php');
 ch();
+$er=array();
+$ss=array();
 $themes=array("dark"=>array("-webkit-linear-gradient(#AAA,#EEE)","-moz-linear-gradient(left,#AAA,#EEE)"),"cloud"=>array("url(//open.subinsb.com/img/clouds) rgba(100, 172, 400,.8)","url(//open.subinsb.com/img/clouds) rgba(100, 172, 400,.8)","10em"),"normal"=>array("url(//open.subinsb.com/img/dot.gif)","url(//open.subinsb.com/img/dot.gif)"),"india"=>array("-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))","-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))"));
 if(isset($_POST['theme'])){
  $theme=strtolower($_POST['theme']);

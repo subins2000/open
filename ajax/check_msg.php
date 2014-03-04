@@ -3,7 +3,7 @@ include("config.php");
 include("../comps/chat_rend.php");
 ch();
 $to=$_GET['to'];
-$lid=$_GET['lid'];
+$lid=isset($_GET['lid']) ? $_GET['lid']:"";
 $lup=false;
 $isFri=false;
 if($to!="gadget"){

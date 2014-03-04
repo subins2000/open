@@ -8,6 +8,7 @@ function show_chat($fid,$single=false){
   $sql=$db->prepare("SELECT * FROM chat WHERE id=?");
   $sql->execute(array($single));
  }
+ $h="";
  if($single==false){
   $h="<div class='msgs' id='$fid'>";
  }

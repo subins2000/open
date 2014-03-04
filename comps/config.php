@@ -33,6 +33,8 @@ if(!function_exists("decrypter")){
   }
  }
 }
+$_COOKIE['wervsi']=isset($_COOKIE['wervsi']) ? $_COOKIE['wervsi']:"";
+$_COOKIE['curuser']=isset($_COOKIE['curuser']) ? $_COOKIE['curuser']:"";
 $who=$_COOKIE['curuser']=='' ? "Varghese":$_COOKIE['curuser'];
 $whod=$_COOKIE['wervsi']=='' ? "Chinnan":decrypter($_COOKIE['wervsi']);/*28 Nov 2013*/
 $lg=$whod==$who ? true:false;
@@ -156,7 +158,7 @@ if(!function_exists("filt")){
 }
 if(!function_exists("get")){
  $load_cache=array();
- function get($k,$u,$j=true){
+ function get($k,$u=null,$j=true){
   global$db;global$who;global$load_cache;
   if(is_null($u)){$u=$who;}
   if(!array_key_exists($u,$load_cache)){
@@ -172,7 +174,7 @@ if(!function_exists("get")){
   }
   if($k=='img'){
    $data=json_decode($data['udata'],true);
-   $data=filt($data["img"]);
+   $data=isset($data["img"]) ? filt($data["img"]):"";
    $data=$data=='' ? "http://open.subinsb.com/img/profile_pics/om":$data;
    return$data;
   }elseif($k=='plink'){
@@ -198,7 +200,11 @@ if(!function_exists("get")){
    return $data[0];
   }elseif($j==true){
    $data=json_decode($data['udata'],true);
-   $data=is_array($data[$k]) ? $data[$k]:filt($data[$k]);
+   if(isset($data[$k])){
+    $data=is_array($data[$k]) ? $data[$k]:filt($data[$k]);
+   }else{
+    $data="";
+   }
    return$data;
   }else{
    return filt($data[$k]);

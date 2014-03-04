@@ -1,5 +1,6 @@
 <?
 if($_SERVER['PHP_SELF']=="/search.php"){
+ $_GET['q']=isset($_GET['q']) ? $_GET['q']:"";
  $q=filt($_GET['q']);
  if($q!=''){
   $sql=$db->prepare("UPDATE trend SET hits=hits+1 WHERE title=?");

@@ -1,6 +1,6 @@
 <?
 include("comps/config.php");
-if($_GET['id']!=''){
+if(isset($_GET['id']) && $_GET['id']!=''){
  $id=$_GET['id'];
 }else{
  $id=$who;
@@ -25,6 +25,10 @@ while($r=$sql->fetch()){
  $name=$r['name'];
  $mail=$r['username'];
  $json=json_decode($r['udata'],true);
+ $profVals=array("about", "img", "joined", "birth", "gen", "mail", "add", "phone", "live", "work", "lve", "fb", "tw", "gplus", "pin", "header");
+ foreach($profVals as $v){
+  $json[$v]=isset($json[$v]) ? $json[$v] : "";
+ }
  $img=filt($json["img"]);
  $img=$img=='' ? "http://open.subinsb.com/img/profile_pics/om":$img;
  $about=$json['about']=="" ? $plnmsg:$json['about'];
@@ -70,7 +74,10 @@ $cms=$cms->fetchColumn();
   </div>
   <div class="main">
    <div class="clearfix left">
-    <?if($_GET['part']=="feed"){$_GET['part']="";}?>
+    <?
+    $_GET['part']=isset($_GET['part']) ? $_GET['part']:"";
+    if($_GET['part']=="feed"){$_GET['part']="";}
+    ?>
     <div class="navigation">
      <part <?if($_GET['part']==""){echo"act";}?>>Feed</part>
      <part <?if($_GET['part']=="about"){echo"act";}?>>About</part>
