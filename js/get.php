@@ -18,6 +18,7 @@ if($f!=""){
  arsort($log);
  $etag=hash("md5",$log[0]);
  header("ETag: $etag");
+ $_SERVER["HTTP_IF_NONE_MATCH"]=isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"]:0;
  if($changed===true || $_SERVER["HTTP_IF_NONE_MATCH"]!=$etag){
   foreach($fs as $v){
    $itc++;
