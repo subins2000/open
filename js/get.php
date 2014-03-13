@@ -16,6 +16,19 @@ if($f!=""){
   }
  }
  arsort($log);
+ foreach($fs as $v){
+  $itc++;
+  if($itc==1){
+   echo "$(document).ready(function(){";
+  }
+  echo file_get_contents("$v.js");
+  if(count($fs)==$itc){
+   echo "});";
+  }
+ }
+ $clog=json_encode($log);
+ file_put_contents("changed.txt", $clog);
+ /*
  $etag=hash("md5",$log[0]);
  header("ETag: $etag");
  $_SERVER["HTTP_IF_NONE_MATCH"]=isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"]:0;
@@ -36,6 +49,6 @@ if($f!=""){
   if($_SERVER["HTTP_IF_NONE_MATCH"]==$etag){
    header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified', true, 304);
   }
- }
+ }*/
 }
 ?>
