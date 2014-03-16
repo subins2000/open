@@ -22,7 +22,7 @@ if($f=='' || $u==''){
  $etag=str_split($t,480);
  $etag=hash("sha256",$etag[0]);
  header("ETag: $etag");
- if($_SERVER["HTTP_IF_NONE_MATCH"]==$etag){
+ if(isset($_SERVER["HTTP_IF_NONE_MATCH"]) && $_SERVER["HTTP_IF_NONE_MATCH"]==$etag){
   header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified', true, 304);
  }else{
   header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK', true, 200);

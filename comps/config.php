@@ -103,13 +103,14 @@ if(!function_exists("ch")){
 }
 if(!function_exists("ch_url")){
  function ch_url($m){
+  $ots="";
   $u=str_replace("\n","",str_replace("\s","",$m[0]));
   if($m[2]=='http://' || $m[2]=='https://' || $m[2]=='www'){
    $t=$m[1];
   }else{
    $t=$m[2];
   }
-  if(preg_match("\n",$t)){
+  if(preg_match("/\n/",$t)){
    $t=str_replace("\n","",$t);
    $ots="\n";
   }

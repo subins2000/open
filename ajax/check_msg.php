@@ -74,7 +74,7 @@ if($lid!="" && $to!="gadget"){
   }
  });
 <?
-}elseif($_GET['all']=="true"){
+}elseif(isset($_GET['all']) && $_GET['all']=="true"){
  $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
  $sql->execute(array(":who"=>$who,":fid"=>$to));
  if($sql->rowCount()==0){

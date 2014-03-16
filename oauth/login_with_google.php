@@ -4,6 +4,7 @@ include('config.php');
 include('http.php');
 include('oauth_client.php');
 $host=parse_url($_GET['c']);
+$host['host']=isset($host['host']) ? $host['host']:"";
 if(($_GET['c']=='' && $_SESSION['continue']=='') || $host['host']!='open.subinsb.com'){
  $_SESSION['continue']="http://open.subinsb.com";
 }else{

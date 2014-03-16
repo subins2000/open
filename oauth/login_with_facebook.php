@@ -6,7 +6,10 @@ require('oauth_client.php');
 require('database_oauth_client.php');
 require('mysqli_oauth_client.php');
 function ras($length){$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
+$_GET['c']=isset($_GET['c']) ? $_GET['c']:"";
 $hostp=parse_url($_GET['c']);
+$hostp['host']=isset($hostp['host']) ? $hostp['host']:"";
+$_SESSION['continue']=isset($_SESSION['continue']) ? $_SESSION['continue']:"";
 if(($_GET['c']=='' && $_SESSION['continue']=='') || $hostp['host']!='open.subinsb.com'){
  $_SESSION['continue']="http://open.subinsb.com/home";
 }else{
