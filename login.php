@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
  if($p==$salted_hash){
   $tme=time()*60+1200;
   setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
-  setcookie("wervsi", encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
+  setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
   header("Location:$c");
  }else{
   $er='Username/Password is Incorrect.';

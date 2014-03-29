@@ -24,7 +24,7 @@ If you want to test Open on your Localhost server, you should do the following s
 
 6) Replace $dbname, $host, $port, $usr, $pass values with Database credentials.
 
-7) On comps/config.php file make sure that the $sroot variable value is correct.
+7) On inc/config.php file make sure that the $sroot variable value is correct.
 
 8) Go To http://localhost/open to see Open live in action
 

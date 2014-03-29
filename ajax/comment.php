@@ -15,7 +15,7 @@ if($_P && is_numeric($id) && preg_match("/[^\s]/",$msg)){
   $sql=$db->prepare("UPDATE posts SET cmts=cmts+1 WHERE id=?");
   $sql->execute(array($id));
   include("../inc/notify.php");
-  #notify("comment",$msg,$id,$prr,$who);
+  notify("comment",$msg,$id,$prr,$who);
   if($_POST['clod']=='mom'){
    $_POST['all']=1;
   }

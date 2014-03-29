@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /ajax
-Disallow: /comps
+Disallow: /inc
 Disallow: /css
 Disallow: /data/add
 Disallow: /data/config

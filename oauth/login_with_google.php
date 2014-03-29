@@ -46,7 +46,7 @@ if($success){
  if($sql->rowCount()!=0){
   while($r=$sql->fetch()){$id=$r['id'];}
   setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
-  setcookie("wervsi", encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
+  setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
   header("Location:$loc");
  }else{
   function ras($length){$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
@@ -65,7 +65,7 @@ if($success){
   $sql->execute(array($m));
   while($r=$sql->fetch()){$id=$r['id'];}
   setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
-  setcookie("wervsi", encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
+  setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
   header("Location:$loc");
  }
 }

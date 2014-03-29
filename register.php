@@ -17,7 +17,7 @@
    $verified=0;
    $cde=isset($_POST['code']) ? $_POST['code']:"";
    if(isset($_POST['verify']) && $cde!=""){
-    $dcde=decrypter($cde);
+    $dcde=$OP->decrypter($cde);
     $vfr=$_POST['user']."a_password";
     if($vfr==$dcde){
      $verified=1;
@@ -67,7 +67,7 @@
     if($sql->rowCount()!=0){
      ser("You Already Have An Account!","There is already an account registered with the E-Mail you have given. <a href='http://open.subinsb.com/me/ResetPassword'>Forgot Password ?</a>");
     }
-    send_mail($u,"Verify Your E-Mail","You requested for registering on Open. For signing up, you need to verify your E-Mail address. Paste the code below in the input field of the page where you requested for signing up.<blockquote>".encrypter($_POST['mail']."a_password")."</blockquote>");
+    send_mail($u,"Verify Your E-Mail","You requested for registering on Open. For signing up, you need to verify your E-Mail address. Paste the code below in the input field of the page where you requested for signing up.<blockquote>".$OP->encrypter($_POST['mail']."a_password")."</blockquote>");
    ?>
    An E-Mail containing a code have been sent to the E-Mail address you gave us. Check Your Inbox for that mail. The mail might have went to the SPAM folder. Hence you have to check that folder too.<cl/>
    <form action="register" method="POST">
@@ -97,7 +97,7 @@
     if($p!=$p2){
      ser("Passwords Don't Match","The Passwords you entered didn't match");
     }
-    $dcde=decrypter($_POST['user']);
+    $dcde=$OP->decrypter($_POST['user']);
     $vfr=$_POST['nuser']."a_password";
     if($vfr!=$dcde){
      ser("User Not Verified.","The user in which this form was sent have not verified his/her E-Mail.");

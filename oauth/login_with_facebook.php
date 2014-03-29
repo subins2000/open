@@ -53,7 +53,7 @@ if(($success = $client->Initialize())){
     if($sql->rowCount()!=0){
      while($r=$sql->fetch()){$id=$r['id'];}
      setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
-     setcookie("wervsi", encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
+     setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
      $client->SetUser($id);
      header("Location:$loc");
     }else{
@@ -72,7 +72,7 @@ if(($success = $client->Initialize())){
      $sql->execute(array($m));
      while($r=$sql->fetch()){$id=$r['id'];}
      setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
-     setcookie("wervsi", encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
+     setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
      $client->SetUser($id);
      header("Location:$loc");
     }
