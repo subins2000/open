@@ -1,5 +1,5 @@
 <?
-if(isset($_GET['show_errors'])){
+if(!isset($_GET['show_errors'])){
  ini_set("display_errors","on");
 }
 $dbname=getenv('OPENSHIFT_GEAR_NAME');
@@ -8,45 +8,13 @@ $port=getenv('OPENSHIFT_MYSQL_DB_PORT');
 $usr=getenv('OPENSHIFT_MYSQL_DB_USERNAME');
 $pass=getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 $db=new PDO("mysql:dbname=$dbname;host=$host;port=".$port, $usr, $pass);
-if(!function_exists("encrypter")){
- function encrypter($value){
-  if($value==''){return false;}
-  $key = 'akey';
-  $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-  $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-  $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $value, MCRYPT_MODE_ECB, $iv);
-  return urlencode(trim(base64_encode($crypttext)));
- }
-}
-if(!function_exists("decrypter")){
- function decrypter($value){
-  $value=urldecode($value);
-  if(!$value || $value==null || $value=='' || base64_encode(base64_decode($value)) != $value){
-   return $value;
-  }else{
-   $key = 'akey';
-   $crypttext = base64_decode($value);
-   $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-   $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-   $decrypttext = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $crypttext, MCRYPT_MODE_ECB, $iv);
-   return trim($decrypttext);
-  }
- }
-}
-$_COOKIE['wervsi']=isset($_COOKIE['wervsi']) ? $_COOKIE['wervsi']:"";
-$_COOKIE['curuser']=isset($_COOKIE['curuser']) ? $_COOKIE['curuser']:"";
-$who=$_COOKIE['curuser']=='' ? "Varghese":$_COOKIE['curuser'];
-$whod=$_COOKIE['wervsi']=='' ? "Chinnan":decrypter($_COOKIE['wervsi']);/*28 Nov 2013*/
-$lg=$whod==$who ? true:false;
-if($lg){
- $sql=$db->prepare("SELECT id FROM users WHERE id=?");
- $sql->execute(array($who));
- if($sql->rowCount()==0){
-  $lg=false;
- }
-}
+require "class.open.php";
+$OP=new Open();
+$lg   = $OP->lg;
+$who  = $OP->uid;
+$whod = $OP->sid;
 if(!function_exists("ser")){
- function ser($t,$d){
+ function ser($t="", $d=""){
   if($t==''){
    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
    include('all_errors_page.php');
@@ -55,8 +23,8 @@ if(!function_exists("ser")){
    if($d!=''){
     $er.="<span style='color:red;font-family:ubuntu;'>$d</span>";
    }
+   echo $er;
   }
-  echo $er;
   exit;
  }
 }
@@ -176,7 +144,7 @@ if(!function_exists("get")){
   if($k=='img'){
    $data=json_decode($data['udata'],true);
    $data=isset($data["img"]) ? filt($data["img"]):"";
-   $data=$data=='' ? "http://open.subinsb.com/img/profile_pics/om":$data;
+   $data=$data=='' ? "http://open.subinsb.com/cdn/img/profile_pics/om":$data;
    return$data;
   }elseif($k=='plink'){
    return"http://open.subinsb.com/$u";
@@ -190,7 +158,7 @@ if(!function_exists("get")){
   }elseif($k=="avatar"){
    $img=get("img",$u);
    if(preg_match("/profile\_pics\/om/",$img) || $img==""){
-    $img="http://open.subinsb.com/img/profile_pics/om";
+    $img="http://open.subinsb.com/cdn/img/profile_pics/om";
    }elseif(!preg_match("/imgur/",$img) && !preg_match("/akamaihd/",$img) && !preg_match("/google/",$img) && $img!=""){
     $img="http://open.subinsb.com/data/{$u}/img/avatar";
    }
@@ -262,12 +230,12 @@ if(!function_exists("foll")){
  }
 }
 if(!function_exists("send_mail")){
- include("$sroot/comps/mailer/class.phpmailer.php");
+ include("$sroot/inc/mailer/class.phpmailer.php");
  function send_mail($mail,$subject,$msg) {
   global $sroot;
   $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
   $subject.=" - Open";
-  $lufp="$sroot/comps/lastused.txt";
+  $lufp="$sroot/inc/lastused.txt";
   $lastu=file_get_contents($lufp);
   if($lastu=="hotmail"){
    $ch = curl_init();

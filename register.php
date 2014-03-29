@@ -1,15 +1,15 @@
-<?include("comps/config.php");if($lg){header("Location:home.php");}?>
+<?include("inc/config.php");if($lg){header("Location:home.php");}?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Sign Up";$fs="pc";include("comps/head.php");?>
+ <?$t="Sign Up";$fs="pc";include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content" style="width:320px;">
   <button style="padding:5px 25px;" onclick="$('#social').show();$('#classic').hide();">Social Sign Up</button><button style="padding:5px 25px;" onclick="$('#social').hide();$('#classic').show();">Form Sign Up</button>
   <div id="social" style="<?if(isset($_POST['submit']) || isset($_POST['verify'])){?>display:none;<?}?>">
    <h1>Social Sign Up</h1>
-   <a href="http://open.subinsb.com/oauth/login_with_facebook"><img src="http://open.subinsb.com/img/fb_login.png"/></a><cl/>
-   <a href="http://open.subinsb.com/oauth/login_with_google"><img src="http://open.subinsb.com/img/google_login.png"/></a>
+   <a href="http://open.subinsb.com/oauth/login_with_facebook"><img src="http://open.subinsb.com/cdn/img/fb_login.png"/></a><cl/>
+   <a href="http://open.subinsb.com/oauth/login_with_google"><img src="http://open.subinsb.com/cdn/img/google_login.png"/></a>
   </div>
   <div style="<?if(!isset($_POST['submit']) && !isset($_POST['verify'])){?>display:none;<?}?>" id="classic">
    <h1>Sign Up</h1>

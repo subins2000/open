@@ -1,5 +1,5 @@
 <?
-include('../comps/config.php');
+include('../inc/config.php');
 $id=urldecode($_GET['id']);
 $sql=$db->prepare("SELECT * FROM verify WHERE code=?");
 $sql->execute(array($id));
@@ -11,9 +11,9 @@ while($r=$sql->fetch()){
 }
 ?>
 <!DOCTYPE html><html><head>
-<?$t="Confirm Password Reset - Manage Account";include("../comps/head.php");?>
+<?$t="Confirm Password Reset - Manage Account";include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
  <div class="content">
   <h2>Reset Password</h2>
   <div style="margin:0px auto;width:600px;">

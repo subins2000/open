@@ -1,6 +1,6 @@
 <?
 include("config.php");
-include("../comps/chat_rend.php");
+include("../inc/chat_rend.php");
 ch();
 $to=$_GET['to'];
 $lid=isset($_GET['lid']) ? $_GET['lid']:"";

@@ -1,9 +1,9 @@
-<?include("../comps/config.php");ch();?>
+<?include("../inc/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
- <?include("../comps/head.php");?>
+ <?include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
  <div class="content">
   <h1>Manage Account</h1>
   <p>Here, in this page you can manage your account such as <b>Password Changing</b></p><cl/>
@@ -18,7 +18,7 @@
   <cl/>
   <p>Did you ever Found A bug / Had a suggestion ? Please report/suggest at <b>Bug Reporter Page</b>. The feedback you give, helps us to make this site more powerful, great and awesome.<br/> Are you a <b>Web Developer</b> / a <b>Web Designer</b> ? If yes, you can join our <b>Open Source Community</b>. We would love to have developers like you.</p>
   <?
-  include("../comps/project_urls.php");
+  include("../inc/project_urls.php");
   ?>
  </div>
 </body></html>

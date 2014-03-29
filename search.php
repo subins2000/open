@@ -1,13 +1,13 @@
-<?include("comps/config.php");ch();?>
+<?include("inc/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Search";$cfs="ac,home,post_form,gadget";$fs="ac,post_form,home,time,gadget";include("comps/head.php");?>
+ <?$t="Search";$cfs="ac,home,post_form,gadget";$fs="ac,post_form,home,time,gadget";include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content">
   <div class="left viewpoint">
    <?
-   include("comps/trending.php");
+   include("inc/trending.php");
    ?>
   </div>
   <div class="right viewpoint">
@@ -16,14 +16,14 @@
     <input type="submit" value="Search"/>
    </form><br/>
    <?
-   include("comps/post_form.php");
+   include("inc/post_form.php");
    ?>
    <div class="feed">
     <?
-    include("comps/feed.php");
+    include("inc/feed.php");
     ?>
    </div>
   </div>
  </div>
- <?include("comps/gadget.php");?>
+ <?include("inc/gadget.php");?>
 </body></html>

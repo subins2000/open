@@ -1,7 +1,7 @@
 <?
 include("config.php");
 ch();
-include("../comps/not_rend.php");
+include("../inc/not_rend.php");
 if(isset($_POST['load'])){
  $sql=$db->prepare("SELECT id FROM notify WHERE uid=? ORDER BY id DESC LIMIT 10");
  $sql->execute(array($who));

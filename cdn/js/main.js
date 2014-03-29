@@ -89,14 +89,14 @@ window.post=function(u,dt,s,e,w,t){
   msg(d.err,"e");
  });
 };
-$(".ajax_form").live('submit',function(){
+$(".ajax_form").live('submit',function(event){
+ event.preventDefault();
  t=$(this);
  if($("#aj_res").length==0){$("body").append("<div id='aj_res' hide></div>");}
  d={succ:"",err:""};
  if(t.attr("succ")!=null){d.succ=t.attr("succ");}
  if(t.attr("err")!=null){d.err=t.attr("err");}
  post(t.attr("action"),t.serialize(),d.succ,d.err,t.attr("while"),t);
- return false;
 });
 $(document).mouseup(function (e){
  $(".c_c").each(function(i){
@@ -114,7 +114,7 @@ $(".unfollow").live('click',function(){
  post("follow",{id:id},"UnFollowed","UnFollowing Failed","UnFollowing");
 });
 $("#change_picture").live("click",function(){
- dialog(ht+"/comps/profile_pic");
+ dialog(ht+"/inc/profile_pic");
 });
 window.scrollTo=function(top){
  $('html, body').animate({

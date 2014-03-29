@@ -11,7 +11,7 @@ if($_P && is_numeric($id)){
   if($sql->rowCount()==0){
    $sql=$db->prepare("INSERT INTO conn (uid,fid,since) VALUES (?,?,NOW())");
    $sql->execute(array($who,$id));
-   include("../comps/notify.php");
+   include("../inc/notify.php");
    notify("follow",0,0,$id,$who);
 ?>
 $("#<?echo$id;?>.follow").removeClass("follow").addClass("unfollow").html("<span hide>UnFollow</span>-");

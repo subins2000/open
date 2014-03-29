@@ -1,4 +1,4 @@
-<?include("../../comps/config.php");ch();?>
+<?include("../../inc/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
  <?
@@ -15,7 +15,7 @@
  if(isset($_GET['id'])){
   $id=$_GET['id'];
   if($imgs[$id]!=""){
-   save("header","http://open.subinsb.com/img/headers/".$imgs[$id]);
+   save("header","http://open.subinsb.com/cdn/img/headers/".$imgs[$id]);
    sss("Saved","Your new header image was saved successfully. See your profile to see changes.");
   }else{
    ser("Error","There was an error saving your header image. Please Try again.");
@@ -27,7 +27,7 @@
  <center style="margin-top:10px;">
   <?
   foreach($imgs as $k=>$v){
-   echo "<a href='?id=$k'><img src='http://open.subinsb.com/img/headers/$v' width='600' height='180' /></a>";
+   echo "<a href='?id=$k'><img src='http://open.subinsb.com/cdn/img/headers/$v' width='600' height='180' /></a>";
   }
   ?>
  </center>

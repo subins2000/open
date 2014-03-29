@@ -1,5 +1,5 @@
 <?
-include("comps/config.php");
+include("inc/config.php");
 $ceb=isset($_GET['request']) ? $_GET['request']:"";
 if(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!="" && preg_match("/[1-9]/",$ceb)){
  $_GET['id']=$ceb;
@@ -11,9 +11,9 @@ ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?include("comps/head.php");?>
+ <?include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
   <div class="icontent">
    <div class="left">
@@ -29,8 +29,8 @@ ch();
  </div>
  <div style="width:100%;background:white;color:white;text-align:center;">
   <div class="icontent">
-   <a href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/img/fb_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
-   <a href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(//open.subinsb.com/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
+   <a href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/cdn/img/fb_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
+   <a href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(//open.subinsb.com/cdn/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
    <div style="font-size: 30px;margin-top: 20px;height: 25px;">
     <?
     $sql=$db->prepare("SELECT COUNT(seen) FROM users");
@@ -95,7 +95,7 @@ ch();
    <div class="left">
     <h2>How Can I contribute ?</h2>
     <p>
-     Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><?include("comps/project_urls.php");?>
+     Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><?include("inc/project_urls.php");?>
      <br/>You can Find Documentation, news, info <br/>about Open on our blog.<br/><cl/>
      <a href="blog"><button class="b-white">Blog</button></a>
     </p>

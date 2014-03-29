@@ -3,7 +3,7 @@
  <link rel="stylesheet" href="https://open-phpgeek.rhcloud.com/css/main.css"/>
 </head><body>
  <script>window.top.location.href = "http://open.subinsb.com";</script>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content">
   <h1>Welcome</h1>
   Welcome To <a href="http://open.subinsb.com" target="_blank">Open</a>  - The Open Source Social Network.

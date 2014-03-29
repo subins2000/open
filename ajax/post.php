@@ -1,9 +1,9 @@
 <?
 include("config.php");
-include("../comps/post_rend.php");
-include("../comps/reverse_markup.php");
-include("../comps/post_to_tw.php");
-include("../comps/post_to_fb.php");
+include("../inc/post_rend.php");
+include("../inc/reverse_markup.php");
+include("../inc/post_to_tw.php");
+include("../inc/post_to_fb.php");
 ch();
 $pr=$_POST['privacy'];
 if($_P && ($pr=="pub" || $pr=="fri" || $pr=="meo")){

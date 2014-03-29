@@ -1,6 +1,6 @@
 <?
 include("config.php");
-include("../comps/cmt_rend.php");
+include("../inc/cmt_rend.php");
 ch();
 $id=$_POST['id'];
 $msg=filt($_POST['cmt'],true);
@@ -14,7 +14,7 @@ if($_P && is_numeric($id) && preg_match("/[^\s]/",$msg)){
   $sql->execute(array($who,$id,$msg));
   $sql=$db->prepare("UPDATE posts SET cmts=cmts+1 WHERE id=?");
   $sql->execute(array($id));
-  include("../comps/notify.php");
+  include("../inc/notify.php");
   #notify("comment",$msg,$id,$prr,$who);
   if($_POST['clod']=='mom'){
    $_POST['all']=1;

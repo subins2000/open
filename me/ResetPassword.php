@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head>
-<?$t="Reset Password - Manage Account";include("../comps/head.php");?>
+<?$t="Reset Password - Manage Account";include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
  <div class="content">
   <h2>Reset Password</h2>
   Fill up the following form to reset your password.<br/><cl/>

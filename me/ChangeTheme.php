@@ -1,9 +1,9 @@
 <?
-include('../comps/config.php');
+include('../inc/config.php');
 ch();
 $er=array();
 $ss=array();
-$themes=array("dark"=>array("-webkit-linear-gradient(#AAA,#EEE)","-moz-linear-gradient(left,#AAA,#EEE)"),"cloud"=>array("url(//open.subinsb.com/img/clouds) rgba(100, 172, 400,.8)","url(//open.subinsb.com/img/clouds) rgba(100, 172, 400,.8)","10em"),"normal"=>array("url(//open.subinsb.com/img/dot.gif)","url(//open.subinsb.com/img/dot.gif)"),"india"=>array("-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))","-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))"));
+$themes=array("dark"=>array("-webkit-linear-gradient(#AAA,#EEE)","-moz-linear-gradient(left,#AAA,#EEE)"),"cloud"=>array("url(//open.subinsb.com/cdn/img/clouds) rgba(100, 172, 400,.8)","url(//open.subinsb.com/cdn/img/clouds) rgba(100, 172, 400,.8)","10em"),"normal"=>array("url(//open.subinsb.com/cdn/img/dot.gif)","url(//open.subinsb.com/cdn/img/dot.gif)"),"india"=>array("-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))","-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8))"));
 if(isset($_POST['theme'])){
  $theme=strtolower($_POST['theme']);
  if($theme=="dark" || $theme=="cloud" || $theme=='normal' || $theme=='india'){
@@ -16,9 +16,9 @@ if(isset($_POST['theme'])){
 }
 ?>
 <!DOCTYPE html><html><head>
-<?$t="Change Theme - Manage Account";include("../comps/head.php");?>
+<?$t="Change Theme - Manage Account";include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
   <div class="content">
   <h2>Change Theme</h2>
   <div style="margin:0px auto;width:67%;">

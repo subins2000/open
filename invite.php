@@ -1,9 +1,9 @@
-<?include("comps/config.php");ch();?>
+<?include("inc/config.php");ch();?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Invite";$cfs="ac,gadget";$fs="time,ac,gadget";include("comps/head.php");?>
+ <?$t="Invite";$cfs="ac,gadget";$fs="time,ac,gadget";include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content">
   <h1>Invite</h1>
   Invite your friends to Join Open.
@@ -36,10 +36,10 @@
   }
   </script><br/>
   <center>
-   <a href="#" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;" onclick="FBInvite()">Invite Facebook Friends</a>
+   <a href="#" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;" onclick="FBInvite()">Invite Facebook Friends</a>
    <br/><cl/>
-   <a href="oauth/invite_gmail" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:#4F9FCA url(//open.subinsb.com/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Invite GMail Contacts</a>
+   <a href="oauth/invite_gmail" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:#4F9FCA url(//open.subinsb.com/cdn/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Invite GMail Contacts</a>
   </center>
  </div>
- <?include("comps/gadget.php");?>
+ <?include("inc/gadget.php");?>
 </body></html>

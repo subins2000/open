@@ -1,3 +1,3 @@
 <?
-include("../comps/config.php");
+include("../inc/config.php");
 ?>

@@ -38,7 +38,7 @@
 }
 .post .like, .post .cmt{
  cursor:pointer;
- background: url(http://open.subinsb.com/img/sprites/post_action_bar.png);
+ background: url(http://open.subinsb.com/cdn/img/sprites/post_action_bar.png);
  margin-top:5px;
  display:inline-block;
  text-indent: -999em;
@@ -76,7 +76,7 @@
  word-wrap: break-word;
 }
 .post .author_box{
- background:url(//open.subinsb.com/img/sprites/triangle.png);
+ background:url(//open.subinsb.com/cdn/img/sprites/triangle.png);
  height: 14px;
  width: 14px;
  background-size: 14px;
@@ -136,7 +136,7 @@
  margin-top:5px;
 }
 .comment .author_cmt_box{
- background:url(//open.subinsb.com/img/sprites/triangle.png);
+ background:url(//open.subinsb.com/cdn/img/sprites/triangle.png);
  height: 14px;
  width: 14px;
  background-size: 14px;

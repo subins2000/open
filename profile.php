@@ -1,5 +1,5 @@
 <?
-include("comps/config.php");
+include("inc/config.php");
 if(isset($_GET['id']) && $_GET['id']!=''){
  $id=$_GET['id'];
 }else{
@@ -30,7 +30,7 @@ while($r=$sql->fetch()){
   $json[$v]=isset($json[$v]) ? $json[$v] : "";
  }
  $img=filt($json["img"]);
- $img=$img=='' ? "http://open.subinsb.com/img/profile_pics/om":$img;
+ $img=$img=='' ? "http://open.subinsb.com/cdn/img/profile_pics/om":$img;
  $about=$json['about']=="" ? $plnmsg:$json['about'];
  $joined=$json['joined'];
  $bir=$json['birth']=="" ? "DD/MM/YYYY":$json['birth'];
@@ -47,7 +47,7 @@ while($r=$sql->fetch()){
  $gplus=$json['gplus']=="" ? $plnmsg:$json['gplus'];
  $pin=$json['pin']=="" ? $plnmsg:$json['pin'];
  $himg=$json['header'];
- $himg=$himg=="" ? "http://open.subinsb.com/img/headers/00.png":$himg;
+ $himg=$himg=="" ? "http://open.subinsb.com/cdn/img/headers/00.png":$himg;
 }
 $pvals=array($about,$bir);
 $lks=$db->prepare("SELECT COUNT(uid) FROM likes WHERE uid=?");
@@ -59,11 +59,11 @@ $cms=$cms->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$cfs="ac,home,profile,gadget";$fs="ac,profile,time,home,gadget";$t=substr($name,"-1")=='s' ? "$name' Profile":"$name's Profile";include("comps/head.php");?>
+ <?$cfs="ac,home,profile,gadget";$fs="ac,profile,time,home,gadget";$t=substr($name,"-1")=='s' ? "$name' Profile":"$name's Profile";include("inc/head.php");?>
  <meta name="oid" value="<?echo$id;?>"/>
  <meta name="type" value="profile"/>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content profile">
   <div class="header">
    <img src="<?echo$himg;?>" width="704" height="180"/>
@@ -85,7 +85,7 @@ $cms=$cms->fetchColumn();
      <part <?if($_GET['part']=="comments"){echo"act";}?>>Comments</part>
     </div>
     <div class="noggler" id="feed" <?if($_GET['part']==""){echo"style='display:block;'";}?>>
-     <?$_POST['user']=$id;include("comps/feed.php");?>
+     <?$_POST['user']=$id;include("inc/feed.php");?>
     </div>
     <div class="noggler" id="about" <?if($_GET['part']=="about"){echo"style='display:block;'";}?>>
      <div style="display:inline-block;vertical-align:top;width:260px;">
@@ -230,5 +230,5 @@ $cms=$cms->fetchColumn();
  <?if($who==$id){?>
  <button id="editBox" style="margin:0px;position:fixed;top:95px;left:0px;width:200px;text-align:center;">Edit Profile</button>
  <?}?>
- <?include("comps/gadget.php");?>
+ <?include("inc/gadget.php");?>
 </body></html>

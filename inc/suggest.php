@@ -1,5 +1,4 @@
 <?
-include("config.php");
 $sql=$db->prepare("SELECT id FROM users WHERE id NOT IN (SELECT fid FROM conn WHERE uid=:who) AND id IN (SELECT fid FROM conn WHERE uid IN (SELECT fid FROM conn WHERE uid=:who)) AND id!=:who LIMIT 5");
 $sql->execute(array(":who"=>$who));
 if($sql->rowCount()==0){

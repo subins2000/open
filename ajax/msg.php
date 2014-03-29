@@ -1,7 +1,7 @@
 <?
 include("config.php");
-include("../comps/chat_rend.php");
-include("../comps/notify.php");
+include("../inc/chat_rend.php");
+include("../inc/notify.php");
 ch();
 $msg=filt($_POST['msg'],true);
 $to=$_POST['to'];

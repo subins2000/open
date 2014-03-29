@@ -1,5 +1,5 @@
 <?
-include('../comps/config.php');
+include('../inc/config.php');
 ch();
 $er=array();
 $ss=array();
@@ -50,9 +50,9 @@ if($upa==$salted_hash){
 }
 ?>
 <!DOCTYPE html><html><head>
-<?$t="Change Password - Manage Account";include("../comps/head.php");?>
+<?$t="Change Password - Manage Account";include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
   <div class="content">
   <h2>Change Password</h2>
   <div style="margin:0px auto;width: 60%;">

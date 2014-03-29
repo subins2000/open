@@ -11,7 +11,7 @@ window.location.reload();
 if($lg && $_GET['user']==$who){
  if($_GET['fid']!="undefined" && $_GET['type']!="profile" && $_GET['type']!="view"){
   /* Are There New Posts ? */
-  include("../comps/post_rend.php");
+  include("../inc/post_rend.php");
   $id=$_GET['fid'];
   $url=urldecode($_GET['url']);
   $url=parse_url(str_replace("#","%23",$url));

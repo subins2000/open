@@ -97,7 +97,7 @@ $(".load_more_posts .normal").live("click",function(){
 });
 $(".suggestions .follow").die("click").live("click",function(event){
  $(this).parents(".sugg").remove();
- $.get(ht+"/comps/suggest",function(d){
+ $.get(ht+"/inc/suggest",function(d){
   $(".suggestions").replaceWith(d);
  });
 });
@@ -115,7 +115,14 @@ $(".textEditor").smention(ht+"/ajax/get_users",{
  position:"below",
  cache:true
 }).live("keyup",function(){
+ if($(this).data("realInnerH")==null){
+  $(this).data("realInnerH", $(this).innerHeight());
+  console.log($(this).data("realInnerH"));
+ }
  $(this).innerHeight($(this)[0].scrollHeight);
+}).parents("form").live("submit", function(){
+ console.log($(this).find(".textEditor").data("realInnerH"));
+ $(this).find(".textEditor").innerHeight($(this).find(".textEditor").data("realInnerH"));
 });
 tURL($(".post .cont"));
 tURL($(".comment .cont"));

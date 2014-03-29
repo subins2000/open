@@ -1,5 +1,5 @@
 <?
-include("../comps/config.php");
+include("../inc/config.php");
 $sql=$db->prepare("SELECT * FROM mails ORDER BY id LIMIT 100");
 $sql->execute();
 if($sql->rowCount()!=0){

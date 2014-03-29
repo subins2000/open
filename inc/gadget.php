@@ -6,7 +6,7 @@
    Chat | 
    <a id="cwinopen" href="chat?id=">Open Independently</a>
   </div>
-  <?include("comps/chat_rend.php");?>
+  <?include("inc/chat_rend.php");?>
   <?echo show_chat("gadget");?>
  </div>
  <div class="usersgt">

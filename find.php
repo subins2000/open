@@ -1,13 +1,13 @@
 <?
-include("comps/config.php");
+include("inc/config.php");
 ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$cfs="ac,gadget";$fs="ac,time,gadget";include("comps/head.php");?>
+ <?$cfs="ac,gadget";$fs="ac,time,gadget";include("inc/head.php");?>
 </head><body>
  <?
- include("comps/header.php");
+ include("inc/header.php");
  $_GET['q']=isset($_GET['q']) ? $_GET['q']:"";
  $q=filt($_GET['q']);
  ?>
@@ -103,5 +103,5 @@ ch();
   ?>
   <style>div[field]{margin:5px;}</style>
  </div>
- <?include("comps/gadget.php");?>
+ <?include("inc/gadget.php");?>
 </body></html>

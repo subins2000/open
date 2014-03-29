@@ -1,5 +1,5 @@
 <?
-include("comps/config.php");
+include("inc/config.php");
 $_GET['c']=isset($_GET['c']) ? $_GET['c']:"";
 $c=filt($_GET['c']);
 $c=$c=="" ? "http://open.subinsb.com/home":$c;
@@ -33,14 +33,14 @@ if(isset($_GET['logout']) && $_GET['logout']=="true"){
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Sign In";include("comps/head.php");?>
+ <?$t="Sign In";include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content" style="text-align:center;">
   <div style="display:inline-block;width:200px;text-align:left;height:260px;padding:10px 20px 20px;">
    <h1>Social Sign In</h1>
-   <a href="http://open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="http://open.subinsb.com/img/fb_login.png"/></a><cl/>
-   <a href="http://open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="http://open.subinsb.com/img/google_login.png"/></a>
+   <a href="http://open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="http://open.subinsb.com/cdn/img/fb_login.png"/></a><cl/>
+   <a href="http://open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="http://open.subinsb.com/cdn/img/google_login.png"/></a>
   </div>
   <div style="display:inline-block;vertical-align:top;width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
    <h1>Sign In</h1>

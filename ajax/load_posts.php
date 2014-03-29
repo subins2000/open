@@ -1,6 +1,6 @@
 <?
 include("config.php");
-include("../comps/post_rend.php");
+include("../inc/post_rend.php");
 if(isset($_POST['uid']) && $_POST['uid']==''){
  ch();
 }

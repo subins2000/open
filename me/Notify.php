@@ -1,13 +1,13 @@
 <?
-include("../comps/config.php");
+include("../inc/config.php");
 ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Linked Acounts - Manage Account";include("../comps/head.php");?>
+ <?$t="Linked Acounts - Manage Account";include("../inc/head.php");?>
 </head><body>
  <?
- include("../comps/header.php");
+ include("../inc/header.php");
  if(isset($_POST['submit'])){
   $shouldNotSend=array();
   $optSend=array("cmt", "fol", "msg", "men");

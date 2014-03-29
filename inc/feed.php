@@ -32,6 +32,6 @@ while($r=$sql->fetch()){
 }
 echo show_posts($tp);
 if($_SERVER['PHP_SELF']!="/view.php"){
- echo"<div class='load_more_posts'><div class='normal'>Load More Posts</div><div class='loader' hide><img src='http://open.subinsb.com/img/load.gif' height='32' width='32'/><span>Loading More Posts</span></div></div>";
+ echo"<div class='load_more_posts'><div class='normal'>Load More Posts</div><div class='loader' hide><img src='http://open.subinsb.com/cdn/img/load.gif' height='32' width='32'/><span>Loading More Posts</span></div></div>";
 }
 ?>

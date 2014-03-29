@@ -1,6 +1,6 @@
 <?
 include("config.php");
-include("../comps/cmt_rend.php");
+include("../inc/cmt_rend.php");
 $id=filt($_POST['id']);
 if($id!=""){
  $_POST['all']=1;

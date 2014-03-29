@@ -39,7 +39,7 @@
    ?>
    <button id="nfn_button" class="b-white<?if($count!=0){echo' b-red';}?>"><?echo$count;?></button>
    <div id="nfn" class="c_c">
-    <center class="loading"><br/><br/><img src="http://open.subinsb.com/img/load.gif"/><br/>Loading</center>
+    <center class="loading"><br/><br/><img src="http://open.subinsb.com/cdn/img/load.gif"/><br/>Loading</center>
     <div class="nfs"></div>
    </div>
   </div>

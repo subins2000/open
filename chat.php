@@ -1,12 +1,12 @@
 <?
-include("comps/config.php");
+include("inc/config.php");
 ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$cfs="chat,gadget,ac";$fs="ac,time,gadget";include("comps/head.php");?>
+ <?$cfs="chat,gadget,ac";$fs="ac,time,gadget";include("inc/head.php");?>
 </head><body>
- <?include("comps/header.php");?>
+ <?include("inc/header.php");?>
  <div class="content">
   <h1>Chat</h1>
   <div class="users">
@@ -37,7 +37,7 @@ ch();
       ser("Not Friends","You and $gid are not friends.");
      }
     }else{
-     include("comps/chat_rend.php");
+     include("inc/chat_rend.php");
      echo show_chat($gid);
     }
    }else{

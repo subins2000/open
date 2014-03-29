@@ -7,16 +7,31 @@
  * //www.opensource.org/licenses/mit-license.php
 */
 (function($) {	
+ var defaultOptions={
+  cache : true,
+  extraParams : {},
+  after : "",
+  avatar : true,
+  position : "above",
+  width : 200,
+  key : "@"
+ };
  $.fn.smention=function(url,options){
   if($(".sm_bar").length==0){
    $("body").append("<div class='sm_bar'><div class='sm_conts'></div><div class='sm_close'></div></div>");
   }
-  if(typeof options.cache === "undefined"){
-   options.cache=true;
+  options=$.extend(defaultOptions, options);
+  if(options.key=="@"){
+   options.keyCode=50;
+  }else if(options.key=="#"){
+   options.keyCode=51;
+  }else if(options.key==""){
+   options.keyCode="";
   }
   localStorage['smlto']="";
   localStorage['smloc']="";
   lc=0;
+  smAddEvent(options);
   var down = [];
   return this.each(function() {
    $(this).on("keydown",function(e){
@@ -24,7 +39,7 @@
    });
    $(this).on("keyup",function(e){
     t=$(this);
-    if(down[50] && down[16]){
+    if((down[50] && down[options.keyCode]) || options.keyCode==""){
      lc=t[0].selectionStart-1;
      t.data("callNow","enabled");
      t.enSmen(url,options);
@@ -34,7 +49,7 @@
     if((parseFloat(lc)+localStorage['smlto'].length) < t[0].selectionStart || localStorage['smlto']==""){
      t.unSmen();
     }
-    if(e.keyCode==16 || e.keyCode==50){down[e.keyCode] = false;}
+    if(e.keyCode==16 || e.keyCode==options.keyCode){down[e.keyCode] = false;}
    });
   });
  };
@@ -45,7 +60,7 @@
     $(this).data("squed",1);
     $(this).bind("keyup",function(e){
      t=$(this);
-     smlto=localStorage['smlto'].replace("@","");
+     smlto=options.key=="" ? localStorage['smlto']:localStorage['smlto'].replace(options.key,"");
      if(typeof(options.extraParams)=="object"){
       data=$.extend({q:smlto},options.extraParams);
      }else{
@@ -110,13 +125,15 @@
 String.prototype.replaceBetween = function(start, end, what) {
  return this.substring(0, start) + what + this.substring(end);
 };
-$("body").on("click",".sm_bar .sitem",function(){
- var id=$(this).attr("id");
- parts=localStorage['smloc'].split(",");
- start=parseFloat(parts[0])+1;
- end=parts[1];
- t=$(".sm_bar").data("from");
- t.val(t.val().replaceBetween(start,end,id));
- $(".sm_bar").hide();
- t.focus();
-});
+function smAddEvent(options){
+ $("body").on("click",".sm_bar .sitem",function(){
+  var id=$(this).attr("id");
+  parts=localStorage['smloc'].split(",");
+  start=parseFloat(parts[0])+options["key"].length;
+  end=parts[1];
+  t=$(".sm_bar").data("from");
+  t.val(t.val().replaceBetween(start,end,id));
+  $(".sm_bar").hide();
+  t.focus();
+ });
+}

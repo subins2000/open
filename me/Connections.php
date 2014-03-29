@@ -1,12 +1,12 @@
 <?
-include("../comps/config.php");
+include("../inc/config.php");
 ch();
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$t="Connections - Manage Account";include("../comps/head.php");?>
+ <?$t="Connections - Manage Account";include("../inc/head.php");?>
 </head><body>
- <?include("../comps/header.php");?>
+ <?include("../inc/header.php");?>
  <div class="content">
   <h1>Manage Connections</h1>
   You can manage all your connections at this page. You can see who follows you, who you're following here.<cl/>
