@@ -8,8 +8,10 @@ $port=getenv('OPENSHIFT_MYSQL_DB_PORT');
 $usr=getenv('OPENSHIFT_MYSQL_DB_USERNAME');
 $pass=getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 $db=new PDO("mysql:dbname=$dbname;host=$host;port=".$port, $usr, $pass);
-require "class.open.php";
-$OP=new Open();
+if(!isset($OP)){
+ require "class.open.php";
+ $OP=new Open();
+}
 $lg   = $OP->lg;
 $who  = $OP->uid;
 $whod = $OP->sid;

@@ -1,7 +1,7 @@
 <?
 include("inc/config.php");
 $ceb=isset($_GET['request']) ? $_GET['request']:"";
-if(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!="" && preg_match("/[1-9]/",$ceb)){
+if(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!="" && preg_match("/[0-9]/",$ceb)){
  $_GET['id']=$ceb;
  include("profile.php");
 }elseif(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!=""){
