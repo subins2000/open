@@ -1,5 +1,5 @@
 <?
-if(!isset($_GET['show_errors'])){
+if(isset($_GET['show_errors'])){
  ini_set("display_errors","on");
 }
 $dbname=getenv('OPENSHIFT_GEAR_NAME');
