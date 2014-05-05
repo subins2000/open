@@ -1,10 +1,13 @@
 $(".navigation part").live("click",function(){
  v=$(this).text().toLowerCase();
- window.history.pushState("","","?part="+v);
+ if(typeof magicWord=="undefined"){
+  magicWord="/"+window.location.pathname.split("/")[1]+"/";
+ }
+ window.history.pushState("/", "/", magicWord+v);
  $(".navigation part").removeAttr("act");
- $(this).attr("act",1);
- $(".noggler").hide();
- $(".noggler#"+v).show();
+ $(this).attr("act", 1);
+ $(".noggler").removeAttr("show").attr("hide", 1);
+ $(".noggler#"+v).removeAttr("hide").attr("show", 1);
 });
 edopened=0;
 $("#editBox").live("click",function(){

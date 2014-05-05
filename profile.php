@@ -12,7 +12,7 @@ if(!isset($_GET['id']) && !$lg){
  ch(true);
 }
 if($_SERVER['SCRIPT_NAME']!="/index.php" && $id!=$who){
- header("Location:http://open.subinsb.com/$id");
+ redirect("http://open.subinsb.com/$id");
 }
 $sql=$db->prepare("SELECT * FROM users WHERE id=?");
 $sql->execute(array($id));
@@ -20,11 +20,23 @@ if($sql->rowCount()==0){
  ser();
 }
 $plnmsg="Private";
-function age($birthday){list($day,$month,$year) = explode("/",$birthday);$year_diff  = date("Y") - $year;$month_diff = date("m") - $month;$day_diff   = date("d") - $day;if($day_diff < 0 && $month_diff==0){$year_diff--;}if($day_diff < 0 && $month_diff <0){$year_diff--;}return $year_diff;}
+function age($birthday){
+ list($day,$month,$year) = explode("/", $birthday);
+ $year_diff  = date("Y") - $year;
+ $month_diff = date("m") - $month;
+ $day_diff   = date("d") - $day;
+ if($day_diff < 0 && $month_diff==0){
+  $year_diff--;
+ }
+ if($day_diff < 0 && $month_diff <0){
+  $year_diff--;
+ }
+ return $year_diff;
+}
 while($r=$sql->fetch()){
  $name=$r['name'];
  $mail=$r['username'];
- $json=json_decode($r['udata'],true);
+ $json=json_decode($r['udata'], true);
  $profVals=array("about", "img", "joined", "birth", "gen", "mail", "add", "phone", "live", "work", "lve", "fb", "tw", "gplus", "pin", "header");
  foreach($profVals as $v){
   $json[$v]=isset($json[$v]) ? $json[$v] : "";
@@ -49,13 +61,10 @@ while($r=$sql->fetch()){
  $himg=$json['header'];
  $himg=$himg=="" ? "http://open.subinsb.com/cdn/img/headers/00.png":$himg;
 }
-$pvals=array($about,$bir);
-$lks=$db->prepare("SELECT COUNT(uid) FROM likes WHERE uid=?");
-$lks->execute(array($id));
-$lks=$lks->fetchColumn();
-$cms=$db->prepare("SELECT COUNT(uid) FROM cmt WHERE uid=?");
-$cms->execute(array($id));
-$cms=$cms->fetchColumn();
+$pvals=array($about, $bir);
+require("$sroot/inc/class.rep.php");
+$RP=new ORep();
+$Rep=$RP->getRep($id);
 ?>
 <!DOCTYPE html>
 <html><head>
@@ -68,26 +77,31 @@ $cms=$cms->fetchColumn();
   <div class="header">
    <img src="<?echo$himg;?>" width="704" height="180"/>
    <div class="holder">
-    <?echo$name.foll($id);?>
+    <?
+    echo "<a href=''>".$name."</a>";
+    echo foll($id);
+    ?>
    </div>
-   <?if($id==$who){?><button id="ch_hi" class="b-white">Change Header Image</button><?}?>
+   <?if($id==$who){?>
+    <a id="ch_hi" class="button b-white">Change Header Image</a>
+    <a id="editBox" class="button b-red" style="margin:2px;position:absolute;bottom:0px;top:80% !important;left:0px;width:150px;text-align:center;">Edit Profile</a>
+   <?}?>
   </div>
-  <div class="main">
-   <div class="clearfix left">
+  <div class="main blocks">
+   <div class="clearfix left block">
     <?
     $_GET['part']=isset($_GET['part']) ? $_GET['part']:"";
     if($_GET['part']=="feed"){$_GET['part']="";}
     ?>
     <div class="navigation">
-     <part <?if($_GET['part']==""){echo"act";}?>>Feed</part>
+     <part <?if($_GET['part']=="" || $_GET['part']=="feed"){echo"act";}?>>Feed</part>
      <part <?if($_GET['part']=="about"){echo"act";}?>>About</part>
-     <part <?if($_GET['part']=="likes"){echo"act";}?>>Likes</part>
-     <part <?if($_GET['part']=="comments"){echo"act";}?>>Comments</part>
+     <part <?if($_GET['part']=="reputation"){echo"act";}?>>Reputation</part>
     </div>
-    <div class="noggler" id="feed" <?if($_GET['part']==""){echo"style='display:block;'";}?>>
+    <div class="noggler" hide id="feed" <?if($_GET['part']==""){echo"show";}?>>
      <?$_POST['user']=$id;include("inc/feed.php");?>
     </div>
-    <div class="noggler" id="about" <?if($_GET['part']=="about"){echo"style='display:block;'";}?>>
+    <div class="noggler" hide id="about" <?if($_GET['part']=="about"){echo"show";}?>>
      <div style="display:inline-block;vertical-align:top;width:260px;">
       <div class="basic smallbox">
        <h>Basic</h>
@@ -120,89 +134,67 @@ $cms=$cms->fetchColumn();
       </div>
      </div>
     </div>
-    <div class="noggler" id="likes" <?if($_GET['part']=="likes"){echo"style='display:block;'";}?>>
-     <?
-     $sql=$db->prepare("SELECT liked, pid FROM likes WHERE 
-     uid=:id AND pid IN (
-      SELECT id FROM posts WHERE (
-       privacy='pub' OR (
-        privacy='fri' AND uid IN (
-         SELECT fid FROM conn WHERE uid=:who AND fid IN (
-          SELECT uid FROM conn WHERE fid=:who
-         )
-        )
-       )
-      )
-     )
-     ORDER BY liked DESC LIMIT 10");
-     $sql->execute(array(":id"=>$id,":who"=>$who));
-     if($sql->rowCount()==0){
-      echo "<h1>No Post Likes</h1>";
-     }else{
-      echo "<h1>Post Likes</h1>";
-      while($r=$sql->fetch()){
-       echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><span class='time'>{$r['liked']}</span> : $name liked <a href='view?id={$r['pid']}'>Post #".$r['pid']."</a></div>";
-      }
-     }
-     $sql=$db->prepare("SELECT liked, cid FROM clikes WHERE 
-     uid=:id AND cid IN (
-      SELECT id FROM cmt WHERE pid IN (
-       SELECT id FROM posts WHERE (
-        privacy='pub' OR (
-         privacy='fri' AND uid IN (
-          SELECT fid FROM conn WHERE uid=:who AND fid IN (
-           SELECT uid FROM conn WHERE fid=:who
-          )
-         )
-        )
-       )
-      )
-     )
-     ORDER BY liked DESC");
-     $sql->execute(array(":id"=>$id,":who"=>$who));
-     if($sql->rowCount()==0){
-      echo "<h1>No Comment Likes</h1>";
-     }else{
-      echo "<h1>Comment Likes</h1>";
-      while($r=$sql->fetch()){
-       $cid=$db->prepare("SELECT pid FROM cmt WHERE id=?");
-       $cid->execute(array($r['cid']));
-       $cid=$cid->fetch();
-       $cid=$cid['pid'];
-       echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><span class='time'>{$r['liked']}</span> : $name liked <a href='view?id={$cid}#{$r['cid']}'>Comment # {$r['cid']}</a></div>";
-      }
-     }
-     ?>
-     Post & Comment Likes are limited to 10 results.
-    </div>
-    <div class="noggler" id="comments" <?if($_GET['part']=="comments"){echo"style='display:block;'";}?>>
-     <?
-     $sql=$db->prepare("SELECT * FROM cmt WHERE uid=:id AND pid IN (SELECT id FROM posts WHERE (privacy='pub' OR (privacy='fri' AND uid IN (SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who))))) ORDER BY posted DESC LIMIT 10");
-     $sql->execute(array(":id"=>$id,":who"=>$who));
-     while($r=$sql->fetch()){
-      echo "<div style='background:gray;color:white;padding:10px 15px;border-radius:10px;border:1px solid white;'><div class='time'>{$r['posted']}</div><div clear></div><div style='margin-left:10px;'>$name commented on <a href='view?id=".$r['pid']."'>Post #".$r['pid']."</a><div clear></div><div style='border:5px dashed white;padding:10px 15px;'>{$r['cmt']}</div></div></div>";
-     }
-     if($sql->rowCount()==0){
-      echo "<h1>No Comments</h1>";
-     }
-     ?>
+    <div class="noggler" hide id="reputation" <?if($_GET['part']=="reputation"){echo "show";}?>>
+     <center style="font-size:30px;height:40px;"><?echo $Rep['total'];?></center>
+     <div class="blocks">
+      <div class="block" style="width: 49%;">
+       <?
+       foreach($RP->getTopPosts() as $r){
+       ?>
+        <div class="blocks item">
+         <div class="block rep"><?echo$r['rep'];?></div>
+         <a class="block" href="http://open.subinsb.com/view/<?echo$r['id'];?>">Post # <?echo$r['id'];?></a>
+        </div>
+       <?
+       }
+       ?>
+      </div>
+      <div class="block" style="width: 49%;">
+       <?
+       foreach($RP->getTopComments() as $r){
+       ?>
+        <div class="blocks item">
+         <div class="block rep"><?echo$r['rep'];?></div>
+         <a class="block" href="http://open.subinsb.com/view/<?echo$r['id'];?>">
+          <?
+          $c=$r['cmt'];
+          if(strlen($c) > 10){
+           echo substr($c, 0, 10);
+          }else{
+           echo $c;
+          }
+          /* The above code should be in one line */
+          ?>
+         </a>
+        </div>
+       <?
+       }
+       ?>
+      </div>
+     </div>
     </div>
    </div>
-   <div class="clearfix right">
+   <div class="clearfix right block">
     <div class="image">
      <img src="<?echo$img;?>" height="150" width="150"/>
      <?if($id==$who){?><a id="change_picture">Change Picture</a><?}?>
     </div>
     <div class="osin">
-     <div val><span>Likes</span><c>:</c><v><?echo$lks;?></v></div>
-     <div val><span>Comments</span><c>:</c><v><?echo$cms;?></v></div>
+     <div class="tlRep">
+      <div class="tl" title="Toal Reputation"><?echo $Rep['total'];?></div>
+      <div>
+       <span title="Post Likes"><?echo $Rep['count']['pst'];?></span>
+       <span title="Post Comments"><?echo $Rep['count']['cmt'];?></span>
+       <span title="Comment Likes"><?echo $Rep['count']['cmtl'];?></span>
+      </div>
+     </div>
      <div class="following" style="text-align:center;">
       <?
       $sql=$db->prepare("SELECT fid FROM conn WHERE uid=? LIMIT 6");
       $sql->execute(array($id));
       while($r=$sql->fetch()){
        $f=$r['fid'];
-       echo "<a href='".get("ploc",$f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name",$f,false)."' height='32' width='32' src='".get('img',$f)."'></a>";
+       echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar',$f)."'></a>";
       }
       $sql=$db->prepare("SELECT COUNT(uid) FROM conn WHERE uid=?");
       $sql->execute(array($id));
@@ -216,7 +208,7 @@ $cms=$cms->fetchColumn();
       $sql->execute(array($id));
       while($r=$sql->fetch()){
        $f=$r['uid'];
-       echo "<a href='".get("ploc",$f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name",$f,false)."' height='32' width='32' src='".get('img',$f)."'></a>";
+       echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar', $f)."'></a>";
       }
       $sql=$db->prepare("SELECT 1 FROM conn WHERE fid=?");
       $sql->execute(array($id));
@@ -227,8 +219,5 @@ $cms=$cms->fetchColumn();
    </div>
   </div>
  </div>
- <?if($who==$id){?>
- <button id="editBox" style="margin:0px;position:fixed;top:95px;left:0px;width:200px;text-align:center;">Edit Profile</button>
- <?}?>
  <?include("inc/gadget.php");?>
 </body></html>

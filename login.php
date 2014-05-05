@@ -16,12 +16,16 @@ if(isset($_POST['submit'])){
  $site_salt="a_salt_key";
  $salted_hash = hash('sha256',$pa.$site_salt.$p_salt);
  if($p==$salted_hash){
-  $tme=time()*60+1200;
+  if(isset($_POST['remember_me'])){
+   $tme=time()+4950000;
+  }else{
+   $tme=time()*60+1200;
+  }
   setcookie("curuser", $id, $tme, "/", $_SERVER['HTTP_HOST']);
   setcookie("wervsi", $OP->encrypter($id), $tme, "/", $_SERVER['HTTP_HOST']);
   header("Location:$c");
  }else{
-  $er='Username/Password is Incorrect.';
+  $er='E-Mail/Password is Incorrect';
  }
 }
 if(isset($_GET['logout']) && $_GET['logout']=="true"){
@@ -29,35 +33,44 @@ if(isset($_GET['logout']) && $_GET['logout']=="true"){
  setcookie("curuser", "", $tme, "/", $_SERVER['HTTP_HOST']);
  setcookie("wervsi", "", $tme, "/", $_SERVER['HTTP_HOST']);
  header("Location://open.subinsb.com");
-}elseif($lg){header("Location: $c");}
+}elseif($lg){redirect("$c");}
 ?>
 <!DOCTYPE html>
 <html><head>
  <?$t="Sign In";include("inc/head.php");?>
 </head><body>
  <?include("inc/header.php");?>
- <div class="content" style="text-align:center;">
-  <div style="display:inline-block;width:200px;text-align:left;height:260px;padding:10px 20px 20px;">
+ <div class="content blocks" style="text-align:center;">
+  <div class="block" style="width:200px;padding:0px 20px 20px;text-align:left;">
+   <h1>Sign In</h1>
+   <form action="login?c=<?echo$c;?>" method="POST">
+    <div style="margin:5px 0px;">
+     E-Mail<br/>
+     <input name="user" type="text" valuesize="20"/>
+    </div>
+    <div>
+     Password<br/>
+    <input name="pass" autocomplete="off" type="password" size="20"/>
+    </div><cl/>
+    <label class="blocks">
+     <input type="checkbox" class="block" name="remember_me"/><span class="block">Remember Me</span>
+    </label><cl/>
+    <div>
+     <input name="submit" type="submit" value="Sign In"/>
+     <a href="http://open.subinsb.com/register" class="button b-green">Sign Up</a>
+    </div><cl/>
+    <a href="http://open.subinsb.com/me/ResetPassword" class="button b-red">Forgot Password ?</a>
+   </form>
+   <?
+   if(isset($er)){
+    echo "<div style='color:red;margin: 5px -5px;'>$er</div>";
+   }
+   ?>
+  </div>
+  <div class="block" style="width:200px;text-align:left;padding:0px 20px 20px;">
    <h1>Social Sign In</h1>
    <a href="http://open.subinsb.com/oauth/login_with_facebook?c=<?echo$c;?>"><img src="http://open.subinsb.com/cdn/img/fb_login.png"/></a><cl/>
    <a href="http://open.subinsb.com/oauth/login_with_google?c=<?echo$c;?>"><img src="http://open.subinsb.com/cdn/img/google_login.png"/></a>
-  </div>
-  <div style="display:inline-block;vertical-align:top;width:200px;padding:10px 20px 20px;height:260px;text-align:left;">
-   <h1>Sign In</h1>
-   <form action="login?c=<?echo$c;?>" method="POST">
-    E-Mail<br/>
-    <input name="user" type="text" size="20"/><br/>
-    Password<br/>
-    <input name="pass" autocomplete="off" type="password" size="20"/><br/><cl/>
-    <input name="submit" type="submit" value="Sign In"/><cl/>
-    <?
-    if(isset($er)){
-     ser($er,"");
-    }
-    ?>
-    <a href="http://open.subinsb.com/register"><button type="button" class="b-green">Sign Up</button></a><cl/>
-    <a href="http://open.subinsb.com/me/ResetPassword"><button type="button" class="b-red">Forgot Password ?</button></a>
-   </form>
   </div>
  </div>
 </body></html>

@@ -18,13 +18,10 @@
  z-index:5;
 }
 .main .left.clearfix{
- display:inline-block;
  width:530px;
- vertical-align: top;
 }
 .main .right.clearfix{
- display:inline-block;
- width:150px;
+ width:154px;
  margin-left: 5px;
 }
 .main .right.clearfix .image{
@@ -42,14 +39,20 @@
 .main .right.clearfix .osin{
  margin-top:5px;
 }
-.main .right.clearfix .osin div[val] span,.main .right.clearfix .osin div[val] v,.main .right.clearfix .osin div[val] c{
- display:table-cell;
- padding-left:10px;
+.main .right.clearfix .osin .tlRep{
+ text-align:center;
+ background:white;
+ padding:5px 0px;
+ border:1px solid black;
+ border-radius:5px;
 }
-.main .right.clearfix .osin div[val] v{font-weight:bold;}
-.main .right.clearfix .osin div[val]{
- display: table-row;
- margin-left:-10px;
+.main .right.clearfix .osin .tlRep .tl{
+ font-size:25px;
+ font-weight:bold;
+ padding-bottom:7px;
+}
+.main .right.clearfix .osin .tlRep span:not(.tl){
+ margin:0px 5px;
 }
 .main .right.clearfix .osin .followers,.main .right.clearfix .osin .following{
  background:black;
@@ -60,9 +63,6 @@
 }
 .main .left.clearfix .noggler{
  margin-top:10px;
-}
-.noggler{
- display:none;
 }
 .main .left.clearfix .navigation part{
  font-size:16px;
@@ -77,11 +77,11 @@
 }
 #about .smallbox{
  background:white;
- box-shadow:outset 0px 0px 8px 1px rgba(0, 0, 0, .4);
+ box-shadow:0px 0px 8px 1px rgba(0, 0, 0, .4);
  padding:10px;
  display:inline-block;
  vertical-align:top;
- margin:2px;
+ margin:5px 0px;
  width:235px;
  border-radius:10px;
  border-top-width:5px;
@@ -110,7 +110,48 @@
 #editField{max-width: 130px;min-width: 130px;}
 #ch_hi{
  position:absolute;
- right:-6px;
+ right:0px;
  top:3px;
  padding:5px 15px;
+}
+.noggler#reputation .item{
+ margin:5px;
+}
+.noggler#reputation .item .block{
+ padding:5px;
+}
+.noggler#reputation .rep{
+ background:#CCC;
+ line-height:15px;
+}
+@media screen and (max-width:750px){
+ .main .left.clearfix{
+  width:75%;
+ }
+ .main .right.clearfix{
+  width:22%;
+ }
+ .content .header img, .main .right.clearfix .image img{
+  height:100%;
+  width:100%;
+ }
+}
+@media screen and (max-width:690px){ 
+ .post .left{
+  display:none;
+ }
+ .main .right.clearfix .image{
+  border:0px;
+  margin-top:0px;
+  width: auto;
+  height: auto;
+ }
+}
+@media screen and (max-width:520px){
+ .content{
+  width: 500px;
+ }
+ .content .header{
+  border:0px;
+ }
 }

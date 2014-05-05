@@ -1,4 +1,14 @@
-<?include("inc/config.php");ch();?>
+<?
+include("inc/config.php");
+ch();
+if(!isset($_GET['id']) || $_GET['id']==""){
+ ser();
+}
+if($_SERVER['SCRIPT_NAME']=="/view.php"){/* We don't want view?id= URLs anymore */
+ $To=$_GET['id']=="" ? "":"/{$_GET['id']}";
+ redirect("/view$To", 301); /* 3rd Param is the status code and not the 2nd */
+}
+?>
 <!DOCTYPE html>
 <html><head>
  <meta name="type" value="view"></meta>

@@ -1,13 +1,9 @@
 <?
 function show_cmt($pid){
- global$who, $db;
- $sql=$db->prepare("SELECT cid FROM clikes WHERE uid=?");
- $sql->execute(array($who));
- $ck=array();
+ global $who, $db, $OP;
  $ocnt=$db->prepare("SELECT * FROM cmt WHERE pid=?");
  $ocnt->execute(array($pid));
  $ocnt=$ocnt->rowCount();
- while($r=$sql->fetch()){$ck[]=$r['cid'];}
  if(!isset($_POST['all'])){
   $sql=$db->prepare("SELECT * FROM cmt WHERE pid=? ORDER BY likes DESC LIMIT 2");
  }else{
@@ -26,9 +22,10 @@ function show_cmt($pid){
     $id=$r['id'];
     $uid=$r['uid'];
     $img=get("avatar",$uid);
-    $nm=get("name",$uid,false);
-    $pl=get("plink",$uid,false);
-    $lk=array_search($id,$ck)===false ? "Like":"Unlike";
+    $nm=get("name", $uid, false);
+    $pl=get("plink", $uid, false);
+    $lk=$OP->didLike($id, "cmt")===false ? "Like":"Unlike";
+    $class=strtolower($lk)=="unlike" ? " unlike":"";
     $h.="<div class='comment' id='$id'>";
      $h.="<div class='left'>";
       $h.="<img src='$img' class='pimg'/>";
@@ -42,16 +39,19 @@ function show_cmt($pid){
        }
       $h.="</div>";
       $h.="<div class='cont'>";
-       $h.=$r['cmt'];
+       $h.=filt($r['cmt'], true);
       $h.="</div>";
       $h.="<div class='actions'>";
-       $h.="<div class='like_bar'><a class='cmt like' id='$id'>$lk</a>&nbsp;&nbsp;<span class='count lk' id='$id'>{$r['likes']}</span><a style='margin-left:20px;display: inline-block;vertical-align: bottom;' class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a></div>";
+       $h.="<div class='like_bar'><a class='cmt like$class' id='$id'>$lk</a>";
+        $h.="<span class='count lk' id='$id'>{$r['likes']}</span>";
+        $h.="<a class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a>";
+       $h.="</div>";
       $h.="</div>";
      $h.="</div>";
     $h.="</div>";
    }
    if($ocnt>$sql->rowCount()){
-    $h.="<button class='b-green load_more_comments' id='$pid'>Load More Comments</button>";
+    $h.="<a class='load_more_comments pointer' id='$pid'>Load More Comments</a>";
    }
   }else{
    $h.="<h2>No Comments</h2>No one has posted a comment yet on this post.<br/>Be the first one to comment !";

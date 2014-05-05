@@ -1,6 +1,11 @@
 <?
 include("inc/config.php");
 ch();
+if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want find?q= URLs anymore */
+ $_GET['q']=str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
+ $To=$_GET['q']=="" ? "":"/{$_GET['q']}";
+ redirect("/find$To", 301); /* See redirect() in config.php */
+}
 ?>
 <!DOCTYPE html>
 <html><head>
@@ -9,13 +14,14 @@ ch();
  <?
  include("inc/header.php");
  $_GET['q']=isset($_GET['q']) ? $_GET['q']:"";
+ $_GET['q']=str_replace(array('%5C', '/'), array('%255C', '%252F'), $_GET['q']);
  $q=filt($_GET['q']);
  ?>
  <div class="content">
   <h1>Find People</h1>
-  Here are some of the users of <b>Open</b>. You can search for a specific user using the form below. <b>You wouldn't get any results if you search yourself.</b><cl/>
-  <form method="GET" action="find" style="border-bottom:1px solid black;padding-bottom:5px;">
-   <span>Search :</span><input type="text" name="q" value="<?echo $q;?>" size="35"/>
+  <p>Here are some of the users of <b>Open</b>. You can search for a specific user using the form below. <b>You wouldn't get any results if you search yourself.</b></p><cl/>
+  <form action="/find">
+   <span>Search </span><input type="text" name="q" value="<?echo $q;?>" size="35"/>
   </form>
   <cl/>
   <?
@@ -52,6 +58,7 @@ ch();
     ser("No Person Found !","No Person was found with the name you searched for.");exit;
    }
   }
+  $OR=new ORep();
   while($r=$sql->fetch()){
    $id=$r['id'];
    $name=get("name",$id,false);
@@ -63,22 +70,30 @@ ch();
    $foll=$db->prepare("SELECT COUNT(uid) FROM conn WHERE fid=?");
    $foll->execute(array($id));
    $foll=$foll->fetchColumn();
+   $rep=$OR->getRep($id);
   ?>
-   <div style="padding:5px;border-bottom:1px solid white;margin:0px;">
+  <div class="blocks">
+   <div class="blocks" style="padding:5px;margin:5px 0px;">
     <div style='background:black;width:100px;height:100px;display:inline-block;vertical-align:top;'>
      <a href="<?echo$loc;?>">
       <center><img style='max-width:100px;max-height:100px;' src="<?echo$img;?>"/></center>
      </a>
     </div>
-    <div style="display:inline-block;vertical-align:top;margin-left:5px;">
+    <div class="block" style="margin-left:5px;">
      <div><a href="<?echo$loc;?>"><strong style='font-size:18px;'><?echo$name;?></strong></a></div>
-     <?if($live!=""){?><div field>Lives In <?echo $live;?></div><?}?>
-     <div field>Joined <span class="time"><?echo get("joined",$id);?></span></div>
-     <?if($obirth!=""){?><div field>Born <span class="time"><?echo $birth;?></span></div><?}?>
+     <div field style='font-size:17px;' title="Reputation"><b><?echo$rep['total'];?></b></div>
+     <?if($live!=""){?>
+      <div field>Lives In <?echo $live;?></div>
+     <?}?>
+     <div field>Joined <span class="time"><?echo get("joined", $id);?></span></div>
+     <?if($obirth!=""){?>
+      <div field>Born <span class="time"><?echo $birth;?></span></div>
+     <?}?>
      <div field><strong><?echo$foll;?></strong> Followers</div>
      <?echo foll($id);?>
     </div>
    </div>
+  </div>
   <?
   }
   if($q==''){

@@ -3,8 +3,7 @@
  <div class="msggt">
   <div class="close">x</div>
   <div class="chattop">
-   Chat | 
-   <a id="cwinopen" href="chat?id=">Open Independently</a>
+   Chat | <a id="cwinopen" href="chat/">Full Chat</a>
   </div>
   <?include("inc/chat_rend.php");?>
   <?echo show_chat("gadget");?>
@@ -19,7 +18,7 @@
    </div>
   </div>
   <div class="users">
-   <div style="margin-top: 60px;">
+   <div style="margin-top: 55px;">
     <?
      $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
      $sql->execute(array(":who"=>$who));

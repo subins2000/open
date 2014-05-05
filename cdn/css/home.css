@@ -1,19 +1,15 @@
-.viewpoint.left{
- display:inline-block;
+.viewpoint.block.left{
  width:150px;
- vertical-align:top;
  padding:5px 10px;
  color:white;
 }
-.viewpoint.right{
- display:inline-block;
+.viewpoint.block.right{
  width:515px;
- vertical-align:top;
  border-radius:10px;
  margin-left:5px;
 }
 .post{
- background:rgba(100, 172, 400, .7);
+ background:#92c4ff;
  border-radius:10px;
  padding:10px 10px;
  color:white;
@@ -21,16 +17,14 @@
  position:relative;
  margin: 5px 0px;
 }
-.post:hover{background:rgba(100, 172, 400,1);;}
+.post:hover{
+ background:#64acff;
+}
 .post .left{
- display:inline-block;
  width:50px;
- vertical-align: top;
 }
 .post .right{
- display:inline-block;
  width:400px;
- vertical-align: top;
  padding-left:7px;
 }
 .post .bottom{
@@ -44,7 +38,7 @@
  text-indent: -999em;
  width: 19px;
  height: 15px;
- background-size: 62px;
+ background-size: 60px;
  vertical-align: middle;
 }
 .post .pst.cmt{
@@ -54,7 +48,7 @@
  background-position: -18px 0px;
  margin-top: 10px;
 }
-.post .like_bar,.post .cmt_bar{
+.post .like_bar, .post .cmt_bar{
  margin-left: 10px;
  display:inline-block;
 }
@@ -103,7 +97,6 @@
  cursor:default;
 }
 .comments{
- border-top:1px solid black;
  margin-top:10px;
  padding-top:5px;
  display:block;
@@ -115,7 +108,7 @@
 }
 .comments .cmt_form .textEditor{
  width:235px;
- height:20px;
+ height:30px;
 }
 .comment .left{
  display:inline-block;
@@ -132,7 +125,6 @@
 }
 .comment{
  position:relative;
- border-bottom:1px solid black;
  margin-top:5px;
 }
 .comment .author_cmt_box{
@@ -184,15 +176,41 @@
 .comment .actions{
  padding:0px 10px 6px;
 }
+.comment .actions .reply_cmt{
+ margin-left:10px;
+ display: inline-block;
+ vertical-align: middle;
+ height: 15px;
+}
 .comments .load_more_comments{
  display:block;
- margin:5px auto 0px;
+ margin:3px 5px 0px;
  width:300px;
 }
 .count{color:#E0520A;}
 .post .count{
- margin-left: 8px;
+ margin-left: 5px;
  vertical-align: middle;
  display: inline-block;
- height: 13px;
+ height: 15px;
+}
+@media screen and (max-width: 750px){
+ .viewpoint.block.left{
+  display:none;
+ }
+ .viewpoint.block.right{
+  width: 100%;
+  margin-left:0px;
+ }
+}
+@media screen and (max-width: 420px){
+ .post .left{
+  display:none;
+ }
+ .post .right{
+  width:100%;
+ }
+ .post .right .slink:not(.time){
+  display: none;
+ }
 }

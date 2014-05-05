@@ -8,7 +8,7 @@ function show_not($id){
   $img=get("avatar",$fid);
   $name=get("fname",$fid,false);
   if(preg_match("/\-/", $r['post'])){
-   list($aid,$pid)=explode("-",$r['post']);
+   list($aid, $pid)=explode("-", $r['post']);
   }
   $amsg=$r['ty']=="cmt" ? "Commented on your post":"";
   if($r['ty']=="fol"){
@@ -18,13 +18,13 @@ function show_not($id){
   }elseif($r['ty']=="men"){
    $amsg="Mentioned You.";
   }
-  $alnk=$r['ty']=="cmt" ? "http://open.subinsb.com/view?id=$pid#$aid":"";
+  $alnk=$r['ty']=="cmt" ? "http://open.subinsb.com/view/$pid#$aid":"";
   if($r['ty']=="fol"){
    $alnk=get("plink",$r['fid']);
   }elseif($r['ty']=="msg"){
-   $alnk="http://open.subinsb.com/chat?id=".$r['fid'];
+   $alnk="http://open.subinsb.com/chat/".$r['fid'];
   }elseif($r['ty']=="men"){
-   $alnk="http://open.subinsb.com/view?id=$pid";
+   $alnk="http://open.subinsb.com/view/$pid";
   }
   $iuR=$r['red']==0 ? "nred":"";
   $iuT=$r['red']==0 ? "Unread Notification":"";

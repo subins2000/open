@@ -86,15 +86,10 @@
 .chatgt .close{
  position:absolute;
  right:5px;
- padding:0px 5px 5px;
- background:#AAA;
- color:white;
- cursor:pointer;
 }
 .cusgt{
  margin-bottom:5px;
  padding: 0px 5px 5px;
- border-bottom:1px solid black;
  position: absolute;
  background: white;
  right: 0px;
@@ -109,7 +104,6 @@
  display:inline-block;
  vertical-align:top;
  margin-left:5px;
- font-weight:bold;
  width: 143px;
 }
 .cusgt .otd span{
@@ -120,14 +114,14 @@
 .openugt{
  position:fixed;
  bottom:0px;
- right:30px;
+ right:0px;
  width:100px;
  height:20px;
  text-align:center;
  display:none;
  background:white;
- border:1px solid black;
- border-radius:5px;
+ border-left:1px solid black;
+ border-top:1px solid black;
  z-index:999;
 }
 .msggt .chattop{

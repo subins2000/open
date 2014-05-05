@@ -11,7 +11,7 @@
  background:white;
  overflow-y:auto;
 }
-.chat{
+.content .chat{
  width:440px;
  padding:5px 14px;
  background: #FAB359;
@@ -36,5 +36,11 @@
  .content .chat{display:block;width: auto;padding-bottom: 15px;}
 }
 @media screen and (max-width: 335px){
- .content .chat .chat_form input[type=text], .content .chat .chat_form input[type=submit]{width:93% !important;}
+ .content .chat .chat_form .msgEditor{
+  width:100% !important;
+  display:block;
+ }
+ .content .chat .chat_form input[type=submit]{
+  display:block;
+ }
 }

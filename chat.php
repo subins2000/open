@@ -1,6 +1,10 @@
 <?
 include("inc/config.php");
 ch();
+if($_SERVER['SCRIPT_NAME']=="/chat.php" && isset($_GET['q'])){/* We don't want view?id= URLs anymore */
+ $To=$_GET['id']=="" ? "":"/{$_GET['id']}";
+ redirect("/chat$To", 301); /* 3rd Param is the status code and not the 2nd */
+}
 ?>
 <!DOCTYPE html>
 <html><head>
@@ -8,10 +12,9 @@ ch();
 </head><body>
  <?include("inc/header.php");?>
  <div class="content">
-  <h1>Chat</h1>
   <div class="users">
    <?
-   $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who) ORDER BY since");
+   $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who) ORDER BY `since`");
    $sql->execute(array(":who"=>$who));
    while($r=$sql->fetch()){
     $id=$r['fid'];
@@ -19,7 +22,7 @@ ch();
     $name=get("name",$id,false);
     $img=get("avatar",$id);
     $st=get("status",$id);
-    echo "<a href='chat?id=$id'><div class='user' id='$id'><img height='32' width='32' src='$img'/><span class='status $st'>$st</span><span class='name' title='$name'>$fname</span></div></a>";
+    echo "<a href='/chat/$id'><div class='user' id='$id'><img height='32' width='32' src='$img'/><span class='status $st'>$st</span><span class='name' title='$name'>$fname</span></div></a>";
    }
    ?>
   </div>
@@ -32,9 +35,9 @@ ch();
     $sql->execute(array(":who"=>$who,":fid"=>$gid));
     if($sql->rowCount()==0){
      if($gid==$who){
-      ser("Uh... It's you","Why do you want to chat with yourself ?");
+      echo "<h2>Uh... It's you</h2><p>Why do you want to chat with yourself ?</p>";
      }else{
-      ser("Not Friends","You and $gid are not friends.");
+      echo "<h2>Not Friends</h2><p>You and $gid are not friends.</p>";
      }
     }else{
      include("inc/chat_rend.php");
@@ -45,6 +48,6 @@ ch();
    }
    ?>
   </div>
-  <?if($sql->rowCount()!=0 && $_GET['id']!=""){echo"<br/><cl/>You are Chatting With <a href='".get("plink",$gid)."'>".get("name",$gid,false)."</a>";}?>
+  <?if($sql->rowCount()!=0 && $_GET['id']!=""){echo"<br/><cl/>Chatting With <a href='".get("plink",$gid)."'>".get("name",$gid,false)."</a>";}?>
  </div>
 </body></html>

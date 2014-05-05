@@ -1,16 +1,16 @@
 <header>
- <div class="logo" style="display: inline-block;">
-  <a href='http://open.subinsb.com' style='color:white;'><h1 style="float:left;margin-top:5px;">&nbsp;&nbsp;Open</h1></a>
+ <div class="logo">
+  <a href='http://open.subinsb.com' style='color:white;'><h1 style="float:left;margin: 7px 0px 0px;">&nbsp;&nbsp;Open</h1></a>
  </div>
  <nav>
   <?if($lg){?>
-   <a href="http://open.subinsb.com/home"><button class="b-white home" title="Home">Home</button></a>
-   <a href="http://open.subinsb.com/search"><button class="b-white search" title="Search">Search</button></a>
-   <a href="http://open.subinsb.com/find"><button class="b-white find" title="Find">Find</button></a>
-   <a href="http://open.subinsb.com/chat"><button class="b-white chat" title="Chat">Chat</button></a>
+   <a href="http://open.subinsb.com/home" class="button b-white home lNav" title="Home">Home</a>
+   <a href="http://open.subinsb.com/search" class="button b-white search lNav" title="Search">Search</a>
+   <a href="http://open.subinsb.com/find" class="button b-white find lNav" title="Find">Find</a>
+   <a href="http://open.subinsb.com/chat" class="button b-white chat lNav" title="Chat">Chat</a>
   <?}else{?>
-   <a href="http://open.subinsb.com/login"><button class="b-red">Sign In</button></a>
-   <a href="http://open.subinsb.com/register"><button class="b-blue">Sign Up</button></a>
+   <a href="http://open.subinsb.com/login" class="button b-red">Sign In</a>
+   <a href="http://open.subinsb.com/register" class="button b-blue">Sign Up</a>
   <?}?>
  </nav>
  <?if($lg){?>
@@ -18,8 +18,18 @@
    <button id="name_button" class="b-white" rid="<?echo$who;?>"><?echo$uname;?></button>
    <div id="short_profile" class="c_c">
     <div class="left">
-     <b><?$uname=explode(" ",$uname);echo$uname[0];?></b><br/>
-     <a href="http://open.subinsb.com/profile"><button style="margin-top:20px;">View Profile</button></a>
+     <a href="<?echo get('plink');?>"><b><?$uname=explode(" ", $uname);echo$uname[0];?></b></a><br/>
+     <div style="margin-top:15px;font-size:17px;font-weight:bold;" title="Reputation">
+      <?
+      include realpath(dirname(__FILE__)."/")."/config.php";
+      if(!class_exists("ORep")){
+       require "$sroot/inc/class.rep.php";
+      }
+      $HRep=new ORep();
+      $HRep=$HRep->getRep($who);
+      echo $HRep['total'];
+      ?>
+     </div>
     </div>
     <div class="right">
      <a id="change_picture">Change Picture</a>

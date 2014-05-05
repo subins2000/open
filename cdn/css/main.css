@@ -4,17 +4,18 @@
 [show]{
  display:block !important;
 }
-*{font-family: 'Ubuntu', sans-serif;}
+*{
+ font-family: 'Ubuntu', sans-serif;
+ word-wrap: break-word;
+}
 body{
- background:url(//open.subinsb.com/cdn/img/dot.gif);
+ background: #eee url('//open.subinsb.com/cdn/img/dot.gif') repeat left top;
  margin:0px;
  border:0px;
  padding:0px;
- line-height:100%;
+ line-height:18px;
+ font-size: 14px;
 }
-body.cloud{background:url(//open.subinsb.com/cdn/img/clouds);background-size:25em;background-color:rgba(100, 172, 400,.8);}
-body.dark{background:-webkit-linear-gradient(#AAA,#EEE);background:-moz-linear-gradient(left,#AAA,#EEE);background-size:800em;}
-body.india{background:-webkit-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));background:-moz-linear-gradient(rgba(241, 158, 32, 0.7),white,rgba(65, 199, 53, .8));background-size:80em;background-repeat-y:no-repeat;}
 header{
  padding:0px 100px;
  position:fixed;
@@ -29,6 +30,7 @@ header{
  box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
  text-align:center;
 }
+header 
 /*Global*/
 h1,h2,h3,h4,h5{
  margin:10px 0px 15px 0px;
@@ -37,8 +39,23 @@ h1,h2,h3,h4,h5{
 .pointer{
  cursor:pointer;
 }
+[clear],cl{
+ margin-top:5px;
+ display:block;
+}
+a[href]{
+ text-decoration:none;
+ color:inherit;
+}
+a[href]:hover{
+ /*color:#E0520A;*/
+ text-decoration: underline;
+}
+p{
+ margin:5px 0px;
+}
 /*End Global*/
-.logo{
+header .logo{
  display: inline-block;
  position: relative;
  width: 130px;
@@ -51,20 +68,23 @@ header nav{
  vertical-align:middle;
  width: 45%;
 }
+header nav a.button:not(.lNav){
+ width:100px;
+}
 header .curuserinfo, header .notifications{
  display:inline-block;
  vertical-align:middle;
  position: relative;
 }
-header nav .home,header nav .search,header nav .find, header nav .chat{
- background:url(//open.subinsb.com/cdn/img/sprites/menu) white !important;
+header nav .lNav{
+ background:url(//open.subinsb.com/cdn/img/sprites/menu.png) white !important;
  background-repeat:no-repeat;
  background-position: 1.5px 0px !important;
  border-radius:10px;
  height:29px;
- width:20px;
  padding: 0px 18px;
  text-indent:-999em;
+ margin: 1px;
 }
 header nav .search{
  background-position: 0px -29px !important;
@@ -76,23 +96,18 @@ header nav .chat{
  background-position: -65px 0px !important;
 }
 .content{
- margin:0px auto 20px auto;
+ margin: 0px auto 0px auto;
  width: auto;
  position: relative;
  padding: 60px 14px 15px 14px;
  width: 700px;
  line-height: 18px;
- background: #E8EBED;
- background-clip: padding-box;
- box-shadow: 0 0 3px rgb(102, 102, 102);
- border-bottom-left-radius:5px;
- border-bottom-right-radius:5px;
  font-size: 14px;
 }
 /*Buttons*/
-button, input[type=submit], input[type=button]{
+button, input[type=submit], input[type=button], .button{
  margin:0px 5px 0px 5px;
- padding:5px 30px;
+ padding:5px 10px;
  cursor:pointer;
  border: 1px solid rgb(48, 121, 237);
  background-color: rgb(77, 144, 254);
@@ -103,30 +118,29 @@ button, input[type=submit], input[type=button]{
  background-image: -o-linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
  background-image: linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
  outline:none;
- color:white;
- font-weight:bold;
+ color:#fff !important;
  font-size:13px;
  display:inline-block;
  vertical-align: middle;
+ text-decoration:none !important;
+ text-align:center;
 }
-button:hover, input[type=submit]:hover, input[type=button]:hover{
+button:hover, input[type=submit]:hover, input[type=button]:hover, .button:hover{
  background: rgb(255, 255, 255);
  box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
 }
-button:active,input[type=submit]:active,input[type=button]:active{
+button:active,input[type=submit]:active,input[type=button]:active, .button:active{
  position:relative;
  top:1px;
 }
 input[type=text],input[type=number],textarea,input[type=password],.textEditor{
- border:1px solid black;
- border-radius:5px;
+ font-size: 14px;
+ border: 1px rgb(223, 223, 223) solid;
+ border-radius: 3px;
  outline:none;
  padding:4px 5px;
  min-width:190px;
  font-family:ubuntu;
- box-shadow:inset 0 1px 0 rgba(0, 0, 0, 0.08),inset 0 1px 2px rgba(255, 255, 255, 0.75);
- border:1px solid rgba(204, 204, 204, .7);
- background: rgba(255, 255, 255, .7);
  vertical-align: middle;
 }
 input[type=text]:hover,input[type=number]:hover,textarea:hover,input[type=password]:hover,.textEditor:hover{
@@ -145,18 +159,6 @@ input[disabled=disabled]{
 input[disabled=disabled]:hover{
  background:#AAA;
 }
-[clear],cl{
- margin-top:5px;
- display:block;
-}
-a[href]{
- text-decoration:none;
- color:inherit;
-}
-a[href]:hover{
- /*color:#E0520A;*/
- text-decoration: underline;
-}
 /*Notifications*/
 header .notifications #nfn_button{
  padding: 5px;
@@ -173,7 +175,6 @@ header .notifications #nfn{
  width: 230px;
  border: 1px solid black;
  border-radius: .6em;
- box-shadow: 0 7px 60px -6px black;
  z-index: 10;
  text-align: left;
  display:none;
@@ -193,7 +194,6 @@ header .notifications #nfn{
 }
 .notifications .nfsi{
  font-size:13px;
- border-bottom:1px solid black;
  cursor:pointer;
  margin-top:5px;
 }
@@ -218,7 +218,6 @@ header .notifications #nfn{
  width: 270px;
  border: 1px solid black;
  border-radius: .6em;
- box-shadow: 0 7px 60px -6px black;
  z-index: 10;
  text-align: left;
  display:none;
@@ -298,7 +297,6 @@ header .notifications #nfn{
  background:-moz-linear-gradient(center top, #fe1a00 5%, #ce0100 100% ) !important;
  background-color:#fe1a00;
  font-size:38px;
- font-weight:bold;
  height:30px;
  line-height:20px;
  width:30px;
@@ -320,7 +318,7 @@ header .notifications #nfn{
 /*Custom Buttons*/
 .b-white{
  background:white !important;
- color:#000;
+ color:#000 !important;
  border:0px solid black;
  background-image:none !important;
 }
@@ -332,18 +330,25 @@ header .notifications #nfn{
 }
 .b-red{
  background:rgb(231, 38, 54) !important;
- color:white;
+ color:white !important;
  border:1px solid rgb(231, 38, 54);
  background-image:none !important;
 }
+.close{
+ padding:0px 5px 4px 5px;
+ background:#AAA;
+ color:white;
+ cursor:pointer;
+ line-height: 15px;
+ font-size:15px;
+}
 /*Dialog*/
 #dialog{
- position:absolute;
+ position:fixed;
  top:0px;
  left:0px;
  right:0px;
  bottom:0px;
- background:rgba(0,0,0,.6);
  z-index:2013;
 }
 #dialog #content{
@@ -355,34 +360,83 @@ header .notifications #nfn{
  background:white;
  position: absolute;
  border-radius:10px;
- border:10px solid #AAA;
+ border:5px solid #AAA;
 }
 #dialog #content iframe{
  border:0px;
 }
 #dialog #close{
- position:absolute;
- right:0px;
- top: -43px;
- font-size:20px;
- background:#CCC;
- padding:8px;
- cursor:pointer;
+ position: absolute;
+ right: 1px;
+ top: 1px;
+ font-size: 20px;
+ background: #CCC;
+ padding: 8px;
+ cursor: pointer;
+ line-height: 15px;
+}
+/* ViewPoints */
+.blocks .block{
+ display:inline-block;
+ vertical-align:top;
 }
 /*Responsive Design*/
-@media screen and (max-width: 778px){
- .content{width:auto;margin-left:10px;margin-right:10px;}
- header{padding:0px;}
- header nav{width:auto;}
- header nav div{right: 0px;}
- .viewpoint{width:auto !important;display:block !important;}
- .post_form .right{width:auto !important;}
- .post .left{width: 13% !important;}
- .post .right{width:80% !important;}
+@media screen and (max-width: 750px){
+ .content{
+  width:auto;
+  margin-left:10px;
+  margin-right:10px;
+ }
+ header{
+  padding:0px;
+ }
+ header nav{
+  width:auto;
+ }
+ header nav div{
+  right: 0px;
+ }
+ .post_form .right{
+  width:87% !important;
+ }
 }
-@media screen and (max-width: 515px){
- header{height:auto;padding: 0px 0px 10px;position: relative;}
- .content{padding-top: 10px;margin-top: -10px;}
- .post .left{width: 20% !important;}
- .post .right{width:76% !important;}
+@media screen and (max-width: 640px){
+ .content{
+  margin-left:0px;
+  margin-right:0px;
+ }
+ .post_form .right{
+  width:100% !important;
+ }
+ .post_form .left{
+  display:none;
+ }
+ .post_form textarea{
+  width:95% !important;
+ }
+}
+@media screen and (max-width: 520px){
+ header{
+  height:auto;
+  padding: 5px 0px;
+  position: relative;
+  text-align: right;
+ }
+ header .logo{
+  display:none;
+ }
+ .content{
+  padding: 10px 3px;
+ }
+ .post .right{
+  width:85% !important;
+ }
+}
+@media screen and (max-width: 320px){
+ header .lNav{
+  display: block;
+ }
+ .usersgt, .openugt{
+  display:none;
+ }
 }

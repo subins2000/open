@@ -8,13 +8,12 @@
   <h1>Manage Account</h1>
   <p>Here, in this page you can manage your account such as <b>Password Changing</b></p><cl/>
   <center style="margin:0px auto;display:table;">
-   <a href="ChangePassword"><button>Change Password</button><cl/></a>
-   <a href="ChangeTheme"><button class="b-green">Change Theme</button><cl/></a>
-   <a href="Connections"><button class="b-red">Manage Connections</button><cl/></a>
-   <a href="Linked"><button class="b-white">Manage Linked Accounts</button><cl/></a>
-   <a href="Notify"><button>Notifications</button><cl/></a>
+   <div><a href="ChangePassword" class="button">Change Password</a></div><cl/>
+   <div><a href="Notify" class="button b-green">Notifications</a></div><cl/>
+   <div><a href="Connections" class="button b-red">Manage Connections</a></div><cl/>
+   <div><a href="Linked" class="button b-white">Manage Linked Accounts</a></div><cl/>
   </center>
-  <style>.content center button{width: 100%;}</style>
+  <style>.content center .button{width: 100%;}</style>
   <cl/>
   <p>Did you ever Found A bug / Had a suggestion ? Please report/suggest at <b>Bug Reporter Page</b>. The feedback you give, helps us to make this site more powerful, great and awesome.<br/> Are you a <b>Web Developer</b> / a <b>Web Designer</b> ? If yes, you can join our <b>Open Source Community</b>. We would love to have developers like you.</p>
   <?

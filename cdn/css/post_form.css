@@ -16,14 +16,10 @@
  width:200px;
 }
 .post_form .right{
- display:inline-block;
  width: 410px;
- vertical-align:top;
 }
 .post_form .left{
- display:inline-block;
  width:70px;
- background:
 }
 .post_form #privacy{
  position: absolute;
@@ -46,7 +42,7 @@
  padding: 5px !important;
  background: white !important;
  min-width: 30px !important;
- color:black;
+ color:black !important;
  vertical-align:top;
 }
 .post_form #cam{
@@ -70,14 +66,8 @@
  position:absolute;
  top:0px;
  right:10px;
- cursor:pointer;
- font-size:15px;
 }
 .post_form .close{
  position:absolute;
  right:5px;
- padding:0px 5px 4px;
- background:#AAA;
- color:white;
- cursor:pointer;
 }

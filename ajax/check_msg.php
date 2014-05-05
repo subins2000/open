@@ -2,20 +2,20 @@
 include("config.php");
 include("../inc/chat_rend.php");
 ch();
-$to=$_GET['to'];
-$lid=isset($_GET['lid']) ? $_GET['lid']:"";
+$to=$_POST['to'];
+$lid=isset($_POST['lid']) ? $_POST['lid']:"";
 $lup=false;
 $isFri=false;
 if($to!="gadget"){
- $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
- $sql->execute(array(":who"=>$who,":fid"=>$to));
+ $sql=$db->prepare("SELECT `fid` FROM `conn` WHERE `uid`=:who AND `fid`=:fid AND `uid` IN (SELECT fid FROM conn WHERE `uid`=:fid)");
+ $sql->execute(array(":who" => $who, ":fid"=>$to));
  if($sql->rowCount()==0){
   ser();
  }
 }
 if($lid!="" && $to!="gadget"){
- $sql=$db->prepare("SELECT id,red FROM chat WHERE (id > :ex OR id=:ex) AND (uid=:fid AND fid=:uid) ORDER BY id ASC LIMIT 1");
- $sql->execute(array(":ex"=>$lid,":uid"=>$who,":fid"=>$to));
+ $sql=$db->prepare("SELECT `id`, `red` FROM `chat` WHERE (`id` > :ex OR `id`=:ex) AND (`uid`=:fid AND `fid`=:uid) ORDER BY id ASC LIMIT 1");
+ $sql->execute(array(":ex" => $lid, ":uid" => $who, ":fid"=>$to));
  if($sql->rowCount()!=0){
   while($r=$sql->fetch()){
    if($r['id']!=$lid){
@@ -58,6 +58,34 @@ if($lid!="" && $to!="gadget"){
 <?
   }
  }
+}elseif(isset($_POST['all']) && $_POST['all']=="true" && $to!="gadget"){
+ $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
+ $sql->execute(array(":who"=>$who, ":fid"=>$to));
+ if($sql->rowCount()==0){
+  ser();
+ }
+ $ht=rendFilt(show_chat($to,true));
+?>
+ $("#<?echo$to;?>.msgs").html("<?echo$ht;?>");
+ mcTop();
+ t=$(".users #<?echo$to;?>.user");
+ t.css({background:"white",color:"black"});
+ t.attr("title","Unread Messages");
+<?
+}
+if($to!=""){
+ $sql=$db->prepare("SELECT `uid` FROM `chat` WHERE `fid`=:uid AND `red`='0' ORDER BY `id` LIMIT 1");
+ $sql->execute(array(":uid"=>$who));
+ if($sql->rowCount()!=0){
+  $id=$sql->fetchColumn();
+?>
+  t=$(".users #<?echo$id;?>.user");
+  t.css({background:"red",color:"white"});
+  t.attr("title","Unread Messages");
+<?
+ }
+}
+if($_P){
  $userstatus=array();
  $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
  $sql->execute(array(":who"=>$who));
@@ -74,32 +102,6 @@ if($lid!="" && $to!="gadget"){
   }
  });
 <?
-}elseif(isset($_GET['all']) && $_GET['all']=="true"){
- $sql=$db->prepare("SELECT fid FROM conn WHERE uid=:who AND fid=:fid AND uid IN (SELECT fid FROM conn WHERE uid=:fid)");
- $sql->execute(array(":who"=>$who,":fid"=>$to));
- if($sql->rowCount()==0){
-  ser();
- }
- $ht=rendFilt(show_chat($to,true));
-?>
- $("#<?echo$to;?>.msgs").html("<?echo$ht;?>");
- mcTop();
- t=$(".users #<?echo$to;?>.user");
- t.css({background:"white",color:"black"});
- t.attr("title","Unread Messages");
-<?
-}
-if($to!=""){
- $sql=$db->prepare("SELECT uid FROM chat WHERE fid=:uid AND red='0' ORDER BY id LIMIT 1");
- $sql->execute(array(":uid"=>$who));
- if($sql->rowCount()!=0){
-  $id=$sql->fetchColumn();
-?>
-  t=$(".users #<?echo$id;?>.user");
-  t.css({background:"red",color:"white"});
-  t.attr("title","Unread Messages");
-<?
- }
 }else{
  ser();
 }

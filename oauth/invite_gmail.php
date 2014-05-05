@@ -41,6 +41,6 @@ if($success){
    $sql->execute(array($m, "$sn Sent You An Invitation", $msg));
   }
  }
- header("Location: http://open.subinsb.com/invite?gmail=success");
+ redirect("http://open.subinsb.com/invite?gmail=success");
 }
 ?>

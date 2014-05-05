@@ -1,43 +1,37 @@
-ErrorDocument 403 /comps/all_errors_page
-ErrorDocument 404 /comps/all_errors_page
-ErrorDocument 405 /comps/all_errors_page
-ErrorDocument 408 /comps/all_errors_page
-ErrorDocument 410 /comps/all_errors_page
-ErrorDocument 411 /comps/all_errors_page
-ErrorDocument 412 /comps/all_errors_page
-ErrorDocument 413 /comps/all_errors_page
-ErrorDocument 414 /comps/all_errors_page
-ErrorDocument 415 /comps/all_errors_page
-ErrorDocument 500 /comps/all_errors_page
-ErrorDocument 501 /comps/all_errors_page
-ErrorDocument 502 /comps/all_errors_page
-ErrorDocument 503 /comps/all_errors_page
-ErrorDocument 506 /comps/all_errors_page
-DirectoryIndex index.php /comps/all_errors_page
-<Files ^(*.php|*.phps)>
-    order deny,allow
-    deny from all
-</Files>
 <IfModule mod_rewrite.c>
  RewriteEngine On
  RewriteRule ^(blog|wp-admin)($|/) - [L]
  RewriteCond %{REQUEST_FILENAME} !-d
  RewriteCond %{REQUEST_FILENAME}\.php -f
  RewriteRule .* $0.php
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteCond %{REQUEST_FILENAME}\.png -f
- RewriteRule .* $0.png
  RewriteRule ^index\.php$ - [L]
  RewriteCond %{REQUEST_FILENAME} !-f
  RewriteCond %{REQUEST_FILENAME} !-d
- RewriteRule (.+) ./index.php?request=$1 [L]
+ RewriteRule ^(.*)$ ./index.php?request=$1 [QSA,L]
  # browser requests PHP
  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.php
  RewriteRule ^/?(.*)\.php$ /$1 [L,R=301]
- # check to see if the request is for a PHP file:
- RewriteCond %{REQUEST_FILENAME}\.php -f
- RewriteRule ^/?(.*)$ /$1.php [L]
 </IfModule>
+ErrorDocument 403 /inc/all_errors_page.php
+ErrorDocument 404 /inc/all_errors_page.php
+ErrorDocument 405 /inc/all_errors_page.php
+ErrorDocument 408 /inc/all_errors_page.php
+ErrorDocument 410 /inc/all_errors_page.php
+ErrorDocument 411 /inc/all_errors_page.php
+ErrorDocument 412 /inc/all_errors_page.php
+ErrorDocument 413 /inc/all_errors_page.php
+ErrorDocument 414 /inc/all_errors_page.php
+ErrorDocument 415 /inc/all_errors_page.php
+ErrorDocument 500 /inc/all_errors_page.php
+ErrorDocument 501 /inc/all_errors_page.php
+ErrorDocument 502 /inc/all_errors_page.php
+ErrorDocument 503 /inc/all_errors_page.php
+ErrorDocument 506 /inc/all_errors_page.php
+DirectoryIndex index.php /inc/all_errors_page.php
+<Files ^(*.php|*.phps)>
+    order deny,allow
+    deny from all
+</Files>
 #Gzip - compress text, html, javascript, css, xml
 <IfModule mod_deflate.c>
  AddOutputFilterByType DEFLATE text/plain

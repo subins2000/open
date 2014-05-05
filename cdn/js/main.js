@@ -1,21 +1,67 @@
 localStorage['onFormSion']=0;
 ht="http://open.subinsb.com";
-setInterval(function(){
- $.getScript(ht+"/ajax/check?user="+$("#name_button").attr("rid")+"&fid="+$(".post:first").attr("id")+"&url="+encodeURIComponent(window.location.href)+"&type="+$("meta[name=type]").attr("value"));
-},15000);
+window.clog=function(e){ // For Debugging
+ return console.log(e);
+};
+window.sChecks={
+ "init" : function(extra, isInterval){
+  var data={
+   "u"   : $("#name_button").attr("rid"),
+   "p"   : $(".post:first").attr("id"),
+   "cu"  : encodeURIComponent(window.location.href),
+   "pt"  : $("meta[name=type]").attr("value")
+  };
+  if(typeof isInterval == "undefined" && typeof sChecks.nc=="undefined"){
+   sChecks.nc=sChecks.normalCheck();
+  }else if(typeof isInterval != "undefined" && isInterval!="normal"){
+   window.clearInterval(sChecks.nc);
+  }
+  wholeJSON=$.extend(sChecks.removeUD(extra), sChecks.removeUD(data));
+  var intSt=sChecks.interval(wholeJSON, function(){});
+ },
+ "interval" : function(wholeJSON, c){
+  $.post(ht+"/ajax/check", wholeJSON, function(){c();}, "script").error(function(){
+   c();
+  });   
+ },
+ "normalCheck" : function(){
+  return setInterval(function(){
+   sChecks.init({}, "normal");
+  }, 15000);
+ },
+ "removeUD" : function(wholeJSON){
+  if(typeof wholeJSON=="object" && wholeJSON.length!=0){
+   $.each(wholeJSON, function(i, elem){
+    if(typeof wholeJSON[i]=="undefined"){
+     wholeJSON[i]="undefined";
+    }else if(typeof wholeJSON[i]=="object"){
+     $.each(wholeJSON[i], function(i2, elem2){
+      if(typeof wholeJSON[i][i2]=="undefined"){
+       wholeJSON[i][i2]="undefined";
+      }
+     });
+    }
+   });
+  }
+  return wholeJSON;
+ }
+}
+if(typeof $("#name_button").attr("rid")!="undefined"){
+ sChecks.init();
+}
 window.filt=function($msg,$f){
  $msg=$msg.replace(/\</g,'&lt;');
  $msg=$msg.replace(/\>/g,'&gt;');
  $msg=$msg.replace(/\//g,'\/');
- if($f===true){
-  $msg=$msg.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
-  $msg=$msg.replace(/"/g,'\"');
-  $msg=$msg.replace(/\*\/(.*?)\/\*/g,'<i>$1</i>');
-  $msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="http://open.subinsb.com/url?url=$1">$1</a>');
+ /*if($f===true){
+  *///$msg=$msg.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+  /*$msg=$msg.replace(/"/g,'\"');
+  *///$msg=$msg.replace(/\*\/(.*?)\/\*/g,'<i>$1</i>');
+  /*$msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="http://open.subinsb.com/url?url=$1">$1</a>');
   $msg=$msg.replace("\n","<br/>");
   $msg=$msg.replace(RegExp('(\#[^ ]+)','g'),'<a href="http://open.subinsb.com/search?q=$1">$1</a>');
   $msg=$msg.replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23");
- }
+ }*/
  return $msg;
 };
 window.msg=function(m,t){
@@ -25,7 +71,7 @@ window.msg=function(m,t){
  whb=t=='e' ? "red":"rgb(100, 194, 53)";
  if(t=="m"){whb="rgb(218, 208, 101)";m+="....";}
  if($("#notify_panel").length==0){
-  $("body").append("<div id='notify_panel' style='padding:20px 15px;position:fixed;left:50px;bottom:100px;border:2px solid black;border-radius:10px;color:white;width:150px;display:none;cursor:pointer;z-index:2014;' title='Click To Close Dialog'></div>");
+  $("body").append("<div id='notify_panel' style='padding:5px 20px;position:fixed;left:50px;bottom:100px;border:1px solid black;border-radius:5px;color:white;display:none;cursor:pointer;z-index:2014;font-size: 14px;max-width:150px;' title='Click To Close Dialog'></div>");
  }
  $("#notify_panel").css("background",whb);
  $("#notify_panel").html(filt(m));
@@ -39,28 +85,36 @@ window.msg=function(m,t){
   $(this).fadeOut("2000");
  });
 };
-window.dialog=function(u){
+window.dialog=function(u, t){
  if($("#dialog").length==0){
   $("body").append("<div id='dialog'><div id='content'></div></div>");
   $("#dialog #close").live("click",function(){
    $("#dialog").hide();
-   $("body").css("overflow","auto");
+  });
+  $("#dialog").live("click", function(e){
+   if(!$("#dialog #content").is(e.target) && !$("#dialog #content").has(e.target)){
+    $("#dialog").hide();
+   }
+  });
+  $(window).live("keyup",function(e){
+   clog(e);
+   if(e.keyCode==27){
+    $("#dialog").hide();
+   }
   });
  }
+ $(".content").trigger("mouseup");// Close all dialogs with .c_c
  $("#dialog").show();
- $("body").css("overflow","hidden");
- msg("Loading","m");
- if($("#dialog #content iframe").attr("src")!=u){
-  $("#dialog #content").html("<iframe src='"+u+"' onload='msg(\"Loaded\")' height='100%' width='100%'></iframe><div id='close'>X</div>");
- }else{
-  msg("Loaded");
- }
- $(window).live("keyup",function(e){
-  if(e.keyCode==27){
-   $("#dialog").hide();
-   $("body").css("overflow","auto");
+ if(typeof t=="undefined"){
+  msg("Loading","m");
+  if($("#dialog #content iframe").attr("src")!=u){
+   $("#dialog #content").html("<iframe src='"+u+"' onload='msg(\"Loaded\")' height='100%' width='100%'></iframe><div id='close'>X</div>");
+  }else{
+   msg("Loaded");
   }
- });
+ }else{
+  $("#dialog #content").html("<div style='margin:5px;'>"+u+"</div><div id='close'>X</div>");
+ }
 };
 $("#name_button").live("click",function(){
  $("#short_profile").toggle();
@@ -89,8 +143,8 @@ window.post=function(u,dt,s,e,w,t){
   msg(d.err,"e");
  });
 };
-$(".ajax_form").live('submit',function(event){
- event.preventDefault();
+$(".ajax_form").live('submit',function(e){
+ e.preventDefault();
  t=$(this);
  if($("#aj_res").length==0){$("body").append("<div id='aj_res' hide></div>");}
  d={succ:"",err:""};

@@ -15,10 +15,8 @@ if(!isset($fs)){
  $fs="main,$fs";
 }
 echo "<script src='http://open.subinsb.com/cdn/js/jquery.js'></script>";
-echo "<script>".file_get_contents("$sroot/cdn/js/stats.js")."</script>";
-echo "<script async='async' src='http://open.subinsb.com/cdn/js/get?f=$fs'></script>";
-$theme=get("theme");
-if($theme!=""){
- echo'<script>$(document).ready(function(){$("body").addClass("'.$theme.'");});</script>';
+if(isset($sroot) && isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!="/me/ResetPassword" && $_SERVER['HTTP_HOST']!="open.subinsb.com"){
+ echo "<script>".file_get_contents("$sroot/cdn/js/stats.js")."</script>";
 }
+echo "<script async='async' src='http://open.subinsb.com/cdn/js/get?f=$fs'></script>";
 ?>

@@ -1,13 +1,49 @@
 <?
 include("inc/config.php");
-$ceb=isset($_GET['request']) ? $_GET['request']:"";
-if(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!="" && preg_match("/[0-9]/",$ceb)){
- $_GET['id']=$ceb;
- include("profile.php");
-}elseif(!file_exists("$ceb.php") && !file_exists("$ceb") && $ceb!=""){
+$ceb=isset($_GET['request']) ? $_GET['request'] : "";
+$uP=explode("/", $ceb);
+if(count($uP)>1){
+ list($uP1, $uP2)=$uP;
+ $uP2=substr($uP2, -4, 4)==".php" ? substr_replace($uP2, "", -4, 4):$uP2;
+}else{
+ list($uP1)=$uP;
+}
+if($ceb!="" && !file_exists("$ceb.php") && !file_exists("$ceb")){
+ if(preg_match("/[0-9]/", $uP1) || $uP1=="profile"){
+  $_GET['id']=$uP1=="profile" ? "":$uP1;
+  if(isset($uP2) && ($uP2=="about" || $uP2=="reputation" || $uP2=="feed")){
+   $_GET['part']=$uP2;
+   include("profile.php");
+  }elseif(!isset($uP2)){
+   include("profile.php");
+  }else{
+   ser();
+  }
+ }elseif($uP1=="view"){
+  if(isset($uP2)){
+   $_GET['id']=$uP2;
+  }
+  $_SERVER['PHP_SELF']="/view.php";/* A Fake One (2 May) */
+  include("view.php");
+ }elseif($uP1=="chat"){
+  if(isset($uP2)){
+   $_GET['id']=$uP2;
+  }
+  $_SERVER['PHP_SELF']="/chat.php";/* A Fake One (2 May) */
+  include("chat.php");
+ }elseif($uP1=="find"){
+  if(isset($uP2)){
+   $_GET['q']=$uP2;
+  }
+  $_SERVER['PHP_SELF']="/find.php";/* Only PHP_SELF is fake. Others are the original */
+  include("find.php");
+ }else{
+  ser();
+ }
+}elseif(!file_exists("$ceb") && $ceb!=""){
  ser();
 }else{
-ch();
+ ch();
 ?>
 <!DOCTYPE html>
 <html><head>
@@ -17,7 +53,7 @@ ch();
  <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
   <div class="icontent">
    <div class="left">
-    <img src="img/logo"/>
+    <img src="cdn/img/logo.png"/>
    </div>
    <div class="right">
     <h2>Let the Doors Open</h2>
@@ -29,8 +65,8 @@ ch();
  </div>
  <div style="width:100%;background:white;color:white;text-align:center;">
   <div class="icontent">
-   <a href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/cdn/img/fb_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
-   <a href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(//open.subinsb.com/cdn/img/g+_icon) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
+   <a href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(//open.subinsb.com/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
+   <a href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(//open.subinsb.com/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
    <div style="font-size: 30px;margin-top: 20px;height: 25px;">
     <?
     $sql=$db->prepare("SELECT COUNT(seen) FROM users");
@@ -53,14 +89,14 @@ ch();
     </p>
    </div>
    <div class="right">
-    <img src="img/ex_code2" width="160"/>
+    <img src="cdn/img/ex_code2.png" width="160"/>
    </div>
   </div>
  </div>
  <div style="width:100%;background:white;">
   <div class="icontent">
    <div class="left">
-    <img src="img/ex_post" width="120"/>
+    <img src="cdn/img/ex_post.png" width="120"/>
    </div>
    <div class="right">
     <h2>What's the Benefit ?</h2>
@@ -73,7 +109,7 @@ ch();
  <div style="width:100%;background:rgba(65, 199, 53, .8);color:white;">
   <div class="icontent">
    <div class="left">
-    <img src="img/ex_code" width="165"/>
+    <img src="cdn/img/ex_code.png" width="165"/>
    </div>
    <div class="right">
     <h2>Features</h2>
@@ -101,7 +137,7 @@ ch();
     </p>
    </div>
    <div class="right">
-    <img src="img/ex_code3" height="179"/>
+    <img src="cdn/img/ex_code3.png" height="179"/>
    </div>
   </div>
  </div>
@@ -122,7 +158,6 @@ ch();
    line-height:20px;
   }
   .icontent .right{
-   border-left:1px solid black;
    padding-left:10px;
   }
  </style>

@@ -60,30 +60,37 @@ $(".reply_cmt").live("click",function(){
 });
 function load_more_posts(){
  var ID=$(".post:last").attr("id");
+ var mVal=$("meta[name=type]").attr("value");
  t=$(".load_more_posts");
  t.find(".normal").hide();
  t.find(".loader").show();
- if(window.location.pathname=="/view"){
+ if(mVal=="view"){
   return false;
- }
- if($("meta[name=type]").length!=0){
-  var aer=$("meta[name=oid]").attr("value");
- }
- if($("meta[name=type]").length!=0){
-  var pd={uid:aer,id:ID};
-  if($(".noggler#feed").is(":hidden")){
-   return false;
-  }
- }else if(window.location.pathname.match("search")!=null){
-  var query=window.location.href.split('q=')[1];
-  if(query==undefined){query="";}
-  if(query.match("&")){query=query.split('&')[0];}
-  var pd={id:ID,q:query};
  }else{
-  var pd={id:ID};
+  if(mVal=="profile"){
+   var aer=$("meta[name=oid]").attr("value");
+   var data={uid:aer,id:ID};
+   if($(".noggler#feed").is(":hidden")){
+    return false;
+   }
+  }else if(mVal=="search"){
+   var query=window.location.href.split('q=')[1];
+   splW=window.location.pathname.split("/");
+   if(typeof query=="undefined"){
+    query="";
+   }else if(query.match("&")){
+    query=query.split('&')[0];
+   }
+   if(splW.length>2){
+    query=window.location.pathname.split("/")[2];
+   }
+   var data={"id":ID, "q":query};
+  }else{
+   var data={"id":ID};
+  }
  }
  if(localStorage['requested']==0){
-  post('load_posts',pd,"Successfuly loaded Posts","Loading More Posts failed","Loading");
+  post('load_posts', data, "Loaded Posts", "Loading Posts failed", "Loading");
   localStorage['requested']=1;
  }
 }
@@ -105,7 +112,7 @@ $(".load_more_comments").live("click",function(){
  var ID=$(this).attr("id");
  var pd={id:ID};
  if(localStorage['crequested']==0){
-  post('load_cmts',pd,"Successfuly loaded Comments","Loading More Comments failed","Loading");
+  post('load_cmts', pd, "Loaded Comments", "Loading Comments failed", "Loading");
   localStorage['crequested']=1;
  }
 });
@@ -117,12 +124,12 @@ $(".textEditor").smention(ht+"/ajax/get_users",{
 }).live("keyup",function(){
  if($(this).data("realInnerH")==null){
   $(this).data("realInnerH", $(this).innerHeight());
-  console.log($(this).data("realInnerH"));
  }
  $(this).innerHeight($(this)[0].scrollHeight);
-}).parents("form").live("submit", function(){
- console.log($(this).find(".textEditor").data("realInnerH"));
- $(this).find(".textEditor").innerHeight($(this).find(".textEditor").data("realInnerH"));
+}).parent("form").live("submit", function(e){
+ t=$(e.target);
+ t.find(".textEditor").innerHeight(t.find(".textEditor").data("realInnerH"));
+ t[0].reset();
 });
 tURL($(".post .cont"));
 tURL($(".comment .cont"));

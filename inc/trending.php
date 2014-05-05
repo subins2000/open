@@ -21,7 +21,7 @@ if($_SERVER['PHP_SELF']=="/search.php"){
    echo '<div style="padding:1px;">';
    $wdot=strlen($r['title'])>=14 ? "....":"";
    $sp_t=str_split($r['title'],14);
-   echo '<a href="../search?q='.urlencode($r['title']).'" title="'.$r['title'].'">'.$sp_t[0]."$wdot</a>";
+   echo '<a href="../search?q='.rawurlencode($r['title']).'" title="'.$r['title'].'">'.$sp_t[0]."$wdot</a>";
    echo '<div style="margin-top:5px;"></div>';
    echo "</div>";
   }

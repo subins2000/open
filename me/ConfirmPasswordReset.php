@@ -1,6 +1,6 @@
 <?
 include('../inc/config.php');
-$id=urldecode($_GET['id']);
+$id=isset($_GET['id']) ? urldecode($_GET['id']):"";
 $sql=$db->prepare("SELECT * FROM verify WHERE code=?");
 $sql->execute(array($id));
 if($sql->rowCount()==0){
@@ -27,20 +27,21 @@ while($r=$sql->fetch()){
     </table>
     <span style="color:red;">
      <?
-     if($_POST['new']!='' && $_POST['new2']!=''){
-      if($_POST['new']!=$_POST['new2']){
-       ser("Error","Passwords don't match");
+     if(isset($_POST['new']) && isset($_POST['new2'])){
+      if($_POST['new']!='' && $_POST['new2']!=''){
+       if($_POST['new']!=$_POST['new2']){
+        ser("Error","Passwords don't match");
+       }
+       if(preg_match('/.{6,100}/',$_POST['new'])==false){
+        ser("Error","Password must contain atleast 6 characters.");
+       }
+       $rsalt=$OP->randStr('25');
+       $site_salt="a_salt_key";
+       $salted_hash = hash('sha256',$_POST['new'].$site_salt.$rsalt);
+       $sql=$db->prepare("UPDATE users SET password=?,psalt=? WHERE id=?;DELETE FROM verify WHERE code=?");
+       $sql->execute(array($salted_hash,$rsalt,$fwho,$id));
+       sss("Password Successfully changed","Your Password has been changed. Sign In Wih your new password.");
       }
-      if(preg_match('/.{6,100}/',$_POST['new'])==false){
-       ser("Error","Password must contain atleast 6 characters.");
-      }
-      function ras($length){$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
-      $rsalt=ras('25');
-      $site_salt="a_salt_key";
-      $salted_hash = hash('sha256',$_POST['new'].$site_salt.$rsalt);
-      $sql=$db->prepare("UPDATE users SET password=?,psalt=? WHERE id=?;DELETE FROM verify WHERE code=?");
-      $sql->execute(array($salted_hash,$rsalt,$fwho,$id));
-      sss("Password Successfully changed","Your Password has been changed. Sign In Wih your new password.");
      }
      ?>
     </span>

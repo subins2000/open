@@ -3,28 +3,35 @@ include("config.php");
 include("../inc/cmt_rend.php");
 ch();
 $id=$_POST['id'];
-$msg=filt($_POST['cmt'],true);
-if($_P && is_numeric($id) && preg_match("/[^\s]/",$msg)){
- $sql=$db->prepare("SELECT id,uid FROM posts WHERE id=?");
+$msg=$_POST['cmt'];
+if($_P && is_numeric($id)){
+ if(!preg_match("/[^\s]/", $msg)){
+  jer("Comment Can't be blank");
+ }
+ $sql=$db->prepare("SELECT uid FROM posts WHERE id=?");
  $sql->execute(array($id));
- $prr=$sql->fetch();
- $prr=$prr['uid'];
+ $owner=$sql->fetchColumn();
  if($sql->rowCount()!=0){
-  $sql=$db->prepare("INSERT INTO cmt(uid,pid,cmt,posted) VALUES(?,?,?,NOW())");
-  $sql->execute(array($who,$id,$msg));
-  $sql=$db->prepare("UPDATE posts SET cmts=cmts+1 WHERE id=?");
-  $sql->execute(array($id));
-  include("../inc/notify.php");
-  notify("comment",$msg,$id,$prr,$who);
+  filt($msg, true); /* Just For @mention notifications */
+  $sql=$db->prepare("INSERT INTO cmt (uid, pid, cmt, posted) VALUES(:uid, :id, :msg, NOW());UPDATE posts SET cmts=cmts+1 WHERE id=:id");
+  $sql->execute(array(
+   ":uid" => $who,
+   ":id"  => $id,
+   ":msg" => $msg
+  ));
+  notify("comment", $msg, $id, $owner, $who);/* We should notify the owner of post */
+  sm_notify($id, "comment");
   if($_POST['clod']=='mom'){
    $_POST['all']=1;
   }
   $ht=rendFilt(show_cmt($id));
 ?>
-$("#<?echo$id;?>.comments").replaceWith("<?echo$ht;?>");$("#<?echo$id;?>.comments").show();$("#<?echo$id;?>.ck.count").text(parseFloat($("#<?echo$id;?>.ck.count").text())+1);
+$("#<?echo$id;?>.comments").replaceWith("<?echo$ht;?>");
+$("#<?echo$id;?>.comments").show();
+$("#<?echo$id;?>.ck.count").text(parseFloat($("#<?echo$id;?>.ck.count").text())+1);
 <?
  }else{
-  ser();
+  jer("I can't find the post you wished to comment on.");
  }
 }else{
  ser();

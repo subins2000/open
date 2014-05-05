@@ -8,18 +8,28 @@ window.mcTop=function(){
 };
 mcTop();
 function doMchecks(isG){
- if($("input[name=to]").length!=0){
-  to=$("input[name=to]").val();
-  if(to!="" && isG!="gadget"){
-   setInterval(function(){
-    if(localStorage['onFormSion']==0){
-     $.getScript(ht+"/ajax/check_msg?to="+to+"&lid="+$("#"+to+".msgs .msg:last").attr("id"));
-    }
-   },10000);
-  }
+ to=$("input[name=to]").length!=0 ? $("input[name=to]").val():"gadget";
+ if(isG!="gadget"){
+  setInterval(function(){
+   if(localStorage['onFormSion']==0){
+    sChecks.init({
+     "fl"  : "mC",
+     "mC"  : {
+      "to"  : to,
+      "lid" : $("#"+to+".msgs .msg:last").attr("id")
+     }
+    }, "yes"); // It's an interval
+   }
+  }, 7000);
  }
  if(isG=="gadget"){
-  $.getScript(ht+"/ajax/check_msg?to="+to+"&all=true");
+  sChecks.init({
+   "fl"  : "mC",
+   "mC"  : {
+    "to"  : to,
+    "all" : "true"
+   }
+  });
  }
 }
 $(".msgEditor").smention(ht+"/ajax/get_users",{
@@ -36,7 +46,7 @@ $(".usersgt .user").live("click",function(){
  id=$(this)[0].id;
  $(".msggt").show();
  $(".msggt input[name=to]").val(id);
- $(".msggt #cwinopen").attr("href", "chat?id="+id);
+ $(".msggt #cwinopen").attr("href", "chat/"+id);
  $(".chatgt .msgs, .chat_form").attr("id",id);
  if(isFmCh!=id){
   $("#"+id+".msgs").html("<h3>Initiating Chat...</h3>Every famous sites in the world was made by Nerds. A bot nerd is working for you right now to get the messages.");

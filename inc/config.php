@@ -15,6 +15,13 @@ if(!isset($OP)){
 $lg   = $OP->lg;
 $who  = $OP->uid;
 $whod = $OP->sid;
+if(!function_exists("redirect")){
+ function redirect($u, $s){
+  header("Location: $u", true, $s);
+  exit;
+  return true;
+ }
+}
 if(!function_exists("ser")){
  function ser($t="", $d=""){
   if($t==''){
@@ -62,11 +69,11 @@ if(!function_exists("ch")){
   $no_login_required_ps=array("/index","/");
   if(!$lg || $t===true){
    if(array_search($_SERVER['REQUEST_URI'],$no_login_required_ps)==false){
-    header("Location: http://open.subinsb.com/login?c=//open.subinsb.com".$_SERVER['REQUEST_URI']);
+    redirect("http://open.subinsb.com/login?c=//open.subinsb.com".$_SERVER['REQUEST_URI']);
     exit;
    }
   }elseif(array_search($_SERVER['REQUEST_URI'],$no_login_required_ps)!=false){
-   header("Location: //open.subinsb.com/home");
+   redirect("//open.subinsb.com/home");
    exit;
   }
  }
@@ -92,29 +99,28 @@ if(!function_exists("ch_url")){
 }
 if(!function_exists("smention")){
  $mUsers=array();
- function smention($s,$t){
+ function smention($s, $t){
+  global $db, $mUsers;
   $userid=$t[1];
-  $nxs=strpos($s,"@$userid");
-  $nxs=strlen("@$userid")+$nxs;
-  $nxs=substr($s,$nxs,1);
-  global$db, $mUsers;
-  $sql=$db->prepare("SELECT username,name FROM users WHERE id=?");
+  $nxs=strpos($s, "@$userid");
+  $nxs=strlen("@$userid") + $nxs;
+  $nxs=substr($s, $nxs, 1);
+  $sql=$db->prepare("SELECT name FROM users WHERE id=?");
   $sql->execute(array($userid));
   if($sql->rowCount()==0){
    return"@$userid".$nxs;
   }else{
    while($r=$sql->fetch()){
     $name=$r['name'];
-    $mail=$r['username'];
    }
    $html="<a href='http://open.subinsb.com/$userid'>@$name</a>".$nxs;
    $mUsers[$userid]=1;
-   return$html;
+   return $html;
   }
  }
 }
 if(!function_exists("filt")){
- function filt($s,$r=false){
+ function filt($s, $r=false){
   $s=htmlspecialchars($s);
   if($r==true){
    $s=preg_replace("/\*\*(.*?)\*\*/",'<b>$1</b>',$s);
@@ -122,64 +128,18 @@ if(!function_exists("filt")){
    $s=preg_replace_callback('@((www|http://|https://)(.*?)(\s|\z|\n)+)@',"ch_url",$s);
    $s=preg_replace('@(\#[^ ]+)@','<a href="http://open.subinsb.com/search?q=\1">\1</a>',$s);
    $s=str_replace("http://open.subinsb.com/search?q=#","http://open.subinsb.com/search?q=%23",$s);
-   $s=preg_replace_callback("/\@(.*?)(\s|\z|[^0-9])/", function($t) use ($s){return smention($s,$t);},$s);
+   $s=preg_replace_callback("/\@(.*?)(\s|\z|[^0-9])/", function($t) use ($s){
+    return smention($s, $t);
+   },$s);
   }
   return $s;
  }
 }
 if(!function_exists("get")){
  $load_cache=array();
- function get($k,$u=null,$j=true){
-  global$db;global$who;global$load_cache;
-  if(is_null($u)){$u=$who;}
-  if(!array_key_exists($u,$load_cache)){
-   $sql=$db->prepare("SELECT * FROM users WHERE id=?");
-   $sql->execute(array($u));
-   $data=$sql->fetch();
-   $uvno=json_decode($data['udata'],true);
-   $uvno['ploc']="http://open.subinsb.com/".$u;
-   $data['udata']=json_encode($uvno);
-   $load_cache[$u]=$data;
-  }else{
-   $data=$load_cache[$u];
-  }
-  if($k=='img'){
-   $data=json_decode($data['udata'],true);
-   $data=isset($data["img"]) ? filt($data["img"]):"";
-   $data=$data=='' ? "http://open.subinsb.com/cdn/img/profile_pics/om":$data;
-   return$data;
-  }elseif($k=='plink'){
-   return"http://open.subinsb.com/$u";
-  }elseif($k=="status"){
-   $data=$data['seen'];
-   if($data < date("Y-m-d H:i:s",strtotime('-20 seconds', time()))){
-    return "off";
-   }else{
-    return "on";
-   }
-  }elseif($k=="avatar"){
-   $img=get("img",$u);
-   if(preg_match("/profile\_pics\/om/",$img) || $img==""){
-    $img="http://open.subinsb.com/cdn/img/profile_pics/om";
-   }elseif(!preg_match("/imgur/",$img) && !preg_match("/akamaihd/",$img) && !preg_match("/google/",$img) && $img!=""){
-    $img="http://open.subinsb.com/data/{$u}/img/avatar";
-   }
-   return $img;
-  }elseif($k=="fname"){
-   $data=filt($data["name"]);
-   $data=explode(" ",$data);
-   return $data[0];
-  }elseif($j==true){
-   $data=json_decode($data['udata'],true);
-   if(isset($data[$k])){
-    $data=is_array($data[$k]) ? $data[$k]:filt($data[$k]);
-   }else{
-    $data="";
-   }
-   return$data;
-  }else{
-   return filt($data[$k]);
-  }
+ function get($k, $u="", $j=true){
+  global $OP;
+  return $OP->get($k, $u, $j);
  }
 }
 if(!function_exists("save")){
@@ -212,11 +172,7 @@ if($lg && $al_coll_dt==false){
 }
 /*Global Variables*/
 $_P=count($_POST)>0 ? true:false;
-if($usr=="root"){
- $sroot=$_SERVER['DOCUMENT_ROOT']; /* If Localhost*/
-}else{
- $sroot=getenv('OPENSHIFT_REPO_DIR')."php";
-}
+$sroot=realpath(dirname(str_replace("inc", "", __FILE__))."/");
 /*Other Functions*/
 if(!function_exists("foll")){
  function foll($id){
@@ -239,7 +195,7 @@ if(!function_exists("send_mail")){
   $subject.=" - Open";
   $lufp="$sroot/inc/lastused.txt";
   $lastu=file_get_contents($lufp);
-  if($lastu=="hotmail"){
+  if($lastu=="5" || $lastu=="0"){
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
    curl_setopt($ch, CURLOPT_USERPWD, 'mailgun_key');
@@ -254,20 +210,27 @@ if(!function_exists("send_mail")){
    );
    $result = curl_exec($ch);
    curl_close($ch);
-   $lwu="mg";
+   $lwu=$lastu=="5" ? 0:$lastu++;
   }else{
-   $pass="password";
+   $macc=array(
+    1 => array("noreply@open.subinsb.com", "password"),
+    2 => array("noreply2@open.subinsb.com", "password"),
+    3 => array("noreply3@open.subinsb.com", "password"),
+    4 => array("noreply4@open.subinsb.com", "password")
+   );
+   $user  = $macc[$lastu][0];
+   $pass  = $macc[$lastu][1];
    $smail = new PHPMailer();
    $smail->IsSMTP();
    $smail->CharSet    = 'UTF-8';
    $smail->Host       = "smtp.live.com";
    $smail->SMTPAuth   = true;
    $smail->Port       = 587;
-   $smail->Username   = "noreply@open.subinsb.com";
+   $smail->Username   = $user;
    $smail->Password   = $pass;
    $smail->SMTPSecure = 'tls';
    $smail->From       = 'noreply@open.subinsb.com';
-   $smail->FromName   = 'Open Automated Mail';
+   $smail->FromName   = 'Open Auto Mail';
    $smail->isHTML(true);
    $smail->Subject    = $subject;
    $smail->SMTPDebug  = false;
@@ -275,20 +238,20 @@ if(!function_exists("send_mail")){
    $smail->Body       = $msg;
    $smail->addAddress($mail);
    $result=$smail->send();
-   $lwu="hotmail";
+   $lwu=$lastu++;
   }
-  file_put_contents($lufp,$lwu);
+  file_put_contents($lufp, $lwu);
   return $result;
  }
 }
-include("notify.php");
+require "notify.php";
 if(!function_exists("sm_notify")){
- function sm_notify($pid){
+ function sm_notify($pid, $type="post"){
   global $mUsers, $who;
   if(count($mUsers)!=0){  
    foreach($mUsers as $k=>$v){
     if($k!=$who){
-     notify("mention","post",$pid,$k,$who);
+     notify("mention", $type, $pid, $k, $who);
     }
    }
   }

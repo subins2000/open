@@ -2,7 +2,7 @@
 function show_chat($fid,$single=false){
  global$who, $db;
  if($single===false || $single===true){
-  $sql=$db->prepare("SELECT * FROM chat WHERE (uid=? AND fid=?) OR (uid=? AND fid=?) ORDER BY id ASC");
+  $sql=$db->prepare("SELECT * FROM (SELECT * FROM `chat` WHERE (`uid`=? AND `fid`=?) OR (`uid`=? AND `fid`=?) ORDER BY id DESC LIMIT 15) sub ORDER BY `id` ASC");
   $sql->execute(array($who,$fid,$fid,$who));
  }elseif($single!==true){
   $sql=$db->prepare("SELECT * FROM chat WHERE id=?");
@@ -23,7 +23,7 @@ function show_chat($fid,$single=false){
     $snm=$snm[0];
     $h.="<div class='msg' id='$id'>";
      if($uid==$who){
-      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 1px 6px 8px;padding-top:1px;'>";
+      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 1px 6px 8px;'>";
        $h.="<div class='up'>";
         $h.="<a target='_blank' href='$pl'>$snm</a>";
         $h.="<span class='time'>{$r['posted']}</span>";
@@ -58,10 +58,10 @@ function show_chat($fid,$single=false){
   $h.="</div>";
  }
  if($single===false){
-  $h.="<form action='ajax/msg' method='POST' class='ajax_form chat_form' id='$fid' succ='Sent Successfully' err='Sending Failed. Try again.' while='Sending'>";
+  $h.="<form action='ajax/msg' method='POST' class='ajax_form chat_form blocks' id='$fid' succ='Sent Successfully' err='Sending Failed. Try again.' while='Sending'>";
    $h.="<input type='hidden' name='to' value='$fid'/>";
-   $h.="<textarea type='text' class='msgEditor' name='msg' style='width:70%;min-width: 0px;'></textarea>";
-   $h.="<input type='submit' name='submit' style='width:18%;padding: 5px;min-width: 0px;' value='Send'/>";
+   $h.="<textarea type='text' class='msgEditor block' name='msg' style='width:70%;min-width: 0px;'></textarea>";
+   $h.="<input type='submit' name='submit' class='block' value='Send'/>";
   $h.="</form>";
  }
  $sql=$db->prepare("UPDATE chat SET red='1' WHERE uid=? AND fid=? AND red='0'");

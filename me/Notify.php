@@ -46,7 +46,7 @@ ch();
       <td>When Someone Messages You</td><td><input type="checkbox" <?checkOrNot("msg");?>/></td>
      </tr>
      <tr>
-      <td>When Someone Mentiones You in Posts/Comments</td><td><input type="checkbox" <?checkOrNot("men");?>/></td>
+      <td>When Someone Mentions You in Posts/Comments</td><td><input type="checkbox" <?checkOrNot("men");?>/></td>
      </tr>
     </tbody>
    </table>
