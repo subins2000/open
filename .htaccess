@@ -1,3 +1,4 @@
+AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
  RewriteEngine On
  RewriteRule ^(blog|wp-admin)($|/) - [L]
