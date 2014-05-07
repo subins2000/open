@@ -191,11 +191,11 @@ if(!function_exists("send_mail")){
  include("$sroot/inc/mailer/class.phpmailer.php");
  function send_mail($mail,$subject,$msg) {
   global $sroot;
-  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$msg.'</div><br/>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a>';
+  $msg='<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div><h2>'.$subject.'</h2><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$msg.'</div><p>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a><br/><a href="http://open.subinsb.com/me/Notify">Manage Mail Notifications</a></p>';
   $subject.=" - Open";
-  $lufp="$sroot/inc/lastused.txt";
-  $lastu=file_get_contents($lufp);
-  if($lastu=="5" || $lastu=="0"){
+  $status_file="$sroot/inc/lastused.txt";
+  $acc_status=file_get_contents($status_file);
+  if($acc_status=="5" || $acc_status=="0"){
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
    curl_setopt($ch, CURLOPT_USERPWD, 'mailgun_key');
@@ -210,7 +210,7 @@ if(!function_exists("send_mail")){
    );
    $result = curl_exec($ch);
    curl_close($ch);
-   $lwu=$lastu=="5" ? 0:$lastu++;
+   $new_status=$acc_status=="5" ? 0:$acc_status+1;
   }else{
    $macc=array(
     1 => array("noreply@open.subinsb.com", "password"),
@@ -218,8 +218,8 @@ if(!function_exists("send_mail")){
     3 => array("noreply3@open.subinsb.com", "password"),
     4 => array("noreply4@open.subinsb.com", "password")
    );
-   $user  = $macc[$lastu][0];
-   $pass  = $macc[$lastu][1];
+   $user  = $macc[$acc_status][0];
+   $pass  = $macc[$acc_status][1];
    $smail = new PHPMailer();
    $smail->IsSMTP();
    $smail->CharSet    = 'UTF-8';
@@ -238,9 +238,11 @@ if(!function_exists("send_mail")){
    $smail->Body       = $msg;
    $smail->addAddress($mail);
    $result=$smail->send();
-   $lwu=$lastu++;
+   $new_status=$acc_status+1;
   }
-  file_put_contents($lufp, $lwu);
+  if(isset($new_status)){
+   file_put_contents($status_file, $new_status);
+  }
   return $result;
  }
 }
