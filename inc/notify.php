@@ -90,7 +90,7 @@ if(!function_exists("notify")){
   }
   $settings=get("NfS",$to);
   $action=str_replace("mention", "men", str_replace("follow", "fol", str_replace("comment", "cmt", $action)));
-  if(isset($settings[$action])){
+  if(is_array($settings) && isset($settings[$action])){
    $dontSend=1;
   }
   if($dontSend==0){
