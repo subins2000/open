@@ -48,7 +48,7 @@ class ORep extends Open{
   return $cmtlRep;
  }
  public function getTopPosts(){
-  $sql=$this->dbh->prepare("SELECT `id`, `likes` FROM `posts` WHERE `uid`=? ORDER BY `likes` DESC");
+  $sql=$this->dbh->prepare("SELECT `id`, `likes` FROM `posts` WHERE `uid`=? ORDER BY `likes` DESC LIMIT 5");
   $sql->execute(array($this->cU));
   $r=array();
   foreach($sql->fetchAll(PDO::FETCH_ASSOC) as $k=>$v){
@@ -62,7 +62,7 @@ class ORep extends Open{
   return $r;
  }
  public function getTopComments(){
-  $sql=$this->dbh->prepare("SELECT `id`, `likes`, `cmt` FROM `cmt` WHERE `uid`=? ORDER BY `likes` DESC");
+  $sql=$this->dbh->prepare("SELECT `id`, `likes`, `cmt`, `pid` FROM `cmt` WHERE `uid`=? ORDER BY `likes` DESC LIMIT 5");
   $sql->execute(array($this->cU));
   $r=array();
   foreach($sql->fetchAll(PDO::FETCH_ASSOC) as $k=>$v){
@@ -70,6 +70,7 @@ class ORep extends Open{
     $r[$k]=array(
      "id"  => $v['id'],
      "cmt" => $v['cmt'],
+     "pid" => $v['pid'],
      "rep" => $v['likes'] * $this->rep['cmt']
     );
    }

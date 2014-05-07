@@ -155,7 +155,7 @@ $Rep=$RP->getRep($id);
        ?>
         <div class="blocks item">
          <div class="block rep"><?echo$r['rep'];?></div>
-         <a class="block" href="http://open.subinsb.com/view/<?echo$r['id'];?>">
+         <a class="block" href="http://open.subinsb.com/view/<?echo$r['pid']."#".$r['id'];?>">
           <?
           $c=$r['cmt'];
           if(strlen($c) > 10){
