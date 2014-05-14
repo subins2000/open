@@ -14,7 +14,7 @@ if(!isset($fs)){
 }else{
  $fs="main,$fs";
 }
-echo "<script src='http://open.subinsb.com/cdn/js/jquery.js'></script>";
+echo "<script async='async' src='http://open.subinsb.com/cdn/js/jquery.js'></script>";
 if(isset($sroot) && isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!="/me/ResetPassword"){
  echo "<script>".file_get_contents("$sroot/cdn/js/stats.js")."</script>";
 }
