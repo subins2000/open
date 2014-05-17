@@ -12,21 +12,36 @@ Run On Localhost
 ====
 If you want to test Open on your Localhost server, you should do the following steps :
 
-1) Download The Git
+1) Install Git by Running the following commands
 
-2) Place the Git folder "open" in /var/www (Linux). The entire files will be now @ /var/www/open
+      sudo apt-get update
 
-3) Using Replacing Softwares like regexxer(http://regexxer.sourceforge.net/), replace the text "open.subinsb.com" with "localhost/open" on the /var/www/open directory
+      sudo apt-get install git
 
-4) Create a MySQL database named "open"
+2) CD to the Apache directory by running
+      
+      cd /var/www/
+      
+      in apache 2.5 and above /var/www/html
+      
+3) Now run 
+      
+      git clone https://github.com/subins2000/open.git open
+    
+  now open 's files will be in the /open directory
+      
 
-5) Execute The SQL Code : http://pastebin.com/uVNucXHp
+4) Using Replacing Softwares like regexxer(http://regexxer.sourceforge.net/), replace the text "open.subinsb.com" with "localhost/open" on the /var/www/open directory
 
-6) Replace $dbname, $host, $port, $usr, $pass values with Database credentials.
+5) Create a MySQL database named "open"
 
-7) On inc/config.php file make sure that the $sroot variable value is correct.
+6) Execute The SQL Code : http://pastebin.com/uVNucXHp
 
-8) Go To http://localhost/open to see Open live in action
+7) Replace $dbname, $host, $port, $usr, $pass values with Database credentials.
+
+8) On inc/config.php file make sure that the $sroot variable value is correct.
+
+9) Go To http://localhost/open to see Open live in action
 
 Libraries used In Open
 ====
