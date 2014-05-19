@@ -168,7 +168,8 @@ header .notifications #nfn{
  position:absolute;
  top:35px;
  right:5px;
- background: #FAB359;
+ background: white;
+ color:black;
  padding:10px;
  padding: 0 13px;
  height: 300px;

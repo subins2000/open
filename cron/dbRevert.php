@@ -1,4 +1,5 @@
 <?
+/* This file was used to revert Datas in Database which is no longer used. Preserved for history purposes - 19 May 2014 */
 include("../inc/config.php");
 function toBack($t){
  $t=htmlspecialchars_decode($t);

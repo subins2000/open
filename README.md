@@ -7,7 +7,7 @@ If you need help, documentation and other info about Open, please see our blog :
 
 Note that the blog folder is not included in source code. The blog is ran using Wordpress.
 
-The folder "cron_minute_job" contains the CRON job files. The files in it are ran every minute.
+The folder "cron" contains the CRON job files. Open the .php file in "cron" folder for more details.
 Run On Localhost
 ====
 Here is a simple tutorial on how to run Open on a Linux Apache Web Server.
@@ -28,7 +28,7 @@ Here is a simple tutorial on how to run Open on a Linux Apache Web Server.
     
    now open's files will be in the /var/www/open directory
 
-4) Using Replacing Softwares like regexxer(http://regexxer.sourceforge.net/), replace the string "open.subinsb.com" with "localhost/open" on the /var/www/open directory or /var/www/html directory
+4) Using Replacing Softwares like regexxer(http://regexxer.sourceforge.net/), replace the string "open.subinsb.com" with "localhost/open" on the /var/www/open directory or /var/www/html directory. Also, there might be URL instances like "open\.subinsb\.com" in certain files which won't be covered with this replacing. An example is cdn/js/main.js file on window.tURL() function.
 
 5) Create a MySQL database named "open"
 
