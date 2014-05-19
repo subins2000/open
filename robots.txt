@@ -2,11 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /ajax
 Disallow: /inc
-Disallow: /css
+Disallow: /cdn
 Disallow: /data/add
 Disallow: /data/config
 Disallow: /data/handle
-Disallow: /js
 Disallow: /me/ConfirmPasswordReset
 Disallow: /me/recaptchalib
 Disallow: /oauth/LICENSE
