@@ -1,18 +1,32 @@
 AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
  RewriteEngine On
+ 
+ # access files without .php extension except for wordpress blog
  RewriteRule ^(blog|wp-admin)($|/) - [L]
  RewriteCond %{REQUEST_FILENAME} !-d
  RewriteCond %{REQUEST_FILENAME}\.php -f
  RewriteRule .* $0.php
+ 
+ # all requests pass through index.php first
  RewriteRule ^index\.php$ - [L]
  RewriteCond %{REQUEST_FILENAME} !-f
  RewriteCond %{REQUEST_FILENAME} !-d
  RewriteRule ^(.*)$ ./index.php?request=$1 [QSA,L]
- # browser requests PHP
+ 
+ # redirect .php pages to non pages
  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.php
  RewriteRule ^/?(.*)\.php$ /$1 [L,R=301]
+ 
+ # display Error page when source/index.php is requested
+ RewriteRule ^(source/cdn)($|/) - [L]
+ RewriteCond %{THE_REQUEST} !-d
+ RewriteCond %{THE_REQUEST} !-f
+ RewriteRule ^source/(.*?)$ /inc/all_errors_page.php [QSA,L]
 </IfModule>
+
+# All Error Documents should be a single file
+
 ErrorDocument 403 /inc/all_errors_page.php
 ErrorDocument 404 /inc/all_errors_page.php
 ErrorDocument 405 /inc/all_errors_page.php
@@ -28,11 +42,10 @@ ErrorDocument 501 /inc/all_errors_page.php
 ErrorDocument 502 /inc/all_errors_page.php
 ErrorDocument 503 /inc/all_errors_page.php
 ErrorDocument 506 /inc/all_errors_page.php
+
+# If Directory is requested, give index.php of it if there is one, else give the error document page
 DirectoryIndex index.php /inc/all_errors_page.php
-<Files ^(*.php|*.phps)>
-    order deny,allow
-    deny from all
-</Files>
+
 #Gzip - compress text, html, javascript, css, xml
 <IfModule mod_deflate.c>
  AddOutputFilterByType DEFLATE text/plain
@@ -45,6 +58,7 @@ DirectoryIndex index.php /inc/all_errors_page.php
  AddOutputFilterByType DEFLATE application/javascript
  AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
+
 #End Gzip
 <ifModule mod_gzip.c>
  mod_gzip_on Yes

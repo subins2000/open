@@ -485,7 +485,7 @@ class PHPMailer {
  * @param string $name
  * @return boolean
  */
-  public function SetFrom($address, $name = '',$auto=1) {
+  public function SetFrom($address, $name = '', $auto=1) {
     $address = trim($address);
     $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
     if (!self::ValidateAddress($address)) {
@@ -564,8 +564,8 @@ class PHPMailer {
 
       // digitally sign with DKIM if enabled
       if ($this->DKIM_domain && $this->DKIM_private) {
-        $header_dkim = $this->DKIM_Add($header,$this->Subject,$body);
-        $header = str_replace("\r\n","\n",$header_dkim) . $header;
+        $header_dkim = $this->DKIM_Add($header, $this->Subject, $body);
+        $header = str_replace("\r\n", "\n", $header_dkim) . $header;
       }
 
       // Choose the mailer and send through it
@@ -612,7 +612,7 @@ class PHPMailer {
         $result = pclose($mail);
         // implement call back function if it exists
         $isSent = ($result == 0) ? 1 : 0;
-        $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
+        $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
         if($result != 0) {
           throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
         }
@@ -626,7 +626,7 @@ class PHPMailer {
       $result = pclose($mail);
       // implement call back function if it exists
       $isSent = ($result == 0) ? 1 : 0;
-      $this->doCallback($isSent,$this->to,$this->cc,$this->bcc,$this->Subject,$body);
+      $this->doCallback($isSent, $this->to, $this->cc, $this->bcc, $this->Subject, $body);
       if($result != 0) {
         throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
       }
@@ -657,13 +657,13 @@ class PHPMailer {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
-          $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
+          $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
         }
       } else {
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
         // implement call back function if it exists
         $isSent = ($rt == 1) ? 1 : 0;
-        $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
+        $this->doCallback($isSent, $to, $this->cc, $this->bcc, $this->Subject, $body);
       }
     } else {
       if ($this->SingleTo === true && count($toArr) > 1) {
@@ -671,13 +671,13 @@ class PHPMailer {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
-          $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
+          $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
         }
       } else {
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header);
         // implement call back function if it exists
         $isSent = ($rt == 1) ? 1 : 0;
-        $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
+        $this->doCallback($isSent, $to, $this->cc, $this->bcc, $this->Subject, $body);
       }
     }
     if (isset($old_from)) {
@@ -716,11 +716,11 @@ class PHPMailer {
         $bad_rcpt[] = $to[0];
         // implement call back function if it exists
         $isSent = 0;
-        $this->doCallback($isSent,$to[0],'','',$this->Subject,$body);
+        $this->doCallback($isSent, $to[0],'','', $this->Subject, $body);
       } else {
         // implement call back function if it exists
         $isSent = 1;
-        $this->doCallback($isSent,$to[0],'','',$this->Subject,$body);
+        $this->doCallback($isSent, $to[0],'','', $this->Subject, $body);
       }
     }
     foreach($this->cc as $cc) {
@@ -728,11 +728,11 @@ class PHPMailer {
         $bad_rcpt[] = $cc[0];
         // implement call back function if it exists
         $isSent = 0;
-        $this->doCallback($isSent,'',$cc[0],'',$this->Subject,$body);
+        $this->doCallback($isSent,'', $cc[0],'', $this->Subject, $body);
       } else {
         // implement call back function if it exists
         $isSent = 1;
-        $this->doCallback($isSent,'',$cc[0],'',$this->Subject,$body);
+        $this->doCallback($isSent,'', $cc[0],'', $this->Subject, $body);
       }
     }
     foreach($this->bcc as $bcc) {
@@ -740,11 +740,11 @@ class PHPMailer {
         $bad_rcpt[] = $bcc[0];
         // implement call back function if it exists
         $isSent = 0;
-        $this->doCallback($isSent,'','',$bcc[0],$this->Subject,$body);
+        $this->doCallback($isSent,'','', $bcc[0], $this->Subject, $body);
       } else {
         // implement call back function if it exists
         $isSent = 1;
-        $this->doCallback($isSent,'','',$bcc[0],$this->Subject,$body);
+        $this->doCallback($isSent,'','', $bcc[0], $this->Subject, $body);
       }
     }
 
@@ -1125,7 +1125,7 @@ class PHPMailer {
     }
 
     if($this->MessageID != '') {
-      $result .= $this->HeaderLine('Message-ID',$this->MessageID);
+      $result .= $this->HeaderLine('Message-ID', $this->MessageID);
     } else {
       $result .= sprintf("Message-ID: <%s@%s>%s", $uniq_id, $this->ServerHostname(), $this->LE);
     }
@@ -2005,7 +2005,7 @@ class PHPMailer {
     if(isset($images[2])) {
       foreach($images[2] as $i => $url) {
         // do not change urls for absolute images (thanks to corvuscorax)
-        if (!preg_match('#^[A-z]+://#',$url)) {
+        if (!preg_match('#^[A-z]+://#', $url)) {
           $filename = basename($url);
           $directory = dirname($url);
           ($directory == '.')?$directory='':'';
@@ -2014,7 +2014,7 @@ class PHPMailer {
           $mimeType  = self::_mime_types($ext);
           if ( strlen($basedir) > 1 && substr($basedir,-1) != '/') { $basedir .= '/'; }
           if ( strlen($directory) > 1 && substr($directory,-1) != '/') { $directory .= '/'; }
-          if ( $this->AddEmbeddedImage($basedir.$directory.$filename, md5($filename), $filename, 'base64',$mimeType) ) {
+          if ( $this->AddEmbeddedImage($basedir.$directory.$filename, md5($filename), $filename, 'base64', $mimeType) ) {
             $message = preg_replace("/".$images[1][$i]."=\"".preg_quote($url, '/')."\"/Ui", $images[1][$i]."=\"".$cid."\"", $message);
           }
         }
@@ -2022,7 +2022,7 @@ class PHPMailer {
     }
     $this->IsHTML(true);
     $this->Body = $message;
-    $textMsg = trim(strip_tags(preg_replace('/<(head|title|style|script)[^>]*>.*?<\/\\1>/s','',$message)));
+    $textMsg = trim(strip_tags(preg_replace('/<(head|title|style|script)[^>]*>.*?<\/\\1>/s','', $message)));
     if (!empty($textMsg) && empty($this->AltBody)) {
       $this->AltBody = html_entity_decode($textMsg);
     }
@@ -2199,7 +2199,7 @@ class PHPMailer {
       if ( ((0x21 <= $ord) && ($ord <= 0x3A)) || $ord == 0x3C || ((0x3E <= $ord) && ($ord <= 0x7E)) ) {
         $line.=$txt[$i];
       } else {
-        $line.="=".sprintf("%02X",$ord);
+        $line.="=".sprintf("%02X", $ord);
       }
     }
     return $line;
@@ -2214,7 +2214,7 @@ class PHPMailer {
   public function DKIM_Sign($s) {
     $privKeyStr = file_get_contents($this->DKIM_private);
     if ($this->DKIM_passphrase!='') {
-      $privKey = openssl_pkey_get_private($privKeyStr,$this->DKIM_passphrase);
+      $privKey = openssl_pkey_get_private($privKeyStr, $this->DKIM_passphrase);
     } else {
       $privKey = $privKeyStr;
     }
@@ -2230,15 +2230,15 @@ class PHPMailer {
    * @param string $s Header
    */
   public function DKIM_HeaderC($s) {
-    $s=preg_replace("/\r\n\s+/"," ",$s);
-    $lines=explode("\r\n",$s);
+    $s=preg_replace("/\r\n\s+/", " ", $s);
+    $lines=explode("\r\n", $s);
     foreach ($lines as $key=>$line) {
-      list($heading,$value)=explode(":",$line,2);
+      list($heading, $value)=explode(":", $line,2);
       $heading=strtolower($heading);
-      $value=preg_replace("/\s+/"," ",$value) ; // Compress useless spaces
+      $value=preg_replace("/\s+/", " ", $value) ; // Compress useless spaces
       $lines[$key]=$heading.":".trim($value) ; // Don't forget to remove WSP around the value
     }
-    $s=implode("\r\n",$lines);
+    $s=implode("\r\n", $lines);
     return $s;
   }
 
@@ -2251,8 +2251,8 @@ class PHPMailer {
   public function DKIM_BodyC($body) {
     if ($body == '') return "\r\n";
     // stabilize line endings
-    $body=str_replace("\r\n","\n",$body);
-    $body=str_replace("\n","\r\n",$body);
+    $body=str_replace("\r\n", "\n", $body);
+    $body=str_replace("\n", "\r\n", $body);
     // END stabilize line endings
     while (substr($body,strlen($body)-4,4) == "\r\n\r\n") {
       $body=substr($body,0,strlen($body)-2);
@@ -2268,13 +2268,13 @@ class PHPMailer {
    * @param string $subject Subject
    * @param string $body Body
    */
-  public function DKIM_Add($headers_line,$subject,$body) {
+  public function DKIM_Add($headers_line, $subject, $body) {
     $DKIMsignatureType    = 'rsa-sha1'; // Signature & hash algorithms
     $DKIMcanonicalization = 'relaxed/simple'; // Canonicalization of header/body
     $DKIMquery            = 'dns/txt'; // Query method
     $DKIMtime             = time() ; // Signature Timestamp = seconds since 00:00:00 - Jan 1, 1970 (UTC time zone)
     $subject_header       = "Subject: $subject";
-    $headers              = explode("\r\n",$headers_line);
+    $headers              = explode("\r\n", $headers_line);
     foreach($headers as $header) {
       if (strpos($header,'From:') === 0) {
         $from_header=$header;
@@ -2282,9 +2282,9 @@ class PHPMailer {
         $to_header=$header;
       }
     }
-    $from     = str_replace('|','=7C',$this->DKIM_QP($from_header));
-    $to       = str_replace('|','=7C',$this->DKIM_QP($to_header));
-    $subject  = str_replace('|','=7C',$this->DKIM_QP($subject_header)) ; // Copied header fields (dkim-quoted-printable
+    $from     = str_replace('|','=7C', $this->DKIM_QP($from_header));
+    $to       = str_replace('|','=7C', $this->DKIM_QP($to_header));
+    $subject  = str_replace('|','=7C', $this->DKIM_QP($subject_header)) ; // Copied header fields (dkim-quoted-printable
     $body     = $this->DKIM_BodyC($body);
     $DKIMlen  = strlen($body) ; // Length of body
     $DKIMb64  = base64_encode(pack("H*", sha1($body))) ; // Base64 of packed binary SHA-1 hash of body
@@ -2303,10 +2303,10 @@ class PHPMailer {
     return "X-PHPMAILER-DKIM: phpmailer.worxware.com\r\n".$dkimhdrs.$signed."\r\n";
   }
 
-  protected function doCallback($isSent,$to,$cc,$bcc,$subject,$body) {
+  protected function doCallback($isSent, $to, $cc, $bcc, $subject, $body) {
     if (!empty($this->action_function) && function_exists($this->action_function)) {
-      $params = array($isSent,$to,$cc,$bcc,$subject,$body);
-      call_user_func_array($this->action_function,$params);
+      $params = array($isSent, $to, $cc, $bcc, $subject, $body);
+      call_user_func_array($this->action_function, $params);
     }
   }
 }

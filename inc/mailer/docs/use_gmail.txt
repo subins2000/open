@@ -8,7 +8,7 @@ include("class.smtp.php"); // note, this is optional - gets called from main cla
 $mail             = new PHPMailer();
 
 $body             = $mail->getFile('contents.html');
-$body             = eregi_replace("[\]",'',$body);
+$body             = eregi_replace("[\]",'', $body);
 
 $mail->IsSMTP();
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
@@ -27,12 +27,12 @@ $mail->WordWrap   = 50; // set word wrap
 
 $mail->MsgHTML($body);
 
-$mail->AddReplyTo("replyto@yourdomain.com","Webmaster");
+$mail->AddReplyTo("replyto@yourdomain.com", "Webmaster");
 
 $mail->AddAttachment("/path/to/file.zip");             // attachment
 $mail->AddAttachment("/path/to/image.jpg", "new.jpg"); // attachment
 
-$mail->AddAddress("username@domain.com","First Last");
+$mail->AddAddress("username@domain.com", "First Last");
 
 $mail->IsHTML(true); // send as HTML
 

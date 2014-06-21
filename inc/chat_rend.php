@@ -1,11 +1,11 @@
 <?
-function show_chat($fid,$single=false){
- global$who, $db;
+function show_chat($fid, $single=false){
+ global $who, $OP;
  if($single===false || $single===true){
-  $sql=$db->prepare("SELECT * FROM (SELECT * FROM `chat` WHERE (`uid`=? AND `fid`=?) OR (`uid`=? AND `fid`=?) ORDER BY id DESC LIMIT 15) sub ORDER BY `id` ASC");
-  $sql->execute(array($who,$fid,$fid,$who));
+  $sql=$OP->dbh->prepare("SELECT * FROM (SELECT * FROM `chat` WHERE (`uid`=? AND `fid`=?) OR (`uid`=? AND `fid`=?) ORDER BY id DESC LIMIT 15) sub ORDER BY `id` ASC");
+  $sql->execute(array($who, $fid, $fid, $who));
  }elseif($single!==true){
-  $sql=$db->prepare("SELECT * FROM chat WHERE id=?");
+  $sql=$OP->dbh->prepare("SELECT * FROM chat WHERE id=?");
   $sql->execute(array($single));
  }
  $h="";
@@ -14,39 +14,43 @@ function show_chat($fid,$single=false){
  }
   if($sql->rowCount()!=0){
    while($r=$sql->fetch()){
-    $id=$r['id'];
-    $uid=$r['uid'];
-    $img=get("avatar",$uid);
-    $nm=get("name",$uid,false);
-    $pl=get("plink",$uid);
-    $snm=explode(" ",$nm);
-    $snm=$snm[0];
+    $id	= $r['id'];
+    $uid	= $r['uid'];
+    $img	= get("avatar", $uid);
+    $nm	= get("name", $uid, false);
+    $pl	= get("plink", $uid);
+    $snm	= explode(" ", $nm);
+    $snm	= $snm[0];
     $h.="<div class='msg' id='$id'>";
-     if($uid==$who){
-      $h.="<div style='display: table-cell;margin-top: -5px;vertical-align: top;background: white;padding: 1px 6px 8px;'>";
-       $h.="<div class='up'>";
-        $h.="<a target='_blank' href='$pl'>$snm</a>";
-        $h.="<span class='time'>{$r['posted']}</span>";
-       $h.="</div>";
-       $h.="<div class='cmsg'>{$r['msg']}</div>";
-      $h.="</div>";
-      $h.="<div style='display: table-cell;vertical-align: top;width:9%;'>";
-       $h.="<a target='_blank' href='$pl'>";
-        $h.="<img class='left' height='32' width='32' src='$img'>";
-       $h.="</a>";
+     if($uid == $who){
+      $h.="<div class='left'>";
+      	$h.="<div class='mainContent'>";
+       		$h.="<div class='up'>";
+        			$h.="<a target='_blank' href='$pl'>$snm</a>";
+        			$h.="<span class='time'>{$r['posted']}</span>";
+       		$h.="</div>";
+       		$h.="<div class='cmsg'>{$r['msg']}</div>";
+       	$h.="</div>";
+       	$h.="<div class='avatar'>";
+       		$h.="<a target='_blank' href='$pl'>";
+        			$h.="<img height='32' width='32' src='$img'>";
+       		$h.="</a>";
+      	$h.="</div>";
       $h.="</div>";
      }else{      
-      $h.="<div style='float:left;'>";
-       $h.="<a target='_blank' href='$pl'>";
-        $h.="<img class='left' height='32' width='32' src='$img'>";
-       $h.="</a>";
-      $h.="</div>";
-      $h.="<div style='background: white;padding: 1px 6px 8px;max-width: 100%;margin-left: 45px;white-space: pre;word-wrap: break-word;'>";
-       $h.="<div class='up'>";
-        $h.="<a target='_blank' href='$pl'>$snm</a>";
-        $h.="<span class='time'>{$r['posted']}</span>";
-       $h.="</div>";
-       $h.="<div class='cmsg'>{$r['msg']}</div>";
+      $h.="<div class='right'>";
+      	$h.="<div class='mainContent'>";
+       		$h.="<div class='up'>";
+        			$h.="<a target='_blank' href='$pl'>$snm</a>";
+        			$h.="<span class='time'>{$r['posted']}</span>";
+       		$h.="</div>";
+       		$h.="<div class='cmsg'>{$r['msg']}</div>";
+       	$h.="</div>";
+       	$h.="<div class='avatar'>";
+     			$h.="<a target='_blank' href='$pl'>";
+     				$h.="<img height='32' width='32' src='$img'>";
+    			$h.="</a>";
+     		$h.="</div>";
       $h.="</div>";
      }
     $h.="</div>";
@@ -64,8 +68,8 @@ function show_chat($fid,$single=false){
    $h.="<input type='submit' name='submit' class='block' value='Send'/>";
   $h.="</form>";
  }
- $sql=$db->prepare("UPDATE chat SET red='1' WHERE uid=? AND fid=? AND red='0'");
- $sql->execute(array($fid,$who));
+ $sql=$OP->dbh->prepare("UPDATE chat SET red='1' WHERE uid=? AND fid=? AND red='0'");
+ $sql->execute(array($fid, $who));
  return $h;
 }
 ?>

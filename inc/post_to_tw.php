@@ -1,9 +1,9 @@
 <?
-require("$sroot/oauth/http.php");
-require("$sroot/oauth/oauth_client.php");
-require("$sroot/oauth/database_oauth_client.php");
-require("$sroot/oauth/mysqli_oauth_client.php");
-function post_to_tw($t,$who){
+require("$docRoot/oauth/http.php");
+require("$docRoot/oauth/oauth_client.php");
+require("$docRoot/oauth/database_oauth_client.php");
+require("$docRoot/oauth/mysqli_oauth_client.php");
+function post_to_tw($t, $who){
  global$host;
  global$usr;
  global$pass;
@@ -22,8 +22,8 @@ function post_to_tw($t,$who){
  $client->offline = true;
  $client->debug = false;
  $client->debug_http = true;
- $client->client_id = 'client_id';
- $client->client_secret = 'client_secret';
+ $client->client_id = 'private_value';
+ $client->client_secret = 'private_value';
  if(($success=$client->Initialize())){
   $success=$client->CallAPI(
    "https://api.twitter.com/1.1/statuses/update.json",
@@ -32,7 +32,7 @@ function post_to_tw($t,$who){
     'status'=>$t,
    ),array(
     'FailOnAccessError'=>true
-   ),$user);
+   ), $user);
  }
  $success = $client->Finalize($success);
 }

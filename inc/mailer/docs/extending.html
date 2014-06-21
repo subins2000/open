@@ -25,7 +25,7 @@ $mail->FromName = "List manager";
 $mail->Host     = "smtp1.example.com;smtp2.example.com";
 $mail->Mailer   = "smtp";
 
-@MYSQL_CONNECT("localhost","root","password");
+@MYSQL_CONNECT("localhost", "root", "password");
 @mysql_select_db("my_company");
 $query  = "SELECT full_name, email, photo FROM employee WHERE id=$id";
 $result = @MYSQL_QUERY($query);

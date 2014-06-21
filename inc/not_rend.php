@@ -1,12 +1,12 @@
 <?
 function show_not($id){
- global $db;
- $sql=$db->prepare("SELECT * FROM notify WHERE id=?");
+ global $OP;
+ $sql=$OP->dbh->prepare("SELECT * FROM notify WHERE id=?");
  $sql->execute(array($id));
  while($r=$sql->fetch()){
   $fid=$r['fid'];
-  $img=get("avatar",$fid);
-  $name=get("fname",$fid,false);
+  $img=get("avatar", $fid);
+  $name=get("fname", $fid,false);
   if(preg_match("/\-/", $r['post'])){
    list($aid, $pid)=explode("-", $r['post']);
   }
@@ -18,13 +18,13 @@ function show_not($id){
   }elseif($r['ty']=="men"){
    $amsg="Mentioned You.";
   }
-  $alnk=$r['ty']=="cmt" ? "http://open.subinsb.com/view/$pid#$aid":"";
+  $alnk=$r['ty']=="cmt" ? HOST . "/view/$pid#$aid":"";
   if($r['ty']=="fol"){
-   $alnk=get("plink",$r['fid']);
+   $alnk=get("plink", $r['fid']);
   }elseif($r['ty']=="msg"){
-   $alnk="http://open.subinsb.com/chat/".$r['fid'];
+   $alnk=HOST . "/chat/".$r['fid'];
   }elseif($r['ty']=="men"){
-   $alnk="http://open.subinsb.com/view/$pid";
+   $alnk=HOST . "/view/$pid";
   }
   $iuR=$r['red']==0 ? "nred":"";
   $iuT=$r['red']==0 ? "Unread Notification":"";
@@ -43,7 +43,7 @@ function show_not($id){
    $nfs.="</div>";
   $nfs.="</a>";
  }
- $sql=$db->prepare("UPDATE notify SET red='1' WHERE id=?");
+ $sql=$OP->dbh->prepare("UPDATE notify SET red='1' WHERE id=?");
  $sql->execute(array($id));
  return $nfs;
 }

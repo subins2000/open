@@ -58,7 +58,7 @@ try {
   echo $e->getMessage(); //Boring error messages from anything else!
 }
 
-function cleanEmails($str,$type) {
+function cleanEmails($str, $type) {
   if ($type == 'cc') {
     $addy['Email'] = $str[0];
     $addy['Name']  = $str[1];
