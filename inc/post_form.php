@@ -1,9 +1,9 @@
 <?
 if($_SERVER['PHP_SELF']=="/search.php"){
- $q=filt($_GET['q']);
+ $q=$OP->format($_GET['q']);
 }
 $tw="";$fb="";$twv="";$fbv="";
-$sql=$db->prepare("SELECT server,access_token FROM oauth_session WHERE user=?");
+$sql=$OP->dbh->prepare("SELECT server,access_token FROM oauth_session WHERE user=?");
 $sql->execute(array($who));
 while($r=$sql->fetch()){
  if($r['server']=='Twitter'){

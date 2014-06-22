@@ -173,7 +173,7 @@ class SMTP {
       return false;
     }
 
-    fputs($this->smtp_conn,"STARTTLS" . $this->CRLF);
+    fputs($this->smtp_conn, "STARTTLS" . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -209,7 +209,7 @@ class SMTP {
    */
   public function Authenticate($username, $password) {
     // Start authentication
-    fputs($this->smtp_conn,"AUTH LOGIN" . $this->CRLF);
+    fputs($this->smtp_conn, "AUTH LOGIN" . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -332,7 +332,7 @@ class SMTP {
       return false;
     }
 
-    fputs($this->smtp_conn,"DATA" . $this->CRLF);
+    fputs($this->smtp_conn, "DATA" . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -364,9 +364,9 @@ class SMTP {
      */
 
     // normalize the line breaks so we know the explode works
-    $msg_data = str_replace("\r\n","\n",$msg_data);
-    $msg_data = str_replace("\r","\n",$msg_data);
-    $lines = explode("\n",$msg_data);
+    $msg_data = str_replace("\r\n", "\n", $msg_data);
+    $msg_data = str_replace("\r", "\n", $msg_data);
+    $lines = explode("\n", $msg_data);
 
     /* we need to find a good way to determine is headers are
      * in the msg_data or if it is a straight msg body
@@ -377,31 +377,31 @@ class SMTP {
      * headers.
      */
 
-    $field = substr($lines[0],0,strpos($lines[0],":"));
+    $field = substr($lines[0],0,strpos($lines[0], ":"));
     $in_headers = false;
-    if(!empty($field) && !strstr($field," ")) {
+    if(!empty($field) && !strstr($field, " ")) {
       $in_headers = true;
     }
 
     $max_line_length = 998; // used below; set here for ease in change
 
-    while(list(,$line) = @each($lines)) {
+    while(list(, $line) = @each($lines)) {
       $lines_out = null;
       if($line == "" && $in_headers) {
         $in_headers = false;
       }
       // ok we need to break this line up into several smaller lines
       while(strlen($line) > $max_line_length) {
-        $pos = strrpos(substr($line,0,$max_line_length)," ");
+        $pos = strrpos(substr($line,0, $max_line_length), " ");
 
         // Patch to fix DOS attack
         if(!$pos) {
           $pos = $max_line_length - 1;
-          $lines_out[] = substr($line,0,$pos);
-          $line = substr($line,$pos);
+          $lines_out[] = substr($line,0, $pos);
+          $line = substr($line, $pos);
         } else {
-          $lines_out[] = substr($line,0,$pos);
-          $line = substr($line,$pos + 1);
+          $lines_out[] = substr($line,0, $pos);
+          $line = substr($line, $pos + 1);
         }
 
         /* if processing headers add a LWSP-char to the front of new line
@@ -414,14 +414,14 @@ class SMTP {
       $lines_out[] = $line;
 
       // send the lines to the server
-      while(list(,$line_out) = @each($lines_out)) {
+      while(list(, $line_out) = @each($lines_out)) {
         if(strlen($line_out) > 0)
         {
           if(substr($line_out, 0, 1) == ".") {
             $line_out = "." . $line_out;
           }
         }
-        fputs($this->smtp_conn,$line_out . $this->CRLF);
+        fputs($this->smtp_conn, $line_out . $this->CRLF);
       }
     }
 
@@ -540,7 +540,7 @@ class SMTP {
     }
 
     $useVerp = ($this->do_verp ? "XVERP" : "");
-    fputs($this->smtp_conn,"MAIL FROM:<" . $from . ">" . $useVerp . $this->CRLF);
+    fputs($this->smtp_conn, "MAIL FROM:<" . $from . ">" . $useVerp . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -583,7 +583,7 @@ class SMTP {
     }
 
     // send the quit command to the server
-    fputs($this->smtp_conn,"quit" . $this->CRLF);
+    fputs($this->smtp_conn, "quit" . $this->CRLF);
 
     // get any good-bye messages
     $byemsg = $this->get_lines();
@@ -635,7 +635,7 @@ class SMTP {
       return false;
     }
 
-    fputs($this->smtp_conn,"RCPT TO:<" . $to . ">" . $this->CRLF);
+    fputs($this->smtp_conn, "RCPT TO:<" . $to . ">" . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -678,7 +678,7 @@ class SMTP {
       return false;
     }
 
-    fputs($this->smtp_conn,"RSET" . $this->CRLF);
+    fputs($this->smtp_conn, "RSET" . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -726,7 +726,7 @@ class SMTP {
       return false;
     }
 
-    fputs($this->smtp_conn,"SAML FROM:" . $from . $this->CRLF);
+    fputs($this->smtp_conn, "SAML FROM:" . $from . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);

@@ -13,13 +13,13 @@ $mail             = new PHPMailer(); // defaults to using php "mail()"
 $mail->IsSendmail(); // telling the class to use SendMail transport
 
 $body             = file_get_contents('contents.html');
-$body             = eregi_replace("[\]",'',$body);
+$body             = eregi_replace("[\]",'', $body);
 
-$mail->AddReplyTo("name@yourdomain.com","First Last");
+$mail->AddReplyTo("name@yourdomain.com", "First Last");
 
 $mail->SetFrom('name@yourdomain.com', 'First Last');
 
-$mail->AddReplyTo("name@yourdomain.com","First Last");
+$mail->AddReplyTo("name@yourdomain.com", "First Last");
 
 $address = "whoto@otherdomain.com";
 $mail->AddAddress($address, "John Doe");

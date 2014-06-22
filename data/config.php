@@ -1,3 +1,0 @@
-<?
-include("../inc/config.php");
-?>

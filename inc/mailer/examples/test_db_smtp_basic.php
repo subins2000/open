@@ -17,7 +17,7 @@ require_once('../class.phpmailer.php');
 $mail                = new PHPMailer();
 
 $body                = file_get_contents('contents.html');
-$body                = eregi_replace("[\]",'',$body);
+$body                = eregi_replace("[\]",'', $body);
 
 $mail->IsSMTP(); // telling the class to use SMTP
 $mail->Host          = "smtp1.site.com;smtp2.site.com";
@@ -32,7 +32,7 @@ $mail->AddReplyTo('list@mydomain.com', 'List manager');
 
 $mail->Subject       = "PHPMailer Test Subject via smtp, basic with authentication";
 
-@MYSQL_CONNECT("localhost","root","password");
+@MYSQL_CONNECT("localhost", "root", "password");
 @mysql_select_db("my_company");
 $query  = "SELECT full_name, email, photo FROM employee WHERE id=$id";
 $result = @MYSQL_QUERY($query);

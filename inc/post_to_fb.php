@@ -1,5 +1,5 @@
 <?
-function post_to_fb($t,$who,$pr){
+function post_to_fb($t, $who, $pr){
  global$host;
  global$usr;
  global$pass;
@@ -27,8 +27,8 @@ function post_to_fb($t,$who,$pr){
  $client->offline = true;
  $client->debug = false;
  $client->debug_http = false;
- $client->client_id = 'client_id';
- $client->client_secret = 'client_secret';
+ $client->client_id = 'private_value';
+ $client->client_secret = 'private_value';
  if(($success=$client->Initialize())){
   $success=$client->CallAPI(
    "https://graph.facebook.com/me/feed",
@@ -38,7 +38,7 @@ function post_to_fb($t,$who,$pr){
     'privacy' => $prr
    ),array(
     'FailOnAccessError'=>true
-   ),$user);
+   ), $user);
  }
  $success = $client->Finalize($success);
 }

@@ -22,7 +22,7 @@ try {
 
 	$mail->IsSendmail();  // tell the class to use Sendmail
 
-	$mail->AddReplyTo("name@domain.com","First Last");
+	$mail->AddReplyTo("name@domain.com", "First Last");
 
 	$mail->From       = "name@domain.com";
 	$mail->FromName   = "First Last";

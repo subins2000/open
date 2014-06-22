@@ -28,7 +28,7 @@ class ORep extends Open{
   }
  }
  private function getCMTRep(){
-  $sql=$this->dbh->prepare("SELECT COUNT(`pid`) FROM `cmt` WHERE `pid` IN (SELECT `id` FROM `posts` WHERE `uid`=?)");
+  $sql=$this->dbh->prepare("SELECT COUNT(`pid`) FROM `comments` WHERE `pid` IN (SELECT `id` FROM `posts` WHERE `uid`=?)");
   $sql->execute(array($this->cU));
   $cmtRep=$sql->fetchColumn() * $this->rep['cmt'];
   return $cmtRep;
@@ -42,7 +42,7 @@ class ORep extends Open{
  }
  private function getCMTLRep(){
   /* Time For Comment Likes */
-  $sql=$this->dbh->prepare("SELECT COUNT(`cid`) FROM `clikes` WHERE `cid` IN (SELECT `id` FROM `cmt` WHERE `uid`=?)");
+  $sql=$this->dbh->prepare("SELECT COUNT(`cid`) FROM `commentLikes` WHERE `cid` IN (SELECT `id` FROM `comments` WHERE `uid`=?)");
   $sql->execute(array($this->cU));
   $cmtlRep=$sql->fetchColumn() * $this->rep['cmtl'];
   return $cmtlRep;
@@ -62,7 +62,7 @@ class ORep extends Open{
   return $r;
  }
  public function getTopComments(){
-  $sql=$this->dbh->prepare("SELECT `id`, `likes`, `cmt`, `pid` FROM `cmt` WHERE `uid`=? ORDER BY `likes` DESC LIMIT 5");
+  $sql=$this->dbh->prepare("SELECT `id`, `likes`, `comments`, `pid` FROM `comments` WHERE `uid`=? ORDER BY `likes` DESC LIMIT 5");
   $sql->execute(array($this->cU));
   $r=array();
   foreach($sql->fetchAll(PDO::FETCH_ASSOC) as $k=>$v){

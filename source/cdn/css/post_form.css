@@ -1,0 +1,73 @@
+.post_form{
+ background:#fff;
+ padding:10px;
+ border-radius:10px;
+ margin-bottom: 5px;
+ position:relative;
+ margin:5px 0px;
+}
+.post_form textarea{
+ width:395px;
+ height:80px;
+ resize: none;
+ margin-bottom: 5px;
+}
+.post_form #show_form{
+ width:200px;
+}
+.post_form .right{
+ width: 410px;
+}
+.post_form .left{
+ width:70px;
+}
+.post_form #privacy{
+ position: absolute;
+ top: 0px;
+ left: 40px;
+ width: 110px;
+ background: white;
+ text-align: center;
+ border: 1px solid black;
+ z-index: 2;
+}
+.post_form #prtoggle,#cam{
+ background: url(//open.subinsb.com/source/cdn/img/web.png) no-repeat !important;
+ min-width: 34px !important;
+ background-color: white;
+ padding: 8px !important;
+ height: 34px;
+}
+.post_form .small{
+ padding: 5px !important;
+ background: white !important;
+ min-width: 30px !important;
+ color:black !important;
+ vertical-align:top;
+}
+.post_form #cam{
+ background: url(//open.subinsb.com/source/cdn/img/camera.png) no-repeat !important;
+ background-position: center 3px;
+ background-color:white;
+ background-size: 33px !important;
+}
+.short_news{
+ background:#FAB359;
+ padding:10px;
+ border-radius:10px;
+ position:relative;
+}
+.short_news h2{
+ margin:5px 0px;
+ font-size:25px;
+ color:white;
+}
+.short_news .close{
+ position:absolute;
+ top:0px;
+ right:10px;
+}
+.post_form .close{
+ position:absolute;
+ right:5px;
+}
