@@ -32,7 +32,7 @@ Here is a simple tutorial on how to run Open on a Linux Apache Web Server.
 
 5) Create a MySQL database named "open"
 
-6) Execute The SQL Code : http://pastebin.com/91auGPK5
+6) Execute The SQL Code : http://pastebin.com/PRVTDfH2
 
 7) Replace $dbname, $host, $port, $usr, $pass values with Database credentials.
 

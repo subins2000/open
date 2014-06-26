@@ -101,20 +101,24 @@ if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want f
    $count->execute(array(":who"=>$who));
   }else{
    $count=$OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
-   $count->execute(array(":who"=>$who, ":q"=>"%$q%"));
+   $count->execute(array(":who"=>$who, ":q" => "%$q%"));
   }
-  $count=$count->rowCount();
-  $countP=(ceil($count/10)) + 1;
-  $tW=($countP*84) + $countP;
-  echo"<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
-   echo"<div style='width:".$tW."px'>";
-    for($i=1;$i<$countP;$i++){
-     $isC=$i==$_GET['p'] ? "class='b-green'":"";
-     echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
-    }
-   echo"</div>";
-  echo"</center>";
-  echo"<cl/>$count Results Found.";
+  $count		  = $sql->rowCount();
+  $pagesCount = (ceil($count/10)) + 1;
+  $theWidth	  = 29;
+  
+  echo "<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
+   	echo "<div id='s7e9v'>";
+    		for($i=1;$i < $pagesCount;$i++){
+     			$isC = $i == $_GET['p'] ? "class='b-green'" : "";
+     			echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
+     			
+     			$theWidth = $theWidth + 29 + ((strlen($i)-1) * 7) + 10;
+    		}
+    		echo "<style>#s7e9v{width:" . $theWidth . "px;}</style>";
+   	echo "</div>";
+  echo "</center>";
+  echo "<cl/>$count Results Found.";
   ?>
   <style>div[field]{margin:5px;}</style>
  </div>

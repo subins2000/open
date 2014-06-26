@@ -27,24 +27,18 @@ if($fileName=='' || $userId==''){
  	}
  	/* The File Data encoded with base64 */
  	$fileData = $sql->fetchColumn();
- 
- 	/* E-Tag is the first 480 chars of the image file encoded in sha256 */
- 	$etag = str_split($fileData, 480);
- 	$etag = hash("sha256", $etag[0]);
+ 	
+ 	/* The timestamp of the next 10 year */
+ 	$years 	= strtotime("+10 years");
  
  	/* Set Headers */
- 	header("ETag: $etag");
- 	header("Cache-Control: public");
+ 	header("Expires: " . gmdate('D, d M Y H:i:s', $years) . ' GMT');
+ 	header("Cache-Control: max-age=" . date("s", $years) . ", public");
  	/* We only server PNG images */
- 	header("Content-type:image/png");
- 
- 	/* We tell the browser if the file has been changed or not */
- 	if(isset($_SERVER["HTTP_IF_NONE_MATCH"]) && $_SERVER["HTTP_IF_NONE_MATCH"] == $etag){
-  		header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified', true, 304);
- 	}else{
-  		header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK', true, 200);
- 	}
- 
+ 	header("Content-type: image/png");
+ 	header('Vary: Accept');
+ 	
+ 	/* Get the original image file */
  	$fileData = base64_decode($fileData);
  
  	/* Serve the small image if it's the one that is requested */
