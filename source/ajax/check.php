@@ -1,20 +1,20 @@
-<?
+<?php
 Header("content-type: application/x-javascript");
 if(isset($_POST['u']) && $_POST['u'] != $who && $_POST['u'] != "undefined"){
  echo "window.location.reload();"; /* Reload The Page */
  exit;
 }
-if($OP->lg && $_P){
+if(loggedIn && $_P){
  if(isset($_POST['p']) && isset($_POST['pt']) && $_POST['p']!="undefined" && $_POST['pt']!="view"){
   /* Are There New Posts ? */
-  require_once "$docRoot/inc/post_rend.php";
+  require_once "$docRoot/inc/render.php";
   $id		= $_POST['p'];
   $url	= urldecode($_POST['cu']);
-  $url	= parse_url(str_replace("#", "%23", $url));
-  $path	= $url['path'];
+  $url	= parse_url($url);
+  $path	= explode("/", $url['path']);
   if($path == "/search"){
-   	parse_str($url['query'], $gets);
-   	$q	  = urldecode($gets['q']);
+	preg_match("/\/search\/(.*?)/", $matches);
+   	$q	  = urldecode($matches[0]);
    	$sql = $OP->dbh->prepare("SELECT * FROM `posts` WHERE `id` > :lid AND `post` LIKE :q AND (
    		`uid`=:who OR `uid` IN (
    			SELECT `fid` FROM `conn` WHERE `uid`=:who
@@ -62,18 +62,18 @@ if($OP->lg && $_P){
   }
   if($sql->rowCount()!=0){
    	$postArr = $sql->fetchAll(PDO::FETCH_ASSOC);
-   	$html 	= $OP->rendFilt(show_posts($postArr));
+   	$html 	= $OP->rendFilt(Render::post($postArr));
    	/* Give a fadein effect on new posts */
    	$effect	= "";
    	foreach($postArr as $id => $v){
     		$effect .= "$('#" . $id . ".post').hide().fadeIn(2000);";
    	}
 ?>
-   if($(".post:first").attr("id") != "<?echo $k;?>"){
-    p="<?echo$ht;?>";$(".post:first").before(p);
-    <?echo $effect;?>
+   if($(".post:first").attr("id") != "<?php echo $k;?>"){
+    p="<?php echo $ht;?>";$(".post:first").before(p);
+    <?php echo $effect;?>
    }
-<?
+<?php
   }
  }
  /* Are There New Notifications ?*/
@@ -82,14 +82,14 @@ if($OP->lg && $_P){
  $count = $sql->rowCount();
  if($count != 0){
 ?>
-  $(".notifications #nfn_button").text("<?echo$count;?>");$(".notifications #nfn_button").addClass("b-red");
-<? 
+  $(".notifications #nfn_button").text("<?php echo$count;?>");$(".notifications #nfn_button").addClass("b-red");
+<?php 
  }
  if(isset($_POST['fl'])){
   $requestedFile=$_POST['fl'];
   $_POST=$_POST[$_POST['fl']];
   if($requestedFile=="mC"){
-   $OP->inc("source/ajax/check_msg.php");
+   include "$docRoot/source/ajax/checkMsg.php";
   }
  }
 }else{

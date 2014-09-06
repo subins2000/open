@@ -7,7 +7,7 @@
  */
 
 /*
-{metadocument}<?xml version="1.0" encoding="ISO-8859-1" ?>
+{metadocument}<?phpxml version="1.0" encoding="ISO-8859-1" ?>
 <class>
 
 	<package>net.manuellemos.oauth</package>

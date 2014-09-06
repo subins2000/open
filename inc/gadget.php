@@ -1,25 +1,25 @@
-<?if($OP->lg){?>
+<?php if(loggedIn){?>
 <div class="chatgt">
  <div class="msggt">
   <div class="close">x</div>
   <div class="chattop">
    Chat | <a id="cwinopen" href="chat/">Full Chat</a>
   </div>
-  <?include("inc/chat_rend.php");?>
-  <?echo show_chat("gadget");?>
+  <?php require_once "inc/render.php";?>
+  <?php echo Render::chat("gadget");?>
  </div>
  <div class="usersgt">
   <div class="cusgt">
    <div class="close">x</div>
-   <img src="<?echo get("avatar");?>"/>
+   <img src="<?php echo get("avatar");?>"/>
    <div class="otd">
-    <a href="profile"><?echo get("name", $who,false);?></a><br/>
+    <a href="<?php echo Open::URL("profile");?>"><?php echo get("name", $who,false);?></a><br/>
     <span class="status on"></span><span>Online</span>
    </div>
   </div>
   <div class="users">
    <div style="margin-top: 55px;">
-    <?
+    <?php
      $sql=$OP->dbh->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
      $sql->execute(array(":who"=>$who));
      while($r=$sql->fetch()){
@@ -36,5 +36,4 @@
  </div>
  <a class="openugt" href="javascript:;">Open Chat</a>
 </div>
-<script>if(localStorage['chatgtopen']!=0){$(".content").css("margin-right", "350px");}</script>
-<?}?>
+<?php }?>

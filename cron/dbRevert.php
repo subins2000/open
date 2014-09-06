@@ -1,6 +1,6 @@
-<?
+<?php
 /* This file was used to revert Datas in Database which is no longer used. Preserved for history purposes - 19 May 2014 */
-include("../inc/load.php");
+include("../load.php");
 function toBack($t){
  $t=htmlspecialchars_decode($t);
  $t=preg_replace("/<span style='white-space:pre-wrap;'>(.*?)<\/span>/", "$1", $t);

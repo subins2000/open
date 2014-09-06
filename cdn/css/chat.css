@@ -1,0 +1,72 @@
+.users, .chat{
+	display:inline-block;
+	vertical-align:top;
+	height:410px;
+}
+.users{
+	width:200px;
+	background:white;
+	padding:5px 10px 5px 9px;
+	border-right:1px solid #CCC;
+	background:white;
+	overflow-y:auto;
+}
+.users .user img, .users .user .name, .users .user .status{
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:4px;
+}
+.content .chat{
+	width:440px;
+	padding:5px 14px;
+	background: #FAB359;
+	position: relative;
+}
+.content .chat .chatInfo{
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 3px 15px;
+	z-index: 99;
+	color: white;
+	background-color: #4D90FE;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+}
+.chat .msgs{
+	height: 360px;
+	margin-top: 15px;
+}
+.chat .chat_form{
+	padding: 5px 15px;
+	margin-right: -14px;
+	margin-left: -14px;
+}
+.chat_form .msgEditor {
+	width: 80%;
+}
+.chat_form input[type=submit] {
+	margin: 0px 5px;
+	padding: 3px 15px;
+}
+@media screen and (max-width: 745px){
+	.content .users{
+		display: block;
+		height: 100px;
+		width: auto;
+	}
+	.content .chat{
+		display:block;
+		width: auto;
+		padding-bottom: 15px;
+	}
+}
+@media screen and (max-width: 335px){
+	.content .chat .chat_form .msgEditor{
+		width: 100% !important;
+		display: block;
+	}
+	.content .chat .chat_form input[type=submit]{
+		display: block;
+	}
+}

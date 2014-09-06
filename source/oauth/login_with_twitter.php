@@ -14,34 +14,34 @@ require "$docRoot/inc/oauth/database_oauth_client.php";
 require "$docRoot/inc/oauth/mysqli_oauth_client.php";
 
 /* We make an array of Database Details */
-$databaseDetails 				  = 	unserialize(DATABASE);
+$databaseDetails				= 	unserialize(DATABASE);
 /* The PHP OAuth Library requires some special items in array, so we add that */
-$databaseDetails["password"] = 	$databaseDetails["pass"];
-$databaseDetails["socket"]	  = 	"/var/lib/mysql/mysql.sock";
+$databaseDetails["password"]	= 	$databaseDetails["pass"];
+$databaseDetails["socket"]		= 	"/var/lib/mysql/mysql.sock";
 
 $client = new mysqli_oauth_client_class;
-$client->database      = $databaseDetails;
-$client->server        = 'Twitter';
-$client->offline       = true;
-$client->debug 		  = true;
-$client->debug_http    = true;
-$client->client_id     = 'private_value';
-$client->client_secret = 'private_value';
-$client->redirect_uri  = HOST . '/oauth/login_with_twitter';
+$client->database		= $databaseDetails;
+$client->server			= 'Twitter';
+$client->offline		= true;
+$client->debug			= true;
+$client->debug_http		= true;
+$client->client_id		= 'twitterClientID';
+$client->client_secret	= 'twitterClientSecret';
+$client->redirect_uri	= Open::URL('/oauth/login_with_twitter');
 
 if(($success = $client->Initialize())){
- if(($success = $client->Process())){
-  if(strlen($client->authorization_error)){
-   $client->error = $client->authorization_error;
-   $success = false;
-  }elseif(strlen($client->access_token)){
-   $success = $client->CallAPI('https://api.twitter.com/1.1/account/verify_credentials.json', 'GET', array(), array('FailOnAccessError'=>true), $user);
-   if($success){
-    $success = $client->SetUser($who);
-   }
-  }
- }
- $success = $client->Finalize($success);
+	if(($success = $client->Process())){
+		if(strlen($client->authorization_error)){
+			$client->error = $client->authorization_error;
+			$success = false;
+		}elseif(strlen($client->access_token)){
+			$success = $client->CallAPI('https://api.twitter.com/1.1/account/verify_credentials.json', 'GET', array(), array('FailOnAccessError'=>true), $user);
+			if($success){
+				$success = $client->SetUser($who);
+			}
+		}
+	}
+	$success = $client->Finalize($success);
 }
 if($client->exit){
  	$OP->ser("Error", "Something Happened. Try again.");

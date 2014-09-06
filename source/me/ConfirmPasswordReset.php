@@ -1,4 +1,4 @@
-<?
+<?php
 
 $id=isset($_GET['id']) ? urldecode($_GET['id']):"";
 $sql=$OP->dbh->prepare("SELECT * FROM verify WHERE code=?");
@@ -11,13 +11,13 @@ while($r=$sql->fetch()){
 }
 ?>
 <!DOCTYPE html><html><head>
-<?$t="Confirm Password Reset - Manage Account";$OP->inc("inc/head.php");?>
+<?php $t="Confirm Password Reset - Manage Account";include "$docRoot/inc/head.php";?>
 </head><body>
- <?$OP->inc("inc/header.php");?>
- <div class="content">
+ <?php include "$docRoot/inc/header.php";?>
+ <div class="wrapper"><div class="content">
   <h2>Reset Password</h2>
   <div style="margin:0px auto;width:600px;">
-   <form action="ConfirmPasswordReset?id=<?echo urlencode($id);?>" method="POST">
+   <form action="ConfirmPasswordReset?id=<?php echo urlencode($id);?>" method="POST">
     <table>
      <tbody>
       <tr><td>New Password:</td><td><input placeholder="Type new Password" autocomplete="off" type="password" name="new"/></td></tr>
@@ -26,7 +26,7 @@ while($r=$sql->fetch()){
      </tbody>
     </table>
     <span style="color:red;">
-     <?
+     <?php
      if(isset($_POST['new']) && isset($_POST['new2'])){
       if($_POST['new']!='' && $_POST['new2']!=''){
        if($_POST['new']!=$_POST['new2']){
@@ -36,7 +36,7 @@ while($r=$sql->fetch()){
         $OP->ser("Error", "Password must contain atleast 6 characters.");
        }
        $rsalt=$OP->randStr('25');
-       $site_salt="private_value";
+       $site_salt="cantMakePublic";
        $salted_hash = hash('sha256', $_POST['new'].$site_salt.$rsalt);
        $sql=$OP->dbh->prepare("UPDATE users SET password=?,psalt=? WHERE id=?;DELETE FROM verify WHERE code=?");
        $sql->execute(array($salted_hash, $rsalt, $fwho, $id));
@@ -47,5 +47,5 @@ while($r=$sql->fetch()){
     </span>
    </form>
   </div>
- </div>
+ </div></div>
 </body></html>

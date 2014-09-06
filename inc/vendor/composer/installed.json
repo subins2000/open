@@ -1,0 +1,58 @@
+[
+    {
+        "name": "klein/klein",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chriso/klein.php.git",
+            "reference": "6e1f228ce82333b437402dafad049713eb3eeac6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chriso/klein.php/zipball/6e1f228ce82333b437402dafad049713eb3eeac6",
+            "reference": "6e1f228ce82333b437402dafad049713eb3eeac6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.x"
+        },
+        "time": "2013-06-16 23:32:47",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Klein": "."
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris O'Hara",
+                "email": "cohara87@gmail.com",
+                "homepage": "http://chris6f.com/",
+                "role": "Creator/Developer"
+            },
+            {
+                "name": "Trevor Suarez",
+                "email": "rican7@gmail.com",
+                "homepage": "http://about.me/tnsuarez",
+                "role": "Contributor/Developer"
+            }
+        ],
+        "description": "A lightning fast router for PHP",
+        "homepage": "https://github.com/chriso/klein.php",
+        "keywords": [
+            "boilerplate",
+            "router",
+            "routing",
+            "sinatra"
+        ]
+    }
+]

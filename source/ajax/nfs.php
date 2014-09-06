@@ -1,7 +1,7 @@
-<?
+<?php
+require_once "$docRoot/inc/render.php";
 
-$OP->init();
-$OP->inc("inc/not_rend.php");
+$LS->init();
 if(isset($_POST['load'])){
  $sql=$OP->dbh->prepare("SELECT id FROM notify WHERE uid=? ORDER BY id DESC LIMIT 10");
  $sql->execute(array($who));
@@ -10,16 +10,16 @@ if(isset($_POST['load'])){
  }else{
   $nfs="";
   while($r=$sql->fetch()){
-   $nfs.=show_not($r['id']);
+   $nfs .= Render::notification($r['id']);
   }
   $nfs=$OP->rendFilt($nfs);
-  $nfs.="<br/><a href='notifications' style='text-align:center;display:block;'>See All Notifications</a><br/>";
+  $nfs.="<br/><a href='". Open::URL("/notifications") ."' style='text-align:center;display:block;'>See All Notifications</a><br/>";
 ?>
 $(".notifications .loading").hide();
-$(".notifications .nfs").html("<?echo$nfs;?>");
+$(".notifications .nfs").html("<?php echo $nfs;?>");
 $(".notifications #nfn_button").text("0");
 $(".notifications #nfn_button").removeClass("b-red");
-<?  
+<?php  
  }
 }
 ?>

@@ -1,30 +1,30 @@
-<?
+<?php
 
-$OP->init();
+$LS->init();
 if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want find?q= URLs anymore */
  $_GET['q']=str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
  $To=$_GET['q']=="" ? "":"/{$_GET['q']}";
- $OP->$OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
+ $OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
 }
 ?>
 <!DOCTYPE html>
 <html><head>
- <?$OP->head("", "ac,time,gadget", "ac,gadget");?>
+ <?php $OP->head("", "ac,time,gadget", "ac,gadget");?>
 </head><body>
- <?
- $OP->inc("inc/header.php");
+ <?php
+ include "$docRoot/inc/header.php";
  $_GET['q']=isset($_GET['q']) ? $_GET['q']:"";
  $_GET['q']=str_replace(array('%5C', '/'), array('%255C', '%252F'), $_GET['q']);
  $q=$OP->format($_GET['q']);
  ?>
- <div class="content">
+ <div class="wrapper"><div class="content">
   <h1>Find People</h1>
   <p>Here are some of the users of <b>Open</b>. You can search for a specific user using the form below. <b>You wouldn't get any results if you search yourself.</b></p><cl/>
   <form action="/find">
-   <span>Search </span><input type="text" name="q" value="<?echo $q;?>" size="35"/>
+   <span>Search </span><input type="text" name="q" value="<?php echo $q;?>" size="35"/>
   </form>
   <cl/>
-  <?
+  <?php
   $_GET['p']=!isset($_GET['p']) || $_GET['p']=="" ? 1:$_GET['p'];
   $p=$_GET['p'];
   if($q!='' && $p=='1'){
@@ -75,33 +75,33 @@ if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want f
   <div class="blocks">
    <div class="blocks" style="padding:5px;margin:5px 0px;">
     <div style='background:black;width:100px;height:100px;display:inline-block;vertical-align:top;'>
-     <a href="<?echo$loc;?>">
-      <center><img style='max-width:100px;max-height:100px;' src="<?echo$img;?>"/></center>
+     <a href="<?php echo$loc;?>">
+      <center><img style='max-width:100px;max-height:100px;' src="<?php echo$img;?>"/></center>
      </a>
     </div>
     <div class="block" style="margin-left:5px;">
-     <div><a href="<?echo$loc;?>"><strong style='font-size:18px;'><?echo$name;?></strong></a></div>
-     <div field style='font-size:17px;' title="Reputation"><b><?echo$rep['total'];?></b></div>
-     <?if($live!=""){?>
-      <div field>Lives In <?echo $live;?></div>
-     <?}?>
-     <div field>Joined <span class="time"><?echo get("joined", $id);?></span></div>
-     <?if($obirth!=""){?>
-      <div field>Born <span class="time"><?echo $birth;?></span></div>
-     <?}?>
-     <div field><strong><?echo$foll;?></strong> Followers</div>
-     <?echo $OP->followButton($id);?>
+     <div><a href="<?php echo$loc;?>"><strong style='font-size:18px;'><?php echo$name;?></strong></a></div>
+     <div field style='font-size:17px;' title="Reputation"><b><?php echo$rep['total'];?></b></div>
+     <?php if($live!=""){?>
+      <div field>Lives In <?php echo $live;?></div>
+     <?php }?>
+     <div field>Joined <span class="time"><?php echo get("joined", $id);?></span></div>
+     <?php if($obirth!=""){?>
+      <div field>Born <span class="time"><?php echo $birth;?></span></div>
+     <?php }?>
+     <div field><strong><?php echo$foll;?></strong> Followers</div>
+     <?php echo $OP->followButton($id);?>
     </div>
    </div>
   </div>
-  <?
+  <?php
   }
   if($q==''){
-   $count=$OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id");
-   $count->execute(array(":who"=>$who));
+   $sql = $OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id");
+   $sql->execute(array(":who" => $who));
   }else{
-   $count=$OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
-   $count->execute(array(":who"=>$who, ":q" => "%$q%"));
+   $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
+   $sql->execute(array(":who"=>$who, ":q" => "%$q%"));
   }
   $count		  = $sql->rowCount();
   $pagesCount = (ceil($count/10)) + 1;
@@ -121,6 +121,6 @@ if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want f
   echo "<cl/>$count Results Found.";
   ?>
   <style>div[field]{margin:5px;}</style>
- </div>
- <?$OP->inc("inc/gadget.php");?>
+ </div></div>
+ <?php include "$docRoot/inc/gadget.php";?>
 </body></html>

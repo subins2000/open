@@ -1,6 +1,6 @@
-<?
+<?php
 
-$OP->init();
+$LS->init();
 $id=$_POST['id'];
 if($_P && is_numeric($id)){
  $sql=$OP->dbh->prepare("SELECT id FROM users WHERE id=?");
@@ -11,17 +11,17 @@ if($_P && is_numeric($id)){
   if($sql->rowCount()==0){
    $sql=$OP->dbh->prepare("INSERT INTO conn (uid,fid,since) VALUES (?,?,NOW())");
    $sql->execute(array($who, $id));
-   $OP->inc("inc/notify.php");
-   notify("follow",0,0, $id, $who);
+   include "$docRoot/inc/notify.php";
+   $OP->notify("follow",0,0, $id, $who);
 ?>
-$("#<?echo$id;?>.follow").removeClass("follow").addClass("unfollow").html("<span hide>UnFollow</span>-");
-<?
+$("#<?php echo$id;?>.follow").removeClass("follow").addClass("unfollow").html("<span hide>UnFollow</span>-");
+<?php
   }else{
    $sql=$OP->dbh->prepare("DELETE FROM conn WHERE uid=? AND fid=?");
    $sql->execute(array($who, $id));
 ?>
-$("#<?echo$id;?>.unfollow").removeClass("unfollow").addClass("follow").html("<span hide>Follow</span>+");
-<?
+$("#<?php echo$id;?>.unfollow").removeClass("unfollow").addClass("follow").html("<span hide>Follow</span>+");
+<?php
   }
  }else{
   $OP->ser();

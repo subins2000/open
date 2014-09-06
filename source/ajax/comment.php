@@ -1,6 +1,6 @@
-<?
-require_once "$docRoot/inc/cmt_rend.php";
-$OP->init();
+<?php
+require_once "$docRoot/inc/render.php";
+$LS->init();
 $id  = $_POST['id'];
 $msg = $_POST['cmt'];
 
@@ -17,24 +17,24 @@ if($_P && is_numeric($id)){
   $sql = $OP->dbh->prepare("INSERT INTO `comments` (`uid`, `pid`, `comment`, `time`) VALUES(:uid, :id, :msg, NOW());
   UPDATE `posts` SET `comments` = `comments` + 1 WHERE `id`=:id");
   $sql->execute(array(
-   	":uid" => $who,
+   	":uid" => curUser,
    	":id"  => $id,
    	":msg" => $msg
   ));
   $OP->mentionNotify($id, "comment");
   
-  notify("comment", $msg, $id, $owner, $who);/* We should notify the owner of post */
+  $OP->notify("comment", $msg, $id, $owner, curUser);/* We should notify the owner of post */
   
   /* Show all comments or not */
   if($_POST['clod'] == 'mom'){
    	$_POST['all'] = 1;
   }
-  $html = $OP->rendFilt(show_cmt($id));
+  $html = $OP->rendFilt(Render::comment($id));
 ?>
-$("#<?echo$id;?>.comments").replaceWith("<?echo $html;?>");
-$("#<?echo$id;?>.comments").show();
-$("#<?echo$id;?>.ck.count").text(parseFloat($("#<?echo $id;?>.ck.count").text())+1);
-<?
+$("#<?php echo$id;?>.comments").replaceWith("<?php echo $html;?>");
+$("#<?php echo$id;?>.comments").show();
+$("#<?php echo$id;?>.ck.count").text(parseFloat($("#<?php echo $id;?>.ck.count").text())+1);
+<?php
  }else{
   	$OP->ser("I can't find the post you wished to comment on.", "", "json");
  }

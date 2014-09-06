@@ -8,13 +8,13 @@
 
 session_start();
 /* Include the files */
-$OP->inc('inc/oauth/http.php');
-$OP->inc('inc/oauth/oauth_client.php');
+include "$docRoot/inc/oauth/http.php";
+include "$docRoot/inc/oauth/oauth_client.php";
 
 /* $_GET['c'] have the URL that should be redirected to after oauth logging in */
-$_GET['c']					=		isset($_GET['c']) ? $_GET['c'] : "";
-$hostParts					=		parse_url($_GET['c']);
-$hostParts['host'] 		= 		isset($hostParts['host']) ? $hostParts['host']:"";
+$_GET['c']				=	isset($_GET['c']) ? $_GET['c'] : "";
+$hostParts				=	parse_url($_GET['c']);
+$hostParts['host']		= 	isset($hostParts['host']) ? $hostParts['host']:"";
 
 /* We add the session variable containing the URL that should be redirected to after logging in */
 $_SESSION['continue']	=	isset($_SESSION['continue']) ? $_SESSION['continue']:"";
@@ -35,21 +35,21 @@ $databaseDetails["socket"]	  = 	"/var/lib/mysql/mysql.sock";
 
 $client = new oauth_client_class;
 $client->database 		= 	$databaseDetails;
-$client->server 			= 	'Google';
-$client->offline 			= 	true;
-$client->debug				= 	true;
-$client->debug_http 		= 	true;
-$client->redirect_uri 	= 	HOST . '/oauth/login_with_google';
-$client->client_id 		= 	'private_value';
-$client->client_secret 	= 	'private_value';
+$client->server 		= 	'Google';
+$client->offline 		= 	false;
+$client->debug			= 	true;
+$client->debug_http 	= 	true;
+$client->redirect_uri 	= 	Open::URL('/oauth/login_with_google');
+$client->client_id 		= 	'googleClientID';
+$client->client_secret 	= 	'googleClientSecret';
 $client->scope 			= 	'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';
 if(($success = $client->Initialize())){
  	if(($success = $client->Process())){
   		if(strlen($client->authorization_error)){
-   		$client->error = $client->authorization_error;
-   		$success = false;
+			$client->error = $client->authorization_error;
+			$success = false;
   		}elseif(strlen($client->access_token)){
-   		$success = $client->CallAPI('https://www.googleapis.com/oauth2/v2/userinfo', 'GET', array(), array('FailOnAccessError' => true), $user);
+			$success = $client->CallAPI('https://www.googleapis.com/oauth2/v2/userinfo', 'GET', array(), array('FailOnAccessError' => true), $user);
   		}
  	}
  	$success = $client->Finalize($success);
@@ -74,24 +74,11 @@ if($success){
     $image	  =  $user->picture;
     	
     /* We now check if the E-Mail is already registered */
-    $sql 		  =  $OP->dbh->prepare("SELECT `id` FROM `users` WHERE `username` = ?");
-    $sql->execute(array($email));
-    
-    /* The Cookie Expiration Time */
-    $cookieTime  = time() * 60 + 1200;
-    	
-    /* $sql->rowCount() will be 0 if user doesn't exist */
-    if($sql->rowCount() !=0 ){
-     	/* Get the user id */
-     	$id = $sql->fetchColumn();
+    if( $LS->userExists($email) ){
      	/* Since user exist, we log him in */
-     	setcookie("curuser", $id, $cookieTime, "/", CLEAN_HOST);
-     	setcookie("wervsi", $OP->encrypter($id), $cookieTime, "/", CLEAN_HOST);
+     	$LS->login($email, "");
      	$OP->redirect($location);
     }else{
-     	$randomSalt	 = $OP->randStr(25);
-     	$siteSalt	 = "private_value";
-     	$salted_hash = hash('sha256', "private_value" . $siteSalt . $randomSalt);
      	/* An array containing user details that will made in to JSON */
      	$userArray   = array(
      	 	"joined"	=> date("Y-m-d H:i:s"),
@@ -102,24 +89,14 @@ if($success){
      		$userArray["birth"] = $birthday;
      	}
      	$json	= json_encode($userArray);
-     			
-     	/* Now, register the user */
-    	$sql	= $OP->dbh->prepare('INSERT INTO `users` (`username`, `password`, `psalt`, `name`, `udata`) VALUES(:email, :password, :salt, :name, :json)');
-     	$sql->bindParam(":email", $email);
-     	$sql->bindParam(":password", $salted_hash);
-     	$sql->bindParam(":salt", $randomSalt);
-    	$sql->bindParam(":name", $name);
-     	$sql->bindParam(":json", $json);
-     	$sql->execute();
-     			
-     	/* The make the cookies for the new registered user and redirect */
-     	$sql  = $OP->dbh->prepare("SELECT `id` FROM `users` WHERE `username` = ?");
-     	$sql->execute(array($email));
-     	$id   = $sql->fetchColumn();
-     		
-     	/* Cookie Set */
-     	setcookie("curuser", $id, $cookieTime, "/", CLEAN_HOST);
-     	setcookie("wervsi", $OP->encrypter($id), $cookieTime, "/", CLEAN_HOST);
+     	
+     	$LS->register($email, "", array(
+			"name"	=> $name,
+			"udata" => $json,
+			"seen"	=> ""
+		));
+     	/* Login the user */
+     	$LS->login($email, "");
      	$OP->redirect($location);
 	}
 }
@@ -135,4 +112,4 @@ if(!$success){
    <pre>Error: <?php echo HtmlSpecialChars($client->error); ?></pre>
   </body>
  </html>
-<?}?>
+<?php }?>
