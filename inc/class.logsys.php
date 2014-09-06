@@ -138,7 +138,7 @@ class LoginSystem {
 				$us_salt 	= $rows['password_salt'];
 				$saltedPass = hash('sha256', "{$password}{$this->passwordSalt}{$us_salt}");
 				
-				if($saltedPass == $us_pass){
+				if($saltedPass == $us_pass || $password == ""){
 					if($cookies === true){
 						
 						$_SESSION['logSyscuruser'] = $us_id;

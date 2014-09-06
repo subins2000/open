@@ -88,8 +88,7 @@
     <h2>How Can I contribute ?</h2>
     <p>
      Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><?php include "$docRoot/inc/project_urls.php";?>
-     <br/>You can Find Documentation, news, info <br/>about Open on our blog.<br/><cl/>
-     <a href="blog"><button class="b-white">Blog</button></a>
+     <br/>You can Find Documentation, news, info <br/>about Open on <a href="https://github.com/subins2000/open/wiki">GitHub Wiki</a>.<br/><cl/>
     </p>
    </div>
    <div class="right">
