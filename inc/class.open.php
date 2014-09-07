@@ -411,14 +411,14 @@ class Open{
    			$sql->execute(array($to, curUser, "cmt", "$lci-$pid"));
    			
    			/* Get comments count of post */
-   			$sql = $this->dbh->prepare("SELECT COUNT(1) FROM `posts` WHERE `id` = ?");
+   			$sql = $this->dbh->prepare("SELECT 1 FROM `posts` WHERE `id` = ?");
    			$sql->execute(array($pid));
-   			$cCmts = $sql->fetchColumn();
+   			$cCmts = $sql->rowCount();
    			
    			/* Make the email */
    			$body  = "{$n} commented on your <a href='". HOST ."/view/$pid'>post</a> :";
    			$body .= "<blockquote>$text</blockquote>";
-   			$body .= "Your post now have <b>$cCmts</b> comments.<br/><a href='". HOST ."/view/$pid#$lci' target='_blank'>";
+   			$body .= "Your post now have <b>{$cCmts}</b> comments.<br/><a href='". HOST ."/view/$pid#$lci' target='_blank'>";
 				$body .= "<button style='padding:5px 15px;'>View Post</button>";
 			$body .= "</a>";
    			$title = "$sn Commented On Your Post";// The email subject
@@ -476,7 +476,7 @@ class Open{
    			$sql->execute(array($to, curUser, "msg"));
    			$lps = $sql->fetchColumn();
    			
-   			date_default_timezone_set("EST");
+   			date_default_timezone_set("GMT");
    			if(strtotime($lps) < strtotime("-20 minutes") || $lps==""){
     			$sql = $this->dbh->prepare("INSERT INTO `notify` (`uid`, `fid`, `ty`, `post`, `posted`) VALUES (?, ?, ?, ?, NOW())");
     			$sql->execute(array($to, curUser, "msg", ""));

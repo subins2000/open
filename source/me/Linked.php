@@ -46,11 +46,11 @@ $LS->init();
 					if($service == '0'){
 						$sql = $OP->dbh->prepare("DELETE FROM `oauth_session` WHERE `user` = ? AND `server` = ?");
 						$sql->execute(array($who, "Facebook"));
-						$OP->sss("Successfully Removed", "Service 'Facebook' has been removed from your account. Too Add it back, reload page.");
+						$OP->sss("Successfully Removed", "Service 'Facebook' has been removed from your account. To Add it back, reload page.");
 					}elseif($service == '1'){
 						$sql = $OP->dbh->prepare("DELETE FROM `oauth_session` WHERE `user` = ? AND `server` = ?");
 						$sql->execute(array($who, "Twitter"));
-						$OP->sss("Successfully Removed", "Service 'Twitter' has been removed from your account. Too Add it back, reload page.");
+						$OP->sss("Successfully Removed", "Service 'Twitter' has been removed from your account. To Add it back, reload page.");
 					}else{
 						$OP->ser("Error", "Service Not Found");
 					}
