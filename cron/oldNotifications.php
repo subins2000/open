@@ -1,7 +1,7 @@
-<?
+<?php
 /* This file is ran hourly. Deletes old notification items that are older than 50 days */
-include("../inc/load.php");
-//include(getenv("OPENSHIFT_REPO_DIR")."php/inc/load.php");
+include("../load.php");
+//include(getenv("OPENSHIFT_REPO_DIR")."php/load.php");
 
 $sql=$OP->dbh->prepare("SELECT `posted` FROM `notify` ORDER BY `posted` ASC LIMIT 50");
 $sql->execute(array());

@@ -1,8 +1,8 @@
-<?
+<?php
 
-$OP->inc("inc/chat_rend.php");
-$OP->inc("inc/notify.php");
-$OP->init();
+require_once "$docRoot/inc/render.php";
+include "$docRoot/inc/notify.php";
+$LS->init();
 $msg=$OP->format($_POST['msg'], true);
 $to=$_POST['to'];
 $udte=false;
@@ -27,27 +27,27 @@ if($_P && $msg!="" && $to!=""){
   $sql->execute(array($who, $to, $msg));
  }
  if(get("status", $to)=="off"){
-  notify("msg", $msg,0, $to, $who);
+  $OP->notify("msg", $msg,0, $to, $who);
  }
  $sql=$OP->dbh->prepare("SELECT id FROM chat WHERE uid=? AND fid=? ORDER BY id DESC LIMIT 1");
  $sql->execute(array($who, $to));
  while($r=$sql->fetch()){
   $cid=$r['id'];
  }
- $ht=$OP->rendFilt(show_chat($to, $cid));
+ $ht=$OP->rendFilt(Render::chat($to, $cid));
 ?>
-  p="<?echo$ht;?>";
-  <?if($udte==false){?>
-   if($("#<?echo$to;?>.msgs .msg").length==0){
-    $("#<?echo$to;?>.msgs").html(p);
+  p="<?php echo$ht;?>";
+  <?php if($udte==false){?>
+   if($("#<?php echo$to;?>.msgs .msg").length==0){
+    $("#<?php echo$to;?>.msgs").html(p);
    }else{
-    $("#<?echo$to;?>.msgs").append(p);
+    $("#<?php echo$to;?>.msgs").append(p);
    }
-  <?}else{?>
-   $("#<?echo$cid;?>.msg").replaceWith(p);
-  <?}?>
-  $("#<?echo$to;?>.chat_form")[0].reset();mcTop();
-<?
+  <?php }else{?>
+   $("#<?php echo$cid;?>.msg").replaceWith(p);
+  <?php }?>
+  $("#<?php echo$to;?>.chat_form")[0].reset();open.chat.scrollToEnd();
+<?php
 }else{
  $OP->ser();
 }
