@@ -1,7 +1,6 @@
 <?php
 
 require_once "$docRoot/inc/render.php";
-include "$docRoot/inc/notify.php";
 $LS->init();
 $msg=$OP->format($_POST['msg'], true);
 $to=$_POST['to'];

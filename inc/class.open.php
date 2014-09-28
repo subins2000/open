@@ -621,4 +621,3 @@ class Open{
 		return $new;
 	}
 }
-?>

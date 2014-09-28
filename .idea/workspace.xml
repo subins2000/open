@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cf71d5e5-7e4b-4179-a3e1-cd93925b2484" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/inc/notify.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/class.logsys.php" afterPath="$PROJECT_DIR$/inc/class.logsys.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/class.open.php" afterPath="$PROJECT_DIR$/inc/class.open.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/class.rep.php" afterPath="$PROJECT_DIR$/inc/class.rep.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/class.social.php" afterPath="$PROJECT_DIR$/inc/class.social.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cron/dbRevert.php" afterPath="$PROJECT_DIR$/cron/dbRevert.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/feed.php" afterPath="$PROJECT_DIR$/inc/feed.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cron/mail.php" afterPath="$PROJECT_DIR$/cron/mail.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/ajax/msg.php" afterPath="$PROJECT_DIR$/source/ajax/msg.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cron/oldNotifications.php" afterPath="$PROJECT_DIR$/cron/oldNotifications.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cron/removeImages.php" afterPath="$PROJECT_DIR$/cron/removeImages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/render.php" afterPath="$PROJECT_DIR$/inc/render.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cron/send_mails.php" afterPath="$PROJECT_DIR$/cron/send_mails.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inc/suggest.php" afterPath="$PROJECT_DIR$/inc/suggest.php" />
+    </list>
+    <ignored path="open.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="open" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="search.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/search.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0306258" vertical-offset="774" max-vertical-offset="1525">
+              <folding>
+                <marker date="1411928386000" expanded="true" signature="339:391" placeholder="INSERT INTO ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/load.php" />
+        <option value="$PROJECT_DIR$/cron/mail.php" />
+        <option value="$PROJECT_DIR$/cron/oldNotifications.php" />
+        <option value="$PROJECT_DIR$/cron/removeImages.php" />
+        <option value="$PROJECT_DIR$/cron/send_mails.php" />
+        <option value="$PROJECT_DIR$/cron/dbRevert.php" />
+        <option value="$PROJECT_DIR$/inc/class.logsys.php" />
+        <option value="$PROJECT_DIR$/inc/class.open.php" />
+        <option value="$PROJECT_DIR$/inc/class.rep.php" />
+        <option value="$PROJECT_DIR$/inc/class.social.php" />
+        <option value="$PROJECT_DIR$/inc/feed.php" />
+        <option value="$PROJECT_DIR$/source/ajax/msg.php" />
+        <option value="$PROJECT_DIR$/inc/post_form.php" />
+        <option value="$PROJECT_DIR$/inc/suggest.php" />
+        <option value="$PROJECT_DIR$/inc/render.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1280" />
+    <option name="height" value="774" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cron" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="open" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cdn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf71d5e5-7e4b-4179-a3e1-cd93925b2484" name="Default" comment="" />
+      <created>1411928442801</created>
+      <updated>1411928442801</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1280" height="774" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="21" selection-start="625" selection-end="625" vertical-scroll-proportion="0.06775068" vertical-offset="300" max-vertical-offset="2900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/vendor/klein/klein/Klein/Klein.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="20" selection-start="3243" selection-end="3243" vertical-scroll-proportion="-19.697832" vertical-offset="18262" max-vertical-offset="19000">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/load.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="16" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="1025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron/mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.16644473" vertical-offset="0" max-vertical-offset="751">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron/oldNotifications.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="496" selection-end="496" vertical-scroll-proportion="0.49933422" vertical-offset="0" max-vertical-offset="751">
+          <folding>
+            <marker date="1411928534000" expanded="true" signature="-1:-1" placeholder="SELECT `post..." />
+            <marker date="1411928534000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron/removeImages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="317" selection-end="317" vertical-scroll-proportion="0.36617842" vertical-offset="0" max-vertical-offset="751">
+          <folding>
+            <marker date="1411928538000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron/send_mails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="720" selection-end="720" vertical-scroll-proportion="0.7791328" vertical-offset="0" max-vertical-offset="738">
+          <folding>
+            <marker date="1411928543000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928543000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1411928543000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron/dbRevert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="1909" selection-end="1909" vertical-scroll-proportion="0.796748" vertical-offset="937" max-vertical-offset="1675">
+          <folding>
+            <marker date="1411928554000" expanded="true" signature="-1:-1" placeholder="SELECT id, p..posts..." />
+            <marker date="1411928554000" expanded="true" signature="-1:-1" placeholder="SELECT `id`,..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/class.logsys.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="497" column="0" selection-start="20881" selection-end="20881" vertical-scroll-proportion="0.796748" vertical-offset="11837" max-vertical-offset="12575">
+          <folding>
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `id`,..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `id`,..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `uid`..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `uid`..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `emai..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `user..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `user..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `id` ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT `id` ..." />
+            <marker date="1411928567000" expanded="true" signature="-1:-1" placeholder="SELECT {$col..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/class.open.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="623" column="0" selection-start="23473" selection-end="23473" vertical-scroll-proportion="0.796748" vertical-offset="14987" max-vertical-offset="15725">
+          <folding>
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `udat..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `name..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `pid`..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `cid`..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `uid`..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `id` ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT 1 FRO..." />
+            <marker date="1411928572000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT 1 FRO..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `fid`..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `id` ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="SELECT `post..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928572000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/class.rep.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2518" selection-end="2518" vertical-scroll-proportion="0.796748" vertical-offset="1587" max-vertical-offset="2325">
+          <folding>
+            <marker date="1411928590000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1411928590000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1411928590000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1411928590000" expanded="true" signature="-1:-1" placeholder="SELECT `id`,..." />
+            <marker date="1411928590000" expanded="true" signature="-1:-1" placeholder="SELECT `id`,..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/class.social.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="0" selection-start="2509" selection-end="2509" vertical-scroll-proportion="0.8002663" vertical-offset="1474" max-vertical-offset="2225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/errorPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3712738" vertical-offset="1012" max-vertical-offset="1750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/feed.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="26" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.25474253" vertical-offset="1337" max-vertical-offset="2075">
+          <folding>
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..posts..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT uid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..posts..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT uid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..posts..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT uid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..posts..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT uid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..posts..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928603000" expanded="true" signature="-1:-1" placeholder="SELECT uid F..conn..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="7" selection-start="385" selection-end="385" vertical-scroll-proportion="0.1693767" vertical-offset="0" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.5745257" vertical-offset="1162" max-vertical-offset="1900">
+          <folding>
+            <marker date="1411928386000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/ajax/msg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="47" selection-end="47" vertical-scroll-proportion="0.101626016" vertical-offset="0" max-vertical-offset="1475">
+          <folding>
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="SELECT fid F..conn..." />
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="SELECT uid,m..chat..." />
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="UPDATE chat ..." />
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1411928670000" expanded="true" signature="-1:-1" placeholder="SELECT id FR..chat..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/gadget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="6" selection-start="1259" selection-end="1259" vertical-scroll-proportion="0.76287264" vertical-offset="362" max-vertical-offset="1100">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/post_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="2" selection-start="2777" selection-end="2777" vertical-scroll-proportion="0.796748" vertical-offset="1187" max-vertical-offset="1925">
+          <folding>
+            <marker date="1411928386000" expanded="true" signature="-1:-1" placeholder="SELECT `serv..." />
+            <marker date="1411928386000" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/project_urls.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/suggest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="2130" selection-end="2130" vertical-scroll-proportion="0.796748" vertical-offset="487" max-vertical-offset="1225">
+          <folding>
+            <marker date="1411928683000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1411928683000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1411928683000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928683000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928683000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928683000" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/render.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="285" column="0" selection-start="10728" selection-end="10728" vertical-scroll-proportion="0.796748" vertical-offset="6537" max-vertical-offset="7275">
+          <folding>
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..*..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT `pid`..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928688000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/trending.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="700">
+          <folding>
+            <marker date="1411928386000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1411928386000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1411928386000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="7" selection-start="6425" selection-end="6425" vertical-scroll-proportion="0.796748" vertical-offset="2262" max-vertical-offset="3000">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0306258" vertical-offset="774" max-vertical-offset="1525">
+          <folding>
+            <marker date="1411928386000" expanded="true" signature="339:391" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

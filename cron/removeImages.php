@@ -12,4 +12,3 @@ while($r = $sql->fetch()){
   	$OP->uid = $r['id'];
   	$OP->save("img", "");
 }
-?>
