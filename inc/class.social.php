@@ -81,4 +81,3 @@ class SocialPost extends Open {
  		$success = $this->client->Finalize($success);
 	}
 }
-?>

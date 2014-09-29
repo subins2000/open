@@ -85,4 +85,3 @@ class ORep extends Open {
 		return $comments;
 	}
 }
-?>
