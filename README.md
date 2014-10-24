@@ -30,8 +30,7 @@ git clone https://github.com/subins2000/open.git open
 ```
 	Now open's files will be in the `/var/www/open` directory
 
-4) 	Using Replacing Softwares like (http://regexxer.sourceforge.net/)[regexxer], replace the string `open.subinsb.com` with `localhost/open` on the directory where you cloned the open repository. 
-
+4) 	Using Replacing Softwares like (http://regexxer.sourceforge.net/)[regexxer], replace the string `open.subinsb.com` with `localhost/open` on the directory where you cloned the open repository.
 	Also, there might be URL strings like `open\.subinsb\.com` in certain files which won't be covered with this replacing. An example is `cdn/js/main.js` file on `open.externalLinks` function.
 
 5) 	Create a MySQL database named "open"
@@ -46,9 +45,9 @@ Libraries used In Open
 ====
 jQuery
 
-The @Mentions have been implemented on Open by using (https://github.com/subins2000/smention)[jQuery sMention Plugin]
+The @Mentions have been implemented on Open by using [jQuery sMention Plugin](https://github.com/subins2000/smention)
 
-(http://www.phpclasses.org/package/7700-PHP-Authorize-and-access-APIs-using-OAuth.html)[PHP OAuth Class]. Thanks Manuel Lemos.
+[PHP OAuth Class](http://www.phpclasses.org/package/7700-PHP-Authorize-and-access-APIs-using-OAuth.html). Thanks Manuel Lemos.
 
 Resize image class
 

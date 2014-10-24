@@ -5,6 +5,6 @@ window.onload = function(){
  var oHead = document.getElementsByTagName('head').item(0),
      oScript = document.createElement("script");
  oScript.setAttribute("type", "text/javascript");
- oScript.setAttribute("src", "http://www.statcounter.com/counter/counter.js");
+ oScript.setAttribute("src", "https://secure.statcounter.com/counter/counter.js");
  oHead.appendChild(oScript);
 };

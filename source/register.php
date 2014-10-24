@@ -66,6 +66,7 @@
 						$OP->ser("You Already Have An Account!", "There is already an account registered with the E-Mail you have given. <a href='http://open.subinsb.com/me/ResetPassword'>Forgot Password ?</a>");
 					}
 					$secretToken = $OP->encrypt("{$email}cantMakePublic");
+					echo $secretToken;
 					if( $OP->sendEMail($email, "Verify Your E-Mail", "You requested for registering on Open. For signing up, you need to verify your E-Mail address. Paste the code below in the input field of the page where you requested for signing up.<blockquote>{$secretToken}</blockquote>") !== false ) {
 				?>
 						<p>An E-Mail containing a code have been sent to the E-Mail address you gave us. Check Your Inbox for that mail. The mail might have went to the SPAM folder. Hence you have to check that folder too.</p><cl/>
@@ -94,7 +95,7 @@
 					if($email == "" || $pass == '' || $pass2 == '' || $name == ''){
 						$OP->ser("Fields Left Blank", "Some Fields were left blank. Please fill up all fields. You now have to start over the signup process.");
 					}
-					if( !preg_match("/[^a-zA-Z]/", $name) ){
+					if( !ctype_alnum(strtolower(str_replace(" ", "", $name))) ){
 						$OP->ser("Invalid Name", "The Name is not valid. Only ALPHANUMERIC characters are allowed.");
 					}
 					if($pass != $pass2){

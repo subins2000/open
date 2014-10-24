@@ -34,7 +34,7 @@ class Open{
 		echo "<link rel='icon' href='". HOST ."/cdn/img/favicon.ico' />";
 		
 		/* The 'ubuntu' font */
-		echo "<link async='async' href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>";
+		echo "<link async='async' href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>";
 		
 		/* The Open CSS files */
 		$css = $css != "" ? "main,$css":"main";
