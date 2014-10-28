@@ -35,7 +35,7 @@ git clone https://github.com/subins2000/open.git open
 
 5) 	Create a MySQL database named "open"
 
-6) 	Execute The SQL Code in the file (https://github.com/subins2000/open/blob/master/tables.sql)[tables.sql]
+6) 	Execute The SQL Code in the file [tables.sql](https://github.com/subins2000/open/blob/master/tables.sql)
 
 8) 	Open file `config.php` of Open root directory and set the Database credentials.
 
