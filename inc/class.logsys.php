@@ -2,7 +2,7 @@
 /*
 .---------------------------------------------------------------------------.
 |  Software: PHP Login System - PHP logSys                                  |
-|   Version: 0.2                                                            |
+|   Version: 0.3                                                            |
 |   Contact: http://github.com/subins2000/logsys  (also subinsb.com)        |
 |      Info: http://github.com/subins2000/logsys                            |
 |   Support: http://subinsb.com/ask/php-logsys                              |
@@ -33,18 +33,23 @@ class LoginSystem {
 	private $secureKey		= "cantMakePublic";	// A Secure Key For Cookie Encryption. Don't make this public
 	private $passwordSalt 	= "cantMakePublic";	// Secret Password Salt. Only change once before setting user registration public.
 	private $company		= "Open";	// Company for name for including in emails
+	
 	var $phpsessionstart	= true;	// Should I Start A PHP Session
 	var $emailLogin			= false;	// Make Login With Username & E-Mail Possible
 	var $rememberMe			= true;	// Add Remember Me Feature.
+	var $blockBruteForce	= true; // Deny login for $LS->bfTime seconds after incorrect login tries of 5
 	
-		/* Extra Settings - Set the following	variables only if you're going to use $LS->init() */
+		/* Extra Settings */
 		
-		public $staticPages	= array(
-			"/", "/register"
- 		);	// Pages that doesn't require logging in (exclude login page) (but include register page if you want)
+			/* Set the following variables only if you're going to use $LS->init() */
+			public $staticPages	= array(
+				"/", "/register"
+			);	// Pages that doesn't require logging in (exclude login page) (but include register page if you want)
  	
-		private $loginPage	= "/login"; // The login page. ex : /login.php or /accounts/login.php
-		private $homePage	= "/home";	// The home page. The main page for logged in users. Redirects to here when logs in
+			private $loginPage	= "/login"; // The login page. ex : /login.php or /accounts/login.php
+			private $homePage	= "/home";	// The home page. The main page for logged in users. Redirects to here when logs in
+			
+			public $bfTime		= 300; // The time IN SECONDS for which block from login action should be done after 5 incorrect login attempts. Use http://www.easysurf.cc/utime.htm#m60s for converting minutes to seconds. Default : 5 minutes
 	
 		/* End Extra Settings */
 	
@@ -119,16 +124,17 @@ class LoginSystem {
 			
 			/* We Add LIMIT to 1 in SQL query because we need to just get an array of data with key as the column name. Nothing else. */
 			if($this->emailLogin === true){
-				$query = "SELECT `id`, `password`, `password_salt` FROM `{$this->dbtable}` WHERE `username`=:login OR `email`=:login ORDER BY `id` LIMIT 1";
+				$query = "SELECT `id`, `password`, `password_salt`, `attempt` FROM `{$this->dbtable}` WHERE `username`=:login OR `email`=:login ORDER BY `id` LIMIT 1";
 			}else{
-				$query = "SELECT `id`, `password`, `password_salt` FROM `{$this->dbtable}` WHERE `username`=:login ORDER BY `id` LIMIT 1";
+				$query = "SELECT `id`, `password`, `password_salt`, `attempt` FROM `{$this->dbtable}` WHERE `username`=:login ORDER BY `id` LIMIT 1";
 			}
 			
 			$sql = $this->dbh->prepare($query);
 			$sql->bindValue(":login", $username);
 			$sql->execute();
 			
-			if($sql->rowCount()==0){
+			if($sql->rowCount() == 0){
+				// No such user like that
 				return false;
 			}else{
 				/* Get the user details */
@@ -136,9 +142,26 @@ class LoginSystem {
 				$us_id		= $rows['id'];
 				$us_pass 	= $rows['password'];
 				$us_salt 	= $rows['password_salt'];
+				$status 	= $rows['attempt'];
 				$saltedPass = hash('sha256', "{$password}{$this->passwordSalt}{$us_salt}");
 				
-				if($saltedPass == $us_pass || $password == ""){
+				if(substr($status, 0, 2) == "b-"){
+					$blockedTime = substr($status, 2);
+					if(time() < $blockedTime){
+						$block = true;
+						return array(
+							"status" 	=> "blocked",
+							"minutes"	=> round(abs($blockedTime - time()) / 60, 0),
+							"seconds"	=> round(abs($blockedTime - time()) / 60*60, 2)
+						);
+					}else{
+						// remove the block, because the time limit is over
+						$this->updateUser(array(
+							"attempt" => "" // No tries at all
+						), $us_id);
+					}
+				}
+				if(!isset($block) && ($saltedPass == $us_pass || $password == "")){
 					if($cookies === true){
 						
 						$_SESSION['logSyscuruser'] = $us_id;
@@ -148,12 +171,40 @@ class LoginSystem {
 							setcookie("logSysrememberMe", $us_id, time()+3600*99*500, "/");
 						}
 						$this->loggedIn = true;
+						
+						// Update the attempt status
+						$this->updateUser(array(
+							"attempt" => "" // No tries
+						), $us_id);
+						
+						// Redirect
 						if( $this->initCalled ){
 							$this->redirect($this->homePage);
 						}
 					}
 					return true;
 				}else{
+					// Incorrect password
+					if($this->blockBruteForce === true){
+						// Checking for brute force is enabled
+						if($status == ""){
+							// User was not logged in before
+							$this->updateUser(array(
+								"attempt" => "1" // Tried 1 time
+							), $us_id);
+						}else if($status == 5){
+							$this->updateUser(array(
+								"attempt" => "b-" . strtotime("+{$this->bfTime} seconds", time()) // Blocked, only available for re-login at the time in UNIX timestamp
+							), $us_id);
+						}else if(substr($status, 0, 2) == "b-"){
+							// Account blocked
+						}else if($status < 5){
+							// If the attempts are less than 5 and not 5
+							$this->updateUser(array(
+								"attempt" => $status + 1 // Tried current tries + 1 time
+							), $us_id);
+						}
+					}
 					return false;
 				}
 			}
@@ -178,7 +229,7 @@ class LoginSystem {
 				$colVals = implode(",:", $keys);
 				$sql	 = $this->dbh->prepare("INSERT INTO `{$this->dbtable}` (`username`, `password`, `password_salt`, $columns) VALUES(:username, :password, :passwordSalt, :$colVals)");
 				foreach($other as $key => $value){
-					//$value = htmlspecialchars($value);
+					$value = htmlspecialchars($value);
 					$sql->bindValue(":$key", $value);
 				}
 			}
@@ -207,7 +258,7 @@ class LoginSystem {
 		$identName = $this->emailLogin === false ? "Username" : "Username / E-Mail";
 		
 		if( !isset($_POST['logSysforgotPass']) && !isset($_GET['resetPassToken']) && !isset($_POST['logSysforgotPassRePass']) ){
-			$html='<form action="'.$this->curPage().'" method="POST">';
+			$html='<form action="'.$_SERVER['PHP_SELF'].'" method="POST">';
 				$html.="<label>$identName<br/><input type='text' id='loginSysIdentification' placeholder='Enter your $identName' size='25' name='identification'/></label>";
 				$html.="<br/><button name='logSysforgotPass' type='submit'>Reset Password</button>";
 			$html.="</form>";
@@ -226,7 +277,7 @@ class LoginSystem {
 			}else{
 				/* The token is valid, display the new password form */
 				$html  = "<p>The Token key was Authorized. Now, you can change the password</p>";
-				$html .= "<form action='{$this->curPage()}' method='POST'>";
+				$html .= "<form action='{$_SERVER['PHP_SELF']}' method='POST'>";
 					$html	.=	"<input type='hidden' name='token' value='{$_GET['resetPassToken']}'/>";
 					$html	.=	"<label>New Password<br/><input type='password' name='password'/></label><br/>";
 					$html	.=	"<label>Retype Password<br/><input type='password' name='password2'/></label><br/>";
@@ -254,10 +305,10 @@ class LoginSystem {
 					$this->loggedIn		  = true; // We must create a fake assumption that the user is logged in to change the password as $LS->changePassword() requires the user to be logged in.
 					
 					if( $this->changePassword($this->secureKey) ){
-						$sql			= $this->dbh->prepare("DELETE FROM `resetTokens` WHERE `uid`=?");
-						$sql->execute(array($this->user));
 						$this->user		= false;
 						$this->loggedIn = false;
+						$sql			= $this->dbh->prepare("DELETE FROM resetTokens WHERE token=?");
+						$sql->execute(array($_POST['token']));
 						echo "<h3>Success : Password Reset Successful</h3><p>You may now login with your new password.</p>";
 						$curStatus = "passwordChanged"; // The password was successfully changed
 					}
@@ -270,11 +321,7 @@ class LoginSystem {
 				echo "<h3>Error : $identName not provided</h3>";
 				$curStatus = "identityNotProvided"; // The identity was not given
 			}else{
-				if($this->emailLogin){
-					$sql = $this->dbh->prepare("SELECT `email`, `id` FROM `{$this->dbtable}` WHERE `username`=:login OR `email`=:login");
-				}else{
-					$sql = $this->dbh->prepare("SELECT `username`, `id` FROM `{$this->dbtable}` WHERE `username`=:login");
-				}
+				$sql = $this->dbh->prepare("SELECT `email`, `id` FROM `{$this->dbtable}` WHERE `username`=:login OR `email`=:login");
 				$sql->bindValue(":login", $identification);
 				$sql->execute();
 				if($sql->rowCount() == 0){
@@ -282,7 +329,7 @@ class LoginSystem {
 					$curStatus = "userNotFound"; // The user with the identity given was not found in the users database
 				}else{
 					$rows  = $sql->fetch(PDO::FETCH_ASSOC);
-					$email = $this->emailLogin ? $rows['email'] : $rows['username']; // Assuming the column `username` contains the email
+					$email = $rows['email'];
 					$uid   = $rows['id'];
 					$token = $this->rand_string(40);
 					$sql   = $this->dbh->prepare("INSERT INTO `resetTokens` (`token`, `uid`, `requested`) VALUES (?, ?, NOW())");
@@ -315,7 +362,7 @@ class LoginSystem {
 				$sql->execute(array($saltedPass, $randomSalt, $this->user));
 				return true;
 			}elseif( !isset($_POST['logSysChangePassword']) ){
-				$html = "<form action='".$this->curPage()."' method='POST'>";
+				$html = "<form action='".$_SERVER['PHP_SELF']."' method='POST'>";
 					$html .= "<label>Current Password<br/><input type='password' name='curpass'/></label><br/>";
 					$html .= "<label>New Password<br/><input type='password' name='newPassword'/></label><br/>";
 					$html .= "<label>Retype New Password<br/><input type='password' name='newPassword2'/></label><br/>";
@@ -324,17 +371,16 @@ class LoginSystem {
 				echo $html;
 				$curStatus = "changePasswordForm"; // The form for changing password is shown now
 			}elseif(isset($_POST['logSysChangePassword'])){
-				if( isset($_POST['newPassword']) && $_POST['newPassword']!="" && isset($_POST['newPassword2']) && $_POST['newPassword2']!="" && isset($_POST['curpass']) ){
+				if( isset($_POST['newPassword']) && $_POST['newPassword']!="" && isset($_POST['newPassword2']) && $_POST['newPassword2']!="" && isset($_POST['curpass']) && $_POST['curpass']!="" ){
 					$curpass	  = $_POST['curpass'];
 					$newPassword  = $_POST['newPassword'];
 					$newPassword2 = $_POST['newPassword2'];
-					$sql		  = $this->dbh->prepare("SELECT `username` FROM `{$this->dbtable}` WHERE `id` = ?");
+					$sql		  = $this->dbh->prepare("SELECT username FROM `{$this->dbtable}` WHERE id=?");
 					$sql->execute(array($this->user));
 					$curuserUsername = $sql->fetchColumn();
 					if($this->login($curuserUsername, $curpass, false)){
 						if($newPassword != $newPassword2){
 							echo "<h3>Error : Password Mismatch</h3>";
-							echo "<a href='{$this->curPageURL()}'>Try again</a>";
 							$curStatus = "newPasswordMismatch"; // The Password's don't match (New Password & Retype Password field)
 						}else{
 							$this->changePassword($this->secureKey);
@@ -343,12 +389,10 @@ class LoginSystem {
 						}
 					}else{
 						echo "<h3>Error : Current Password Was Wrong</h3>";
-						echo "<a href='{$this->curPageURL()}'>Try again</a>";
 						$curStatus = "currentPasswordWrong"; // The current password entered was wrong
 					}
 				}else{
 					echo "<h3>Error : Password Fields was blank</h3>";
-					echo "<a href='{$this->curPageURL()}'>Try again</a>";
 					$curStatus = "newPasswordFieldsBlank"; // Blank new password field
 				}
 			}
@@ -410,9 +454,9 @@ class LoginSystem {
 			$sql = $this->dbh->prepare("UPDATE `{$this->dbtable}` SET {$columns} WHERE `id`=:id");
 			$sql->bindValue(":id", $user);
 			foreach($toUpdate as $key => $value){
-					$value = htmlspecialchars($value);
-					$sql->bindValue(":$key", $value);
-				}
+				$value = htmlspecialchars($value);
+				$sql->bindValue(":$key", $value);
+			}
 			$sql->execute();
 			
 		}else{
@@ -487,11 +531,12 @@ class LoginSystem {
 	/* Do a redirect */
 	public function redirect($url, $status=302){
 		header("Location: $url", true, $status);
+		exit;
 	}
 	
 	/* Any mails need to be snt by logSys goes to here. */
 	public function sendMail($email, $subject, $body){
-		Open::sendEMail($email, $subject, $body);
+		Open::sendEMail($email, $subject, $body); /* Change this to something else if you don't like PHP's mail() */
 	}
 	/* End Extra Tools/Functions */
 }

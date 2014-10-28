@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h1>Upload A Profile Picture</h1>
-		<form method="POST" enctype="multipart/form-data" action="<?php echo $LS->curPageURL();?>">
+		<form method="POST" enctype="multipart/form-data">
 			<input type="file" name="file"/>
 			<button>Upload Picture</button>
 			<p>PNG, JPG (JPEG) & GIF images are supported</p>

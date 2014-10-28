@@ -266,7 +266,6 @@ class Open{
  
 	/* Make notifications for mentioned users */
 	public function mentionNotify($pid, $type="post"){
-		include "{$this->root}/inc/notify.php";
 		/* Short for mentioned users - mUsers */
 		$mUsers = $this->mUsers;
 		if(count($mUsers)!=0){  

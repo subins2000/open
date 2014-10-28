@@ -1,10 +1,9 @@
 <?php
-
 $LS->init();
 if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want find?q= URLs anymore */
- $_GET['q']=str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
- $To=$_GET['q']=="" ? "":"/{$_GET['q']}";
- $OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
+	$_GET['q'] = str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
+	$To = $_GET['q']=="" ? "":"/{$_GET['q']}";
+	$OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
 }
 ?>
 <!DOCTYPE html>
