@@ -540,4 +540,3 @@ class LoginSystem {
 	}
 	/* End Extra Tools/Functions */
 }
-?>

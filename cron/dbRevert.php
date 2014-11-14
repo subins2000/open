@@ -59,4 +59,3 @@ foreach($sql->fetchAll() as $r){
 }
 */
 echo "<br/>Done";
-?>

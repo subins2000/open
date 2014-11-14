@@ -284,4 +284,3 @@ class Render {
 		return $nfs;
 	}
 }
-?>

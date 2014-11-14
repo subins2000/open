@@ -13,4 +13,3 @@ while($r=$sql->fetch()){
   		$sql2->execute(array($time));
  }
 }
-?>

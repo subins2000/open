@@ -41,4 +41,3 @@ if($sql->rowCount() != 0){
  	echo'</div>';
  	echo'<style>.sugg{margin:5px;padding-top:5px;}</style>';
 }
-?>

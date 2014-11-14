@@ -75,4 +75,3 @@ echo Render::post($postArr);
 if($_SERVER['REDIRECT_PAGE'] != "/view"){
  	echo "<div class='load_more_posts'><div class='normal'>Load More Posts</div><div class='loader' hide><img src='". HOST ."/cdn/img/load.gif' height='32' width='32'/><span>Loading More Posts</span></div></div>";
 }
-?>
