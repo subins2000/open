@@ -30,7 +30,7 @@ git clone https://github.com/subins2000/open.git open
 ```
 	Now open's files will be in the `/var/www/open` directory
 
-4) 	Using Replacing Softwares like (http://regexxer.sourceforge.net/)[regexxer], replace the string `open.subinsb.com` with `localhost/open` on the directory where you cloned the open repository.
+4) 	Using Replacing Softwares like [regexxer](http://regexxer.sourceforge.net/), replace the string `open.subinsb.com` with `localhost/open` on the directory where you cloned the open repository.
 	Also, there might be URL strings like `open\.subinsb\.com` in certain files which won't be covered with this replacing. An example is `cdn/js/main.js` file on `open.externalLinks` function.
 
 5) 	Create a MySQL database named "open"
