@@ -1,24 +1,24 @@
-<?php $LS->init();?>
+<?php \Fr\LS::init();?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<?php $OP->head();?>
-	</head>
-	<body>
-		<?php include "$docRoot/inc/header.php";?>
-		<div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
-			<div class="icontent">
-				<div class="left">
-					<img src="cdn/img/logo.png"/>
-				</div>
-				<div class="right">
-					<h2>Let the Doors Open</h2>
-					<p>
-						Open is a Social Network like Twitter and Facebook.<br/>&nbsp;&nbsp;&nbsp;The only difference is that Open is an Open Source <br/>Social Network 
-					</p>
-				</div>
-			</div>
-		</div>
+  <head>
+    <?php $OP->head();?>
+  </head>
+  <body>
+    <?php include "$docRoot/inc/header.php";?>
+    <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
+      <div class="icontent">
+        <div class="left">
+          <img src="cdn/img/logo.png"/>
+        </div>
+        <div class="right">
+          <h2>Let the Doors Open</h2>
+          <p>
+            Open is a Social Network like Twitter and Facebook.<br/>&nbsp;&nbsp;&nbsp;The only difference is that Open is an Open Source <br/>Social Network 
+          </p>
+        </div>
+      </div>
+    </div>
  <div style="width:100%;background:white;color:white;text-align:center;">
   <div class="icontent">
    <a class="button" href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(<?php echo HOST;?>/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>

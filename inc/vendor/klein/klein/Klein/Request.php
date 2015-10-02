@@ -126,13 +126,13 @@ class Request
         $body = null
     ) {
         // Assignment city...
-        $this->params_get   = new DataCollection($params_get);
-        $this->params_post  = new DataCollection($params_post);
-        $this->cookies      = new DataCollection($cookies);
-        $this->server       = new ServerDataCollection($server);
-        $this->headers      = new HeaderDataCollection($this->server->getHeaders());
-        $this->files        = new DataCollection($files);
-        $this->body         = $body ? (string) $body : null;
+        $this->params_get = new DataCollection($params_get);
+        $this->params_post = new DataCollection($params_post);
+        $this->cookies = new DataCollection($cookies);
+        $this->server = new ServerDataCollection($server);
+        $this->headers = new HeaderDataCollection($this->server->getHeaders());
+        $this->files = new DataCollection($files);
+        $this->body = $body ? (string) $body : null;
 
         // Non-injected assignments
         $this->params_named = new DataCollection();
@@ -462,8 +462,8 @@ class Request
      * $request->method('get') // returns false
      * </code>
      * 
-     * @param string $is				The method to check the current request method against
-     * @param boolean $allow_override	Whether or not to allow HTTP method overriding via header or params
+     * @param string $is        The method to check the current request method against
+     * @param boolean $allow_override  Whether or not to allow HTTP method overriding via header or params
      * @access public
      * @return string | boolean
      */

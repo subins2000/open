@@ -9,8 +9,8 @@ $sql->execute(array());
 while($r=$sql->fetch()){
  $time = $r['posted'];
  if(strtotime($time) < strtotime("-50 days")){
-  		$sql2 = $OP->dbh->prepare("DELETE FROM `notify` WHERE `posted`=?");
-  		$sql2->execute(array($time));
+      $sql2 = $OP->dbh->prepare("DELETE FROM `notify` WHERE `posted`=?");
+      $sql2->execute(array($time));
  }
 }
 ?>

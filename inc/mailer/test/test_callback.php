@@ -23,8 +23,8 @@ function callbackAction ($result, $to, $cc, $bcc, $subject, $body) {
   this callback example echos the results to the screen - implement to
   post to databases, build CSV log files, etc., with minor changes
   */
-  $to  = cleanEmails($to,'to');
-  $cc  = cleanEmails($cc[0],'cc');
+  $to = cleanEmails($to,'to');
+  $cc = cleanEmails($cc[0],'cc');
   $bcc = cleanEmails($bcc[0],'cc');
   echo $result . "\tTo: "  . $to['Name'] . "\tTo: "  . $to['Email'] . "\tCc: "  . $cc['Name'] . "\tCc: "  . $cc['Email'] . "\tBcc: "  . $bcc['Name'] . "\tBcc: "  . $bcc['Email'] . "\t"  . $subject . "<br />\n";
   return true;
@@ -61,11 +61,11 @@ try {
 function cleanEmails($str, $type) {
   if ($type == 'cc') {
     $addy['Email'] = $str[0];
-    $addy['Name']  = $str[1];
+    $addy['Name'] = $str[1];
     return $addy;
   }
   if (!strstr($str, ' <')) {
-    $addy['Name']  = '';
+    $addy['Name'] = '';
     $addy['Email'] = $addy;
     return $addy;
   }
@@ -73,7 +73,7 @@ function cleanEmails($str, $type) {
   if (substr($addyArr[1],-1) == '>') {
     $addyArr[1] = substr($addyArr[1],0,-1);
   }
-  $addy['Name']  = $addyArr[0];
+  $addy['Name'] = $addyArr[0];
   $addy['Email'] = $addyArr[1];
   $addy['Email'] = str_replace('@', '&#64;', $addy['Email']);
   return $addy;

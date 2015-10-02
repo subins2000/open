@@ -13,7 +13,7 @@
  margin-bottom: 5px;
 }
 .post_form #show_form{
-	width: 97%;
+  width: 97%;
 }
 .post_form #privacy{
  position: absolute;
@@ -26,7 +26,7 @@
  z-index: 2;
 }
 .post_form #prtoggle{
- background: url(//open.subinsb.com/cdn/img/web.png) no-repeat !important;
+ background: url(//open.dev/cdn/img/web.png) no-repeat !important;
  min-width: 16px !important;
  background-color: white;
  padding: 8px !important;
@@ -40,12 +40,11 @@
  vertical-align:top;
 }
 .post_form .cam{
-	background: url(//open.subinsb.com/cdn/img/camera.png) no-repeat !important;
-	background-color:	white;
-	background-size: 33px !important;
-	background-position: 1px 3px !important;
-	width: 12px;
-	height: 22px;
+  background: url(//open.dev/cdn/img/camera.png) no-repeat !important;
+  background-color:  white;
+  background-size: cover !important;
+  width: 40px;
+  height: 32px;
 }
 .short_news{
  background:#FAB359;
@@ -59,9 +58,9 @@
  color:white;
 }
 .short_news .close{
-	position: absolute;
-	right: 5px;
-	top: 6px;
+  position: absolute;
+  right: 5px;
+  top: 6px;
 }
 .post_form .close{
  position:absolute;

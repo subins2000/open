@@ -1,5 +1,5 @@
 .header{
- height:180px;
+ height: 200px;
  border:2px solid white;
  width:100%;
  position:relative;
@@ -13,12 +13,15 @@
  padding:5px 15px;
  font-weight:bold;
 }
+.header .holder a[href]{
+  color: white;
+}
 .main{
  margin-top:7px;
  z-index:5;
 }
 .main .left.clearfix{
- width:530px;
+ width: 600px;
 }
 .main .right.clearfix{
  width:154px;
@@ -82,7 +85,7 @@
  display:inline-block;
  vertical-align:top;
  margin:5px 0px;
- width:235px;
+ width: 95%;
  border-radius:10px;
  border-top-width:5px;
  border-top-style:solid;

@@ -1,7 +1,7 @@
 <?php
 require_once "$docRoot/inc/render.php";
 
-$LS->init();
+\Fr\LS::init();
 if(isset($_POST['load'])){
  $sql=$OP->dbh->prepare("SELECT id FROM notify WHERE uid=? ORDER BY id DESC LIMIT 10");
  $sql->execute(array($who));

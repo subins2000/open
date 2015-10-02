@@ -11,94 +11,99 @@ session_start();
 include "$docRoot/inc/oauth/http.php";
 include "$docRoot/inc/oauth/oauth_client.php";
 
-/* $_GET['c'] have the URL that should be redirected to after oauth logging in */
-$_GET['c']				=	isset($_GET['c']) ? $_GET['c'] : "";
-$hostParts				=	parse_url($_GET['c']);
-$hostParts['host']		= 	isset($hostParts['host']) ? $hostParts['host']:"";
-
 /* We add the session variable containing the URL that should be redirected to after logging in */
-$_SESSION['continue']	=	isset($_SESSION['continue']) ? $_SESSION['continue']:"";
+$_SESSION['continue'] = isset($_SESSION['continue']) ? $_SESSION['continue']:"";
 
-if(($_GET['c']=='' && $_SESSION['continue']=='') || $hostParts['host']!=CLEAN_HOST){
- 	/* The default Redirect URL open.subinsb.com/home */
- 	$_SESSION['continue'] 	=	HOST . "/home";
-}else{
- 	/* Or the URL that was sent */
- 	$_SESSION['continue']	=	$_GET['c'];
+/* $_GET['c'] have the URL that should be redirected to after oauth logging in */
+$_GET['c'] = isset($_GET['c']) ? urldecode($_GET['c']) : "";
+
+if($_GET['c'] == '' && $_SESSION['continue'] == ''){
+  /* The default Redirect URL open.dev/home */
+  $_SESSION['continue'] = Open::URL("home");
+}else if($_GET['c'] != ''){
+  /* Or the URL that was sent */
+  $hostParts = parse_url($_GET['c']);
+  $hostParts['host'] = isset($hostParts['host']) ? $hostParts['host']:"";
+  
+  if($hostParts['host'] != CLEAN_HOST){
+    $_SESSION['continue'] = Open::URL("home");
+  }else{
+    $_SESSION['continue'] = urldecode($_GET['c']);
+  }
 }
 
 /* We make an array of Database Details */
-$databaseDetails 				  = 	unserialize(DATABASE);
+$databaseDetails = unserialize(DATABASE);
 /* The PHP OAuth Library requires some special items in array, so we add that */
-$databaseDetails["password"] = 	$databaseDetails["pass"];
-$databaseDetails["socket"]	  = 	"/var/lib/mysql/mysql.sock";
+$databaseDetails["password"] = $databaseDetails["pass"];
+$databaseDetails["socket"] = "/var/lib/mysql/mysql.sock";
 
 $client = new oauth_client_class;
-$client->database 		= 	$databaseDetails;
-$client->server 		= 	'Google';
-$client->offline 		= 	false;
-$client->debug			= 	true;
-$client->debug_http 	= 	true;
-$client->redirect_uri 	= 	Open::URL('/oauth/login_with_google');
-$client->client_id 		= 	'googleClientID';
-$client->client_secret 	= 	'googleClientSecret';
-$client->scope 			= 	'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';
+$client->database = $databaseDetails;
+$client->server = 'Google';
+$client->offline = false;
+$client->debug = true;
+$client->debug_http = true;
+$client->redirect_uri = Open::URL('/oauth/login_with_google');
+$client->client_id = 'googleClientID';
+$client->client_secret = 'googleClientSecret';
+$client->scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';
 if(($success = $client->Initialize())){
- 	if(($success = $client->Process())){
-  		if(strlen($client->authorization_error)){
-			$client->error = $client->authorization_error;
-			$success = false;
-  		}elseif(strlen($client->access_token)){
-			$success = $client->CallAPI('https://www.googleapis.com/oauth2/v2/userinfo', 'GET', array(), array('FailOnAccessError' => true), $user);
-  		}
- 	}
- 	$success = $client->Finalize($success);
+   if(($success = $client->Process())){
+      if(strlen($client->authorization_error)){
+      $client->error = $client->authorization_error;
+      $success = false;
+      }elseif(strlen($client->access_token)){
+      $success = $client->CallAPI('https://www.googleapis.com/oauth2/v2/userinfo', 'GET', array(), array('FailOnAccessError' => true), $user);
+      }
+   }
+   $success = $client->Finalize($success);
 }
 if($client->exit){
- 	$OP->ser("Something Happened", "<a href='".$client->redirect_uri."'>Try Again</a>");
+   $OP->ser("Something Happened", "<a href='".$client->redirect_uri."'>Try Again</a>");
 }
 /* A function to validate date */
 function validateDate($date){
-    	$d = DateTime::createFromFormat('Y-m-d', $date);
-    	return $d && $d->format('Y-m-d') == $date;
+      $d = DateTime::createFromFormat('Y-m-d', $date);
+      return $d && $d->format('Y-m-d') == $date;
 }
 if($success){
-    $location =  $_SESSION['continue'];
-    $email 	  =  $user->email;
-    $name  	  =  $user->name;
-    $gender	  =  $user->gender;
+    $location = $_SESSION['continue'];
+    $email = $user->email;
+    $name = $user->name;
+    $gender = $user->gender;
     /* Make it DD/MM/YYYY format */
     if(isset($user->birthday) && validateDate($user->birthday)){
-    	$birthday =  date('d/m/Y', strtotime($user->birthday));
+      $birthday = date('d/m/Y', strtotime($user->birthday));
     }
-    $image	  =  $user->picture;
-    	
+    $image = $user->picture;
+      
     /* We now check if the E-Mail is already registered */
-    if( $LS->userExists($email) ){
-     	/* Since user exist, we log him in */
-     	$LS->login($email, "");
-     	$OP->redirect($location);
+    if( \Fr\LS::userExists($email) ){
+       /* Since user exist, we log him in */
+       \Fr\LS::login($email, "");
+       $OP->redirect($location);
     }else{
-     	/* An array containing user details that will made in to JSON */
-     	$userArray   = array(
-     	 	"joined"	=> date("Y-m-d H:i:s"),
-     		"gen"		=> $gender, /* gen = gender (male/female) */
-     	 	"img"		=> $image /* img = image */
-     	);
-     	if(isset($birthday)){
-     		$userArray["birth"] = $birthday;
-     	}
-     	$json	= json_encode($userArray);
-     	
-     	$LS->register($email, "", array(
-			"name"	=> $name,
-			"udata" => $json,
-			"seen"	=> ""
-		));
-     	/* Login the user */
-     	$LS->login($email, "");
-     	$OP->redirect($location);
-	}
+       /* An array containing user details that will made in to JSON */
+       $userArray = array(
+          "joined" => date("Y-m-d H:i:s"),
+         "gen" => $gender, /* gen = gender (male/female) */
+          "img" => $image /* img = image */
+       );
+       if(isset($birthday)){
+         $userArray["birth"] = $birthday;
+       }
+       $json = json_encode($userArray);
+       
+       \Fr\LS::register($email, "", array(
+      "name" => $name,
+      "udata" => $json,
+      "seen" => ""
+    ));
+       /* Login the user */
+       \Fr\LS::login($email, "");
+       $OP->redirect($location);
+  }
 }
 if(!$success){
 ?>

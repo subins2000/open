@@ -163,7 +163,7 @@ class Klein
     {
         // Instanciate our routing objects
         $this->service = $service ?: new ServiceProvider();
-        $this->app     = $app     ?: new App();
+        $this->app = $app     ?: new App();
     }
 
     /**
@@ -611,12 +611,12 @@ class Klein
     {
         if (preg_match_all('`(/|\.|)\[([^:\]]*+)(?::([^:\]]*+))?\](\?|)`', $route, $matches, PREG_SET_ORDER)) {
             $match_types = array(
-                'i'  => '[0-9]++',
-                'a'  => '[0-9A-Za-z]++',
-                'h'  => '[0-9A-Fa-f]++',
-                '*'  => '.+?',
+                'i' => '[0-9]++',
+                'a' => '[0-9A-Za-z]++',
+                'h' => '[0-9A-Fa-f]++',
+                '*' => '.+?',
                 '**' => '.++',
-                ''   => '[^/]+?'
+                '' => '[^/]+?'
             );
             foreach ($matches as $match) {
                 list($block, $pre, $type, $param, $optional) = $match;

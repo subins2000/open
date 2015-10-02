@@ -1,10 +1,9 @@
 <?php
-
-$LS->init();
+\Fr\LS::init();
 if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want find?q= URLs anymore */
- $_GET['q']=str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
- $To=$_GET['q']=="" ? "":"/{$_GET['q']}";
- $OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
+  $_GET['q'] = str_replace(array('%2F', '%5C'), array('%252F', '%255C'), urlencode($_GET['q']));
+  $To = $_GET['q']=="" ? "":"/{$_GET['q']}";
+  $OP->redirect("/find$To", 301); /* See $OP->redirect() in config.php */
 }
 ?>
 <!DOCTYPE html>
@@ -84,9 +83,9 @@ if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want f
      <div field style='font-size:17px;' title="Reputation"><b><?php echo$rep['total'];?></b></div>
      <?php if($live!=""){?>
       <div field>Lives In <?php echo $live;?></div>
-     <?php }?>
-     <div field>Joined <span class="time"><?php echo get("joined", $id);?></span></div>
-     <?php if($obirth!=""){?>
+     <?php }$joined = get("joined", $id);if($joined != ""){?>
+      <div field>Joined <span class="time"><?php echo $joined;?></span></div>
+     <?php } if($obirth!=""){?>
       <div field>Born <span class="time"><?php echo $birth;?></span></div>
      <?php }?>
      <div field><strong><?php echo$foll;?></strong> Followers</div>
@@ -103,20 +102,20 @@ if($_SERVER['SCRIPT_NAME']=="/find.php" && isset($_GET['q'])){/* We don't want f
    $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
    $sql->execute(array(":who"=>$who, ":q" => "%$q%"));
   }
-  $count		  = $sql->rowCount();
+  $count = $sql->rowCount();
   $pagesCount = (ceil($count/10)) + 1;
-  $theWidth	  = 29;
+  $theWidth = 29;
   
   echo "<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
-   	echo "<div id='s7e9v'>";
-    		for($i=1;$i < $pagesCount;$i++){
-     			$isC = $i == $_GET['p'] ? "class='b-green'" : "";
-     			echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
-     			
-     			$theWidth = $theWidth + 29 + ((strlen($i)-1) * 7) + 10;
-    		}
-    		echo "<style>#s7e9v{width:" . $theWidth . "px;}</style>";
-   	echo "</div>";
+     echo "<div id='s7e9v'>";
+        for($i=1;$i < $pagesCount;$i++){
+           $isC = $i == $_GET['p'] ? "class='b-green'" : "";
+           echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
+           
+           $theWidth = $theWidth + 29 + ((strlen($i)-1) * 7) + 10;
+        }
+        echo "<style>#s7e9v{width:" . $theWidth . "px;}</style>";
+     echo "</div>";
   echo "</center>";
   echo "<cl/>$count Results Found.";
   ?>

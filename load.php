@@ -6,11 +6,49 @@ define("docRoot", $docRoot);
 require_once "$docRoot/config.php";
 require_once "$docRoot/inc/class.open.php";
 require_once "$docRoot/inc/class.logsys.php";
-$LS = new LoginSystem();
+
+$db = unserialize(DATABASE);
+\Fr\LS::$config = array(
+  "db" => array(
+    "host" => $db['host'],
+    "port" => $db['port'],
+    "name" => $db['name'],
+    "username" => $db['user'],
+    "password" => $db['pass'],
+    "table" => "users"
+  ),
+  /**
+   * Keys used for encryption
+   * DONT MAKE THIS PUBLIC
+   */
+  "keys" => array(
+    /**
+     * Changing cookie key will expire all current active login sessions
+     */
+    "cookie" => "cantMakePublic",
+    /**
+     * `salt` should not be changed after users are created
+     */
+    "salt" => "cantMakePublic"
+  ),
+  "pages" => array(
+    "no_login" => array(
+      "/",
+      "/register",
+      "/me/ResetPassword"
+    ),
+    "login_page" => "/login",
+    "home_page" => "/home"
+  ),
+  "features" => array(
+    "email_login" => false
+  )
+);
+\Fr\LS::construct();
 
 /* Basic Variables */
-$loggedIn = $LS->loggedIn; /* Boolean on status of current user (logged in or not) */
-$who = $LS->user; /* The current user */
+$loggedIn = \Fr\LS::$loggedIn; /* Boolean on status of current user (logged in or not) */
+$who = \Fr\LS::$user; /* The current user */
 
 /* Global Variables */
 $_P = count($_POST) > 0 ? true : false; /* Boolean Variable whether POST data is sent with the request */
@@ -20,17 +58,17 @@ define("curUser", $who);
 $OP = new Open();
 
 if(!function_exists("get")){
-	function get($key, $uid = "", $json = true){
-		global $OP;
-		return $OP->get($key, $uid, $json);
-	}
+  function get($key, $uid = "", $json = true){
+    global $OP;
+    return $OP->get($key, $uid, $json);
+  }
 }
 /* Do these if user is logged in */
 if( loggedIn && !isset($uimg) ){
-	$uimg  = get("img");
-	$uaimg = get("avatar");
-	$uname = get("name", "", false);
-	/* Update the last seen time */
-	$OP->save("seen");
+  $uimg = get("img");
+  $uaimg = get("avatar");
+  $uname = get("name", "", false);
+  /* Update the last seen time */
+  $OP->save("seen");
 }
 ?>

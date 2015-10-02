@@ -3,7 +3,7 @@
  <div class="msggt">
   <div class="close">x</div>
   <div class="chattop">
-   Chat | <a id="cwinopen" href="chat/">Full Chat</a>
+   <a id="cwinopen" href="chat/">Chat</a>
   </div>
   <?php require_once "inc/render.php";?>
   <?php echo Render::chat("gadget");?>

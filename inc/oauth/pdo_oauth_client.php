@@ -41,15 +41,15 @@ class pdo_oauth_client_class extends database_oauth_client_class{
         if($this->debug){
             $this->OutputDebug('Query: '.$sql);
         }
-        $results   = array();
+        $results = array();
         $statement = $this->db->prepare($sql);
         if(!$statement){
             return $this->SetError($statement->errorInfo());
         }
         $prepared = array();
-        $types 	= '';
-        $tp 		= count($parameters);
-        $v 			= $parameters;
+        $types = '';
+        $tp = count($parameters);
+        $v = $parameters;
 
         for($p = 0; $p < $tp;){
             switch($t = $v[$p++]){
@@ -73,7 +73,7 @@ class pdo_oauth_client_class extends database_oauth_client_class{
         }
 
         foreach($prepared as $param => $value){
-        		$statement->bindValue($param + 1, $value, PDO::PARAM_STR);
+            $statement->bindValue($param + 1, $value, PDO::PARAM_STR);
         }
         
         if(!$statement->execute()){

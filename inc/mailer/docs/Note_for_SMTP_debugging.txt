@@ -5,11 +5,11 @@ If you are having problems connecting or sending emails through your SMTP server
 
 $mail->SMTPDebug = 1;
 $mail->IsSMTP();  // telling the class to use SMTP
-$mail->SMTPAuth   = true;                // enable SMTP authentication
-$mail->Port       = 26;                  // set the SMTP port
-$mail->Host       = "mail.yourhost.com"; // SMTP server
-$mail->Username   = "name@yourhost.com"; // SMTP account username
-$mail->Password   = "your password";     // SMTP account password
+$mail->SMTPAuth = true;                // enable SMTP authentication
+$mail->Port = 26;                  // set the SMTP port
+$mail->Host = "mail.yourhost.com"; // SMTP server
+$mail->Username = "name@yourhost.com"; // SMTP account username
+$mail->Password = "your password";     // SMTP account password
 
 Notes on this:
 $mail->SMTPDebug = 0; ... will disable debugging (you can also leave this out completely, 0 is the default

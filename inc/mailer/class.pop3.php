@@ -128,9 +128,9 @@ class POP3 {
    * @return POP3
    */
   public function __construct() {
-    $this->pop_conn  = 0;
+    $this->pop_conn = 0;
     $this->connected = false;
-    $this->error     = null;
+    $this->error = null;
   }
 
   /**

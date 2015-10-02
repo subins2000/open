@@ -13,14 +13,14 @@ $mail = new PHPMailer(true); // the true param means it will throw exceptions on
 $mail->IsSMTP(); // telling the class to use SMTP
 
 try {
-  $mail->Host       = "mail.yourdomain.com"; // SMTP server
-  $mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
-  $mail->SMTPAuth   = true;                  // enable SMTP authentication
+  $mail->Host = "mail.yourdomain.com"; // SMTP server
+  $mail->SMTPDebug = 2;                     // enables SMTP debug information (for testing)
+  $mail->SMTPAuth = true;                  // enable SMTP authentication
   $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-  $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-  $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-  $mail->Username   = "yourusername@gmail.com";  // GMAIL username
-  $mail->Password   = "yourpassword";            // GMAIL password
+  $mail->Host = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+  $mail->Port = 465;                   // set the SMTP port for the GMAIL server
+  $mail->Username = "yourusername@gmail.com";  // GMAIL username
+  $mail->Password = "yourpassword";            // GMAIL password
   $mail->AddReplyTo('name@yourdomain.com', 'First Last');
   $mail->AddAddress('whoto@otherdomain.com', 'John Doe');
   $mail->SetFrom('name@yourdomain.com', 'First Last');

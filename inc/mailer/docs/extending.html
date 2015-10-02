@@ -20,10 +20,10 @@ require("class.phpmailer.php");
 
 $mail = new phpmailer();
 
-$mail->From     = "list@example.com";
+$mail->From = "list@example.com";
 $mail->FromName = "List manager";
-$mail->Host     = "smtp1.example.com;smtp2.example.com";
-$mail->Mailer   = "smtp";
+$mail->Host = "smtp1.example.com;smtp2.example.com";
+$mail->Mailer = "smtp";
 
 @MYSQL_CONNECT("localhost", "root", "password");
 @mysql_select_db("my_company");
@@ -33,18 +33,18 @@ $result = @MYSQL_QUERY($query);
 while ($row = mysql_fetch_array ($result))
 {
     // HTML body
-    $body  = "Hello &lt;font size=\"4\"&gt;" . $row["full_name"] . "&lt;/font&gt;, &lt;p&gt;";
+    $body = "Hello &lt;font size=\"4\"&gt;" . $row["full_name"] . "&lt;/font&gt;, &lt;p&gt;";
     $body .= "&lt;i&gt;Your&lt;/i&gt; personal photograph to this message.&lt;p&gt;";
     $body .= "Sincerely, &lt;br&gt;";
     $body .= "phpmailer List manager";
 
     // Plain text body (for mail clients that cannot read HTML)
-    $text_body  = "Hello " . $row["full_name"] . ", \n\n";
+    $text_body = "Hello " . $row["full_name"] . ", \n\n";
     $text_body .= "Your personal photograph to this message.\n\n";
     $text_body .= "Sincerely, \n";
     $text_body .= "phpmailer List manager";
 
-    $mail->Body    = $body;
+    $mail->Body = $body;
     $mail->AltBody = $text_body;
     $mail->AddAddress($row["email"], $row["full_name"]);
     $mail->AddStringAttachment($row["photo"], "YourPhoto.jpg");
@@ -87,10 +87,10 @@ require("class.phpmailer.php");
 
 class my_phpmailer extends phpmailer {
     // Set default variables for all new objects
-    var $From     = "from@example.com";
+    var $From = "from@example.com";
     var $FromName = "Mailer";
-    var $Host     = "smtp1.example.com;smtp2.example.com";
-    var $Mailer   = "smtp";                         // Alternative to IsSMTP()
+    var $Host = "smtp1.example.com;smtp2.example.com";
+    var $Mailer = "smtp";                         // Alternative to IsSMTP()
     var $WordWrap = 75;
 
     // Replace the default error_handler
@@ -128,7 +128,7 @@ $mail = new my_phpmailer;
 // Now you only need to add the necessary stuff
 $mail->AddAddress("josh@example.com", "Josh Adams");
 $mail->Subject = "Here is the subject";
-$mail->Body    = "This is the message body";
+$mail->Body = "This is the message body";
 $mail->AddAttachment("c:/temp/11-10-00.zip", "new_name.zip");  // optional name
 
 if(!$mail->Send())

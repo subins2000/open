@@ -5,25 +5,25 @@
 include("class.phpmailer.php");
 include("class.smtp.php"); // note, this is optional - gets called from main class if not already loaded
 
-$mail             = new PHPMailer();
+$mail = new PHPMailer();
 
-$body             = $mail->getFile('contents.html');
-$body             = eregi_replace("[\]",'', $body);
+$body = $mail->getFile('contents.html');
+$body = eregi_replace("[\]",'', $body);
 
 $mail->IsSMTP();
-$mail->SMTPAuth   = true;                  // enable SMTP authentication
+$mail->SMTPAuth = true;                  // enable SMTP authentication
 $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-$mail->Port       = 465;                   // set the SMTP port
+$mail->Host = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+$mail->Port = 465;                   // set the SMTP port
 
-$mail->Username   = "yourname@gmail.com";  // GMAIL username
-$mail->Password   = "password";            // GMAIL password
+$mail->Username = "yourname@gmail.com";  // GMAIL username
+$mail->Password = "password";            // GMAIL password
 
-$mail->From       = "replyto@yourdomain.com";
-$mail->FromName   = "Webmaster";
-$mail->Subject    = "This is the subject";
-$mail->AltBody    = "This is the body when user views in plain text format"; //Text Body
-$mail->WordWrap   = 50; // set word wrap
+$mail->From = "replyto@yourdomain.com";
+$mail->FromName = "Webmaster";
+$mail->Subject = "This is the subject";
+$mail->AltBody = "This is the body when user views in plain text format"; //Text Body
+$mail->WordWrap = 50; // set word wrap
 
 $mail->MsgHTML($body);
 

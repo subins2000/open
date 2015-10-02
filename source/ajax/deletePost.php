@@ -1,6 +1,6 @@
 <?php
 
-$LS->init();
+\Fr\LS::init();
 $id=$_POST['id'];
 if($_P && is_numeric($id)){
  $sql=$OP->dbh->prepare("DELETE FROM posts WHERE id=? AND uid=?");

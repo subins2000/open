@@ -1,4 +1,4 @@
-<?php $LS->init();?>
+<?php \Fr\LS::init();?>
 <!DOCTYPE html>
 <html><head>
  <?php

@@ -1,6 +1,6 @@
 <?php
 require_once "$docRoot/inc/render.php";
-$LS->init();
+\Fr\LS::init();
 $to=$_POST['to'];
 $lid=isset($_POST['lid']) ? $_POST['lid']:"";
 $lup=false;

@@ -120,7 +120,7 @@ class Response
      */
     public function __construct($body = '', $status_code = null, array $headers = array())
     {
-        $status_code   = $status_code ?: static::$default_status_code;
+        $status_code = $status_code ?: static::$default_status_code;
 
         // Set our body and code using our internal methods
         $this->body($body);

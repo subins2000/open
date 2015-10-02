@@ -9,7 +9,7 @@ include "load.php";
 $sql=$OP->dbh->prepare("SELECT * FROM users");
 $sql->execute();
 while($r = $sql->fetch()){
-  	$OP->uid = $r['id'];
-  	$OP->save("img", "");
+    $OP->uid = $r['id'];
+    $OP->save("img", "");
 }
 ?>

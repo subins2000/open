@@ -1,6 +1,6 @@
 <?php
 
-$LS->init();
+\Fr\LS::init();
 if($_P){
  $av_names=array("gender"=>"gen", "birthday"=>"birth", "aboutme"=>"about", "e-mail"=>"mail", "phone"=>"phone", "address"=>"add", "livesat"=>"live", "worksat"=>"work", "loves"=>"lve", "facebook"=>"fb", "twitter"=>"tw", "google+"=>"gplus", "pinterest"=>"pin");
  foreach($_POST as $k=>$v){

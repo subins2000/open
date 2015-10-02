@@ -17,7 +17,7 @@ $mail->IsSMTP();
 
 try {
   $mail->SMTPDebug = 2;
-  $mail->Host     = 'pop3.yourdomain.com';
+  $mail->Host = 'pop3.yourdomain.com';
   $mail->AddReplyTo('name@yourdomain.com', 'First Last');
   $mail->AddAddress('whoto@otherdomain.com', 'John Doe');
   $mail->SetFrom('name@yourdomain.com', 'First Last');

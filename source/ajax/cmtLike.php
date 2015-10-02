@@ -1,5 +1,5 @@
 <?php
-$LS->init();
+\Fr\LS::init();
 $id=$_POST['id'];
 if($_P && is_numeric($id)){
  $sql=$OP->dbh->prepare("SELECT `id` FROM `comments` WHERE `id`=?");

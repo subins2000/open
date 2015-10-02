@@ -1,6 +1,6 @@
 <?php
 
-$LS->init();
+\Fr\LS::init();
 $id=$_POST['id'];
 if($_P && is_numeric($id)){
  $sql=$OP->dbh->prepare("SELECT id FROM users WHERE id=?");
@@ -11,8 +11,8 @@ if($_P && is_numeric($id)){
   if($sql->rowCount()==0){
    $sql=$OP->dbh->prepare("INSERT INTO conn (uid,fid,since) VALUES (?,?,NOW())");
    $sql->execute(array($who, $id));
-   include "$docRoot/inc/notify.php";
-   $OP->notify("follow",0,0, $id, $who);
+
+   $OP->notify("follow", 0, 0, $id, $who);
 ?>
 $("#<?php echo$id;?>.follow").removeClass("follow").addClass("unfollow").html("<span hide>UnFollow</span>-");
 <?php

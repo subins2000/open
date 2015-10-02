@@ -216,8 +216,8 @@ Version 2.0.0 rc1 (Thu, Nov 08 2007), interim release
   $mail = new PHPMailer();
   $mail->Mailer = "smtp";
   $mail->Host = "smtp.example.com";
-  $mail->SMTPSecure   = "tls"; // option
-  //$mail->SMTPSecure   = "ssl";  // option
+  $mail->SMTPSecure = "tls"; // option
+  //$mail->SMTPSecure = "ssl";  // option
   ...
   $mail->Send();
 * PHPMailer has been tested with PHP4 (4.4.7) and PHP5 (5.2.7)

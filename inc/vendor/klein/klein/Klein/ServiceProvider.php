@@ -108,7 +108,7 @@ class ServiceProvider
     public function bind(Request $request = null, Response $response = null)
     {
         // Keep references
-        $this->request  = $request  ?: $this->request;
+        $this->request = $request  ?: $this->request;
         $this->response = $response ?: $this->response;
 
         return $this;
@@ -215,8 +215,8 @@ class ServiceProvider
         // Create our markdown parse/conversion regex's
         $md = array(
             '/\[([^\]]++)\]\(([^\)]++)\)/' => '<a href="$2">$1</a>',
-            '/\*\*([^\*]++)\*\*/'          => '<strong>$1</strong>',
-            '/\*([^\*]++)\*/'              => '<em>$1</em>'
+            '/\*\*([^\*]++)\*\*/' => '<strong>$1</strong>',
+            '/\*([^\*]++)\*/' => '<em>$1</em>'
         );
 
         // Let's make our arguments more "magical"

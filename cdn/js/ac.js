@@ -6,7 +6,7 @@
  * licensed under the MIT license:
  * //www.opensource.org/licenses/mit-license.php
 */
-(function($) {	
+(function($) {  
  var defaultOptions={
   cache : true,
   extraParams : {},

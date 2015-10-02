@@ -72,7 +72,7 @@ class DataCollectionTest extends AbstractKleinTest
             'id' => 1337,
             'name' => array(
                 'first' => 'Trevor',
-                'last'  => 'Suarez',
+                'last' => 'Suarez',
             ),
             'float' => 13.37,
             'thing' => new stdClass(),
@@ -98,8 +98,8 @@ class DataCollectionTest extends AbstractKleinTest
         // Populate our sample data
         $totally_different_sample_data = array(
             '_why' => 'the lucky stiff',
-            'php'  => 'has become beautiful',
-            'yay'  => 'life is very good. :)',
+            'php' => 'has become beautiful',
+            'yay' => 'life is very good. :)',
         );
 
         $this->prepareSampleData($totally_different_sample_data);
