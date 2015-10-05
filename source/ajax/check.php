@@ -12,8 +12,8 @@ if(loggedIn && $_P){
   $url = urldecode($_POST['cu']);
   $url = parse_url($url);
   $path = explode("/", $url['path']);
-  if($path == "/search"){
-  preg_match("/\/search\/(.*?)/", $matches);
+  if($path[0] == "/search"){
+    preg_match("/\/search\/(.*?)/", $matches);
      $q = urldecode($matches[0]);
      $sql = $OP->dbh->prepare("SELECT * FROM `posts` WHERE `id` > :lid AND `post` LIKE :q AND (
        `uid`=:who OR `uid` IN (
@@ -34,8 +34,7 @@ if(loggedIn && $_P){
         ":lid" => $id
      ));
   }elseif($_POST['pt']=="profile"){
-     $pU = explode("/", $path);
-     $pU = $pU[1];
+     $pU = $path[1];
      $sql = $OP->dbh->prepare("SELECT * FROM `posts` WHERE `id` > :lid AND `uid`=:fid ORDER BY `id` DESC LIMIT 10");
      $sql->execute(array(
         ":fid" => $pU,

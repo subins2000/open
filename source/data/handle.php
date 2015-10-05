@@ -19,7 +19,7 @@ if(substr($fileName, -4) == ".png"){
 if($fileName == '' || $userID == ''){
    $OP->ser();
 }else{
-   if($fileCrop != "default"){
+  if($fileCrop != "default"){
     include_once "$docRoot/source/data/resizer.php";
       $fileCrop = $fileCrop == "small.png" ? 200 : $fileCrop;
       $fileCrop = substr($fileCrop, -4) == ".png" ? substr_replace($fileCrop, "", -4, 4) : $fileCrop;
@@ -31,12 +31,14 @@ if($fileName == '' || $userID == ''){
    /* md5 encode the file name */
    $fileName = md5($fileName);
    
-   $sql=$OP->dbh->prepare("SELECT `txt` FROM `data` WHERE `uid`=? AND `name`=?");
+   $sql=$OP->dbh->prepare("SELECT `txt` FROM `data` WHERE `uid`=? AND `name` = ?");
    $sql->execute(array($userID, $fileName));
    if($sql->rowCount() == 0){
       $OP->ser();
    }
-   /* The File Data encoded with base64 */
+   /**
+    * The File Data
+    */
    $fileData = $sql->fetchColumn();
    
    /* The timestamp of the next 10 year */
@@ -56,9 +58,6 @@ if($fileName == '' || $userID == ''){
     /* "Yes, it's the old version and nothing has been changed" - We send this message to the browser */
     header("HTTP/1.1 304 Not Modified");
   }
-   
-   /* Get the original image file */
-   $fileData = base64_decode($fileData);
  
    /* Serve the small image if it's the one that is requested */
    if( isset($resizeIMG) ){
@@ -67,19 +66,23 @@ if($fileName == '' || $userID == ''){
       file_put_contents($temp, $fileData);
       $resize = new ResizeImage($temp);
       
-      /* Make the small image resize to small according to the original ratio */
-      $total = $resize->imgw() + $resize->imgh();
-      $newWidth = $resize->imgw() / $total * $fileCrop;
-      $newHeight = $resize->imgh() / $total * $fileCrop;
+      /**
+       * Make the small image resize to small according to the original ratio
+       */
+      $ratio = $resize->imgw() / $resize->imgh();
+      $newWidth = $ratio * $fileCrop;
+      $newHeight = $ratio * $fileCrop;
       
       if($newWidth > $resize->imgw() || $newHeight > $resize->imgh()){
-      $OP->ser();
-    }
-      
-      /* Resize & Save */
-      $resize->resizeTo($newWidth, $newHeight, 'exact');
-      $resize->saveImage($temp, 80);
-      $fileData = file_get_contents($temp);
+        $fileData = file_get_contents($temp);
+      }else{
+        /**
+         * Resize & Save
+         */
+        $resize->resizeTo($newWidth, $newHeight, 'exact');
+        $resize->saveImage($temp, 80);
+        $fileData = file_get_contents($temp);
+      }
    }
    /* Output the file data */
    echo $fileData;

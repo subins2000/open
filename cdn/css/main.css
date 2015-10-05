@@ -112,6 +112,7 @@ header nav .chat{
   margin: 0px auto 0px auto;
   padding: 60px 14px 15px 14px;
   width: 800px;
+  height: 100%;
   font-size: 14px;
   line-height: 18px;
   background: white;

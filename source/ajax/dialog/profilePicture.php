@@ -16,13 +16,17 @@
     if(isset($_FILES['file'])){
       include_once "$docRoot/source/data/add.php";
       $imageFile = $_FILES['file'];
-      $uploadFileURL = upload($who, false, $imageFile);
+      $uploadFileURL = upload($who, "profile_pic", $imageFile, 200, 200);
       if($uploadFileURL == "extensionNotSupported"){ /* Was the upload finished successfully ? */
         $OP->ser("Extensions Not Supported", "The extension is not supported. Use supported image extensions");
       }elseif($uploadFileURL){
-        /* Save the image URL */
+        /**
+         * Save the image URL
+         */
         $OP->save("img", $uploadFileURL);
-        /* and show success message */
+        /**
+         * and show success message
+         */
         $OP->sss("Uploaded Image", "The Image you gave was successfully uploaded & it has been made as your profile picture. <b>Reload Page to see changes.</b>");
       }else{
         /* Or error message */

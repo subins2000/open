@@ -151,7 +151,7 @@ class Render {
               }
               if( $v['image'] != "" ){
                 CLEAN_HOST != "open.dev" ? $v['image'] = str_replace("http:", "https:", $v['image']) : "";
-                $html .= "<img class='postImage' data-fullsize='{$v['image']}' src='{$v['image']}/500' />";
+                $html .= "<img class='postImage' data-fullsize='{$v['image']}' src='{$v['image']}/200' />";
               }
               $html .= "</div>";
               $html .= "<div class='bottom'>";

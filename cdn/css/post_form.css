@@ -30,7 +30,8 @@
  min-width: 16px !important;
  background-color: white;
  padding: 8px !important;
- height: 16px;
+  height: 34px;
+  width: 34px;
 }
 .post_form .small{
  padding: 5px !important;
