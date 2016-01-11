@@ -58,8 +58,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
         </div>
         <div class="block" style="width:200px;text-align:left;">
           <h1>Social Log In</h1>
-          <a href="<?php echo HOST;?>/oauth/login_with_facebook?c=<?php echo $returnURL;?>"><img src="<?php echo HOST;?>/cdn/img/fb_login.png"/></a><cl/>
-          <a href="<?php echo HOST;?>/oauth/login_with_google?c=<?php echo $returnURL;?>"><img src="<?php echo HOST;?>/cdn/img/google_login.png"/></a>
+          <a href="<?php echo HOST;?>/oauth/login_with_facebook?c=<?php echo base64_encode($returnURL);?>"><img src="<?php echo HOST;?>/cdn/img/fb_login.png"/></a><cl/>
+          <a href="<?php echo HOST;?>/oauth/login_with_google?c=<?php echo base64_encode($returnURL);?>"><img src="<?php echo HOST;?>/cdn/img/google_login.png"/></a>
         </div>
       </div>
     </div>

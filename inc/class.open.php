@@ -253,7 +253,7 @@ class Open{
     return '<a href="'.$url.'">'.$t.'</a>'.$ots;
   }
  
-  /* Makes @1 into <a href='//open.dev/1'>@SubinSiby</a> */
+  /* Makes @1 into <a href='//open.subinsb.com/1'>@SubinSiby</a> */
   public function smention($s, $t){
     $userid = $t[1];
     if(!isset($this->cache["smention"][$userid])){

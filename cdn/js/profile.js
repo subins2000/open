@@ -33,5 +33,5 @@ $("#editBox").live("click",function(){
  }
 });
 $("#ch_hi").live("click",function(){
- open.dialog("http://open.dev/ajax/dialog/header");
+ open.dialog("http://open.subinsb.com/ajax/dialog/header");
 });

@@ -17,20 +17,20 @@ require "$docRoot/inc/oauth/mysqli_oauth_client.php";
 $_SESSION['continue'] = isset($_SESSION['continue']) ? $_SESSION['continue'] : "";
 
 /* $_GET['c'] have the URL that should be redirected to after oauth logging in */
-$_GET['c'] = isset($_GET['c']) ? urldecode($_GET['c']) : "";
+$_GET['c'] = isset($_GET['c']) ? urldecode(base64_decode($_GET['c'])) : "";
 
-if($_GET['c'] == '' && $_SESSION['continue'] == ''){
+if($_GET['c'] === '' && $_SESSION['continue'] === ''){
   /* The default Redirect URL open.dev/home */
   $_SESSION['continue'] = Open::URL("home");
 }else if($_GET['c'] != ''){
   /* Or the URL that was sent */
   $hostParts = parse_url($_GET['c']);
-  $hostParts['host'] = isset($hostParts['host']) ? $hostParts['host']:"";
+  $hostParts['host'] = isset($hostParts['host']) ? $hostParts['host'] : "";
   
   if($hostParts['host'] != CLEAN_HOST){
     $_SESSION['continue'] = Open::URL("home");
   }else{
-    $_SESSION['continue'] = urldecode($_GET['c']);
+    $_SESSION['continue'] = $_GET['c'];
   }
 }
 
@@ -77,6 +77,7 @@ if(($success = $client->Initialize())){
             
             $sql = $OP->dbh->prepare("UPDATE `oauth_session` SET `user` = ? WHERE `server` = ? AND `access_token` = ?");
             $sql->execute(array($who, "Facebook", $client->access_token));
+            unset($_SESSION['continue']);
             $OP->redirect($location);
           }else{
             /**
@@ -102,9 +103,13 @@ if(($success = $client->Initialize())){
               "seen" => ""
             ));
           
-            /* Login the user */
-            \Fr\LS::login($email, "");
+            /**
+             * Login the user
+             */
+            $id = \Fr\LS::login($email, "", false, false);
             $client->SetUser($id);
+            unset($_SESSION['continue']);
+            \Fr\LS::login($email, "");
             $OP->redirect($location);
           }
         }

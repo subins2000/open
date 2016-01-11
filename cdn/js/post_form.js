@@ -17,14 +17,14 @@ $(prntf +'#privacy').live("click",function(){
 });
 $(prntf +"#ptwit").live("click",function(){
   if($(this).find("#twverify").val()==''){
-    window.location="http://open.dev/oauth/login_with_twitter";
+    window.location="http://open.subinsb.com/oauth/login_with_twitter";
   }else{
     $(this).find('input[type=checkbox]').click();
   }
 });
 $(prntf +"#pfbit").live("click",function(){
   if($(this).find("#fbverify").val()==''){
-    window.location="http://open.dev/oauth/login_with_facebook";
+    window.location="http://open.subinsb.com/oauth/login_with_facebook";
   }else{
     $(this).find('input[type=checkbox]').click();
   }

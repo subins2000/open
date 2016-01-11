@@ -1,5 +1,5 @@
 window.open = {
-  "host"   : "http://open.dev",
+  "host"   : "http://open.subinsb.com",
   "cache" : {}
 };
 localStorage['onFormSion'] = 0;
@@ -77,15 +77,15 @@ window.filter = function($msg){
   $msg = $msg.replace(/\</g,'&lt;');
   $msg =$msg.replace(/\>/g,'&gt;');
   $msg = $msg.replace(/\//g,'\/');
-  /*if($f===true){
-  *///$msg=$msg.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
-  /*$msg=$msg.replace(/"/g,'\"');
-  *///$msg=$msg.replace(/\*\/(.*?)\/\*/g,'<i>$1</i>');
-  /*$msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="http://open.dev/url?url=$1">$1</a>');
-  $msg=$msg.replace("\n", "<br/>");
-  $msg=$msg.replace(RegExp('(\#[^ ]+)','g'),'<a href="http://open.dev/search?q=$1">$1</a>');
-  $msg=$msg.replace("http://open.dev/search?q=#", "http://open.dev/search?q=%23");
-  }*/
+  // if($f===true){
+  // $msg=$msg.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+  // $msg=$msg.replace(/"/g,'\"');
+  // $msg=$msg.replace(/\*\/(.*?)\/\*/g,'<i>$1</i>');
+  // $msg=$msg.replace(RegExp('((www|http://)[^ ]+)','g'), '<a target="_blank" href="http://open.subinsb.com/url?url=$1">$1</a>');
+  // $msg=$msg.replace("\n", "<br/>");
+  // $msg=$msg.replace(RegExp('(\#[^ ]+)','g'),'<a href="http://open.subinsb.com/search?q=$1">$1</a>');
+  // $msg=$msg.replace("http://open.subinsb.com/search?q=#", "http://open.subinsb.com/search?q=%23");
+  // }
   return $msg;
 };
 
@@ -265,7 +265,7 @@ open.externalLinks = function(elem){
   elem.find("a[href]").die("mousedown").live("mousedown",function(){
     url = $(this).attr("href");
     if(/open\.subinsb\.com/.test(url) === false){
-      newURL = "http://open.dev/url/" + url;
+      newURL = "http://open.subinsb.com/url/" + url;
       $(this).attr("href", newURL);
       $(this).attr("target", "_blank");
     }

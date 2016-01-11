@@ -3,10 +3,10 @@
 ini_set("display_errors", "on");
 
 /* Define the Host. No / at the end */
-define("HOST", "http://open.dev");
+define("HOST", "http://open.subinsb.com");
 
 /* Host without protocol (http, https) */
-define("CLEAN_HOST", "open.dev");
+define("CLEAN_HOST", "open.subinsb.com");
 
 /* -- Database Configuration STARTS -- */
   

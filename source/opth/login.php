@@ -1,6 +1,6 @@
 <?php
 if(!loggedIn){
-  $c = "?c=" . urlencode(\Fr\LS::curPageURL());
+  $c = "?c=" . base64_encode(\Fr\LS::curPageURL());
   if($_GET['service'] == "facebook"){
     \Fr\LS::redirect("/oauth/login_with_facebook" . $c);
   }else if($_GET['service'] == "google"){

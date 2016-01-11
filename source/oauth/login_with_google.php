@@ -15,7 +15,7 @@ include "$docRoot/inc/oauth/oauth_client.php";
 $_SESSION['continue'] = isset($_SESSION['continue']) ? $_SESSION['continue']:"";
 
 /* $_GET['c'] have the URL that should be redirected to after oauth logging in */
-$_GET['c'] = isset($_GET['c']) ? urldecode($_GET['c']) : "";
+$_GET['c'] = isset($_GET['c']) ? urldecode(base64_decode($_GET['c'])) : "";
 
 if($_GET['c'] == '' && $_SESSION['continue'] == ''){
   /* The default Redirect URL open.dev/home */

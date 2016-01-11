@@ -8,7 +8,7 @@ require_once "$docRoot/inc/class.open.php";
 require_once "$docRoot/inc/class.logsys.php";
 
 $db = unserialize(DATABASE);
-\Fr\LS::$config = array(
+\Fr\LS::config(array(
   "db" => array(
     "host" => $db['host'],
     "port" => $db['port'],
@@ -42,9 +42,11 @@ $db = unserialize(DATABASE);
   ),
   "features" => array(
     "email_login" => false
+  ),
+  "cookies" => array(
+    "domain" => CLEAN_HOST
   )
-);
-\Fr\LS::construct();
+));
 
 /* Basic Variables */
 $loggedIn = \Fr\LS::$loggedIn; /* Boolean on status of current user (logged in or not) */
