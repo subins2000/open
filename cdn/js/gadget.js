@@ -37,7 +37,7 @@ open.chat.check = function (type){
           }
         }, "yes"); // It's an interval
       }
-    }, 7000);
+    }, 15000);
   }
   if(type == "gadget"){
     open.checks.init({

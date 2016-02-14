@@ -66,7 +66,7 @@
             $OP->ser("You Already Have An Account!", "There is already an account registered with the E-Mail you have given. <a href='http://open.subinsb.com/me/ResetPassword'>Forgot Password ?</a>");
           }
           $secretToken = $OP->encrypt("{$email}cantMakePublic");
-          if(CLEAN_HOST == "open.dev"){
+          if(CLEAN_HOST == "open.subinsb.com"){
             echo $secretToken;
           }
           

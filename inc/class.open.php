@@ -552,7 +552,7 @@ class Open{
     /* $nowAccount means that the account that should be currently used to send the email */
     $nowAccount = file_get_contents($statusFile);
   
-    if($nowAccount == "5" || $nowAccount == "0"){
+    if($nowAccount == "4" || $nowAccount == "0"){
       /* This is the Mailgun account */
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -569,7 +569,7 @@ class Open{
       );
       $result = curl_exec($ch);
       curl_close($ch);
-      $newStatus = $nowAccount == "5" ? 0 : $nowAccount + 1;
+      $newStatus = $nowAccount == "4" ? 0 : $nowAccount + 1;
     }else{
       require_once docRoot . "/inc/mailer/class.phpmailer.php";
       $mailAccounts = array(
