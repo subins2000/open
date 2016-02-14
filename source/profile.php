@@ -77,7 +77,7 @@ $Rep = $RP->getRep($id); // Reputation
 <!DOCTYPE html>
 <html>
   <head>
-    <?php $OP->head("", "ac,profile,time,home,gadget", "ac,home,profile,gadget");?>
+    <?php $OP->head($name, "ac,profile,time,home,gadget", "ac,home,profile,gadget");?>
     <meta name="oid" value="<?php echo$id;?>"/>
     <meta name="type" value="profile"/>
   </head>
