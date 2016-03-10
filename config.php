@@ -4,10 +4,14 @@
  */
 ini_set("display_errors", "on");
 
-/* Define the Host. No / at the end */
+/**
+ * The URL of Open. No '/' at the end
+ */
 define("HOST", "http://open.sim");
 
-/* Host without protocol (http, https) */
+/**
+ * Hostname (URL without protocol [http, https] and slashes)
+ */
 define("CLEAN_HOST", "open.sim");
 
 /* -- Database Configuration STARTS -- */
