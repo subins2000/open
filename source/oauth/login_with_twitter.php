@@ -25,8 +25,8 @@ $client->server = 'Twitter';
 $client->offline = true;
 $client->debug = false;
 $client->debug_http = false;
-$client->client_id = 'twitterClientID';
-$client->client_secret = 'twitterClientSecret';
+$client->client_id = $GLOBALS['cfg']['twitter']['api_key'];
+$client->client_secret = $GLOBALS['cfg']['twitter']['api_secret'];
 $client->redirect_uri = Open::URL('/oauth/login_with_twitter');
 
 if(($success = $client->Initialize())){

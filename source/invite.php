@@ -17,7 +17,7 @@
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <script>
   FB.init({
-   appId:'fbAppID',
+   appId:<?php echo $GLOBALS['cfg']['facebook']['app_id'];?>,
    cookie:true,
    status:true,
    xfbml:true,

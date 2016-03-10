@@ -26,7 +26,7 @@
  z-index: 2;
 }
 .post_form #prtoggle{
- background: url(//open.subinsb.com/cdn/img/web.png) no-repeat !important;
+ background: url(//open.sim/cdn/img/web.png) no-repeat !important;
  min-width: 16px !important;
  background-color: white;
  padding: 8px !important;
@@ -41,7 +41,7 @@
  vertical-align:top;
 }
 .post_form .cam{
-  background: url(//open.subinsb.com/cdn/img/camera.png) no-repeat !important;
+  background: url(//open.sim/cdn/img/camera.png) no-repeat !important;
   background-color:  white;
   background-size: cover !important;
   width: 40px;

@@ -17,7 +17,7 @@
         $code = isset($_POST['code']) ? $_POST['code']:"";
         if(isset($_POST['verify']) && $code!=""){
           $decoded = $OP->decrypt($code);
-          $origSTR = "{$_POST['user']}cantMakePublic";
+          $origSTR = $_POST['user'] . $cfg['keys']['email_verification'];
           if($origSTR == $decoded){
             $verified = 1;
           }else{
@@ -65,8 +65,8 @@
           if( \Fr\LS::userExists($email) ){
             $OP->ser("You Already Have An Account!", "There is already an account registered with the E-Mail you have given. <a href='http://open.subinsb.com/me/ResetPassword'>Forgot Password ?</a>");
           }
-          $secretToken = $OP->encrypt("{$email}cantMakePublic");
-          if(CLEAN_HOST == "open.subinsb.com"){
+          $secretToken = $OP->encrypt($email . $cfg['keys']['email_verification']);
+          if(CLEAN_HOST == "open.sim"){
             echo $secretToken;
           }
           
@@ -91,7 +91,7 @@
           $name = $OP->format($_POST['name']);
           
           $decoded = $OP->decrypt($_POST['user']);
-          $origSTR = "{$_POST['nuser']}cantMakePublic";
+          $origSTR = $_POST['nuser'] . $cfg['keys']['email_verification'];
           
           if($origSTR != $decoded){
             $OP->ser("User Not Verified.", "The user in which this form was sent have not verified his/her E-Mail.");

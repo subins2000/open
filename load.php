@@ -2,8 +2,12 @@
 $docRoot = realpath(__DIR__);
 define("docRoot", $docRoot);
 
-/* Load the configuration */
+/**
+ * Load the configuration
+ */
 require_once "$docRoot/config.php";
+$GLOBALS['cfg'] = $cfg;
+
 require_once "$docRoot/inc/class.open.php";
 require_once "$docRoot/inc/class.logsys.php";
 
@@ -25,11 +29,11 @@ $db = unserialize(DATABASE);
     /**
      * Changing cookie key will expire all current active login sessions
      */
-    "cookie" => "cantMakePublic",
+    "cookie" => $cfg["logsys"]["cookie_key"],
     /**
      * `salt` should not be changed after users are created
      */
-    "salt" => "cantMakePublic"
+    "salt" => $cfg["logsys"]["password_salt"]
   ),
   "pages" => array(
     "no_login" => array(

@@ -36,7 +36,7 @@ while($r=$sql->fetch()){
         $OP->ser("Error", "Password must contain atleast 6 characters.");
        }
        $rsalt=$OP->randStr('25');
-       $site_salt="cantMakePublic";
+       $site_salt=")%*@*%!&%^)#@-_+`=~";
        $salted_hash = hash('sha256', $_POST['new'].$site_salt.$rsalt);
        $sql=$OP->dbh->prepare("UPDATE users SET password=?,psalt=? WHERE id=?;DELETE FROM verify WHERE code=?");
        $sql->execute(array($salted_hash, $rsalt, $fwho, $id));

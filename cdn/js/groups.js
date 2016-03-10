@@ -1,4 +1,4 @@
-$("#toInvite").smention("http://open.subinsb.com/ajax/getUsers",{
+$("#toInvite").smention("http://open.sim/ajax/getUsers",{
   avatar : true,
   width : 300,
   position : "below",

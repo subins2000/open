@@ -27,8 +27,8 @@ class SocialPost extends Open {
      $this->client->offline = true;
      $this->client->debug = false;
      $this->client->debug_http = true;
-     $this->client->client_id = 'twitterClientID';
-     $this->client->client_secret = 'twitterClientSecret';
+     $this->client->client_id = $GLOBALS['cfg']['twitter']['api_key'];
+     $this->client->client_secret = $GLOBALS['cfg']['twitter']['api_secret'];
      
      if( $success = $this->client->Initialize() ){
         $success = $this->client->CallAPI(
@@ -64,8 +64,8 @@ class SocialPost extends Open {
      $this->client->offline = true;
      $this->client->debug = false;
      $this->client->debug_http = false;
-     $this->client->client_id = 'fbAppID';
-     $this->client->client_secret = 'fbAppSecret';
+     $this->client->client_id = $GLOBALS['cfg']['facebook']['app_id'];
+     $this->client->client_secret = $GLOBALS['cfg']['facebook']['app_secret'];
      
      if( $success = $this->client->Initialize() ){
         $success = $this->client->CallAPI(

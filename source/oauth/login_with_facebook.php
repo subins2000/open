@@ -50,8 +50,8 @@ $client->offline = true;
 $client->debug = false;
 $client->debug_http = false;
 $client->redirect_uri = Open::URL('/oauth/login_with_facebook');
-$client->client_id = 'fbAppID';
-$client->client_secret = 'fbAppSecret';
+$client->client_id = $GLOBALS['cfg']['facebook']['app_id'];
+$client->client_secret = $GLOBALS['cfg']['facebook']['app_secret'];
 $client->scope = 'user_about_me,email,user_birthday,user_location,publish_actions';
 
 if(($success = $client->Initialize())){

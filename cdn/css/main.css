@@ -13,7 +13,7 @@
   box-sizing:border-box;
 }
 body{
-  background: #eee url('//open.subinsb.com/cdn/img/dot.gif') repeat left top;
+  background: #eee url('//open.sim/cdn/img/dot.gif') repeat left top;
   margin:0px;
   border:0px;
   padding:0px;
@@ -80,7 +80,7 @@ header .curuserinfo, header .notifications{
   position: relative;
 }
 header nav .lNav{
-  background: url(//open.subinsb.com/cdn/img/sprites/menu.png) !important;
+  background: url(//open.sim/cdn/img/sprites/menu.png) !important;
   background-repeat: no-repeat;
   background-position: 1.5px 0px !important;
   border-radius:10px;

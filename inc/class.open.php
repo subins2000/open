@@ -4,7 +4,7 @@ class Open{
   public $uid, $root, $dbh, $host;
   public $mUsers = array(); // A temporary array for storing mentioned users
   
-  private $secureKey = 'cantMakePublic';
+  private $secureKey = '';
   private $cache = array();
  
   public function __construct(){
@@ -17,7 +17,9 @@ class Open{
     $this->dbh = new PDO("mysql:dbname={$database["name"]};host={$database["host"]};port={$database["port"]}", $database["user"], $database["pass"]);
   
     /* The hostname */
-    $this->host = "https://".$_SERVER['HTTP_HOST']; /* currently no SSL for Open */
+    $this->host = "https://".$_SERVER['HTTP_HOST'];
+    
+    $this->secureKey = $GLOBALS['cfg']['keys']['master_key'];
 
     return true;
   }
@@ -253,7 +255,7 @@ class Open{
     return '<a href="'.$url.'">'.$t.'</a>'.$ots;
   }
  
-  /* Makes @1 into <a href='//open.subinsb.com/1'>@SubinSiby</a> */
+  /* Makes @1 into <a href='//open.sim/1'>@SubinSiby</a> */
   public function smention($s, $t){
     $userid = $t[1];
     if(!isset($this->cache["smention"][$userid])){
@@ -572,11 +574,7 @@ class Open{
       $newStatus = $nowAccount == "4" ? 0 : $nowAccount + 1;
     }else{
       require_once docRoot . "/inc/mailer/class.phpmailer.php";
-      $mailAccounts = array(
-        1 => array("subinsiby1@gmail.com", "password"),
-        2 => array("friendshoodhelp@gmail.com", 'password'),
-        3 => array("openautomail@gmail.com", "password")
-      );
+      $mailAccounts = $GLOBALS['cfg']['email_accounts'];
       try {
         $mailUser = $mailAccounts[$nowAccount][0];
         $mailPass = $mailAccounts[$nowAccount][1];
