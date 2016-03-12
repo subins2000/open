@@ -29,13 +29,13 @@ require_once "$docRoot/inc/class.opth.php";
         if($fb == 1){
           echo"<b>Facebook</b> - Connected - <form method='POST' cp><button name='service' value='0' type='submit'>Remove Connection</button></form>";
         }else{
-          echo "<b>Facebook</b> - Not Connected - <a href='" . HOST . "/oauth/login_with_facebook'><button>Add Connection</button></a>";
+          echo "<b>Facebook</b> - Not Connected - <a href='" . O_URL . "/oauth/login_with_facebook'><button>Add Connection</button></a>";
         }
         echo "<br/><cl/>";
         if($tw==1){
           echo "<b>Twitter</b> - Connected - <form method='POST' cp><button name='service' value='1' type='submit'>Remove Connection</button></form>";
         }else{
-          echo "<b>Twitter</b> - Not Connected - <a href='" . HOST . "/oauth/login_with_twitter'><button>Add Connection</button></a>";
+          echo "<b>Twitter</b> - Not Connected - <a href='" . O_URL . "/oauth/login_with_twitter'><button>Add Connection</button></a>";
         }
         ?>
         <cl/>
@@ -113,7 +113,7 @@ require_once "$docRoot/inc/class.opth.php";
               echo "</td>";
               echo "<td>". date("F j, Y", $site['created']) ."</td>";
               echo "<td>". date("F j, Y", $site['expiry']) ."</td>";
-              echo "<td><form method='POST'><input type='hidden' name='action' value='revoke' /><input type='hidden' name='id' value='{$site['sid']}' /><button class='red'>Revoke Access</button></form></td>";
+              echo "<td><form method='POST'><input type='hidden' name='action' value='revoke' /><input type='hidden' name='id' value='{$site['sid']}' /><button class='btn red'>Revoke Access</button></form></td>";
             echo "</tr>";
           }
           echo "</tbody></table>";
@@ -122,7 +122,7 @@ require_once "$docRoot/inc/class.opth.php";
         <p style="color: red;">Note that after you revoke access, all data on the site being revoked will be lost.</p>
         <h1>Opth Dev</h1>
         <p>Would you like to implement Opth into your site ?</p>
-        <p>See <a href="<?php echo HOST . "/opth/sites"?>">Opth Sites</a> for more information.</p>
+        <p>See <a href="<?php echo O_URL . "/opth/sites"?>">Opth Sites</a> for more information.</p>
       </div>
     </div>
   </body>

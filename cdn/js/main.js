@@ -282,3 +282,10 @@ $("#nfn_button").live("click",function(){
     $(".notifications #nfn").hide();
   }
 });
+
+$(document).ready(function(){
+   $('.button-collapse').sideNav({
+      menuWidth: 200, // Default is 24
+    }
+  );
+});

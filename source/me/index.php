@@ -12,16 +12,16 @@
         <p>Here, in this page you can manage your account such as <b>Password Changing</b></p><cl/>
         <center style="margin:0px auto;display:table;">
           <div>
-            <a href="me/ChangePassword" class="button">Change Password</a>
+            <a href="me/ChangePassword" class="btn">Change Password</a>
           </div><cl/>
           <div>
-            <a href="me/Notify" class="button b-green">Notifications</a>
+            <a href="me/Notify" class="btn green">Notifications</a>
           </div><cl/>
           <div>
-            <a href="me/Connections" class="button b-red">Manage Connections</a>
+            <a href="me/Connections" class="btn red">Manage Connections</a>
           </div><cl/>
           <div>
-            <a href="me/OpenAuth" class="button b-white">Open Auth</a>
+            <a href="me/OpenAuth" class="btn white">Open Auth</a>
           </div><cl/>
         </center>
         <style>.content center .button{width: 100%;}</style>

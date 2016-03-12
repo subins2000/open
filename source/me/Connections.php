@@ -12,7 +12,7 @@
       <div class="content">
         <h1>Manage Connections</h1>
         <p>You can manage all your connections at this page. You can see who follows you, who you're following here.</p><cl/>
-        <h2>Following</h2>
+        <h4>Following</h4>
         <?php
         function parseFollower($id){
           global $OP;
@@ -40,7 +40,7 @@
           parseFollower($r['id']);
         }
         ?>
-        <h2>Followers</h2>
+        <h4>Followers</h4>
         <?php
         $sql = $OP->dbh->prepare("SELECT * FROM `users` WHERE `id` != :who AND `id` IN (SELECT `uid` FROM `conn` WHERE `fid` = :who)");
         $sql->execute(array(":who" => $who));
@@ -52,7 +52,7 @@
           parseFollower($r['id']);
         }
         ?>
-        <h2>Friends</h2>
+        <h4>Friends</h4>
         <p>Friends are people who follow you and you follow them.</p><cl/>
         <?php
         $sql = $OP->dbh->prepare("SELECT * FROM users WHERE id!=:who AND id IN (SELECT uid FROM conn WHERE fid=:who AND uid IN (SELECT fid FROM conn WHERE uid=:who))");

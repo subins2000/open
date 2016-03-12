@@ -15,7 +15,7 @@ while($r=$sql->fetch()){
 </head><body>
  <?php include "$docRoot/inc/header.php";?>
  <div class="wrapper"><div class="content">
-  <h2>Reset Password</h2>
+  <h4>Reset Password</h4>
   <div style="margin:0px auto;width:600px;">
    <form action="ConfirmPasswordReset?id=<?php echo urlencode($id);?>" method="POST">
     <table>

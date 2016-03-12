@@ -48,7 +48,7 @@ if($client->exit){
 }
 if($success){
    if(strlen($client->access_token)){
-      $OP->redirect(HOST . "/home");
+      $OP->redirect(O_URL . "/home");
    }else{
       echo 'Error: ', $client->error, "\n";
    }

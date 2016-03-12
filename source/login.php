@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     header("Location: $returnURL");
     exit;
   }else{
-    $error = 'E-Mail/Password is Incorrect';
+    $error = 'Bad E-Mail/Password';
   }
 }
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
@@ -28,38 +28,40 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
   <body>
     <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
-      <div class="content blocks" style="text-align:center;">
-        <div class="block" style="width:300px;padding: 0px 10px;text-align:left;">
-          <h1>Log In</h1>
-          <form action="login?c=<?php echo urlencode($returnURL);?>" method="POST">
-            <div style="margin:5px 0px;">
-              E-Mail<br/>
-              <input name="user" type="text" size="30"/>
-            </div>
-            <div>
-              Password<br/>
-              <input name="pass" autocomplete="off" type="password" size="30"/>
-            </div><cl/>
-            <label class="blocks">
-              <input type="checkbox" class="block" name="remember_me"/>
-              <span class="block">Remember Me</span>
-            </label><cl/>
-            <div>
-              <input name="submit" type="submit" value="Log In"/>
-              <a href="<?php echo HOST;?>/register" class="button b-green">Register</a>
-            </div><cl/>
-            <a href="<?php echo HOST;?>/me/ResetPassword" class="button b-red">Forgot Password ?</a>
-          </form>
+      <div class="content row">
+        <div class="col s6">
+          <h4>Log In</h4>
           <?php
           if(isset($error)){
             $OP->ser($error, "", "html", false);
           }
           ?>
+          <form action="login?c=<?php echo urlencode($returnURL);?>" method="POST">
+            <div class="input-field">
+              E-Mail<br/>
+              <input name="user" type="text" size="30"/>
+            </div>
+            <div class="input-field">
+              Password<br/>
+              <input name="pass" autocomplete="off" type="password" size="30"/>
+            </div>
+            <div class="input-field">
+              <input type="checkbox" name="remember_me" id="remember_me" />
+              <label for="remember_me">Remember Me</label>
+            </div>
+            <div class="input-field">
+              <button name="submit" class="btn">Log In</button>
+            </div>
+          </form>
+          <div class="input-field">
+            <a href="<?php echo O_URL ;?>/register" class="btn blue">Register</a>
+            <a href="<?php echo O_URL ;?>/me/ResetPassword" class="btn red">Forgot Password ?</a>
+          </div>
         </div>
-        <div class="block" style="width:200px;text-align:left;">
-          <h1>Social Log In</h1>
-          <a href="<?php echo HOST;?>/oauth/login_with_facebook?c=<?php echo base64_encode($returnURL);?>"><img src="<?php echo HOST;?>/cdn/img/fb_login.png"/></a><cl/>
-          <a href="<?php echo HOST;?>/oauth/login_with_google?c=<?php echo base64_encode($returnURL);?>"><img src="<?php echo HOST;?>/cdn/img/google_login.png"/></a>
+        <div class="col s6">
+          <h4>Social Log In</h4>
+          <a class="btn" href="oauth/login_with_facebook?c=<?php echo urlencode($returnURL);?>" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(<?php echo O_URL ;?>/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
+          <a class="btn red" href="oauth/login_with_google?c=<?php echo urlencode($returnURL);?>" style="display: inline-block;height: 43px;margin: 10px 0;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(<?php echo O_URL ;?>/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
         </div>
       </div>
     </div>

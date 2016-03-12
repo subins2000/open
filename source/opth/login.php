@@ -77,10 +77,10 @@ if(isset($_GET['service']) && isset($_GET['api_key']) && isset($_GET['scope']) &
           </ul>
           <div class="auth_buttons">
             <form method="POST" action="<?php echo \Fr\LS::curPageURL();?>">
-              <button class="button b-green" name="authorize">I Authorize</button>
+              <button class="btn green" name="authorize">I Authorize</button>
             </form>
             <form method="POST" action="<?php echo \Fr\LS::curPageURL();?>">
-              <button class="button b-red" name="deny">No, I don't</button>
+              <button class="btn red" name="deny">No, I don't</button>
             </form>
           </div>
           <style>
@@ -99,7 +99,7 @@ if(isset($_GET['service']) && isset($_GET['api_key']) && isset($_GET['scope']) &
           <h1>Opth Login - Error</h1>
         <?php
           $OP->ser($error[0], $error[1], "html", false);
-          echo "<p><a href='{$server['url']}' class='button'>Return To Site</a></p>";
+          echo "<p><a href='{$server['url']}' class='btn'>Return To Site</a></p>";
         }
         ?>
       </div>

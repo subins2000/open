@@ -42,7 +42,7 @@ require_once "$docRoot/inc/class.opth.php";
             <table>
               <thead title="<?php echo $r['description'];?>">
                 <tr>
-                  <td><a href="<?php echo HOST . "/opth/sites/edit?id={$r['id']}";?>"><?php echo $r['title'];?></a></td>
+                  <td><a href="<?php echo O_URL . "/opth/sites/edit?id={$r['id']}";?>"><?php echo $r['title'];?></a></td>
                   <td><?php echo $r['url'];?></td>
                 </tr>
               </thead>
@@ -61,7 +61,7 @@ require_once "$docRoot/inc/class.opth.php";
           }
         }
         ?>
-        <h2>New Site</h2>
+        <h4>New Site</h4>
         <p>Register your site for implementing Opth.</p>
         <form method="POST" style="margin-left: 10px;">
           <label>
@@ -80,7 +80,7 @@ require_once "$docRoot/inc/class.opth.php";
             <span>Valid Redirect URLs</span>
             <textarea rows="5" name="redirect_url" placeholder="Type URLs in each line"></textarea>
           </label>
-          <p>By registering, the site/you/administrator/owner are agreeing to <a target="_blank" href="<?php echo HOST;?>/open.pdf">Open's T&C as well as Opth's T&C </a></p>
+          <p>By registering, the site/you/administrator/owner are agreeing to <a target="_blank" href="<?php echo O_URL ;?>/open.pdf">Open's T&C as well as Opth's T&C </a></p>
           <button name="registerSite" style="margin: 10px;font-size: 15px;">Register Site</button>
         </form>
         <style>

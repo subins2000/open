@@ -10,7 +10,7 @@
     <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
       <div class="content">
-        <h2>Reset Password</h2>
+        <h4>Reset Password</h4>
         <?php
         $rePass = \Fr\LS::forgotPassword();
         if( $rePass == "resetPasswordForm" ){

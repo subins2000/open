@@ -28,7 +28,7 @@ if(!defined("HOST")){
        padding:10px 0 15px;
       }
       * > body{
-       background:url(<?php echo HOST;?>/cdn/img/404.png) 80% 5px no-repeat;
+       background:url(<?php echo O_URL ;?>/cdn/img/404.png) 80% 5px no-repeat;
        padding-right:205px;
       }
       p{
@@ -52,8 +52,8 @@ if(!defined("HOST")){
     </style>
   </head>
   <body>
-    <a href="<?php echo HOST;?>/">
-    <img src="<?php echo HOST;?>/cdn/img/logo.png" alt="Open"></a>
+    <a href="<?php echo O_URL ;?>/">
+    <img src="<?php echo O_URL ;?>/cdn/img/logo.png" alt="Open"></a>
     <p>
        <ins>The page doesn't exist.</ins>
     </p>

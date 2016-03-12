@@ -5,7 +5,7 @@
 </head><body>
  <?php include("../inc/header.php");?>
  <div class="wrapper"><div class="content">
-  <h2>Create Group</h2>
+  <h4>Create Group</h4>
   <p>Create A Group & Invite Friends.</p><div clear></div>
   <form method="POST" action="/groups/new">
    <label>

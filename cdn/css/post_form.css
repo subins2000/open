@@ -1,19 +1,25 @@
 .post_form{
  background:#fff;
- padding:10px;
+ padding: 10px 10px 1px;
  border-radius:10px;
- margin-bottom: 5px;
  position:relative;
  margin:5px 0px;
 }
 .post_form textarea{
- width: 94%;
+ width: 98%;
  height:80px;
  resize: none;
  margin-bottom: 5px;
 }
-.post_form #show_form{
-  width: 97%;
+.post_form .blocks{
+  position: relative;
+}
+.post_form .blocks a.block{
+  vertical-align: middle;
+  cursor: pointer;
+}
+.post_form #pfbit, .post_form #ptwit{
+  padding: 6px;
 }
 .post_form #privacy{
  position: absolute;
@@ -24,28 +30,6 @@
  text-align: center;
  border: 1px solid black;
  z-index: 2;
-}
-.post_form #prtoggle{
- background: url(//open.sim/cdn/img/web.png) no-repeat !important;
- min-width: 16px !important;
- background-color: white;
- padding: 8px !important;
-  height: 34px;
-  width: 34px;
-}
-.post_form .small{
- padding: 5px !important;
- background: white !important;
- min-width: 30px !important;
- color:black !important;
- vertical-align:top;
-}
-.post_form .cam{
-  background: url(//open.sim/cdn/img/camera.png) no-repeat !important;
-  background-color:  white;
-  background-size: cover !important;
-  width: 40px;
-  height: 32px;
 }
 .short_news{
  background:#FAB359;

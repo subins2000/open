@@ -58,16 +58,16 @@ $_GET['id'] = isset($_GET['id']) ? $_GET['id'] : "";
             if($friendID != ""){
               if($sql->rowCount()==0){
                 if($friendID == $who){
-                  echo "<h2>Uh... It's you</h2><p>Why do you want to chat with yourself ?</p>";
+                  echo "<h4>Uh... It's you</h4><p>Why do you want to chat with yourself ?</p>";
                 }else{
-                  echo "<h2>Not Friends</h2><p>You and $friendID are not friends.</p>";
+                  echo "<h4>Not Friends</h4><p>You and $friendID are not friends.</p>";
                 }
               }else{
                 require_once "$docRoot/inc/render.php";
                 echo Render::chat($friendID);
               }
             }else{
-              echo "<h2>No User Selected</h2>To see messages, choose a person seen on the left table.";
+              echo "<h4>No User Selected</h4>To see messages, choose a person seen on the left table.";
             }
             ?>
           </div>

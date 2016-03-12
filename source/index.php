@@ -6,13 +6,13 @@
   </head>
   <body>
     <?php include "$docRoot/inc/header.php";?>
-    <div style="width:100%;background:rgba(100, 194, 53,.7);margin-top:47px;color:white;">
+    <div style="background:rgba(100, 194, 53,.7);color:white;">
       <div class="icontent">
         <div class="left">
           <img src="cdn/img/logo.png"/>
         </div>
         <div class="right">
-          <h2>Let the Doors Open</h2>
+          <h4>Let the Doors Open</h4>
           <p>
             Open is a Social Network like Twitter and Facebook.<br/>&nbsp;&nbsp;&nbsp;The only difference is that Open is an Open Source <br/>Social Network 
           </p>
@@ -21,8 +21,8 @@
     </div>
  <div style="width:100%;background:white;color:white;text-align:center;">
   <div class="icontent">
-   <a class="button" href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(<?php echo HOST;?>/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
-   <a class="button b-red" href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(<?php echo HOST;?>/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
+   <a class="btn" href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(<?php echo O_URL ;?>/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
+   <a class="btn red" href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(<?php echo O_URL ;?>/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
    <div style="font-size: 30px;margin-top: 20px;height: 25px;">
     <?php
     $sql=$OP->dbh->prepare("SELECT COUNT(`id`) FROM `users`");
@@ -39,7 +39,7 @@
  <div style="width:100%;background:rgba(241, 158, 32, 0.7);color:white;">
   <div class="icontent">
    <div class="left">
-    <h2>What's Open Source ?</h2>
+    <h4>What's Open Source ?</h4>
     <p>
      If you're a newbie to the Computer World,<br/> you will have this question. Open Source <br/>Softwares are softwares that make<br/>their source code <font size="5">Public</font>.<br/>&nbsp;&nbsp;&nbsp;Anyone can edit the source code and use it <br/>for their purposes. The main AIM of Open Source<br/> is to develop something with the help of all the<br/>people in the world. Anyone who contributed <br/>something to an Open Source project is a part of<br/>that project.
     </p>
@@ -55,7 +55,7 @@
     <img src="cdn/img/ex_post.png" width="120"/>
    </div>
    <div class="right">
-    <h2>What's the Benefit ?</h2>
+    <h4>What's the Benefit ?</h4>
     <p>
      Privacy problems are the most discussed<br/> issue on this planet. Every where we go on web,<br/>someone are tracking us. 21st Century<br/>Social Networks are spies.<br/>&nbsp;&nbsp;&nbsp;They know the every moves we make on the web <br/>and they use that moves to make money.<br/>But at Open, you are the owner. You have all the<br/> freedom. You can check out the source code, <br/>to see if we are tracking any moves of yours.
     </p>
@@ -68,7 +68,7 @@
     <img src="cdn/img/ex_code.png" width="165"/>
    </div>
    <div class="right">
-    <h2>Features</h2>
+    <h4>Features</h4>
     <p>
      <ol>
       <li>No ADS</li>
@@ -85,7 +85,7 @@
  <div style="width:100%;background:#64ACFF;color:white;">
   <div class="icontent">
    <div class="left">
-    <h2>How Can I contribute ?</h2>
+    <h4>How Can I contribute ?</h4>
     <p>
      Open is a developing social network. It will take years <br/>for it to be perfect. If you find any flaws/errors or have <br/>a suggestion, please report it on our Project Page.<br/><cl/><?php include "$docRoot/inc/project_urls.php";?>
      <br/>You can Find Documentation, news, info <br/>about Open on <a href="https://github.com/subins2000/open/wiki">GitHub Wiki</a>.<br/><cl/>

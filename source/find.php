@@ -50,7 +50,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
             ":who" => $who,
             ":q" => "%$q%"
           ));
-        } elseif ($p != "1") {
+        }else if ($p != "1") {
           $start = ($p - 1) * 10;
           $limit = 30;
           if ($q == "") {
@@ -82,6 +82,22 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
             exit;
           }
         }
+        if ($q == '') {
+          $total_sql = $OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id");
+          $total_sql->execute(array(
+            ":who" => $who
+          ));
+        } else {
+          $total_sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
+          $total_sql->execute(array(
+            ":who" => $who,
+            ":q" => "%$q%"
+          ));
+        }
+        $count = $total_sql->rowCount();
+        $totalpage = (ceil($count / 20));
+        echo "<cl/>$count Results Found.";
+        
         $OR = new ORep();
         while ($r = $sql->fetch()) {
           $id     = $r['id'];
@@ -147,19 +163,6 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
             </div>
         <?php
         }
-        if ($q == '') {
-          $sql = $OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id");
-          $sql->execute(array(
-            ":who" => $who
-          ));
-        } else {
-          $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id");
-          $sql->execute(array(
-            ":who" => $who,
-            ":q" => "%$q%"
-          ));
-        }
-        $totalpage = (ceil($sql->rowCount() / 20));
         $lastpage = $totalpage;
         $pagination = "";
         $currentpage    = (isset($_GET['p']) ? $_GET['p'] : 1);
@@ -168,15 +171,14 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
         
         echo "<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
         echo "<div id='s7e9v'>";
-          echo '<a href="?p=1" class="button b-red">First</a>';
+          echo '<a href="?p=1" class="btn red">First</a>';
           for($i = $startCounter; $i <= $loopcounter; $i++){
-            $isC = $i == $p ? "class='b-green'" : "";
+            $isC = $i == $p ? "class='green'" : "";
             echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
           }
-          echo '<a href="?p='.$totalpage.'" class="button b-red">Last</a>';
+          echo '<a href="?p='.$totalpage.'" class="btn red">Last</a>';
         echo "</div>";
         echo "</center>";
-        echo "<cl/>$count Results Found.";
         ?>
         <style>div[field]{margin:5px;}</style>
       </div>

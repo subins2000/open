@@ -8,25 +8,25 @@ $(prntf +"#show_form").on('click',function(){
   t.hide();
   $(prntf+".textEditor").focus();
 });
-$(prntf +"#prtoggle").live("click",function(){
-  $('#privacy').show();
-  $('#privacy')[0].size=2;
+$('.dropdown-button').dropdown({
+  inDuration: 300,
+  outDuration: 225,
+  constrain_width: false, // Does not change width of dropdown to that of the activator
+  gutter: 0, // Spacing from edge
+  belowOrigin: true, // Displays dropdown below the button
+  alignment: 'left' // Displays dropdown with edge aligned to the left of button
 });
-$(prntf +'#privacy').live("click",function(){
-  $('#privacy').hide();
+$(prntf +"#privacy_dropdown a").live("click",function(){
+  $("#privacy").val($(this).data("privacy"));
 });
 $(prntf +"#ptwit").live("click",function(){
   if($(this).find("#twverify").val()==''){
     window.location="http://open.sim/oauth/login_with_twitter";
-  }else{
-    $(this).find('input[type=checkbox]').click();
   }
 });
 $(prntf +"#pfbit").live("click",function(){
   if($(this).find("#fbverify").val()==''){
     window.location="http://open.sim/oauth/login_with_facebook";
-  }else{
-    $(this).find('input[type=checkbox]').click();
   }
 });
 $(".short_news .close").live("click",function(){

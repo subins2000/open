@@ -564,7 +564,7 @@ class LS {
           $html .= "<p>{$identName}</p>";
           $html .= "<input type='text' id='logSysIdentification' placeholder='Enter your {$identName}' size='25' name='identification' />";
         $html .= "</label>";
-        $html .= "<p><button name='logSysForgotPass' type='submit'>Reset Password</button></p>";
+        $html .= "<p><button name='logSysForgotPass' type='submit' class='btn red'>Reset Password</button></p>";
       $html .= "</form>";
       echo $html;
       /**
@@ -1065,7 +1065,7 @@ class LS {
      * If there is a callback for email sending, use it else PHP's mail()
      */
     if(is_callable(self::$config['basic']['email_callback'])){
-      self::$config['basic']['email_callback']($email, $subject, $body);
+      call_user_func_array(self::$config['basic']['email_callback'], array($email, $subject, $body));
     }else{
       $headers = array();
       $headers[] = "MIME-Version: 1.0";

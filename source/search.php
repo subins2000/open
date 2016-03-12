@@ -23,7 +23,7 @@ if($searchQuery != ''){
       <div class="block left viewpoint">
         <form action="<?php echo Open::URL('search');?>" method="GET" style="margin-bottom: 20px;">
           <input type="text" class="block" value="<?php echo $searchQuery;?>" name="q" id="q" />
-          <button class="block">Search</button>
+          <button class="btn block">Search</button>
         </form>
         <style>
         #q{

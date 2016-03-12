@@ -33,7 +33,7 @@ class Open{
       echo "<title>Open - An Open Source Social Network</title>";
     }
     /* Make the Favicon */
-    echo "<link rel='icon' href='". HOST ."/cdn/img/favicon.ico' />";
+    echo "<link rel='icon' href='". O_URL ."/cdn/img/favicon.ico' />";
     
     /* The 'ubuntu' font */
     if(CLEAN_HOST != "open.dev"){
@@ -41,8 +41,8 @@ class Open{
     }
     
     /* The Open CSS files */
-    $css = $css != "" ? "main,$css":"main";
-    echo "<link async='async' type='text/css' rel='stylesheet' href='" . HOST . "/css/{$css}' />";
+    $css = $css != "" ? "mz,main,$css":"mz,main";
+    echo "<link async='async' type='text/css' rel='stylesheet' href='" . O_URL . "/css/{$css}' />";
   
     /* The Open JS files */
     /* First, stats tracker */
@@ -53,16 +53,16 @@ class Open{
     }
       
     /* Then, jQuery*/
-    echo "<script src='". HOST ."/js/jquery'></script>";
+    echo "<script src='". O_URL ."/js/jquery'></script>";
     
     /* Then the other JS files that are mostly coded in jQuery - Thank you John Resig */
-    $js = $js == "" ? "main" : "main,$js";
+    $js = $js == "" ? "mz,main" : "mz,main,$js";
     /* Some extra js files under some conditions */
     if(loggedIn){
       $js .= ",time";
     }
     
-    echo "<script async='async' src='" . HOST . "/js/".$js."'></script>";
+    echo "<script async='async' src='" . O_URL . "/js/".$js."'></script>";
   }
  
   /* Encrypts a string that is decryptable */
@@ -116,7 +116,7 @@ class Open{
         $data = $sql->fetch(PDO::FETCH_ASSOC);
         $newJSON = json_decode($data['udata'], true);
         $newJSON = is_array($newJSON) ? $newJSON : array();
-        $newJSON['ploc'] = HOST . "/" . $userID;
+        $newJSON['ploc'] = O_URL . "/" . $userID;
         $data['udata'] = json_encode($newJSON);
         $this->cache['uData'][$userID]=$data;
       }
@@ -125,10 +125,10 @@ class Open{
       if($key == 'img'){
         $data = json_decode($data['udata'], true);
         $data = isset($data["img"]) ? $this->format($data["img"]):"";
-        $data = $data=='' ? HOST . "/cdn/img/avatars/om.png":$data;
+        $data = $data=='' ? O_URL . "/cdn/img/avatars/om.png":$data;
         return $data;
       }elseif($key == 'plink'){
-        return HOST."/$userID";
+        return O_URL ."/$userID";
       }elseif($key == "status"){
         $data = $data['seen'];
         if($data < date("Y-m-d H:i:s",strtotime('-20 seconds', time()))){
@@ -139,7 +139,7 @@ class Open{
       }elseif($key == "avatar"){
         $img = get("img", $userID);
         if(preg_match("/avatars\/om/", $img) || $img==""){
-          $img = HOST . "/cdn/img/avatars/om.png";
+          $img = O_URL . "/cdn/img/avatars/om.png";
         }elseif(!preg_match("/imgur/", $img) && !preg_match("/akamaihd/", $img) && !preg_match("/google/", $img) && $img!=""){
           $img = "$img/small.png";
         }
@@ -195,7 +195,7 @@ class Open{
         header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
         include "{$this->root}/inc/errorPage.php";
       }else{
-        $html = "<h2 style='color:red;font-family:ubuntu;'>$title</h2>";
+        $html = "<h5 style='color:red;font-family:ubuntu;'>$title</h5>";
         if($description!=''){
           $html .= "<span style='color:red;font-family:ubuntu;'>$description</span>";
         }
@@ -270,7 +270,7 @@ class Open{
         $html = "@$userid{$nxs}";
       }else{
         $name = $sql->fetchColumn();
-        $html = "<a href='". HOST ."/$userid'>@$name</a>{$nxs}";
+        $html = "<a href='". O_URL ."/$userid'>@$name</a>{$nxs}";
         $this->mUsers[$userid] = 1;
       }
       $this->cache["smention"][$userid] = $html;
@@ -385,9 +385,9 @@ class Open{
       $sql = $this->dbh->prepare("SELECT `uid` FROM `conn` WHERE `fid`=? and `uid`=?");
       $sql->execute(array($uid, curUser));
       if($sql->rowCount()==0){
-        return "<a id='{$uid}' class='button follow'><span>+</span><span class='text'>Follow</span></a>";
+        return "<a id='{$uid}' class='btn follow'><span>+</span><span class='text'>Follow</span></a>";
       }else{
-        return "<a id='{$uid}' class='button unfollow'><span>-</span><span class='text'>Unfollow</span></a>";
+        return "<a id='{$uid}' class='btn unfollow'><span>-</span><span class='text'>Unfollow</span></a>";
       }
     }
   }
@@ -435,9 +435,9 @@ class Open{
          $cCmts = $sql->rowCount();
          
          /* Make the email */
-         $body = "{$n} commented on your <a href='". HOST ."/view/$pid'>post</a> :";
+         $body = "{$n} commented on your <a href='". O_URL ."/view/$pid'>post</a> :";
          $body .= "<blockquote>$text</blockquote>";
-         $body .= "Your post now have <b>{$cCmts}</b> comments.<br/><a href='". HOST ."/view/$pid#$lci' target='_blank'>";
+         $body .= "Your post now have <b>{$cCmts}</b> comments.<br/><a href='". O_URL ."/view/$pid#$lci' target='_blank'>";
         $body .= "<button style='padding:5px 15px;'>View Post</button>";
       $body .= "</a>";
          $title = "$sn Commented On Your Post";// The email subject
@@ -458,7 +458,7 @@ class Open{
           
           $body = "{$n} is now Following You.";
           $body .= "<div style='margin: 10px;'><img src='". get("img", $from) ."' style='display:inline-block;vertical-align:top;' height='120' width='120'/><div style='display:inline-block;vertical-align:top;width: 200px;margin-left:10px;'>{$sn} added you to his following list. You now have <b>{$cFoll}</b> followers. If you now follow this person back, you will become friends with {$sn}.</div></div>";
-          $body .= "<a href='" . HOST . "/$from' target='_blank'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
+          $body .= "<a href='" . O_URL . "/$from' target='_blank'><button style='padding:5px 15px;'>See $sn's Profile</button></a>";
           $title = "You Have a New Follower"; // E-Mail subject
          }else{
           $dontSend = 1;
@@ -481,9 +481,9 @@ class Open{
          }
          $body = "{$n} mentioned you in his {$text}. See the {$text} to read what {$sn} had said about you.<br/>";
          if($text == "post"){
-          $body .= "<a href='". HOST ."/view/$pid' target='_blank'>";
+          $body .= "<a href='". O_URL ."/view/$pid' target='_blank'>";
          }else{
-        $body .= "<a href='". HOST ."/view/$pid#{$commentID}' target='_blank'>";
+        $body .= "<a href='". O_URL ."/view/$pid#{$commentID}' target='_blank'>";
          }
          $body .= "<button style='padding:5px 15px;'>See {$sn}'s ". strtoupper($text) ."</button></a>&nbsp;&nbsp;&nbsp;";
          $body .= "<a href='". get("plink", $from) ."' target='_blank'><button style='padding:5px 15px;'>See {$sn}'s Profile</button></a>";
@@ -502,8 +502,8 @@ class Open{
           $body = "{$n} sent you a message :";
           $body .= "<blockquote>{$text}</blockquote>";
           $body .= "See the messages page to see other messages sent by {$sn}.";
-          $body .= "<a href='" . HOST . "/chat/$from'><button style='padding:5px 15px;'>See {$sn}'s Messages</button></a>&nbsp;&nbsp;&nbsp;";
-          $body .= "<a href='" . HOST . "/$from'><button style='padding:5px 15px;'>See {$sn}'s Profile</button></a>";
+          $body .= "<a href='" . O_URL . "/chat/$from'><button style='padding:5px 15px;'>See {$sn}'s Messages</button></a>&nbsp;&nbsp;&nbsp;";
+          $body .= "<a href='" . O_URL . "/$from'><button style='padding:5px 15px;'>See {$sn}'s Profile</button></a>";
           $title = "{$sn} Sent you a message";   
          }else{
           $dontSend = 1;
@@ -539,7 +539,7 @@ class Open{
     }
     
     /* Prepare the HTML message */
-    $html = '<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/cdn/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div>'. $extra .'<h2>'. $subject .'</h2><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$content.'</div><p>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a><br/><a href="http://open.subinsb.com/me/Notify">Manage Mail Notifications</a></p>';
+    $html = '<div style="width:100%;margin:0px;background:#EEE;background:-webkit-linear-gradient(#CCC,#EEE);background:-moz-linear-gradient(#CCC,#EEE);padding:2px;height:100px;"><h1><a href="http://open.subinsb.com"><img style="margin-left:40px;float:left;" src="http://open.subinsb.com/cdn/img/logo.png"></a></h1><div style="float:right;margin-right:40px;font-size:20px;margin-top:20px"><a href="http://open.subinsb.com/me">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href="http://open.subinsb.com/me/ResetPassword">Forgot password ?</a></div></div>'. $extra .'<h4>'. $subject .'</h4><div style="margin-left: 10px;padding: 5px 10px;margin-right:10px">'.$content.'</div><p>Report Bugs, Problems, Suggestions & Feedback @ <a href="https://github.com/subins2000/open/issues">GitHub</a> Or Send Feedback Via HashTag <a href="http://open.subinsb.com/search?q=%23feedback">feedback</a><br/><a href="http://open.subinsb.com/me/Notify">Manage Mail Notifications</a></p>';
   
     if($opth == false){
       /* Append Company name to the subject */
@@ -621,9 +621,9 @@ class Open{
     $path = substr($path, 0, 1) == "/" ? substr($path, 1) : $path;
     $url = $path;
     if($path == ""){
-      $url = HOST;
+      $url = O_URL ;
     }elseif( !preg_match("/http/", $path) && !preg_match("/". CLEAN_HOST ."/", $path) ){
-      $url = HOST . "/$path";
+      $url = O_URL . "/$path";
     }
     return $url;
   }

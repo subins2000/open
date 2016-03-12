@@ -19,11 +19,11 @@ while($r = $sql->fetch()){
 }
 if( loggedIn ){
 ?>
-  <div class="short_news" id="2014-01-28 01:05" hide>
-    <h2>New</h2>
-    <p>Invite your friends to join Open via the <a href="invite">Invite Page</a>.</p>
-    <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.5</b></p>
-    <div class="close">x</div>
+  <div class="short_news" id="2016-03-12 01:05" hide>
+    <h4>New</h4>
+    <p>New UI for Open</p>
+    <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.6</b></p>
+    <div class="close"><i class="material-icons">close</i></div>
   </div>
   <div class="post_form blocks" id="post_form">
     <form action="ajax/post" method="POST" class="form">
@@ -31,29 +31,37 @@ if( loggedIn ){
       <div>
         <input type="text" id="show_form" placeholder="Have Something To Share ?">
         <div id="post_full_form" hide>
-          <div class="close" title="Close">x</div>
+          <div class="close" title="Close"><i class="material-icons tiny">close</i></div>
           <textarea placeholder="Share What's New :-)" class="textEditor" name="post"><?php if($_SERVER['REDIRECT_PAGE']=="/search" && $searchQuery!=""){echo "$searchQuery ";}?></textarea>
-          <div style="display: inline;position: relative;">
-            <a class="button" id="prtoggle"></a>
+          <div class="blocks row">
+            <a class="block col s0 dropdown-button" id="prtoggle" data-activates='privacy_dropdown'>
+              <i class="material-icons small">accessibility</i>
+            </a>
             <select id="privacy" name="privacy" class="c_c" hide>
               <option value='pub'>Public</option>
               <option value='fri'>Friends</option>
               <option value='meo'>Only Me</option>
             </select>
-            <a class="button cam"></a>
+            <ul id='privacy_dropdown' class='dropdown-content'>
+              <li><a data-privacy="pub">Public</a></li>
+              <li><a data-privacy="fri">Friends</a></li>
+              <li class="divider"></li>
+              <li><a data-privacy="meo">Only Me</a></li>
+            </ul>
             <input type="file" id="upload" name="upload" hide />
-            <a title="Post To Facebook" class="button small" id="pfbit">
+            <a class="block cam col s0"><i class="material-icons small">add_a_photo</i></a>            
+            <a title="Post To Facebook" class="block col s2" id="pfbit">
               <input type="hidden" id="fbverify" value="<?php echo $fbv;?>"/>
-              <input <?php echo$fb;?> onclick="$(this).click();" name="facebook" type="checkbox"/>
-              <span class="block">Facebook</span>
+              <input <?php echo $fb;?> name="facebook" type="checkbox" id="post_to_fb" />
+              <label class="block" for="post_to_fb">Facebook</label>
             </a>
-            <a title="Post To Twitter" class="button small" id="ptwit">
+            <a title="Post To Twitter" class="block col s2" id="ptwit">
               <input type="hidden" id="twverify" value="<?php echo $twv;?>"/>
-              <input <?php echo$tw;?> onclick="$(this).click();" name="twitter" type="checkbox"/>
-              <span class="block">Twitter</span>
+              <input <?php echo $tw;?> name="twitter" type="checkbox" id="post_to_tw" />
+              <label class="block" for="post_to_tw">Twitter</label>
             </a>
+            <button class="btn green right">Post</button>
           </div>
-          <input type="submit" class="b-green" style="float:right;min-height: 30px;min-width: 100px;font-size: 14px;" value="Post"/>
         </div>
       </div>
     </form>

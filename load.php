@@ -13,6 +13,11 @@ require_once "$docRoot/inc/class.logsys.php";
 
 $db = unserialize(DATABASE);
 \Fr\LS::config(array(
+  "basic" => array(
+    "email_callback" => function($email, $subject, $body){
+      \Open::sendEMail($email, $subject, $body);
+    }
+  ),
   "db" => array(
     "host" => $db['host'],
     "port" => $db['port'],
@@ -45,7 +50,7 @@ $db = unserialize(DATABASE);
     "home_page" => "/home"
   ),
   "features" => array(
-    "email_login" => false
+    "email_login" => true
   ),
   "cookies" => array(
     "domain" => CLEAN_HOST

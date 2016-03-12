@@ -63,7 +63,7 @@ class Render {
         $html.="</div>";
       }
     }else{
-      $html.="<h2>No Messages</h2>You haven't exchanged messages with this gal. Spark up a conversation.";
+      $html.="<h4>No Messages</h4>You haven't exchanged messages with this gal. Spark up a conversation.";
     }
     if( !$single ){
       $html.="</div>";
@@ -84,7 +84,7 @@ class Render {
     global $OP;
      $html = "";
     if(count($postArr) == 0){
-        $html = "<h2><center>No Posts Found</center></h2>";
+        $html = "<h4><center>No Posts Found</center></h4>";
     }else{
       /* $v contains information about the post*/
       foreach($postArr as $v){
@@ -124,14 +124,14 @@ class Render {
         /* The Profile Link */
         $plink = get("plink", $owner);
   
-          $html .= "<div class='post blocks' id='$id'>";
-          $html .= "<div class='left block'>";
+          $html .= "<div class='post blocks row' id='$id'>";
+          $html .= "<div class='col s1'>";
               $html .= "<a href='$plink'><img src='".get("avatar", $owner)."' class='pimg'/></a>";
           $html .= "</div>";
-          $html .= "<div class='right block'>";
+          $html .= "<div class='col s11'>";
               $html .= "<div class='top'>";
                  $html .= "<a href='$plink'>".get("name", $owner, false)."</a>";
-                 $html .= "<a class='time slink' href='" . HOST . "/view/{$id}'>{$v['time']}</a>";
+                 $html .= "<a class='time slink' href='" . O_URL . "/view/{$id}'>{$v['time']}</a>";
                  $html .= "<span class='privacy slink' title='{$privacyDescription}'>{$privacyShort}</span>";
             if($owner == curUser){
                   $html .= "<div class='author_box'>";
@@ -145,7 +145,7 @@ class Render {
               $html .= "</div>";
               $html .= "<div class='cont'>";
                  if( $otherSTR ){
-                $html .= $post . "<a class='button b-green readMore'>Read More <div hide>{$otherSTR}</div></a>";
+                $html .= $post . "<a class='btn green readMore'>Read More <div hide>{$otherSTR}</div></a>";
               }else{
                 $html .= $post;
               }
@@ -181,11 +181,11 @@ class Render {
     $sql->execute(array($pid));
  
      $html = "<div class='comments' id='$pid'>";
-      $html .= "<form class='cmt_form ajax_form' id='$pid' action='ajax/comment' success='Commented' error='Failed To Comment' while='Commenting'>";
+      $html .= "<form class='cmt_form ajax_form row' id='$pid' action='ajax/comment' success='Commented' error='Failed To Comment' while='Commenting'>";
         $html .= "<input type='hidden' id='clod' name='clod' value='0'/>";
-        $html .= "<textarea name='cmt' type='text' class='textEditor' placeholder='Your Comment Here'></textarea>";
+        $html .= "<textarea name='cmt' type='text' class='textEditor col s10 materialize-textarea' placeholder='Your Comment Here'></textarea>";
         $html .= "<input name='id' type='hidden' value='$pid'/>";
-        $html .= "<input type='submit' value='Comment'/>";
+        $html .= "<button class='btn blue s2'>Comment</button>";
       $html .= "</form>";
       if($sql->rowCount() != 0){
        while( $r = $sql->fetch() ){
@@ -196,14 +196,14 @@ class Render {
         $pLink = get("plink", $uid, false);
         $lk = $OP->didLike($id, "cmt") === false ? "Like":"Unlike";
         $class = strtolower($lk) == "unlike" ? " unlike":"";
-        $html .= "<div class='comment' id='$id'>";
-          $html .= "<div class='left'>";
+        $html .= "<div class='comment row' id='$id'>";
+          $html .= "<div class='col s1'>";
             $html .= "<img src='$img' class='pimg'/>";
           $html .= "</div>";
-          $html .= "<div class='right'>";
+          $html .= "<div class='col s11'>";
             $html .= "<div class='top'>";
               $html .= "<a href='{$pLink}'>$name</a>";
-              $html .= "<a class='time slink' href='" . HOST . "/view/{$r['pid']}#$id'>{$r['time']}</a>";
+              $html .= "<a class='time slink' href='" . O_URL . "/view/{$r['pid']}#$id'>{$r['time']}</a>";
               $html .= "<div class='author_cmt_box'><div class='author_cmt_panel c_c'>";
                 if($uid == $who){
                   $html .= "<a class='de_cmt pointer' id='$id'>Delete Comment</a>";
@@ -227,7 +227,7 @@ class Render {
         $html .= "<a class='load_more_comments pointer' id='$pid'>Load More Comments</a>";
        }
       }else{
-        $html .= "<h2>No Comments</h2>No one has posted a comment yet on this post.<br/>Be the first one to comment !";
+        $html .= "<h4>No Comments</h4>No one has posted a comment yet on this post.<br/>Be the first one to comment !";
       }
      $html .= "</div>";
     return   $html;

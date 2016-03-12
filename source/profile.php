@@ -68,7 +68,7 @@ while($r = $sql->fetch()){
   $twitter = $json['tw'] == ""   ? $defaultVal  : $json['tw'];
   $gplus = $json['gplus'] == ""   ? $defaultVal  : $json['gplus'];
   $pinterest = $json['pin'] == ""   ? $defaultVal  : $json['pin'];
-  $headerIMG = $json['header'] =="" ? HOST . "/cdn/img/headers/00.png" : $json['header'];
+  $headerIMG = $json['header'] =="" ? O_URL . "/cdn/img/headers/00.png" : $json['header'];
 }
 require_once "$docRoot/inc/class.rep.php";
 $RP = new ORep();
@@ -93,8 +93,8 @@ $Rep = $RP->getRep($id); // Reputation
           ?>
         </div>
         <?php if($id == $who){ // If the profile is of logged in user himself ?>
-          <a id="ch_hi" class="button b-white">Change Header Image</a>
-          <a id="editBox" class="button b-red" style="position:absolute;bottom:0px;left:0px;width:150px;text-align:center;">Edit Profile</a>
+          <a id="ch_hi" class="btn white">Change Header Image</a>
+          <a id="editBox" class="btn red" style="position:absolute;bottom:0px;left:0px;width:150px;text-align:center;">Edit Profile</a>
         <?php }?>
       </div>
       <div class="main blocks">
@@ -193,7 +193,7 @@ $Rep = $RP->getRep($id); // Reputation
                 ?>
                   <div class="blocks item">
                     <div class="block rep"><?php echo$r['rep'];?></div>
-                    <a class="block" href="<?php echo HOST;?>/view/<?php echo$r['id'];?>">Post # <?php echo$r['id'];?></a>
+                    <a class="block" href="<?php echo O_URL ;?>/view/<?php echo$r['id'];?>">Post # <?php echo$r['id'];?></a>
                   </div>
                 <?php
                 }

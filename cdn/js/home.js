@@ -84,7 +84,7 @@ $(".post .deletePost").live("click",function(){
 $(".post .author_box .postLink").live("click", function(){
   pID = $(this).parents(".post").attr("id")
   pLink = open.host + "/view/" + pID;
-  var html = "<h2>Post Link</h2>";
+  var html = "<h4>Post Link</h4>";
   html += "<textarea style='width: 50%;'>"+ pLink +"</textarea>";
   html += "<p>You can pass along the above URL to view your post from anywhere on the web</p>";
   open.dialog(html, true);

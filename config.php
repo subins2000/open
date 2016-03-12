@@ -7,7 +7,7 @@ ini_set("display_errors", "on");
 /**
  * The URL of Open. No '/' at the end
  */
-define("HOST", "http://open.sim");
+define("O_URL", "http://open.sim");
 
 /**
  * Hostname (URL without protocol [http, https] and slashes)

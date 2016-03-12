@@ -12,7 +12,7 @@ $sql->execute(array(":who" => $who));
 
 if($sql->rowCount() != "0"){
    echo '<div class="suggestions" style="padding: 5px 0px;margin: 5px -10px 0px 0px;color: black;">';
-     echo "<h2>Suggestions</h2>";
+     echo "<h4>Suggestions</h4>";
      while($r = $sql->fetch()){
         $userID = $r['id'];
         $name = get("name", $userID, false);

@@ -1,32 +1,23 @@
 .content{
   background: none;
-}
-.viewpoint.block.left{
-  width: 515px;
-  border-radius:10px;
-}
-.viewpoint.block.right{
-  width: 150px;
-  padding: 10px 5px;
-  color: white;
+  margin-left: 240px;
 }
 .post{
-  background:#92c4ff;
-  border-radius:10px;
+  background: #fff;
+  border-radius: 2px;
   padding:10px 10px;
-  color:white;
-  border-bottom:1px solid white;
+  color: #000;
   position:relative;
   margin: 20px 0px;
 }
 .post:hover{
-  background:#64acff;
+  box-shadow: 0 0 2px #000;
 }
 .post .left{
   width:50px;
 }
 .post .right{
-  width:400px;
+  width: 400px;
   padding-left:7px;
 }
 .post .bottom{
@@ -121,8 +112,11 @@
   display:none;
 }
 .comments .cmt_form .textEditor{
-  width:235px;
-  height:30px;
+  height:50px;
+}
+.comments .cmt_form .btn{
+  margin: 0 10px;
+  padding: 0 5px;
 }
 .comment .left{
   display:inline-block;
@@ -204,6 +198,11 @@
   vertical-align: middle;
   display: inline-block;
   height: 15px;
+}
+@media only screen and (max-width : 992px) {
+  .content {
+    margin-left: 0;
+  }
 }
 @media screen and (max-width: 730px){
   .content{

@@ -4,7 +4,7 @@ require_once "$docRoot/inc/class.social.php";
 require_once "$docRoot/source/data/add.php";
 
 \Fr\LS::init();
-$privacy = isset($_POST['privacy']) ? $_POST['privacy']:"";
+$privacy = isset($_POST['privacy']) ? $_POST['privacy'] : "pub";
 
 if($_P && ($privacy == "pub" || $privacy == "fri" || $privacy == "meo")){
    $post = $_POST['post'];

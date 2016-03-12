@@ -82,7 +82,7 @@ if(loggedIn && $_P){
  $count = $sql->rowCount();
  if($count != 0){
 ?>
-  $(".notifications #nfn_button").text("<?php echo$count;?>");$(".notifications #nfn_button").addClass("b-red");
+  $(".notifications #nfn_button").text("<?php echo$count;?>");$(".notifications #nfn_button").addClass("red");
 <?php 
  }
  if(isset($_POST['fl'])){

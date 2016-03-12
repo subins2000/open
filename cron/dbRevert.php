@@ -9,7 +9,7 @@ function toBack($t){
  $t=preg_replace("/<b>(.*?)<\/b>/", "**$1**", $t);
  $t=preg_replace("/<i>(.*?)<\/i>/", "*/$1/*", $t);
  $t=preg_replace("/<a(.*?)href=\"(.*?)\">(.*?)<\/a>/", "$3", $t);
- $t=preg_replace("/<a(.*?)href='(.*?)" . HOST . "\/(.*?)'>\@(.*?)<\/a>/", "@$3", $t);
+ $t=preg_replace("/<a(.*?)href='(.*?)" . O_URL . "\/(.*?)'>\@(.*?)<\/a>/", "@$3", $t);
  $t=preg_replace("/<a(.*?)href=\"(.*?)\">(.*?)<\/a>/", "$3", $t);
  return $t;
 }

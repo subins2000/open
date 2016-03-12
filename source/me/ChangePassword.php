@@ -10,7 +10,7 @@
     <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
       <div class="content">
-        <h2>Change Password</h2>
+        <h4>Change Password</h4>
         <div style="margin:0px auto;width: 60%;">
           <?php
           $status = \Fr\LS::changePassword();

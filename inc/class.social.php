@@ -47,6 +47,7 @@ class SocialPost extends Open {
   public function postToFacebook($post, $privacy){
     /* Give Privacy Settings to Facebook as an array */
     
+    $privacySetting = array();
     /* Privacy = Everyone */
     if($privacy == 'pub'){
         $privacySetting = array('value' => 'EVERYONE');
