@@ -18,6 +18,8 @@ $('.dropdown-button').dropdown({
 });
 $(prntf +"#privacy_dropdown a").live("click",function(){
   $("#privacy").val($(this).data("privacy"));
+  $(prntf +"#privacy_dropdown a").removeClass("orange");
+  $(this).addClass("orange");
 });
 $(prntf +"#ptwit").live("click",function(){
   if($(this).find("#twverify").val()==''){

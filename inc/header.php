@@ -5,7 +5,7 @@
       <?php
       if(loggedIn){
       ?>
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons mdi-navigation-menu">view_headline</i></a>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">view_headline</i></a>
       <?php
       }
       ?>
@@ -26,8 +26,6 @@
         </ul>
       <?php
       }
-      ?>
-      <?php
       if(loggedIn){
         $sql = $OP->dbh->prepare("SELECT COUNT(`red`) FROM `notify` WHERE `red`='0' AND `uid`=?");
         $sql->execute(array($who));
@@ -68,28 +66,28 @@ if(loggedIn){
     </li>
     <li>
       <a href="<?php echo O_URL;?>/search">
-        <i class="material-icons">search</i>
-        <span>Search</span>
+        <i class="material-icons">trending_up</i>
+        <span>Trending</span>
       </a>
     </li>
-    <font size="5" style="color:#74ACE9;"><i class="material-icons">trending_up</i><span>Trending</span></font>
-    <div style="padding-left:10px;margin-top:10px;color:black;">
-      <?php
-      $sql = $OP->dbh->query("SELECT * FROM `trend` ORDER BY `hits` DESC LIMIT 9");
-      foreach($sql as $trend){
-        $title = $OP->format( $trend['title'] );
-        $url = Open::URL( "search/" . Open::encodeQuery($trend['title']) );
-        $extra = strlen($title) >= 25 ? "..." : "";
-        $sTitle = str_split($title, 25);
-        $sTitle = $sTitle[0] . $extra;
-        
-        echo '<div style="padding:1px;margin-bottom: 5px;">';
-          echo '<a href="'. $url .'" title="'. $title .'">'. $sTitle .'</a>';
-        echo "</div>";
-      }
-      $OP->dbh->query("DELETE FROM `trend` WHERE `hits` = (SELECT MIN(`hits`) FROM (SELECT * FROM `trend` HAVING COUNT(`hits`) > 150) x);");
-      ?>
-    </div>
+    <li id="trending">
+      <ul id="trends" class="collection">
+        <?php
+        $sql = $OP->dbh->query("SELECT * FROM `trend` ORDER BY `hits` DESC LIMIT 9");
+        foreach($sql as $trend){
+          $title = $OP->format( $trend['title'] );
+          $url = Open::URL( "search/" . Open::encodeQuery($trend['title']) );
+          $extra = strlen($title) >= 25 ? "..." : "";
+          $sTitle = str_split($title, 25);
+          $sTitle = $sTitle[0] . $extra;
+          echo '<li class="collection-item">';
+            echo '<a href="'. $url .'" title="'. $title .'">'. $sTitle .'</a>';
+          echo "</li>";
+        }
+        $OP->dbh->query("DELETE FROM `trend` WHERE `hits` = (SELECT MIN(`hits`) FROM (SELECT * FROM `trend` HAVING COUNT(`hits`) > 150) x);");
+        ?>
+      </ul>
+    </li>
   </ul>
   <div id="short_profile" class="c_c row">
     <div class="row">

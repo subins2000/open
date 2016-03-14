@@ -4,7 +4,7 @@ open.chat.lastLoadedUser = 0; // The ID of the user whose messages was last load
 /* When the chat sidebar is open, other elements shoul be positioned in a way that it wouldn't overlap the sidebar or the other way around : */
 open.chat.alignOthers = function() {
   if($(window).width() > 720 && $(".usersgt").is(":visible") ){
-    $(".content").css("left", "-5%");
+    //$(".content").css("left", "-5%");
   }
 };
 
@@ -98,8 +98,17 @@ $(".chatgt .openugt").live("click",function(){
   open.chat.alignOthers();
 });
 
-/* Display the "Open Chat" button if the sidebar is hidden */
+$(".chatgt .openugt").sideNav({
+  edge: 'right',
+  menuWidth: 200
+});
+
+/**
+ * Display the "Open Chat" button if the sidebar is hidden
+ */
 if(localStorage['chatgtopen'] == 0){
   $(".usersgt").hide();
   $(".openugt").show();
+}else{
+  //$(".chatgt .openugt").sideNav("show");
 }

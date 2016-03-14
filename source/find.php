@@ -170,14 +170,14 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
         $startCounter =  ( ( ( $currentpage - 2 ) >= 3 ) ? ( $currentpage - 2 ) : 1 );
         
         echo "<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
-        echo "<div id='s7e9v'>";
-          echo '<a href="?p=1" class="btn red">First</a>';
+        echo "<ul id='s7e9v' class='pagination'>";
+          echo '<a href="?p=1" class="disabled"><i class="material-icons">chevron_left</i></a>';
           for($i = $startCounter; $i <= $loopcounter; $i++){
-            $isC = $i == $p ? "class='green'" : "";
-            echo "<a href='?p=$i&q=$q'><button $isC>$i</button></a>";
+            $isC = $i == $p ? "class='active'" : "";
+            echo "<li><a href='?p=$i&q=$q' $isC>$i</a></li>";
           }
-          echo '<a href="?p='.$totalpage.'" class="btn red">Last</a>';
-        echo "</div>";
+          echo '<a href="?p='.$totalpage.'" class="disabled"><i class="material-icons">chevron_right</i></a>';
+        echo "</ul>";
         echo "</center>";
         ?>
         <style>div[field]{margin:5px;}</style>

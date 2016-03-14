@@ -283,9 +283,7 @@ $("#nfn_button").live("click",function(){
   }
 });
 
-$(document).ready(function(){
-   $('.button-collapse').sideNav({
-      menuWidth: 200, // Default is 24
-    }
-  );
+$('[data-activates=slide-out]').sideNav({
+  edge: 'left',
+  menuWidth: 200, // Default is 24
 });

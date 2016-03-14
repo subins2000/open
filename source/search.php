@@ -19,23 +19,12 @@ if($searchQuery != ''){
   </head>
   <body>
     <?php include "$docRoot/inc/header.php";?>
-    <div class="content blocks">
-      <div class="block left viewpoint">
-        <form action="<?php echo Open::URL('search');?>" method="GET" style="margin-bottom: 20px;">
-          <input type="text" class="block" value="<?php echo $searchQuery;?>" name="q" id="q" />
-          <button class="btn block">Search</button>
+    <div class="wrapper">
+      <div class="content">
+        <form action="<?php echo Open::URL('search');?>" method="GET" style="margin: 20px 0;" class="row">
+          <input type="text" class="col s10" value="<?php echo $searchQuery;?>" name="q" id="q" autocomplete="off" />
+          <button class="btn col s2 orange"><i class="material-icons">search</i></button>
         </form>
-        <style>
-        #q{
-          width:375px;
-          margin: 0px;
-        }
-        @media screen and (max-width:500px){
-          #q{
-            width:auto;
-          }
-        }
-        </style>
         <?php
         include "$docRoot/inc/post_form.php";
         ?>
@@ -44,11 +33,6 @@ if($searchQuery != ''){
           include "$docRoot/inc/feed.php";
           ?>
         </div>
-      </div>
-      <div class="block right viewpoint">
-        <?php
-        include_once "$docRoot/inc/trending.php";
-        ?>
       </div>
     </div>
     <?php include "$docRoot/inc/gadget.php";?>

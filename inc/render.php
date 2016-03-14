@@ -40,7 +40,7 @@ class Render {
             $html.="</div>";
             $html.="<div class='avatar'>";
               $html.="<a target='_blank' href='$pLink'>";
-                $html.="<img height='32' width='32' src='$img'>";
+                $html.="<img height='32' width='32' src='$img' class='circle responsive-img'>";
               $html.="</a>";
             $html.="</div>";
           $html.="</div>";
@@ -91,9 +91,9 @@ class Render {
         $owner = $v['uid']; /* The user ID of the post owner */
         $id = $v['id']; /* The Post ID */
       
-        $privacyShort = str_replace('pub','Public',
-          str_replace('meo','Only Me',
-            str_replace('fri','Friends', 
+        $privacyShort = str_replace('pub', '<i class="material-icons">public</i>',
+          str_replace('meo', '<i class="material-icons">account_circle</i>',
+            str_replace('fri', '<i class="material-icons">people</i>', 
               $v['privacy']
             )
           )
@@ -125,26 +125,26 @@ class Render {
         $plink = get("plink", $owner);
   
           $html .= "<div class='post blocks row' id='$id'>";
-          $html .= "<div class='col s1'>";
-              $html .= "<a href='$plink'><img src='".get("avatar", $owner)."' class='pimg'/></a>";
-          $html .= "</div>";
-          $html .= "<div class='col s11'>";
+            $html .= "<div class='col m1'>";
+              $html .= "<a href='$plink'><img src='".get("avatar", $owner)."' class='pimg circle responsive-img'/></a>";
+            $html .= "</div>";
+            $html .= "<div class='col m11'>";
               $html .= "<div class='top'>";
-                 $html .= "<a href='$plink'>".get("name", $owner, false)."</a>";
-                 $html .= "<a class='time slink' href='" . O_URL . "/view/{$id}'>{$v['time']}</a>";
-                 $html .= "<span class='privacy slink' title='{$privacyDescription}'>{$privacyShort}</span>";
-            if($owner == curUser){
+                $html .= "<a href='$plink'>".get("name", $owner, false)."</a>";
+                $html .= "<span class='privacy slink' title='{$privacyDescription}'>{$privacyShort}</span>";
+                $html .= "<a class='time slink' href='" . O_URL . "/view/{$id}'>{$v['time']}</a>";
+                if($owner == curUser){
                   $html .= "<div class='author_box'>";
-                $html .= "<div class='author_panel c_c'>";
-                  $html .= "<a class='editPost pointer'>Edit Post</a><cl/>";
-                  $html .= "<a class='deletePost pointer'>Delete Post</a><cl/>";
-                  $html .= "<a class='postLink pointer'>HyperLink</a>";
-                $html .= "</div>";
-              $html .= "</div>";
-            }
+                    $html .= "<div class='card author_panel c_c'>";
+                      $html .= "<a class='postLink pointer'><i class='material-icons'>link</i></a>";
+                      $html .= "<a class='editPost pointer'><i class='material-icons'>mode_edit</i></a>";
+                      $html .= "<a class='deletePost pointer'><i class='material-icons'>delete</i></a>";
+                    $html .= "</div>";
+                  $html .= "</div>";
+                }
               $html .= "</div>";
               $html .= "<div class='cont'>";
-                 if( $otherSTR ){
+              if( $otherSTR ){
                 $html .= $post . "<a class='btn green readMore'>Read More <div hide>{$otherSTR}</div></a>";
               }else{
                 $html .= $post;

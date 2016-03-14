@@ -1,6 +1,27 @@
 .content{
   background: none;
-  margin-left: 240px;
+  margin-left: 200px;
+}
+#trending{
+  background: none;
+  line-height: 10px;
+}
+#trending #trend_head{
+  color: #74ACE9;
+}
+#trending #trend_head i, #trending #trend_head h4{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+#trending #trends li{
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+#trending #trends a{
+  height: 30px;
+  line-height: 30px;
 }
 .post{
   background: #fff;
@@ -46,8 +67,8 @@
   display:inline-block;
 }
 .post .pimg{
-  height:48px;
-  width:48px;
+  max-height:48px;
+  max-width:48px;
 }
 .post .slink{
   margin-left:10px;
@@ -57,8 +78,12 @@
   margin-left:10px;
   color:black;
 }
+.post .top{
+  padding: 5px 0;
+  border-bottom: 1px dashed #CCC;
+}
 .post .cont{
-  margin-top:3px;
+  padding: 10px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -84,6 +109,9 @@
 }
 .post .author_box:hover{
   opacity:1;
+}
+.post .author_box .pointer{
+  margin: 0 2.5px;
 }
 .post .author_panel, .comment .author_cmt_panel{
   position:absolute;
@@ -201,7 +229,7 @@
 }
 @media only screen and (max-width : 992px) {
   .content {
-    margin-left: 0;
+    margin: auto;
   }
 }
 @media screen and (max-width: 730px){

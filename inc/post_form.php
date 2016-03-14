@@ -32,10 +32,10 @@ if( loggedIn ){
         <input type="text" id="show_form" placeholder="Have Something To Share ?">
         <div id="post_full_form" hide>
           <div class="close" title="Close"><i class="material-icons tiny">close</i></div>
-          <textarea placeholder="Share What's New :-)" class="textEditor" name="post"><?php if($_SERVER['REDIRECT_PAGE']=="/search" && $searchQuery!=""){echo "$searchQuery ";}?></textarea>
+          <textarea placeholder="Share What's New :-)" class="textEditor materialize-textarea" name="post"><?php if($_SERVER['REDIRECT_PAGE']=="/search" && $searchQuery!=""){echo "$searchQuery ";}?></textarea>
           <div class="blocks row">
             <a class="block col s0 dropdown-button" id="prtoggle" data-activates='privacy_dropdown'>
-              <i class="material-icons small">accessibility</i>
+              <i class="material-icons small">people</i>
             </a>
             <select id="privacy" name="privacy" class="c_c" hide>
               <option value='pub'>Public</option>
@@ -43,7 +43,7 @@ if( loggedIn ){
               <option value='meo'>Only Me</option>
             </select>
             <ul id='privacy_dropdown' class='dropdown-content'>
-              <li><a data-privacy="pub">Public</a></li>
+              <li><a data-privacy="pub" class="orange">Public</a></li>
               <li><a data-privacy="fri">Friends</a></li>
               <li class="divider"></li>
               <li><a data-privacy="meo">Only Me</a></li>

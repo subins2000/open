@@ -1,3 +1,6 @@
+.content{
+  padding-top: 80px;
+}
 .header{
  height: 200px;
  border:2px solid white;
@@ -16,65 +19,67 @@
 .header .holder a[href]{
   color: white;
 }
+.header #editBox{
+  position:absolute;
+  bottom:0px;
+  left:5px;
+}
 .main{
- margin-top:7px;
+ margin-top: 10px;
  z-index:5;
 }
-.main .left.clearfix{
- width: 600px;
-}
-.main .right.clearfix{
- width:154px;
- margin-left: 5px;
-}
-.main .right.clearfix .image{
+.main .right .image{
  margin-top:-88px;
  border:6px solid white;
- height:150px;
- width:152px;
+ height: 100%;
+ width: 100%;
  background:white;
  position: relative;
  box-shadow:inset 0px 0px 8px 1px rgba(0, 0, 0, .4);
 }
-.main .left.clearfix .navigation{
+.main .right .image img{
+  height: 100%;
+  width: 100%;
+}
+.main .left .navigation{
  text-align: center;
 }
-.main .right.clearfix .osin{
+.main .right .osin{
  margin-top:5px;
 }
-.main .right.clearfix .osin .tlRep{
+.main .right .osin .tlRep{
  text-align:center;
  background:white;
  padding:5px 0px;
  border:1px solid black;
  border-radius:5px;
 }
-.main .right.clearfix .osin .tlRep .tl{
+.main .right .osin .tlRep .tl{
  font-size:25px;
  font-weight:bold;
  padding-bottom:7px;
 }
-.main .right.clearfix .osin .tlRep span:not(.tl){
+.main .right .osin .tlRep span:not(.tl){
  margin:0px 5px;
 }
-.main .right.clearfix .osin .followers,.main .right.clearfix .osin .following{
+.main .right .osin .followers,.main .right .osin .following{
  background:black;
  border-radius:10px;
  padding:5px 10px;
  margin-top:10px;
  color:white;
 }
-.main .left.clearfix .noggler{
+.main .left .noggler{
  margin-top:10px;
 }
-.main .left.clearfix .navigation part{
+.main .left .navigation part{
  font-size:16px;
  margin-left:20px;
  padding:0px 10px 0px 10px;
  display:inline-block;
  cursor:pointer;
 }
-.main .left.clearfix .navigation part[act]{
+.main .left .navigation part[act]{
  font-weight:bold;
  border-bottom:5px solid black;
 }
@@ -113,9 +118,8 @@
 #editField{max-width: 130px;min-width: 130px;}
 #ch_hi{
  position:absolute;
- right:0px;
+ right:3px;
  top:3px;
- padding:5px 15px;
 }
 .noggler#reputation .item{
  margin:5px;
@@ -128,13 +132,13 @@
  line-height:15px;
 }
 @media screen and (max-width:750px){
- .main .left.clearfix{
+ .main .left{
   width:75%;
  }
- .main .right.clearfix{
+ .main .right{
   width:22%;
  }
- .content .header img, .main .right.clearfix .image img{
+ .content .header img, .main .right .image img{
   height:100%;
   width:100%;
  }
@@ -143,7 +147,7 @@
  .post .left{
   display:none;
  }
- .main .right.clearfix .image{
+ .main .right .image{
   border:0px;
   margin-top:0px;
   width: auto;

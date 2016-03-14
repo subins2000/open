@@ -83,188 +83,190 @@ $Rep = $RP->getRep($id); // Reputation
   </head>
   <body>
     <?php include "$docRoot/inc/header.php";?>
-    <div class="content profile">
-      <div class="header">
-        <img src="<?php echo $headerIMG;?>" width="100%" height="200" />
-        <div class="holder">
-          <?php
-          echo "<a href=''>{$name}</a>"; // Attributing link to current page
-          echo $OP->followButton($id);
-          ?>
+    <div class="wrapper">
+      <div class="content profile">
+        <div class="header">
+          <img src="<?php echo $headerIMG;?>" width="100%" height="200" />
+          <div class="holder">
+            <?php
+            echo "<a href=''>{$name}</a>"; // Attributing link to current page
+            echo $OP->followButton($id);
+            ?>
+          </div>
+          <?php if($id == $who){ // If the profile is of logged in user himself ?>
+            <a id="ch_hi" class="btn white">Change Header Image</a>
+            <a id="editBox" class="btn red">Edit Profile</a>
+          <?php }?>
         </div>
-        <?php if($id == $who){ // If the profile is of logged in user himself ?>
-          <a id="ch_hi" class="btn white">Change Header Image</a>
-          <a id="editBox" class="btn red" style="position:absolute;bottom:0px;left:0px;width:150px;text-align:center;">Edit Profile</a>
-        <?php }?>
-      </div>
-      <div class="main blocks">
-        <div class="clearfix left block">
-          <div class="navigation">
-            <part <?php if($_GET['part']=="" || $_GET['part']=="feed"){echo"act";}?>>Feed</part>
-            <part <?php if($_GET['part']=="about"){echo"act";}?>>About</part>
-            <part <?php if($_GET['part']=="reputation"){echo"act";}?>>Reputation</part>
-          </div>
-          <div class="noggler" hide id="feed" <?php if($_GET['part']==""){echo"show";}?>>
-            <?php $_POST['user'] = $id;include "$docRoot/inc/feed.php";?>
-          </div>
-          <div class="noggler" hide id="about" <?php if($_GET['part']=="about"){echo"show";}?>>
-            <div style="display:inline-block;vertical-align:top;width:320px;">
-              <div class="basic smallbox">
-                <h>Basic</h>
-                <it>
-                  <n>Joined</n>
-                  <m>:</m>
-                  <v class="time"><?php echo$joined;?></v>
-                </it>
-                <it editable>
-                  <n>Gender</n>
-                  <m>:</m>
-                  <v><?php echo $gender;?></v>
-                </it>
-                <it editable>
-                  <n>Birthday</n>
-                  <m>:</m>
-                  <v><?php echo $birthday;?></v>
-                </it>
-                <it>
-                  <n>Age</n>
-                  <m>:</m>
-                  <v><?php echo $age;?></v>
-                </it>
-                <it editable in="1">
-                  <n>About Me</n>
-                  <m>:</m>
-                  <v><?php echo $about;?></v>
-                </it>
+        <div class="main row">
+          <div class="col m9 left">
+            <div class="navigation">
+              <part <?php if($_GET['part']=="" || $_GET['part']=="feed"){echo"act";}?>>Feed</part>
+              <part <?php if($_GET['part']=="about"){echo"act";}?>>About</part>
+              <part <?php if($_GET['part']=="reputation"){echo"act";}?>>Reputation</part>
+            </div>
+            <div class="noggler" hide id="feed" <?php if($_GET['part']==""){echo"show";}?>>
+              <?php $_POST['user'] = $id;include "$docRoot/inc/feed.php";?>
+            </div>
+            <div class="noggler" hide id="about" <?php if($_GET['part']=="about"){echo"show";}?>>
+              <div style="display:inline-block;vertical-align:top;width:320px;">
+                <div class="basic smallbox card">
+                  <h>Basic</h>
+                  <it>
+                    <n>Joined</n>
+                    <m>:</m>
+                    <v class="time"><?php echo$joined;?></v>
+                  </it>
+                  <it editable>
+                    <n>Gender</n>
+                    <m>:</m>
+                    <v><?php echo $gender;?></v>
+                  </it>
+                  <it editable>
+                    <n>Birthday</n>
+                    <m>:</m>
+                    <v><?php echo $birthday;?></v>
+                  </it>
+                  <it>
+                    <n>Age</n>
+                    <m>:</m>
+                    <v><?php echo $age;?></v>
+                  </it>
+                  <it editable in="1">
+                    <n>About Me</n>
+                    <m>:</m>
+                    <v><?php echo $about;?></v>
+                  </it>
+                </div>
+                <div class="life smallbox">
+                  <h>Currently</h>
+                  <it editable>
+                    <n>Lives In</n>
+                    <m>:</m>
+                    <v><?php echo $liveIn;?></v>
+                  </it>
+                  <it editable>
+                    <n>Works At</n>
+                    <m>:</m>
+                    <v><?php echo $work;?></v>
+                  </it>
+                  <it editable>
+                    <n>Loves</n>
+                    <m>:</m>
+                    <v><?php echo $loves;?></v>
+                  </it>
+                </div>
               </div>
-              <div class="life smallbox">
-                <h>Currently</h>
-                <it editable>
-                  <n>Lives In</n>
-                  <m>:</m>
-                  <v><?php echo $liveIn;?></v>
-                </it>
-                <it editable>
-                  <n>Works At</n>
-                  <m>:</m>
-                  <v><?php echo $work;?></v>
-                </it>
-                <it editable>
-                  <n>Loves</n>
-                  <m>:</m>
-                  <v><?php echo $loves;?></v>
-                </it>
+              <div style="display:inline-block;vertical-align:top;width:275px;">
+                <div class="contact smallbox">
+                  <h>Contact</h>
+                  <it editable>
+                    <n>E-Mail</n>
+                    <m>:</m>
+                    <v><?php echo$mail;?></v>
+                  </it>
+                  <it editable>
+                    <n>Phone</n>
+                    <m>:</m>
+                    <v><?php echo$phone;?></v>
+                  </it>
+                  <it editable in="1">
+                    <n>Address</n>
+                    <m>:</m>
+                    <v><?php echo$address;?></v>
+                  </it>
+                </div>
+                <div class="profiles smallbox">
+                  <h>Other Profiles</h>
+                  <it editable><n>Facebook</n><m>:</m><v><?php echo $facebook;?></v></it>
+                  <it editable><n>Twitter</n><m>:</m><v><?php echo $twitter;?></v></it>
+                  <it editable><n>Google+</n><m>:</m><v><?php echo $gplus;?></v></it>
+                  <it editable><n>Pinterest</n><m>:</m><v><?php echo $pinterest;?></v></it>
+                </div>
               </div>
             </div>
-            <div style="display:inline-block;vertical-align:top;width:275px;">
-              <div class="contact smallbox">
-                <h>Contact</h>
-                <it editable>
-                  <n>E-Mail</n>
-                  <m>:</m>
-                  <v><?php echo$mail;?></v>
-                </it>
-                <it editable>
-                  <n>Phone</n>
-                  <m>:</m>
-                  <v><?php echo$phone;?></v>
-                </it>
-                <it editable in="1">
-                  <n>Address</n>
-                  <m>:</m>
-                  <v><?php echo$address;?></v>
-                </it>
-              </div>
-              <div class="profiles smallbox">
-                <h>Other Profiles</h>
-                <it editable><n>Facebook</n><m>:</m><v><?php echo $facebook;?></v></it>
-                <it editable><n>Twitter</n><m>:</m><v><?php echo $twitter;?></v></it>
-                <it editable><n>Google+</n><m>:</m><v><?php echo $gplus;?></v></it>
-                <it editable><n>Pinterest</n><m>:</m><v><?php echo $pinterest;?></v></it>
+            <div class="noggler" hide id="reputation" <?php if($_GET['part']=="reputation"){echo "show";}?>>
+              <center style="font-size:30px;height:40px;"><?php echo $Rep['total'];?></center>
+              <div class="blocks">
+                <div class="block" style="width: 49%;">
+                  <?php
+                  foreach($RP->getTopPosts() as $r){
+                  ?>
+                    <div class="blocks item">
+                      <div class="block rep"><?php echo$r['rep'];?></div>
+                      <a class="block" href="<?php echo O_URL ;?>/view/<?php echo$r['id'];?>">Post # <?php echo$r['id'];?></a>
+                    </div>
+                  <?php
+                  }
+                  ?>
+                </div>
+                <div class="block" style="width: 49%;">
+                  <?php
+                  foreach($RP->getTopComments() as $r){
+                  ?>
+                    <div class="blocks item">
+                      <div class="block rep"><?php echo$r['rep'];?></div>
+                      <a class="block" href="<?php echo Open::URL("view/{$r['pid']}#{$r['id']}");?>">
+                        <?php
+                        $c = $r['cmt'];
+                        if(strlen($c) > 10){
+                          echo substr($c, 0, 10);
+                        }else{
+                          echo $c;
+                        }
+                        /* The above code should be in one line */
+                        ?>
+                      </a>
+                    </div>
+                  <?php
+                  }
+                  ?>
+                </div>
               </div>
             </div>
           </div>
-          <div class="noggler" hide id="reputation" <?php if($_GET['part']=="reputation"){echo "show";}?>>
-            <center style="font-size:30px;height:40px;"><?php echo $Rep['total'];?></center>
-            <div class="blocks">
-              <div class="block" style="width: 49%;">
+          <div class="col m3 right">
+            <div class="image">
+              <img src="<?php echo $img;?>" class="responsive-img" />
+              <?php if($id == $who){?>
+                <a id="change_picture">Change Picture</a>
+              <?php }?>
+            </div>
+            <div class="osin">
+              <div class="tlRep">
+                <div class="tl" title="Toal Reputation"><?php echo $Rep['total'];?></div>
+                <div>
+                  <span title="Post Likes"><?php echo $Rep['count']['pst'];?></span>
+                  <span title="Post Comments"><?php echo $Rep['count']['cmt'];?></span>
+                  <span title="Comment Likes"><?php echo $Rep['count']['cmtl'];?></span>
+                </div>
+              </div>
+              <div class="following" style="text-align:center;">
                 <?php
-                foreach($RP->getTopPosts() as $r){
-                ?>
-                  <div class="blocks item">
-                    <div class="block rep"><?php echo$r['rep'];?></div>
-                    <a class="block" href="<?php echo O_URL ;?>/view/<?php echo$r['id'];?>">Post # <?php echo$r['id'];?></a>
-                  </div>
-                <?php
+                $sql = $OP->dbh->prepare("SELECT `fid` FROM `conn` WHERE `uid` = ? LIMIT 6");
+                $sql->execute(array($id));
+                while($r = $sql->fetch()){
+                  $f = $r['fid'];
+                  echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar', $f)."'></a>";
                 }
+                $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `uid` = ?");
+                $sql->execute(array($id));
+                echo "<div><div>Following</div><b style='font-size:20px;'>{$sql->fetchColumn()}</b></div>";
                 ?>
               </div>
-              <div class="block" style="width: 49%;">
+              <div class="followers" style="text-align:center;">
                 <?php
-                foreach($RP->getTopComments() as $r){
-                ?>
-                  <div class="blocks item">
-                    <div class="block rep"><?php echo$r['rep'];?></div>
-                    <a class="block" href="<?php echo Open::URL("view/{$r['pid']}#{$r['id']}");?>">
-                      <?php
-                      $c = $r['cmt'];
-                      if(strlen($c) > 10){
-                        echo substr($c, 0, 10);
-                      }else{
-                        echo $c;
-                      }
-                      /* The above code should be in one line */
-                      ?>
-                    </a>
-                  </div>
-                <?php
+                $sql = $OP->dbh->prepare("SELECT `uid` FROM `conn` WHERE fid=? LIMIT 6");
+                $sql->execute(array($id));
+                while($r=$sql->fetch()){
+                  $f=$r['uid'];
+                  echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar', $f)."'></a>";
                 }
+                $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `fid` = ?");
+                $sql->execute(array($id));
+                echo "<div><b style='font-size:20px;'>{$sql->fetchColumn()}</b><div>Followers</div></div>";
                 ?>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix right block">
-          <div class="image">
-            <img src="<?php echo$img;?>" height="150" width="150"/>
-            <?php if($id == $who){?>
-              <a id="change_picture">Change Picture</a>
-            <?php }?>
-          </div>
-          <div class="osin">
-            <div class="tlRep">
-              <div class="tl" title="Toal Reputation"><?php echo $Rep['total'];?></div>
-              <div>
-                <span title="Post Likes"><?php echo $Rep['count']['pst'];?></span>
-                <span title="Post Comments"><?php echo $Rep['count']['cmt'];?></span>
-                <span title="Comment Likes"><?php echo $Rep['count']['cmtl'];?></span>
-              </div>
-            </div>
-            <div class="following" style="text-align:center;">
-              <?php
-              $sql = $OP->dbh->prepare("SELECT `fid` FROM `conn` WHERE `uid` = ? LIMIT 6");
-              $sql->execute(array($id));
-              while($r = $sql->fetch()){
-                $f = $r['fid'];
-                echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar', $f)."'></a>";
-              }
-              $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `uid` = ?");
-              $sql->execute(array($id));
-              echo "<div><div>Following</div><b style='font-size:20px;'>{$sql->fetchColumn()}</b></div>";
-              ?>
-            </div>
-            <div class="followers" style="text-align:center;">
-              <?php
-              $sql = $OP->dbh->prepare("SELECT `uid` FROM `conn` WHERE fid=? LIMIT 6");
-              $sql->execute(array($id));
-              while($r=$sql->fetch()){
-                $f=$r['uid'];
-                echo "<a href='".get("ploc", $f)."'><img style='border-radius: 0.7em;margin-left:2px;' title='".get("name", $f, false)."' height='32' width='32' src='".get('avatar', $f)."'></a>";
-              }
-              $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `fid` = ?");
-              $sql->execute(array($id));
-              echo "<div><b style='font-size:20px;'>{$sql->fetchColumn()}</b><div>Followers</div></div>";
-              ?>
             </div>
           </div>
         </div>
