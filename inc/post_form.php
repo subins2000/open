@@ -34,9 +34,6 @@ if( loggedIn ){
           <div class="close" title="Close"><i class="material-icons tiny">close</i></div>
           <textarea placeholder="Share What's New :-)" class="textEditor materialize-textarea" name="post"><?php if($_SERVER['REDIRECT_PAGE']=="/search" && $searchQuery!=""){echo "$searchQuery ";}?></textarea>
           <div class="blocks row">
-            <a class="block col s0 dropdown-button" id="prtoggle" data-activates='privacy_dropdown'>
-              <i class="material-icons small">people</i>
-            </a>
             <select id="privacy" name="privacy" class="c_c" hide>
               <option value='pub'>Public</option>
               <option value='fri'>Friends</option>
@@ -49,18 +46,21 @@ if( loggedIn ){
               <li><a data-privacy="meo">Only Me</a></li>
             </ul>
             <input type="file" id="upload" name="upload" hide />
-            <a class="block cam col s0"><i class="material-icons small">add_a_photo</i></a>            
-            <a title="Post To Facebook" class="block col s2" id="pfbit">
+            <a class="block col m1 dropdown-button" id="prtoggle" data-activates='privacy_dropdown'>
+              <i class="material-icons small">people</i>
+            </a>
+            <a class="block cam col m1"><i class="material-icons small">add_a_photo</i></a>            
+            <a title="Post To Facebook" class="block col m2" id="pfbit">
               <input type="hidden" id="fbverify" value="<?php echo $fbv;?>"/>
               <input <?php echo $fb;?> name="facebook" type="checkbox" id="post_to_fb" />
               <label class="block" for="post_to_fb">Facebook</label>
             </a>
-            <a title="Post To Twitter" class="block col s2" id="ptwit">
+            <a title="Post To Twitter" class="block col m6" id="ptwit">
               <input type="hidden" id="twverify" value="<?php echo $twv;?>"/>
               <input <?php echo $tw;?> name="twitter" type="checkbox" id="post_to_tw" />
               <label class="block" for="post_to_tw">Twitter</label>
             </a>
-            <button class="btn green right">Post</button>
+            <button class="btn green s2 right">Post</button>
           </div>
         </div>
       </div>

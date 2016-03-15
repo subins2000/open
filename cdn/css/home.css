@@ -209,19 +209,7 @@
 @media only screen and (max-width : 992px) {
   .content {
     margin: auto;
-  }
-}
-@media screen and (max-width: 730px){
-  .content{
-    left: 0px;
-    right: 0px;
-  }
-  .viewpoint.block.left{
-    width: 100%;
-    margin-left:0px;
-  }
-  .viewpoint.block.right{
-    display: none;
+    padding: 65px 0;
   }
 }
 @media screen and (max-width: 420px){

@@ -31,7 +31,7 @@ $(prntf +"#pfbit").live("click",function(){
     window.location="http://open.sim/oauth/login_with_facebook";
   }
 });
-$(".short_news .close").live("click",function(){
+$(".short_news #close").live("click",function(){
   id = $(this).parents(".short_news").attr("id");
   localStorage["shnews"] = id;
   $(".short_news").hide();

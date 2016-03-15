@@ -339,14 +339,14 @@ table tr td{
 }
 /*Responsive Design*/
 @media screen and (max-width: 850px){
- .content{
-  width:auto;
-  margin-left: 5px;
-  margin-right: 5px;
- }
- .post_form .right{
-  width:87% !important;
- }
+  .content{
+    width:auto;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .post_form .right{
+    width:87% !important;
+  }
 }
 @media screen and (max-width: 640px){
   .content{
@@ -364,17 +364,11 @@ table tr td{
   }
 }
 @media screen and (max-width: 520px){
-  .content{
-    padding: 40px 3px;
-  }
   .post .right{
     width: 85% !important;
   }
 }
 @media screen and (max-width: 320px){
-  .content{
-    padding: 130px 3px;
-  }
   .chatgt{
     display: none;
   }

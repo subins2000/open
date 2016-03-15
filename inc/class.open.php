@@ -27,6 +27,8 @@ class Open{
   /* Make the <head> tag. All params are not required */
   /* Accepts title, js & css files that are separated by a comma (,) */
   public function head($title="", $js="", $css=""){
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    
     if($title!=""){
       echo "<title>$title | Open - An Open Source Social Network</title>";
     }else{

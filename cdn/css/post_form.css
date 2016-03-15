@@ -46,8 +46,9 @@
   position: absolute;
   right: 5px;
   top: 6px;
+  z-index: 99999;
 }
 .post_form .close{
- position:absolute;
- right:5px;
+  position: absolute;
+  right: 5px;
 }

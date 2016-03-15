@@ -150,8 +150,8 @@ class Render {
                 $html .= $post;
               }
               if( $v['image'] != "" ){
-                CLEAN_HOST != "open.dev" ? $v['image'] = str_replace("http:", "https:", $v['image']) : "";
-                $html .= "<img class='postImage' data-fullsize='{$v['image']}' src='{$v['image']}/200' />";
+                CLEAN_HOST != "open.sim" ? $v['image'] = str_replace("http:", "https:", $v['image']) : "";
+                $html .= "<img class='postImage responsive-img' data-fullsize='{$v['image']}' src='{$v['image']}/200' />";
               }
               $html .= "</div>";
               $html .= "<div class='bottom'>";
