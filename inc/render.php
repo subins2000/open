@@ -267,11 +267,11 @@ class Render {
       $iuR = $r['red'] == 0 ? "nred":"";
       $iuT = $r['red'] == 0 ? "Unread Notification":"";
       $nfs="<a href='$alnk'>";
-        $nfs.="<div class='nfsi $iuR' id='$id' title='$iuT'>";
-          $nfs.="<div class='left'>";
-            $nfs.="<img height='32' width='32' src='$img'/>";
+        $nfs.="<div class='nfsi row $iuR' id='$id' title='$iuT'>";
+          $nfs.="<div class='col s2'>";
+            $nfs.="<img class='responsive-img' src='$img'/>";
           $nfs.="</div>";
-          $nfs.="<div class='right'>";
+          $nfs.="<div class='col s10'>";
             $nfs.="<span class='name'>$name</span><br/>";
             $nfs.="<span class='time'>{$r['posted']}</span>";
             $nfs.="<div class='cont'>";

@@ -34,7 +34,7 @@
       ?>
         <div class="right">
           <a id="name_button" class="btn white" who="<?php echo $who;?>"><?php echo $uname;?></a>
-          <a id="nfn_button" class="btn white <?php echo $count == 0 ? "" : "red";?>"><?php echo $count;?></a>
+          <a id="nfn_button" class="btn <?php echo $count == 0 ? "white" : "red";?>"><?php echo $count;?></a>
         </div>
       <?php
       }

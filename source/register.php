@@ -1,4 +1,6 @@
-<?php \Fr\LS::init();?>
+<?php
+\Fr\LS::init();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +10,7 @@
     <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
       <div class="content" style="text-align:center;">
-        <h4>Create An Account</h4>
+        <h3>Create An Account</h3>
         <div id="social" style="<?php if(isset($_POST['submit']) || isset($_POST['verify'])){?>display:none;<?php }?>">
           <a class="btn" href="oauth/login_with_facebook" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background: #3b579d url(<?php echo O_URL ;?>/cdn/img/fb_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;margin-right:5px;">Login With Facebook</a>
           <a class="btn red" href="oauth/login_with_google" style="display: inline-block;height: 43px;margin: 0px;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(<?php echo O_URL ;?>/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
@@ -28,24 +30,36 @@
           }
           if($verified == 1){
           ?>
-            <form action="register" method="POST" style="padding-left:15px;padding-top:1px;">
+            <form action="register" method="POST" style="text-align: left;">
               <input name="user" value="<?php echo $code;?>" type="hidden" />
               <input name="nuser" value="<?php echo $_POST['user'];?>" type="hidden" />
-              <h4>E-Mail</h4>
-              <input type="text" style="width:290px;" value="<?php echo $_POST['user'];?>" disabled="disabled"/><br/>
-              <h4>Password</h4>
-              <input name="pass" style="width:290px;" id="pass" placeholder="Make It Great" autocomplete="off" type="password"/><br/>
-              <h4>Retype Password</h4>
-              <input name="pass2" style="width:290px;" id="pass2" placeholder="Is It that great ?" autocomplete="off" type="password"/><br/>
-              <div id="ppbar" title="Strength"><div id="pbar"></div><div id="ppbartxt"></div></div>
-              <h4>Name</h4>
-              <input name="name" style="width:290px;" id="user" placeholder="You Must Have a Name" type="text"/><br/><cl/>
-              <input type="submit" class="red" style="font-size: 20px;margin: 5px;" name="submit" value="Register Account" />
-              <p>
-                Already Have An Account ?
-                <a href="<?php echo O_URL ;?>/login" class="btn">Log In</a>
-              </p>
+              <div class="input-field row">
+                <i class="material-icons prefix">email</i>
+                <input type="text" value="<?php echo $_POST['user'];?>" disabled="disabled"/>
+                <label>E-Mail</label>
+              </div>
+              <div class="input-field row">
+                <i class="material-icons prefix">account_circle</i>
+                <input name="name" id="user" type="text"/>
+                <label for="user">Full Name</label>
+              </div>
+              <div class="row">
+                <div class="input-field col m6">
+                  <input name="pass" id="pass" type="password"/>
+                  <label for="pass">Password</label>
+                </div>
+                <div class="input-field col m6">
+                  <input name="pass2" id="pass2" type="password"/>
+                  <label for="pass2">Retype Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <i class="material-icons col s1">security</i>
+                <div id="ppbar" class="progress col m11" title="Strength"><div class="determinate" id="pbar"></div><div id="ppbartxt"></div></div>
+              </div>
+              <button class="btn red btn-large" style="font-size: 20px;margin: 5px;" name="submit">Register Account</button>
             </form>
+            <style>#ppbar{height:20px;margin: 5px auto;position: relative;}#ppbartxt{text-align: right;position: absolute;right: 5px;top: 1px;}</style>
           <?php
           }elseif(!isset($_POST['verify']) && !isset($_POST['submit'])){
           ?>
@@ -120,8 +134,7 @@
           ?>
         </div>
       </div>
+      <?php include "$docRoot/inc/footer.php";?>
     </div>
-    <style>#ppbar{background:#CCC;width:400px;height:20px;margin: 5px auto;position: relative;}#pbar{margin:0px;width:0px;background:lightgreen;height: 100%;}#ppbartxt{text-align: right;position: absolute;right: 5px;top: 1px;}</style>
-    <?php include "$docRoot/inc/footer.php";?>
   </body>
 </html>

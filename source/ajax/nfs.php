@@ -13,7 +13,7 @@ if(isset($_POST['load'])){
    $nfs .= Render::notification($r['id']);
   }
   $nfs=$OP->rendFilt($nfs);
-  $nfs.="<br/><a href='". Open::URL("/notifications") ."' style='text-align:center;display:block;'>See All Notifications</a><br/>";
+  $nfs.="<a href='". Open::URL("/notifications") ."' style='text-align:center;display:block;'>See All Notifications</a><br/>";
 ?>
 $(".notifications .loading").hide();
 $(".notifications .nfs").html("<?php echo $nfs;?>");

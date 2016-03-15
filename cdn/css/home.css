@@ -2,27 +2,6 @@
   background: none;
   margin-left: 200px;
 }
-#trending{
-  background: none;
-  line-height: 10px;
-}
-#trending #trend_head{
-  color: #74ACE9;
-}
-#trending #trend_head i, #trending #trend_head h4{
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-}
-#trending #trends li{
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
-#trending #trends a{
-  height: 30px;
-  line-height: 30px;
-}
 .post{
   background: #fff;
   border-radius: 2px;

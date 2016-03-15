@@ -15,8 +15,9 @@ require_once "$docRoot/inc/vendor/autoload.php";
 $router = new \Klein\Klein();
 
 function makeSource($loc){
-  global $OP, $docRoot, $LS, $who;
+  global $OP, $docRoot, $LS, $who, $cfg;
   global $_P, $uname, $uimg; // Extra Vars
+  
   $_SERVER['REDIRECT_PAGE'] = "/$loc";
   include docRoot . "/source/$loc.php";
 }
@@ -29,7 +30,7 @@ function idPage($file, $request){
 }
 
 /* The default 404 pages */
-$router->respond('*', function($request, $response) use($OP) {
+$router->respond('*', function($request, $response) use($OP, $cfg) {
   if($response->status() == "400"){
     $OP->ser();
   }
@@ -78,25 +79,25 @@ $router->respond("/data/?[**:path]?", function($request, $response) {
 });
 /* END - Dynamic Pages */
 
-$router->respond("/css/[**:files]", function($request, $response) use($docRoot) {
+$router->respond("/css/[**:files]", function($request, $response) use($docRoot, $cfg) {
    $_GET['f'] = $request->files;
    include "$docRoot/cdn/css/get.php";
    $GLOBALS['itsMyPage'] = true;
 });
-$router->respond("/js/[**:files]", function($request, $response) use($docRoot) {
+$router->respond("/js/[**:files]", function($request, $response) use($docRoot, $cfg) {
    $_GET['f'] = $request->files;
   include "$docRoot/cdn/js/get.php";
   $GLOBALS['itsMyPage'] = true;
 });
 
-$router->respond("/url?/[**:url]?", function($request, $response) use($docRoot) {
+$router->respond("/url?/[**:url]?", function($request, $response) use($docRoot, $cfg) {
   $response->redirect($request->url);
 });
 
 /**
  * Open Auth (Opth)
  */
-$router->respond("/opth/api/users/[*:token]?/[**:what]", function($request, $response) use($docRoot, $OP) {
+$router->respond("/opth/api/users/[*:token]?/[**:what]", function($request, $response) use($docRoot, $OP, $cfg) {
   $user_token = $request->token;
   $what = $request->what;
 
@@ -104,7 +105,7 @@ $router->respond("/opth/api/users/[*:token]?/[**:what]", function($request, $res
   $GLOBALS['itsMyPage'] = true;
 });
 
-$router->respond("/[**:path]", function($request, $response) use($docRoot, $OP) {
+$router->respond("/[**:path]", function($request, $response) use($docRoot, $OP, $cfg) {
    $loc = docRoot . "/source/{$request->path}.php";
    if ( !isset($GLOBALS['itsMyPage']) ){
     if( file_exists($loc) ){

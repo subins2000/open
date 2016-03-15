@@ -64,7 +64,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
           <a class="btn red" href="oauth/login_with_google?c=<?php echo urlencode($returnURL);?>" style="display: inline-block;height: 43px;margin: 10px 0;padding: 0px 20px 0px 52px;font-family: 'Ubuntu', sans-serif;font-size: 18px;font-weight: 400;color: #fff;line-height: 41px;background:rgb(231, 38, 54) url(<?php echo O_URL ;?>/cdn/img/g+_icon.png) no-repeat 14px 8px scroll;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;text-decoration: none;cursor:pointer;">Login With Google +</a>
         </div>
       </div>
+      <?php include "$docRoot/inc/footer.php";?>
     </div>
-    <?php include "$docRoot/inc/footer.php";?>
   </body>
 </html>

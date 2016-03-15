@@ -7,8 +7,8 @@
     <?php $OP->head("", "ac,time,gadget", "ac,gadget");?>
   </head>
   <body>
+    <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
-      <?php include "$docRoot/inc/header.php";?>
       <div class="content notifications">
         <h1>Notifications</h1>
         <?php

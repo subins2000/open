@@ -1,6 +1,6 @@
 <?php
-if(!defined("HOST")){
-  include_once "../config.php";
+if(!defined("O_URL")){
+  require_once "../config.php";
 }
 ?>
 <html lang="en">
