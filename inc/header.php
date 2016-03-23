@@ -18,7 +18,7 @@
             if( isset($_SERVER['REQUEST_URI']) ){ 
               if( $_SERVER['REQUEST_URI'] != "/" && !preg_match("/\/login/", $_SERVER['REQUEST_URI']) ){
                 echo "?c=";
-                echo $_SERVER['REQUEST_URI'];
+                echo urlencode($_SERVER['REQUEST_URI']);
               }
             }
             ?>" class="btn red">Log In</a></li>

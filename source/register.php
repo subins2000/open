@@ -93,7 +93,7 @@
                 <p>Paste The Code you received via E-Mail below</p><cl/>
                 <input name="user" value="<?php echo $email;?>" type="hidden"/>
                 <input name="code" style="width:290px;" autocomplete="off" placeholder="Paste The Code Here" type="text"/><br/><cl/>
-                <input name="verify" type="submit" value="Complete Verification"/><cl/>
+                <button name="verify" class="btn green">Complete Verification</button><cl/>
               </form>
           <?php
             }else{

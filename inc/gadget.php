@@ -13,12 +13,12 @@
       <div class="close">x</div>
       <img src="<?php echo get("avatar");?>"/>
       <div class="otd">
-        <a href="<?php echo Open::URL("profile");?>"><?php echo get("name", $who,false);?></a><br/>
+        <a href="<?php echo Open::URL("profile");?>"><?php echo get("name", $who,false);?></a>
         <span class="status on"></span><span>Online</span>
       </div>
     </div>
     <div class="users">
-      <div style="margin-top: 55px;">
+      <div>
         <?php
         $sql=$OP->dbh->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
         $sql->execute(array(":who"=>$who));

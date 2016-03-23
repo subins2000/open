@@ -30,30 +30,30 @@ class Render {
         $fName = get("fname", $uid); // First Name
         $html  .= "<div class='msg' id='$mid'>";
         if($uid == curUser){
-          $html.="<div class='left'>";
-            $html.="<div class='mainContent'>";
+          $html.="<div class='leftBox row'>";
+            $html.="<div class='mainContent col m12'>";
               $html.="<div class='up'>";
                 $html.="<a target='_blank' href='$pLink' title='{$name}'>{$fName}</a>";
                 $html.="<span class='time'>{$r['posted']}</span>";
               $html.="</div>";
               $html.="<div class='cmsg'>{$r['msg']}</div>";
             $html.="</div>";
-            $html.="<div class='avatar'>";
+            $html.="<div class='avatar left'>";
               $html.="<a target='_blank' href='$pLink'>";
                 $html.="<img height='32' width='32' src='$img' class='circle responsive-img'>";
               $html.="</a>";
             $html.="</div>";
           $html.="</div>";
         }else{      
-          $html.="<div class='right'>";
-            $html.="<div class='mainContent'>";
+          $html.="<div class='rightBox row'>";
+            $html.="<div class='mainContent col m12 right'>";
               $html.="<div class='up'>";
                 $html.="<a target='_blank' href='$pLink'>$fName</a>";
                 $html.="<span class='time'>{$r['posted']}</span>";
               $html.="</div>";
               $html.="<div class='cmsg'>{$r['msg']}</div>";
             $html.="</div>";
-            $html.="<div class='avatar'>";
+            $html.="<div class='avatar right'>";
               $html.="<a target='_blank' href='$pLink'>";
                 $html.="<img height='32' width='32' src='$img'>";
               $html.="</a>";
@@ -71,7 +71,7 @@ class Render {
     if( !$single ){
       $html .= "<form action='ajax/msg' method='POST' class='ajax_form chat_form blocks' id='$fid' success='Sent Successfully' error='Sending Failed. Try again.' while='Sending'>";
         $html .= "<input type='hidden' name='to' value='$fid'/>";
-        $html .= "<textarea type='text' class='msgEditor' name='msg'></textarea>";
+        $html .= "<textarea type='text' class='msgEditor' name='msg' placeholder='Type here...'></textarea>";
         $html .= "<input type='submit' name='submit' style='display: none;'/>";
       $html .= "</form>";
     }
@@ -197,10 +197,10 @@ class Render {
         $lk = $OP->didLike($id, "cmt") === false ? "Like":"Unlike";
         $class = strtolower($lk) == "unlike" ? " unlike":"";
         $html .= "<div class='comment row' id='$id'>";
-          $html .= "<div class='col s1'>";
+          $html .= "<div class='col m1'>";
             $html .= "<img src='$img' class='pimg'/>";
           $html .= "</div>";
-          $html .= "<div class='col s11'>";
+          $html .= "<div class='col m11'>";
             $html .= "<div class='top'>";
               $html .= "<a href='{$pLink}'>$name</a>";
               $html .= "<a class='time slink' href='" . O_URL . "/view/{$r['pid']}#$id'>{$r['time']}</a>";

@@ -14,9 +14,10 @@ if($_P && $msg != "" && $to != ""){
   if($sql->rowCount() == 0){
     $OP->ser();
   }
-  $sql=$OP->dbh->prepare("SELECT `uid`, `msg` FROM `chat` WHERE (`uid` = ? AND `fid` = ?) OR (`uid` = ? AND `fid` = ?) ORDER BY `id` DESC LIMIT 1");
+  $lu = 0;
+  $sql = $OP->dbh->prepare("SELECT `uid`, `msg` FROM `chat` WHERE (`uid` = ? AND `fid` = ?) OR (`uid` = ? AND `fid` = ?) ORDER BY `id` DESC LIMIT 1");
   $sql->execute(array($who, $to, $to, $who));
-  while($r=$sql->fetch()){
+  while($r = $sql->fetch()){
     $lu = $r['uid']; // Last user id
     $lm = $r['msg']; // Last message
   }

@@ -3,7 +3,7 @@ open.chat.lastLoadedUser = 0; // The ID of the user whose messages was last load
 
 /* When the chat sidebar is open, other elements shoul be positioned in a way that it wouldn't overlap the sidebar or the other way around : */
 open.chat.alignOthers = function() {
-  if($(window).width() > 720 && $(".usersgt").is(":visible") ){
+  if($(window).width() > 720 && $("#users-nav").is(":visible") ){
     //$(".content").css("left", "-5%");
   }
 };
@@ -61,7 +61,7 @@ $(".msgEditor").smention(open.host + "/ajax/getUsers",{
 open.chat.check(); // Check for new messages
 
 /* Open the chat window of user */
-$(".usersgt .user").live("click", function(){
+$("#users-nav .user").live("click", function(){
   id = $(this)[0].id; // The requested user's ID
   $(".msggt").show();
   $(".msggt input[name=to]").val(id);
@@ -81,9 +81,9 @@ $(".msggt .close").live("click", function(){
 });
 
 /* Close the chat sidebar */
-$(".chatgt .usersgt .cusgt .close").live("click", function(){
+$(".chatgt #users-nav .cusgt .close").live("click", function(){
   $(".content").attr("style", "");
-  $(".usersgt").hide();
+  $("#users-nav").hide();
   $(".openugt").show();
   $(".msggt").css("right", "30px");
   localStorage['chatgtopen'] = 0;
@@ -91,7 +91,7 @@ $(".chatgt .usersgt .cusgt .close").live("click", function(){
 
 /* Open the chat sidebar when the "Open Chat" button is clicked */
 $(".chatgt .openugt").live("click",function(){
-  $(".usersgt").show();
+  $("#users-nav").show();
   $(".openugt").hide();
   $(".msggt").css("right", "235px");
   localStorage['chatgtopen'] = 1; // Add info that the chat sidebar is open
@@ -107,7 +107,7 @@ $(".chatgt .openugt").sideNav({
  * Display the "Open Chat" button if the sidebar is hidden
  */
 if(localStorage['chatgtopen'] == 0){
-  $(".usersgt").hide();
+  $("#users-nav").hide();
   $(".openugt").show();
 }else{
   //$(".chatgt .openugt").sideNav("show");

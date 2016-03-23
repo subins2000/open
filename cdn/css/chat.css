@@ -1,7 +1,7 @@
 .users, .chat{
   display:inline-block;
   vertical-align:top;
-  height:410px;
+  height:430px;
 }
 .users{
   width:200px;
@@ -35,7 +35,7 @@
 }
 .chat .msgs{
   height: 360px;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 .chat .chat_form{
   padding: 5px 15px;

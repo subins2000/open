@@ -39,7 +39,6 @@
 }
 .post .unlike{
   background-position: -18px 0px;
-  margin-top: 10px;
 }
 .post .like_bar, .post .cmt_bar{
   margin-left: 10px;
@@ -210,6 +209,11 @@
   .content {
     margin: auto;
     padding: 65px 0;
+  }
+}
+@media only screen and (max-width: 601px) {
+  .content{
+    padding: 56px 0;
   }
 }
 @media screen and (max-width: 420px){

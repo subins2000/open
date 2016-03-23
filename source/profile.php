@@ -78,7 +78,7 @@ $Rep = $RP->getRep($id); // Reputation
 <html>
   <head>
     <?php $OP->head($name, "ac,profile,time,home,gadget", "ac,home,profile,gadget");?>
-    <meta name="oid" value="<?php echo$id;?>"/>
+    <meta name="oid" value="<?php echo $id;?>"/>
     <meta name="type" value="profile"/>
   </head>
   <body>
@@ -100,11 +100,11 @@ $Rep = $RP->getRep($id); // Reputation
         </div>
         <div class="main row">
           <div class="col m9 left">
-            <div class="navigation">
-              <part <?php if($_GET['part']=="" || $_GET['part']=="feed"){echo"act";}?>>Feed</part>
-              <part <?php if($_GET['part']=="about"){echo"act";}?>>About</part>
-              <part <?php if($_GET['part']=="reputation"){echo"act";}?>>Reputation</part>
-            </div>
+            <ul class="tabs navigation">
+              <li class="tab"><a href="<?php echo Open::URL("/$id/feed");?>" class="<?php if($_GET['part'] == "" || $_GET['part'] == "feed"){echo "active";}?>">Feed</a></li>
+              <li class="tab"><a href="<?php echo Open::URL("/$id/about");?>" class="<?php if($_GET['part'] == "about"){echo "active";}?>">About</a></li>
+              <li class="tab"><a href="<?php echo Open::URL("/$id/reputation");?>" class="<?php if($_GET['part'] == "reputation"){echo "active";}?>"">Reputation</li>
+            </ul>
             <div class="noggler" hide id="feed" <?php if($_GET['part']==""){echo"show";}?>>
               <?php $_POST['user'] = $id;include "$docRoot/inc/feed.php";?>
             </div>
@@ -115,7 +115,7 @@ $Rep = $RP->getRep($id); // Reputation
                   <it>
                     <n>Joined</n>
                     <m>:</m>
-                    <v class="time"><?php echo$joined;?></v>
+                    <v class="time"><?php echo $joined;?></v>
                   </it>
                   <it editable>
                     <n>Gender</n>
@@ -163,17 +163,17 @@ $Rep = $RP->getRep($id); // Reputation
                   <it editable>
                     <n>E-Mail</n>
                     <m>:</m>
-                    <v><?php echo$mail;?></v>
+                    <v><?php echo $mail;?></v>
                   </it>
                   <it editable>
                     <n>Phone</n>
                     <m>:</m>
-                    <v><?php echo$phone;?></v>
+                    <v><?php echo $phone;?></v>
                   </it>
                   <it editable in="1">
                     <n>Address</n>
                     <m>:</m>
-                    <v><?php echo$address;?></v>
+                    <v><?php echo $address;?></v>
                   </it>
                 </div>
                 <div class="profiles smallbox">
@@ -193,8 +193,8 @@ $Rep = $RP->getRep($id); // Reputation
                   foreach($RP->getTopPosts() as $r){
                   ?>
                     <div class="blocks item">
-                      <div class="block rep"><?php echo$r['rep'];?></div>
-                      <a class="block" href="<?php echo O_URL ;?>/view/<?php echo$r['id'];?>">Post # <?php echo$r['id'];?></a>
+                      <div class="block rep"><?php echo $r['rep'];?></div>
+                      <a class="block" href="<?php echo O_URL ;?>/view/<?php echo $r['id'];?>">Post # <?php echo $r['id'];?></a>
                     </div>
                   <?php
                   }
@@ -205,7 +205,7 @@ $Rep = $RP->getRep($id); // Reputation
                   foreach($RP->getTopComments() as $r){
                   ?>
                     <div class="blocks item">
-                      <div class="block rep"><?php echo$r['rep'];?></div>
+                      <div class="block rep"><?php echo $r['rep'];?></div>
                       <a class="block" href="<?php echo Open::URL("view/{$r['pid']}#{$r['id']}");?>">
                         <?php
                         $c = $r['cmt'];

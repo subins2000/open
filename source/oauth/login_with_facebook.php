@@ -13,26 +13,30 @@ require "$docRoot/inc/oauth/database_oauth_client.php";
 require "$docRoot/inc/oauth/mysqli_oauth_client.php";
 
 
-/* We add the session variable containing the URL that should be redirected to after logging in */
+/**
+ * We add the session variable containing the URL that should be redirected to after logging in
+ */
 $_SESSION['continue'] = isset($_SESSION['continue']) ? $_SESSION['continue'] : "";
 
 /* $_GET['c'] have the URL that should be redirected to after oauth logging in */
 $_GET['c'] = isset($_GET['c']) ? urldecode($_GET['c']) : "";
 
-if($_GET['c'] === '' && $_SESSION['continue'] === ''){
-  /* The default Redirect URL open.dev/home */
-  $_SESSION['continue'] = Open::URL("home");
-}else if($_GET['c'] != ''){
+if($_GET['c'] != ''){
   /* Or the URL that was sent */
   $hostParts = parse_url($_GET['c']);
-  $hostParts['host'] = isset($hostParts['host']) ? $hostParts['host'] : "";
-  
-  if($hostParts['host'] != CLEAN_HOST){
-    $_SESSION['continue'] = Open::URL("home");
+
+  if(!isset($hostParts['host']) || (isset($hostParts['host']) && $hostParts['host'] == CLEAN_HOST)){
+    $_SESSION['continue'] = Open::URL($_GET['c']);
   }else{
-    $_SESSION['continue'] = $_GET['c'];
+    $_SESSION['continue'] = Open::URL("home");
   }
+}else if($_SESSION['continue'] == ""){
+  /**
+   * The default Redirect URL open.dev/home
+   */
+  $_SESSION['continue'] = Open::URL("home");
 }
+$location = $_SESSION['continue'];
 
 /* We make an array of Database Details */
 $databaseDetails = unserialize(DATABASE);
@@ -63,20 +67,21 @@ if(($success = $client->Initialize())){
         $success = $client->CallAPI('https://graph.facebook.com/me', 'GET', array(), array('FailOnAccessError' => true), $user);
 
         if($success){
-          $location = $_SESSION['continue'];
           $email = $user->email;
           $name = $user->name;
           $gender = $user->gender;
           
           if( \Fr\LS::userExists($email) ){
+            $who = $_SESSION['logSyscuruser'];
+            
             /**
              * Since user exists, we log him/her in
              */
             \Fr\LS::login($email, "");
-            $who = $_SESSION['logSyscuruser'];
             
             $sql = $OP->dbh->prepare("UPDATE `oauth_session` SET `user` = ? WHERE `server` = ? AND `access_token` = ?");
             $sql->execute(array($who, "Facebook", $client->access_token));
+            
             unset($_SESSION['continue']);
             $OP->redirect($location);
           }else{
@@ -108,8 +113,10 @@ if(($success = $client->Initialize())){
              */
             $id = \Fr\LS::login($email, "", false, false);
             $client->SetUser($id);
-            unset($_SESSION['continue']);
+            
             \Fr\LS::login($email, "");
+            
+            unset($_SESSION['continue']);
             $OP->redirect($location);
           }
         }
