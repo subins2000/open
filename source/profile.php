@@ -103,84 +103,113 @@ $Rep = $RP->getRep($id); // Reputation
             <ul class="tabs navigation">
               <li class="tab"><a href="<?php echo Open::URL("/$id/feed");?>" class="<?php if($_GET['part'] == "" || $_GET['part'] == "feed"){echo "active";}?>">Feed</a></li>
               <li class="tab"><a href="<?php echo Open::URL("/$id/about");?>" class="<?php if($_GET['part'] == "about"){echo "active";}?>">About</a></li>
-              <li class="tab"><a href="<?php echo Open::URL("/$id/reputation");?>" class="<?php if($_GET['part'] == "reputation"){echo "active";}?>"">Reputation</li>
+              <li class="tab"><a href="<?php echo Open::URL("/$id/reputation");?>" class="<?php if($_GET['part'] == "reputation"){echo "active";}?>">Reputation</li>
             </ul>
             <div class="noggler" hide id="feed" <?php if($_GET['part']==""){echo"show";}?>>
               <?php $_POST['user'] = $id;include "$docRoot/inc/feed.php";?>
             </div>
             <div class="noggler" hide id="about" <?php if($_GET['part']=="about"){echo"show";}?>>
-              <div style="display:inline-block;vertical-align:top;width:320px;">
-                <div class="basic smallbox card">
-                  <h>Basic</h>
-                  <it>
-                    <n>Joined</n>
-                    <m>:</m>
-                    <v class="time"><?php echo $joined;?></v>
-                  </it>
-                  <it editable>
-                    <n>Gender</n>
-                    <m>:</m>
-                    <v><?php echo $gender;?></v>
-                  </it>
-                  <it editable>
-                    <n>Birthday</n>
-                    <m>:</m>
-                    <v><?php echo $birthday;?></v>
-                  </it>
-                  <it>
-                    <n>Age</n>
-                    <m>:</m>
-                    <v><?php echo $age;?></v>
-                  </it>
-                  <it editable in="1">
-                    <n>About Me</n>
-                    <m>:</m>
-                    <v><?php echo $about;?></v>
-                  </it>
-                </div>
-                <div class="life smallbox">
-                  <h>Currently</h>
-                  <it editable>
-                    <n>Lives In</n>
-                    <m>:</m>
-                    <v><?php echo $liveIn;?></v>
-                  </it>
-                  <it editable>
-                    <n>Works At</n>
-                    <m>:</m>
-                    <v><?php echo $work;?></v>
-                  </it>
-                  <it editable>
-                    <n>Loves</n>
-                    <m>:</m>
-                    <v><?php echo $loves;?></v>
-                  </it>
-                </div>
-              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Basic Info</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Joined</td>
+                    <td class="time"><?php echo $joined;?></td>
+                  </tr>
+                  <tr>
+                    <td data-label="gender">Gender</td>
+                    <td data-value="<?php echo $gender;?>"><?php echo $gender;?></td>
+                  </tr>
+                  <tr>
+                    <td data-label="birthday">Birthday</td>
+                    <td class="time" data-value="<?php echo $birthday;?>"><?php echo $birthday;?></td>
+                  </tr>
+                  <tr>
+                    <td>Age</td>
+                    <td><?php echo $age;?></td>
+                  </tr>
+                  <tr editable data-textarea="1">
+                    <td data-label="aboutme">About Me</td>
+                    <td data-value="<?php echo $about;?>"><?php echo $about;?></td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th>Present</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr editable>
+                    <td data-label="livesin">Lives In</td>
+                    <td data-value="<?php echo $liveIn;?>"><?php echo $liveIn;?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="worksat">Works At</td>
+                    <td data-value="<?php echo $work;?>"><?php echo $work;?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="loves">Loves</td>
+                    <td data-value="<?php echo $loves;?>"><?php echo $loves;?></td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th>Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr editable>
+                    <td data-label="e-mail">E-Mail</td>
+                    <td data-value="<?php echo $mail;?>"><?php echo $mail;?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="phone">Phone</td>
+                    <td data-value="<?php echo $phone;?>"><?php echo $phone;?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="address">Address</td>
+                    <td data-value="<?php echo $address;?>"><?php echo $address;?></td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th>Profiles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr editable>
+                    <td data-label>Facebook</td>
+                    <td data-value="<?php echo $facebook;?>"><?php
+                      if($facebook != "Private"){
+                        echo "<a target='_blank' href='https://www.facebook.com/". $facebook ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-64.png' /></a>";
+                      }
+                    ?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="twitter">Twitter</td>
+                    <td data-value="<?php echo $twitter;?>"><?php
+                      if($twitter != "Private"){
+                        echo "<a target='_blank' href='https://www.twitter.com/". $twitter ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-64.png' /></a>";
+                      }
+                    ?></td>
+                  </tr>
+                  <tr editable>
+                    <td data-label="twitter">Twitter</td>
+                    <td data-value="<?php echo $gplus;?>"><?php
+                      if($twitter != "Private"){
+                        echo "<a target='_blank' href='https://plus.google.com/+". $gplus ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-64.png' /></a>";
+                      }
+                    ?></td>
+                  </tr>
+                </tbody>
+              </table>
               <div style="display:inline-block;vertical-align:top;width:275px;">
-                <div class="contact smallbox">
-                  <h>Contact</h>
-                  <it editable>
-                    <n>E-Mail</n>
-                    <m>:</m>
-                    <v><?php echo $mail;?></v>
-                  </it>
-                  <it editable>
-                    <n>Phone</n>
-                    <m>:</m>
-                    <v><?php echo $phone;?></v>
-                  </it>
-                  <it editable in="1">
-                    <n>Address</n>
-                    <m>:</m>
-                    <v><?php echo $address;?></v>
-                  </it>
-                </div>
                 <div class="profiles smallbox">
                   <h>Other Profiles</h>
-                  <it editable><n>Facebook</n><m>:</m><v><?php echo $facebook;?></v></it>
-                  <it editable><n>Twitter</n><m>:</m><v><?php echo $twitter;?></v></it>
-                  <it editable><n>Google+</n><m>:</m><v><?php echo $gplus;?></v></it>
                   <it editable><n>Pinterest</n><m>:</m><v><?php echo $pinterest;?></v></it>
                 </div>
               </div>

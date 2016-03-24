@@ -2,19 +2,19 @@
   padding-top: 80px;
 }
 .header{
- height: 200px;
- border:2px solid white;
- width:100%;
- position:relative;
+  height: 200px;
+  border:2px solid white;
+  width:100%;
+  position:relative;
 }
 .header .holder{
- background:rgba(0,0,0,.7);
- position:absolute;
- top:0px;
- left:0px;
- color:white;
- padding:5px 15px;
- font-weight:bold;
+  background:rgba(0,0,0,.7);
+  position:absolute;
+  top:0px;
+  left:0px;
+  color:white;
+  padding:5px 15px;
+  font-weight:bold;
 }
 .header .holder a[href]{
   color: white;
@@ -25,140 +25,151 @@
   left:5px;
 }
 .main{
- margin-top: 10px;
- z-index:5;
+  margin-top: 10px;
+  z-index:5;
 }
 .main .right .image{
- margin-top:-88px;
- border:6px solid white;
- height: 100%;
- width: 100%;
- background:white;
- position: relative;
- box-shadow:inset 0px 0px 8px 1px rgba(0, 0, 0, .4);
+  margin-top:-88px;
+  border:6px solid white;
+  height: 100%;
+  width: 100%;
+  background:white;
+  position: relative;
+  box-shadow:inset 0px 0px 8px 1px rgba(0, 0, 0, .4);
 }
 .main .right .image img{
   height: 100%;
   width: 100%;
 }
 .main .left .navigation{
- text-align: center;
+  text-align: center;
 }
 .main .right .osin{
- margin-top:5px;
+  margin-top:5px;
 }
 .main .right .osin .tlRep{
- text-align:center;
- background:white;
- padding:5px 0px;
- border:1px solid black;
- border-radius:5px;
+  text-align:center;
+  background:white;
+  padding:5px 0px;
+  border:1px solid black;
+  border-radius:5px;
 }
 .main .right .osin .tlRep .tl{
- font-size:25px;
- font-weight:bold;
- padding-bottom:7px;
+  font-size:25px;
+  font-weight:bold;
+  padding-bottom:7px;
 }
 .main .right .osin .tlRep span:not(.tl){
- margin:0px 5px;
+  margin:0px 5px;
 }
 .main .right .osin .followers,.main .right .osin .following{
- background:black;
- border-radius:10px;
- padding:5px 10px;
- margin-top:10px;
- color:white;
+  background:black;
+  border-radius:10px;
+  padding:5px 10px;
+  margin-top:10px;
+  color:white;
 }
 .main .left .noggler{
- margin-top:10px;
+  margin-top:10px;
 }
 .main .left .navigation part{
- font-size:16px;
- margin-left:20px;
- padding:0px 10px 0px 10px;
- display:inline-block;
- cursor:pointer;
+  font-size:16px;
+  margin-left:20px;
+  padding:0px 10px 0px 10px;
+  display:inline-block;
+  cursor:pointer;
 }
 .main .left .navigation part[act]{
- font-weight:bold;
- border-bottom:5px solid black;
+  font-weight:bold;
+  border-bottom:5px solid black;
 }
 #about .smallbox{
- background:white;
- box-shadow:0px 0px 8px 1px rgba(0, 0, 0, .4);
- padding:10px;
- display:inline-block;
- vertical-align:top;
- margin:5px 0px;
- width: 95%;
- border-radius:10px;
- border-top-width:5px;
- border-top-style:solid;
+  background:white;
+  box-shadow:0px 0px 8px 1px rgba(0, 0, 0, .4);
+  padding:10px;
+  display:inline-block;
+  vertical-align:top;
+  margin:5px 0px;
+  width: 95%;
+  border-radius:10px;
+  border-top-width:5px;
+  border-top-style:solid;
 }
 #about .smallbox h{
- font-size:25px;
- margin-bottom:12px;
- font-weight:bold;
- display:block;
+  font-size:25px;
+  margin-bottom:12px;
+  font-weight:bold;
+  display:block;
 }
-.smallbox.basic{border-color:red;}
-.smallbox.contact{border-color:blue;}
-.smallbox.profiles{border-color:yellow;}
-.smallbox.life{border-color:rgb(100, 194, 53);}
+.smallbox.basic{
+  border-color:red;
+}
+.smallbox.contact{
+  border-color:blue;
+}
+.smallbox.profiles{
+  border-color:yellow;
+}
+.smallbox.life{
+  border-color:rgb(100, 194, 53);
+}
 .smallbox it{
- display: table-row;
- margin-top:5px;
+  display: table-row;
+  margin-top:5px;
 }
 .smallbox m,.smallbox n,.smallbox v{
- display:table-cell;
- vertical-align:top;
+  display:table-cell;
+  vertical-align:top;
 }
-.smallbox m{padding:2px 10px 2px 10px;}
-.smallbox v{word-break: break-word;}
-#editField{max-width: 130px;min-width: 130px;}
+.smallbox m{
+  padding:2px 10px 2px 10px;
+}
+.smallbox v{
+  word-break: break-word;
+}
 #ch_hi{
- position:absolute;
- right:3px;
- top:3px;
+  position:absolute;
+  right:3px;
+  top:3px;
 }
 .noggler#reputation .item{
- margin:5px;
+  margin:5px;
 }
 .noggler#reputation .item .block{
- padding:5px;
+  padding:5px;
 }
 .noggler#reputation .rep{
- background:#CCC;
- line-height:15px;
+  background:#CCC;
+  line-height:15px;
 }
 @media screen and (max-width:750px){
  .main .left{
-  width:75%;
+    width:75%;
  }
  .main .right{
-  width:22%;
+    width:22%;
  }
  .content .header img, .main .right .image img{
-  height:100%;
-  width:100%;
- }
+    height:100%;
+    width:100%;
+  }
 }
 @media screen and (max-width:690px){ 
  .post .left{
-  display:none;
+    display:none;
  }
  .main .right .image{
-  border:0px;
-  margin-top:0px;
-  width: auto;
-  height: auto;
- }
+    border:0px;
+    margin-top:0px;
+    width: auto;
+    height: auto;
+  }
 }
 @media screen and (max-width:520px){
- .content{
-  width: 500px;
- }
- .content .header{
-  border:0px;
- }
+  .content{
+    width: 500px;
+  }
+  .content .header{
+    border:0px;
+  }
 }
