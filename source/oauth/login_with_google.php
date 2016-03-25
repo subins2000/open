@@ -74,7 +74,7 @@ if($success){
     $gender = $user->gender;
     /* Make it DD/MM/YYYY format */
     if(isset($user->birthday) && validateDate($user->birthday)){
-      $birthday = date('d/m/Y', strtotime($user->birthday));
+      $birthday = date('Y-m-d', strtotime($user->birthday));
     }
     $image = $user->picture;
       
@@ -96,10 +96,11 @@ if($success){
        $json = json_encode($userArray);
        
        \Fr\LS::register($email, "", array(
-      "name" => $name,
-      "udata" => $json,
-      "seen" => ""
-    ));
+        "name" => $name,
+        "email" => $email,
+        "udata" => $json,
+        "seen" => ""
+      ));
        /* Login the user */
        \Fr\LS::login($email, "");
        $OP->redirect($location);

@@ -42,19 +42,20 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
           <span>Search </span><input type="text" name="q" value="<?php echo $q;?>" size="35"/>
         </form><cl/>
         <?php
+        $limit = 10;
         $_GET['p'] = !isset($_GET['p']) || $_GET['p'] == "" ? 1 : $_GET['p'];
         $p         = $_GET['p'];
         if ($q != '' && $p == '1') {
-          $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT 30");
+          $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT :limit");
+          $sql->bindValue(':limit', $limit, PDO::PARAM_INT);
           $sql->execute(array(
             ":who" => $who,
             ":q" => "%$q%"
           ));
         }else if ($p != "1") {
           $start = ($p - 1) * 10;
-          $limit = 30;
           if ($q == "") {
-            $sql = $OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT :start,:limit");
+            $sql = $OP->dbh->prepare("SELECT id FROM users WHERE id!=:who ORDER BY id LIMIT :start, :limit");
             $sql->bindValue(':limit', $limit, PDO::PARAM_INT);
             $sql->bindValue(':start', $start, PDO::PARAM_INT);
             $sql->bindValue(':who', $who);
@@ -95,7 +96,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
           ));
         }
         $count = $total_sql->rowCount();
-        $totalpage = (ceil($count / 20));
+        $totalpage = (ceil($count / 10));
         echo "<cl/>$count Results Found.";
         
         $OR = new ORep();
@@ -162,17 +163,16 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
         <?php
         }
         $lastpage = $totalpage;
-        $pagination = "";
-        $currentpage    = (isset($_GET['p']) ? $_GET['p'] : 1);
-        $loopcounter = ( ( ( $currentpage + 9 ) <= $lastpage ) ? ( $currentpage + 9 ) : $lastpage );
-        $startCounter =  ( ( ( $currentpage - 2 ) >= 3 ) ? ( $currentpage - 2 ) : 1 );
+        $currentpage = (isset($_GET['p']) ? $_GET['p'] : 1);
+        $loopcounter = ( ( ( $currentpage + 5 ) <= $lastpage ) ? ( $currentpage + 5 ) : $lastpage );
+        $startCounter =  ( ( ( $currentpage - 5 ) >= 5 ) ? ( $currentpage - 5 ) : 1 );
         
         echo "<center style='overflow-x:auto;margin-top:10px;padding-bottom:10px;'>";
         echo "<ul id='s7e9v' class='pagination'>";
           echo '<a href="?p=1" class="disabled"><i class="material-icons">chevron_left</i></a>';
           for($i = $startCounter; $i <= $loopcounter; $i++){
             $isC = $i == $p ? "class='active'" : "";
-            echo "<li><a href='?p=$i&q=$q' $isC>$i</a></li>";
+            echo "<li $isC><a href='?p=$i&q=$q'>$i</a></li>";
           }
           echo '<a href="?p='.$totalpage.'" class="disabled"><i class="material-icons">chevron_right</i></a>';
         echo "</ul>";

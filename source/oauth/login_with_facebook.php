@@ -72,27 +72,23 @@ if(($success = $client->Initialize())){
           $gender = $user->gender;
           
           if( \Fr\LS::userExists($email) ){
-            $who = $_SESSION['logSyscuruser'];
-            
             /**
              * Since user exists, we log him/her in
              */
-            \Fr\LS::login($email, "");
+            $who = \Fr\LS::login($email, "", false, false);
             
             $sql = $OP->dbh->prepare("UPDATE `oauth_session` SET `user` = ? WHERE `server` = ? AND `access_token` = ?");
             $sql->execute(array($who, "Facebook", $client->access_token));
             
             unset($_SESSION['continue']);
+            \Fr\LS::login($email, "");
             $OP->redirect($location);
           }else{
             /**
              * Make it DD/MM/YYYY format
              */
-            $birthday = date('d/m/Y', strtotime($user->birthday));
-            $image = get_headers("https://graph.facebook.com/me/picture?width=200&height=200&access_token=" . $client->access_token, 1);
-          
-            /* Facebook Redirects the above URL to the image URL, We get that new URL ! PHP is Magic */
-            $image = $image['Location'];
+            $birthday = date('Y-m-d', strtotime($user->birthday));
+            $image = "https://graph.facebook.com/". $user->id ."/picture?width=200&height=200";
             
             /* An array containing user details that will made in to JSON */
             $userArray = array(
@@ -104,6 +100,7 @@ if(($success = $client->Initialize())){
             $json = json_encode($userArray);
             \Fr\LS::register($email, "", array(
               "name" => $name,
+              "email" => $email,
               "udata" => $json,
               "seen" => ""
             ));

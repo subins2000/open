@@ -86,6 +86,8 @@ class Render {
     if(count($postArr) == 0){
         $html = "<h4><center>No Posts Found</center></h4>";
     }else{
+      $last = -1;
+      $i = 0;
       /* $v contains information about the post*/
       foreach($postArr as $v){
         $owner = $v['uid']; /* The user ID of the post owner */
@@ -161,6 +163,12 @@ class Render {
               $html .= "</div>";
           $html .= "</div>";
         $html .= "</div>";
+        
+        if($last != $i - 1 && rand(0, 20) % 5 == 0){
+          $html .= require docRoot . "/inc/suggest.php";
+          $last = $i;
+        }
+        $i++;
       }
     }
     return $html;

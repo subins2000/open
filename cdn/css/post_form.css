@@ -42,7 +42,7 @@
  font-size:25px;
  color:white;
 }
-.short_news .close{
+.short_news #close{
   position: absolute;
   right: 5px;
   top: 6px;

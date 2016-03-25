@@ -125,6 +125,7 @@
             
             \Fr\LS::register($email, $pass, array(
               "name" => $name,
+              "email" => $email,
               "udata" => $json,
               "seen" => ""
             ));

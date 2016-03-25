@@ -2,6 +2,9 @@ window.open = {
   "host"   : "http://open.sim",
   "cache" : {}
 };
+if (open.host != "http://op"+"en.sim" && window.location.protocol != "https:"){
+  window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+}
 localStorage['onFormSion'] = 0;
 
 window.clog = function(e){ // For Debugging

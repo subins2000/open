@@ -23,7 +23,7 @@ if( loggedIn ){
     <h4>New</h4>
     <p>New UI for Open</p>
     <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.6</b></p>
-    <div class="close"><i class="material-icons">close</i></div>
+    <div id="close"><i class="material-icons">close</i></div>
   </div>
   <div class="post_form blocks" id="post_form">
     <form action="ajax/post" method="POST" class="form">

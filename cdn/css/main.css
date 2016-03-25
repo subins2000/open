@@ -150,7 +150,7 @@ table tr td{
   width: 30px;
 }
 .notifications #nfn{
-  position:absolute;
+  position:fixed;
   top:60px;
   right:5px;
   background: white;
@@ -192,7 +192,7 @@ table tr td{
 }
 /*Short Profile*/
 #short_profile{
-  position:absolute;
+  position:fixed;
   top:60px;
   right:5px;
   padding:10px;

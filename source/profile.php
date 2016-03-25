@@ -54,13 +54,13 @@ while($r = $sql->fetch()){
   }
   $img = $OP->format($json["img"]);
   $img = $img == '' ? Open::URL("cdn/img/avatars/om.png") : $img;
-  $about = $json['about'] == "" ? $defaultVal   : $json['about'];
+  $about = $json['about'] == "" ? $defaultVal : $json['about'];
   $joined = $json['joined']; // This Field will always be there and cannot be removed
-  $birthday = $json['birth'] == "" ? "YYYY-MM-DD"   : $json['birth']; // Default value for birth is DD/MM/YYYY
+  $birthday = $json['birth'] == "" ? "YYYY-MM-DD" : $json['birth']; // Default value for birth is DD/MM/YYYY
   $age = $json['birth'] != "" ? age($birthday): $defaultVal;
-  $gender = $json['gen'] == "" ? $defaultVal   : $json['gen'];
+  $gender = $json['gen'] == "" ? $defaultVal : $json['gen'];
   $mail = $json['mail'] == ""  ? $defaultVal  : $json['mail'];
-  $address = $json['add'] == "" ? $defaultVal   : $json['add'];
+  $address = $json['add'] == "" ? $defaultVal : $json['add'];
   $phone = $json['phone'] == "" ? $defaultVal  : $json['phone'];
   $liveIn = $json['live'] == "" ? $defaultVal  : $json['live'];
   $work = $json['work'] == "" ? $defaultVal  : $json['work'];
@@ -239,33 +239,31 @@ $Rep = $RP->getRep(); // Reputation
                   </tr>
                 </tfoot>
               </table>
-              <div class="row">
-                <div class="col m4">
-                  <div class="collection">
-                    <?php
-                    foreach($RP->getTopPosts() as $r){
-                  ?>
-                      <a href="<?php echo O_URL;?>/view/<?php echo $r['id'];?>" class="collection-item">Post # <?php echo $r['id'];?><span class="badge"><?php echo $r['rep'];?></span></a>
-                    <?php
-                    }
-                  ?>
-                  </div>
-                </div>
-                <div class="col m8">
-                  <div class="collection">
-                    <?php
-                    $topComments = $RP->getTopComments();
-                    if(count($topComments) !== 0){
-                      echo "<a class='collection-header'><h4>Top Comments</h4></a>";
-                    }
-                    foreach($topComments as $r){
-                  ?>
-                      <a href="<?php echo O_URL;?>/view/<?php echo $r['id'];?>" class="collection-item truncate">"<?php echo $r['cmt'];?>"<span class="badge"><?php echo $r['rep'];?></span></a>
-                    <?php
-                    }
-                  ?>
-                  </div>
-                </div>
+              <div class="collection">
+                <?php
+                $topComments = $RP->getTopComments();
+                if(count($topComments) !== 0){
+                  echo "<a class='collection-header'><h4>Top Comments</h4></a>";
+                }
+                foreach($topComments as $r){
+              ?>
+                  <a href="<?php echo O_URL . "/view/{$r['pid']}#{$r['id']}";?>" class="collection-item truncate">"<?php echo $r['cmt'];?>"<span class="badge"><?php echo $r['rep'];?></span></a>
+                <?php
+                }
+              ?>
+              </div>
+              <div class="collection">
+                <?php
+                $topPosts = $RP->getTopPosts();
+                if(count($topPosts) !== 0){
+                  echo "<a class='collection-header'><h4>Top Posts</h4></a>";
+                }
+                foreach($topPosts as $r){
+              ?>
+                  <a href="<?php echo O_URL;?>/view/<?php echo $r['id'];?>" class="collection-item">Post # <?php echo $r['id'];?><span class="badge"><?php echo $r['rep'];?></span></a>
+                <?php
+                }
+              ?>
               </div>
             </div>
           </div>

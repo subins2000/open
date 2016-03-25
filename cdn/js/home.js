@@ -26,7 +26,6 @@ $(".post .pst.like").live("click",function(){
   likeBTN.removeClass("unlike").addClass( newText.toLowerCase() );
   $.post(open.host + "/ajax/like", {"id": pid}).error(function(){
     likeBTN.text(newText);
-    likeBTN.click();
   });
 });
 $(".post .author_box").live("click",function(){
@@ -108,7 +107,6 @@ $(".post .cmt.like").live("click",function(){
   t.addClass(k.toLowerCase());
   $.post(open.host + "/ajax/cmtLike", {id:id}).error(function(){
     t.text(k);
-    t.click();
   });
 });
 $(".post .pst.cmt").live("click",function(){

@@ -127,7 +127,7 @@ class Open{
       if($key == 'img'){
         $data = json_decode($data['udata'], true);
         $data = isset($data["img"]) ? $this->format($data["img"]):"";
-        $data = $data=='' ? O_URL . "/cdn/img/avatars/om.png":$data;
+        $data = $data == '' ? O_URL . "/cdn/img/avatars/om.png":$data;
         return $data;
       }elseif($key == 'plink'){
         return O_URL ."/$userID";
@@ -140,9 +140,9 @@ class Open{
         }
       }elseif($key == "avatar"){
         $img = get("img", $userID);
-        if(preg_match("/avatars\/om/", $img) || $img==""){
+        if(preg_match("/avatars\/om/", $img) || $img == ""){
           $img = O_URL . "/cdn/img/avatars/om.png";
-        }elseif(!preg_match("/imgur/", $img) && !preg_match("/akamaihd/", $img) && !preg_match("/google/", $img) && $img!=""){
+        }else if(!preg_match("/[imgur|graph|google|amaihd]/", $img) && $img != ""){
           $img = "$img/small.png";
         }
         return $img;
