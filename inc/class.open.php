@@ -423,7 +423,7 @@ class Open{
          $dontSend = 1;
     }
     if($action == "comment" && $to != curUser){
-         $lci = $this->dbh->prepare("SELECT `id` FROM `cmt` WHERE `pid`=? AND `uid`=? ORDER BY `id` DESC LIMIT 1");
+         $lci = $this->dbh->prepare("SELECT `id` FROM `comments` WHERE `pid`=? AND `uid`=? ORDER BY `id` DESC LIMIT 1");
          $lci->execute(array($pid, curUser));
          $lci = $lci->fetchColumn(); // Last comment ID
          
@@ -476,7 +476,7 @@ class Open{
          if($text == "post"){
           $sql->execute(array($to, curUser, "men", "0-$pid"));
          }else{
-          $commentID = $this->dbh->prepare("SELECT `id` FROM `cmt` WHERE `pid`=? AND `uid`=? ORDER BY `id` DESC LIMIT 1");
+          $commentID = $this->dbh->prepare("SELECT `id` FROM `comments` WHERE `pid`=? AND `uid`=? ORDER BY `id` DESC LIMIT 1");
           $commentID->execute(array($pid, curUser));
           $commentID = $commentID->fetchColumn();
           $sql->execute(array($to, curUser, "menc", "$commentID-$pid"));
