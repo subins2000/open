@@ -2,6 +2,8 @@
 $docRoot = realpath(__DIR__);
 define("docRoot", $docRoot);
 
+date_default_timezone_set("UTC");
+
 /**
  * Load the configuration
  */

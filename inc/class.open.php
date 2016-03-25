@@ -14,7 +14,11 @@ class Open{
     /* We make the Database configuration into an array */
     $database = unserialize(DATABASE);
     /* We make the PDO object */
-    $this->dbh = new PDO("mysql:dbname={$database["name"]};host={$database["host"]};port={$database["port"]}", $database["user"], $database["pass"], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $this->dbh = new PDO("mysql:dbname={$database["name"]};host={$database["host"]};port={$database["port"]}", $database["user"], $database["pass"], array(
+      \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+      \PDO::MYSQL_ATTR_INIT_COMMAND =>"SET NAMES utf8"
+    ));
+    $this->dbh->query("SET time_zone = '+00:00'");
   
     /* The hostname */
     $this->host = "https://".$_SERVER['HTTP_HOST'];
