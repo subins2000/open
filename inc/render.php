@@ -5,15 +5,15 @@ class Render {
    * The $single variable is for displaying a single message. It should contain the message ID.
    */
   public static function chat($fid, $single = false){
-    global $OP;
+    
     if($single === false || $single === true){
-      $sql = $OP->dbh->prepare("SELECT * FROM (SELECT * FROM `chat` WHERE (`uid` = :who AND `fid` = :fid) OR (`uid` = :fid AND `fid` = :who) ORDER BY id DESC LIMIT 15) sub ORDER BY `id` ASC");
+      $sql = $GLOBALS['OP']->dbh->prepare("SELECT * FROM (SELECT * FROM `chat` WHERE (`uid` = :who AND `fid` = :fid) OR (`uid` = :fid AND `fid` = :who) ORDER BY id DESC LIMIT 15) sub ORDER BY `id` ASC");
       $sql->execute(array(
         ":who" => curUser,
         ":fid" => $fid
       ));
     }elseif($single !== true){
-      $sql = $OP->dbh->prepare("SELECT * FROM `chat` WHERE `id` = ?");
+      $sql = $GLOBALS['OP']->dbh->prepare("SELECT * FROM `chat` WHERE `id` = ?");
       $sql->execute(array($single));
     }
     $html = "";
@@ -75,13 +75,13 @@ class Render {
         $html .= "<input type='submit' name='submit' style='display: none;'/>";
       $html .= "</form>";
     }
-    $sql = $OP->dbh->prepare("UPDATE `chat` SET `red`='1' WHERE `uid`=? AND `fid`=? AND `red`='0'");
+    $sql = $GLOBALS['OP']->dbh->prepare("UPDATE `chat` SET `red`='1' WHERE `uid`=? AND `fid`=? AND `red`='0'");
     $sql->execute(array($fid, curUser));
     return $html;
   }
   
   public static function post($postArr) {
-    global $OP;
+    
      $html = "";
     if(count($postArr) == 0){
         $html = "<h4><center>No Posts Found</center></h4>";
@@ -106,7 +106,7 @@ class Render {
           )
         );
   
-        $liked = $OP->didLike($id, "post") === false ? "Like" : "Unlike";
+        $liked = $GLOBALS['OP']->didLike($id, "post") === false ? "Like" : "Unlike";
         $class = strtolower($liked) == "unlike" ? " unlike" : "";
         $post = $v['post'];
         $otherSTR = false;
@@ -115,11 +115,11 @@ class Render {
           $postSplit = str_split($post, 500);
           $post = $postSplit[0];
           $otherSTR = str_replace($post, "", $v['post']); // The left post
-          $otherSTR = $OP->format($otherSTR, true);
+          $otherSTR = $GLOBALS['OP']->format($otherSTR, true);
         }
         
         /* We format the post from @1 to @Subin Siby */
-        $post = $OP->format($post, true);
+        $post = $GLOBALS['OP']->format($post, true);
         
         /* The Profile Link */
         $plink = get("plink", $owner);
@@ -160,72 +160,72 @@ class Render {
                  $html .= self::comment($id);
               $html .= "</div>";
           $html .= "</div>";
-          $html .= "</div>";
+        $html .= "</div>";
       }
     }
-    return   $html;
+    return $html;
   }
   
-  public static function comment($pid) {
-    global $who, $OP;
- 
-    $postCMTcount = $OP->dbh->prepare("SELECT `pid` FROM `comments` WHERE `pid`=?");
-    $postCMTcount->execute(array($pid));
-    $postCMTcount = $postCMTcount->rowCount();
+  public static function comment($pid = false) {
+    $sql = $GLOBALS['OP']->dbh->prepare("SELECT COUNT(*) FROM `comments` WHERE `pid` = '381'");
+    $sql->execute();
+    $postCMTcount = $sql->fetchColumn();
  
     if(!isset($_POST['all'])){
-      $sql = $OP->dbh->prepare("SELECT * FROM `comments` WHERE `pid`=? ORDER BY `likes` DESC LIMIT 2");
+      $sql = $GLOBALS['OP']->dbh->prepare("SELECT * FROM `comments` WHERE `pid`=? ORDER BY `likes` DESC, `time` DESC LIMIT 2");
     }else{
-      $sql = $OP->dbh->prepare("SELECT * FROM `comments` WHERE `pid`=? ORDER BY `likes` DESC");
+      $sql = $GLOBALS['OP']->dbh->prepare("SELECT * FROM `comments` WHERE `pid`=? ORDER BY `likes` DESC, `time` DESC");
     }
     $sql->execute(array($pid));
  
-     $html = "<div class='comments' id='$pid'>";
+    $html = "<div class='comments' id='$pid'>";
       $html .= "<form class='cmt_form ajax_form row' id='$pid' action='ajax/comment' success='Commented' error='Failed To Comment' while='Commenting'>";
         $html .= "<input type='hidden' id='clod' name='clod' value='0'/>";
         $html .= "<textarea name='cmt' type='text' class='textEditor col s10 materialize-textarea' placeholder='Your Comment Here'></textarea>";
         $html .= "<input name='id' type='hidden' value='$pid'/>";
         $html .= "<button class='btn blue s2'>Comment</button>";
       $html .= "</form>";
-      if($sql->rowCount() != 0){
-       while( $r = $sql->fetch() ){
-        $id = $r['id'];
-        $uid = $r['uid'];
-        $img = get("avatar", $uid);
-        $name = get("name", $uid, false);
-        $pLink = get("plink", $uid, false);
-        $lk = $OP->didLike($id, "cmt") === false ? "Like":"Unlike";
-        $class = strtolower($lk) == "unlike" ? " unlike":"";
-        $html .= "<div class='comment row' id='$id'>";
-          $html .= "<div class='col m1'>";
-            $html .= "<img src='$img' class='pimg'/>";
-          $html .= "</div>";
-          $html .= "<div class='col m11'>";
-            $html .= "<div class='top'>";
-              $html .= "<a href='{$pLink}'>$name</a>";
-              $html .= "<a class='time slink' href='" . O_URL . "/view/{$r['pid']}#$id'>{$r['time']}</a>";
-              $html .= "<div class='author_cmt_box'><div class='author_cmt_panel c_c'>";
-                if($uid == $who){
-                  $html .= "<a class='de_cmt pointer' id='$id'>Delete Comment</a>";
-                }
-                $html .= "<a class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a>";
-              $html .= "</div></div>";
+      
+      $displayedComments = $sql->rowCount();
+      if($displayedComments != 0){
+        while( $r = $sql->fetch() ){
+          $id = $r['id'];
+          $uid = $r['uid'];
+          $img = get("avatar", $uid);
+          $name = get("name", $uid, false);
+          $pLink = get("plink", $uid, false);
+          $lk = $GLOBALS['OP']->didLike($id, "cmt") === false ? "Like":"Unlike";
+          $class = strtolower($lk) == "unlike" ? " unlike":"";
+          $html .= "<div class='comment row' id='$id'>";
+            $html .= "<div class='col m1'>";
+              $html .= "<img src='$img' class='pimg'/>";
             $html .= "</div>";
-            $html .= "<div class='cont'>";
-              $html .= $OP->format($r['comment'], true);
-            $html .= "</div>";
-            $html .= "<div class='actions'>";
-              $html .= "<div class='like_bar'><a class='cmt like$class' id='$id'>$lk</a>";
-                $html .= "<span class='count lk' id='$id'>{$r['likes']}</span>";
-                $html .= "<a class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a>";
+            $html .= "<div class='col m11'>";
+              $html .= "<div class='top'>";
+                $html .= "<a href='{$pLink}'>$name</a>";
+                $html .= "<a class='time slink' href='" . O_URL . "/view/{$r['pid']}#$id'>{$r['time']}</a>";
+                $html .= "<div class='author_cmt_box'><div class='author_cmt_panel c_c'>";
+                  if($uid == curUser){
+                    $html .= "<a class='de_cmt pointer' id='$id'>Delete Comment</a>";
+                  }
+                  $html .= "<a class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a>";
+                $html .= "</div></div>";
+              $html .= "</div>";
+              $html .= "<div class='cont'>";
+                $html .= $GLOBALS['OP']->format($r['comment'], true);
+              $html .= "</div>";
+              $html .= "<div class='actions'>";
+                $html .= "<div class='like_bar'><a class='cmt like$class' id='$id'>$lk</a>";
+                  $html .= "<span class='count lk' id='$id'>{$r['likes']}</span>";
+                  $html .= "<a class='reply_cmt pointer' data-user='$uid' id='$pid'>Reply</a>";
+                $html .= "</div>";
               $html .= "</div>";
             $html .= "</div>";
           $html .= "</div>";
-        $html .= "</div>";
-       }
-       if($postCMTcount>$sql->rowCount()){
-        $html .= "<a class='load_more_comments pointer' id='$pid'>Load More Comments</a>";
-       }
+        }
+        if($postCMTcount > $displayedComments){
+          $html .= "<a class='load_more_comments pointer' id='$pid'>Load More Comments</a>";
+        }
       }else{
         $html .= "<h4>No Comments</h4>No one has posted a comment yet on this post.<br/>Be the first one to comment !";
       }
@@ -234,9 +234,9 @@ class Render {
   }
   
   public static function notification($id){
-    global $OP;
     
-    $sql = $OP->dbh->prepare("SELECT * FROM `notify` WHERE id=?");
+    
+    $sql = $GLOBALS['OP']->dbh->prepare("SELECT * FROM `notify` WHERE id=?");
     $sql->execute(array($id));
     while($r = $sql->fetch()){
       $fid = $r['fid'];
@@ -281,7 +281,7 @@ class Render {
         $nfs.="</div>";
       $nfs.="</a>";
     }
-    $sql = $OP->dbh->prepare("UPDATE `notify` SET red='1' WHERE `id` = ?");
+    $sql = $GLOBALS['OP']->dbh->prepare("UPDATE `notify` SET red='1' WHERE `id` = ?");
     $sql->execute(array($id));
     return $nfs;
   }

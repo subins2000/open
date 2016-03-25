@@ -18,7 +18,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
 <html>
   <head>
     <?php
-    $OP->head("", "ac,time,gadget", "ac,gadget");
+    $OP->head("", "ac,time,gadget", "ac,gadget,home");
     ?>
   </head>
   <body>
@@ -124,7 +124,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
               <div class="block" style="margin-left:5px;">
                 <div>
                   <a href="<?php echo $loc; ?>">
-                    <strong style='font-size:18px;'><?php echo $name;?></strong>
+                    <strong style='font-size:18px;'><?php echo $name . $OP->followButton($id);?></strong>
                   </a>
                 </div>
                 <div field style='font-size:17px;' title="Reputation">
@@ -155,9 +155,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
               <div field><strong><?php
                 echo $foll;
           ?></strong> Followers</div>
-               <?php
-                echo $OP->followButton($id);
-          ?>
+               
              </div>
              </div>
             </div>

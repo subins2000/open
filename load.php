@@ -67,6 +67,7 @@ define("loggedIn", $loggedIn);
 define("curUser", $who);
 
 $OP = new Open();
+$GLOBALS['OP'] = $OP;
 
 if(!function_exists("get")){
   function get($key, $uid = "", $json = true){
@@ -74,6 +75,7 @@ if(!function_exists("get")){
     return $OP->get($key, $uid, $json);
   }
 }
+
 /* Do these if user is logged in */
 if( loggedIn && !isset($uimg) ){
   $uimg = get("img");

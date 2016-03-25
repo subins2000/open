@@ -520,7 +520,7 @@ class LS {
         $colVals = implode(",:", $keys);
         $sql   = self::$dbh->prepare("INSERT INTO `". self::$config['db']['table'] ."` (`username`, `password`, `password_salt`, $columns) VALUES(:username, :password, :passwordSalt, :$colVals)");
         foreach($other as $key => $value){
-          $value = htmlspecialchars($value);
+          $value = $value;
           $sql->bindValue(":$key", $value);
         }
       }

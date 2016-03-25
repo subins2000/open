@@ -2,7 +2,7 @@
 \Fr\LS::init();
 
 if($_P){
-  $av_names=array("gender"=>"gen", "birthday"=>"birth", "aboutme"=>"about", "e-mail"=>"mail", "phone"=>"phone", "address"=>"add", "livesat"=>"live", "worksat"=>"work", "loves"=>"lve", "facebook"=>"fb", "twitter"=>"tw", "google+"=>"gplus", "pinterest"=>"pin");
+  $av_names=array("gender"=>"gen", "birthday"=>"birth", "aboutme"=>"about", "e-mail"=>"mail", "phone"=>"phone", "address"=>"add", "livesin"=>"live", "worksat"=>"work", "loves"=>"lve", "facebook"=>"fb", "twitter"=>"tw", "google+"=>"gplus", "pinterest"=>"pin");
   foreach($_POST as $k => $v){
     if(array_key_exists($k, $av_names) && $v != "Private" && $v != "DD/MM/YYYY"){
       if(($k == "facebook" || $k == "twitter" || $k == "google+" || $k == "pinterest") && $v != ""){
@@ -19,7 +19,7 @@ if($_P){
         }else if($k === "twitter" && preg_match("/\/\//", $v)){
           $v = "http://twitter.com/$v";
         }else if($k === "twitter" && substr($v, 0, 1) == "@"){
-          $v = substr_replace($v, "", 0, 1;
+          $v = substr_replace($v, "", 0, 1);
         }else if($k === "google+" && preg_match("/\/\//", $v)){
           $v = "http://plus.google.com/$v";
         }else if($k === "pinterest" && preg_match("/\/\//", $v)){

@@ -8,7 +8,7 @@
   <?php require_once "inc/render.php";?>
   <?php echo Render::chat("gadget");?>
  </div>
-  <div class="side-nav fixed" id="users-nav">
+  <div class="side-nav fixed right-aligned" id="users-nav">
     <div class="cusgt">
       <div class="close">x</div>
       <img src="<?php echo get("avatar");?>"/>
@@ -34,6 +34,6 @@
       </div>
     </div>
   </div>
-  <a class="openugt" data-activates="users-nav">Open Chat</a>
+  <a class="openugt" data-activates="users-nav" href="#">Open Chat</a>
 </div>
 <?php }?>

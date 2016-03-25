@@ -13,7 +13,7 @@ if( !isset($_GET['id']) || $_GET['id'] == "" ){
   <body>
     <?php include "$docRoot/inc/header.php";?>
     <div class="wrapper">
-      <div class="content" style="width:510px;">
+      <div class="content">
         <div class="feed">
           <?php
           $_POST['all'] = 1;

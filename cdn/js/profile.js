@@ -23,7 +23,7 @@ $("#editBox").live("click",function(){
     edopened = 1;
   }else{
     (function($){$.fn.serializeAny=function(){var ret=[];$.each($(this).find(':input'),function(){ret.push(encodeURIComponent(this.name)+"="+encodeURIComponent($(this).val()));});return ret.join("&").replace(/%20/g, "+");}})(jQuery);
-    open.post("saveProfile", $("#about").serializeAny(), {"success" : "Updated Profile", "error" : "Updation Failed", "loading" : "Updating...."});
+    open.post("saveProfile", $("#about").serializeAny(), {"success" : "Updated Profile. Reload page to see updated profile.", "error" : "Updation Failed", "loading" : "Updating...."});
     $("#about tr[editable]").each(function(){
       v=$(this).find("#editField");
       aap = format(v.val());

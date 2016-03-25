@@ -2,7 +2,7 @@
   padding-top: 80px;
 }
 .header{
-  height: 200px;
+  height: 300px;
   border:2px solid white;
   width:100%;
   position:relative;
@@ -29,7 +29,7 @@
   z-index:5;
 }
 .main .right .image{
-  margin-top:-88px;
+  margin-top: -100px;
   border:6px solid white;
   height: 100%;
   width: 100%;

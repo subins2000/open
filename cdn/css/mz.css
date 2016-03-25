@@ -9751,7 +9751,7 @@ select {
 
 .side-nav.right-aligned {
   will-change: right;
-  right: -105%;
+  right: 0;
   left: auto;
 }
 

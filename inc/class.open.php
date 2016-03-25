@@ -14,7 +14,7 @@ class Open{
     /* We make the Database configuration into an array */
     $database = unserialize(DATABASE);
     /* We make the PDO object */
-    $this->dbh = new PDO("mysql:dbname={$database["name"]};host={$database["host"]};port={$database["port"]}", $database["user"], $database["pass"]);
+    $this->dbh = new PDO("mysql:dbname={$database["name"]};host={$database["host"]};port={$database["port"]}", $database["user"], $database["pass"], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
   
     /* The hostname */
     $this->host = "https://".$_SERVER['HTTP_HOST'];
@@ -387,9 +387,9 @@ class Open{
       $sql = $this->dbh->prepare("SELECT `uid` FROM `conn` WHERE `fid`=? and `uid`=?");
       $sql->execute(array($uid, curUser));
       if($sql->rowCount()==0){
-        return "<a id='{$uid}' class='btn follow'><span>+</span><span class='text'>Follow</span></a>";
+        return "<a id='{$uid}' class='btn follow'>+</a>";
       }else{
-        return "<a id='{$uid}' class='btn unfollow'><span>-</span><span class='text'>Unfollow</span></a>";
+        return "<a id='{$uid}' class='btn unfollow'>-</a>";
       }
     }
   }

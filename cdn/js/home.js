@@ -173,14 +173,17 @@ function load_more_posts(){
     localStorage['requested'] = 1;
   }
 }
+
 $(window).scroll(function(){
   if($(window).scrollTop() + $(window).height() == $(document).height() && $(".post").length != 0){
     load_more_posts();
   }
 });
+
 $(".load_more_posts .normal").live("click",function(){
   load_more_posts();
 });
+
 $(".textEditor").smention(open.host + "/ajax/getUsers", {
   avatar: true,
   width: 300,
@@ -190,8 +193,11 @@ $(".textEditor").smention(open.host + "/ajax/getUsers", {
   if($(this).data("realInnerH") == null){
     $(this).data("realInnerH", $(this).innerHeight());
   }
-  var scrollHeight = $(this)[0].scrollHeight < $(this).data("realInnerH") ? $(this).data("realInnerH") : $(this)[0].scrollHeight;
-  $(this).innerHeight(scrollHeight);
+  var scrollHeight = $(this)[0].scrollHeight;
+  if(scrollHeight > $(this).innerHeight()){
+    //$(this).innerHeight(scrollHeight);
+  }
 });
+
 open.externalLinks($(".post .cont"));
 open.externalLinks($(".comment .cont"));

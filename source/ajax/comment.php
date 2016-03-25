@@ -1,5 +1,4 @@
 <?php
-require_once "$docRoot/inc/render.php";
 \Fr\LS::init();
 
 if($_P){
@@ -16,27 +15,38 @@ if($_P){
   $owner = $sql->fetchColumn();
  
   if($sql->rowCount() != 0){
-    $OP->format($msg, true); /* Just For @mention notifications */
-    $sql = $OP->dbh->prepare("INSERT INTO `comments` (`uid`, `pid`, `comment`, `time`) VALUES(:uid, :id, :msg, NOW());
-      UPDATE `posts` SET `comments` = `comments` + 1 WHERE `id`=:id");
+    /**
+     * For notifications to users who are mentioned,
+     * we format the post to look for mentions
+     */
+    $OP->format($msg, true);
+    
+    $sql = $OP->dbh->prepare("INSERT INTO `comments` (`uid`, `pid`, `comment`, `time`) VALUES(:uid, :id, :msg, NOW());");
     $sql->execute(array(
       ":uid" => curUser,
       ":id" => $id,
       ":msg" => $msg
     ));
+    
+    $sql = $OP->dbh->prepare("UPDATE `posts` SET `comments` = `comments` + 1 WHERE `id` = ?");
+    $sql->execute(array($id));
+    
     $OP->mentionNotify($id, "comment");
   
     $OP->notify("comment", $msg, $id, $owner, curUser);/* We should notify the owner of post */
   
-    /* Show all comments or not */
+    /**
+     * Show all comments or not
+     */
     if($_POST['clod'] == 'mom'){
       $_POST['all'] = 1;
     }
-    $html = $OP->rendFilt(Render::comment($id));
+    require_once "$docRoot/inc/render.php";
+    $html = \Render::comment($id);
 ?>
-$("#<?php echo$id;?>.comments").replaceWith("<?php echo $html;?>");
-$("#<?php echo$id;?>.comments").show();
-$("#<?php echo$id;?>.ck.count").text(parseFloat($("#<?php echo $id;?>.ck.count").text())+1);
+$("#<?php echo $id;?>.comments").replaceWith("<?php echo $html;?>");
+$("#<?php echo $id;?>.comments").show();
+$("#<?php echo $id;?>.ck.count").text(parseFloat($("#<?php echo $id;?>.ck.count").text())+1);
 <?php
   }else{
     $OP->ser("I can't find the post you wished to comment on.", "", "json");

@@ -11,7 +11,7 @@ function localize(t){
 open.timeago = function(){
   $(".time").each(function(){
     /* Timeago on each .time elems */
-    if($(this).data('timeago') != "ran"){
+    if($(this).data('timeago') != "ran" && $(this).text() != ""){
       loc = localize($(this).text());
       date = new Date(loc);
       /* Only do timeago if the date is valid */

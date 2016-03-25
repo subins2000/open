@@ -28,9 +28,9 @@ if($sql->rowCount() == 0 || ($_GET['part'] != "about" && $_GET['part'] != "reput
   $OP->ser();
 }
 
-/* A function to calculate age by a birth date in DD/MM/YYYY format */
+/* A function to calculate age by a birth date in YYYY-MM-DD format */
 function age($birthday){
-  list($day, $month, $year) = explode("/", $birthday);
+  list($year, $month, $day) = explode("-", $birthday);
   $year_diff = date("Y") - $year;
   $month_diff = date("m") - $month;
   $day_diff = date("d") - $day;
@@ -42,6 +42,7 @@ function age($birthday){
   }
   return $year_diff;
 }
+
 $defaultVal = "Private"; // The Default value for fields
 while($r = $sql->fetch()){
   $name = $r['name'];
@@ -55,24 +56,25 @@ while($r = $sql->fetch()){
   $img = $img == '' ? Open::URL("cdn/img/avatars/om.png") : $img;
   $about = $json['about'] == "" ? $defaultVal   : $json['about'];
   $joined = $json['joined']; // This Field will always be there and cannot be removed
-  $birthday = $json['birth'] == ""   ? "DD/MM/YYYY"   : $json['birth']; // Default value for birth is DD/MM/YYYY
-  $age = $json['birth'] != ""   ? age($birthday): $defaultVal;
-  $gender = $json['gen'] == ""   ? $defaultVal   : $json['gen'];
-  $mail = $json['mail'] == ""   ? $defaultVal  : $json['mail'];
-  $address = $json['add'] == ""   ? $defaultVal   : $json['add'];
-  $phone = $json['phone'] == ""   ? $defaultVal  : $json['phone'];
-  $liveIn = $json['live'] == ""   ? $defaultVal  : $json['live'];
-  $work = $json['work'] == ""   ? $defaultVal  : $json['work'];
-  $loves = $json['lve'] == ""   ? $defaultVal  : $json['lve'];
-  $facebook = $json['fb'] == ""   ? $defaultVal  : $json['fb'];
-  $twitter = $json['tw'] == ""   ? $defaultVal  : $json['tw'];
-  $gplus = $json['gplus'] == ""   ? $defaultVal  : $json['gplus'];
-  $pinterest = $json['pin'] == ""   ? $defaultVal  : $json['pin'];
+  $birthday = $json['birth'] == "" ? "YYYY-MM-DD"   : $json['birth']; // Default value for birth is DD/MM/YYYY
+  $age = $json['birth'] != "" ? age($birthday): $defaultVal;
+  $gender = $json['gen'] == "" ? $defaultVal   : $json['gen'];
+  $mail = $json['mail'] == ""  ? $defaultVal  : $json['mail'];
+  $address = $json['add'] == "" ? $defaultVal   : $json['add'];
+  $phone = $json['phone'] == "" ? $defaultVal  : $json['phone'];
+  $liveIn = $json['live'] == "" ? $defaultVal  : $json['live'];
+  $work = $json['work'] == "" ? $defaultVal  : $json['work'];
+  $loves = $json['lve'] == "" ? $defaultVal  : $json['lve'];
+  $facebook = $json['fb'] == "" ? $defaultVal  : $json['fb'];
+  $twitter = $json['tw'] == "" ? $defaultVal  : $json['tw'];
+  $gplus = $json['gplus'] == "" ? $defaultVal  : $json['gplus'];
+  $pinterest = $json['pin'] == "" ? $defaultVal  : $json['pin'];
   $headerIMG = $json['header'] =="" ? O_URL . "/cdn/img/headers/00.png" : $json['header'];
 }
+
 require_once "$docRoot/inc/class.rep.php";
-$RP = new ORep();
-$Rep = $RP->getRep($id); // Reputation
+$RP = new ORep($id);
+$Rep = $RP->getRep(); // Reputation
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,12 +88,12 @@ $Rep = $RP->getRep($id); // Reputation
     <div class="wrapper">
       <div class="content profile">
         <div class="header">
-          <img src="<?php echo $headerIMG;?>" width="100%" height="200" />
+          <img src="<?php echo $headerIMG;?>" width="100%" height="300" />
           <div class="holder">
             <?php
             echo "<a href=''>{$name}</a>"; // Attributing link to current page
             echo $OP->followButton($id);
-            ?>
+          ?>
           </div>
           <?php if($id == $who){ // If the profile is of logged in user himself ?>
             <a id="ch_hi" class="btn white">Change Header Image</a>
@@ -103,7 +105,7 @@ $Rep = $RP->getRep($id); // Reputation
             <ul class="tabs navigation">
               <li class="tab"><a href="<?php echo Open::URL("/$id/feed");?>" class="<?php if($_GET['part'] == "" || $_GET['part'] == "feed"){echo "active";}?>">Feed</a></li>
               <li class="tab"><a href="<?php echo Open::URL("/$id/about");?>" class="<?php if($_GET['part'] == "about"){echo "active";}?>">About</a></li>
-              <li class="tab"><a href="<?php echo Open::URL("/$id/reputation");?>" class="<?php if($_GET['part'] == "reputation"){echo "active";}?>">Reputation</li>
+              <li class="tab"><a href="<?php echo Open::URL("/$id/reputation");?>" class="<?php if($_GET['part'] == "reputation"){echo "active";}?>">Reputation</a></li>
             </ul>
             <div class="noggler" hide id="feed" <?php if($_GET['part']==""){echo"show";}?>>
               <?php $_POST['user'] = $id;include "$docRoot/inc/feed.php";?>
@@ -124,9 +126,9 @@ $Rep = $RP->getRep($id); // Reputation
                     <td data-label="gender">Gender</td>
                     <td data-value="<?php echo $gender;?>"><?php echo $gender;?></td>
                   </tr>
-                  <tr>
+                  <tr editable>
                     <td data-label="birthday">Birthday</td>
-                    <td class="time" data-value="<?php echo $birthday;?>"><?php echo $birthday;?></td>
+                    <td <?php echo $birthday != "YYYY-MM-DD" ? "'" : "";?> data-value="<?php echo $birthday;?>"><?php echo $birthday;?></td>
                   </tr>
                   <tr>
                     <td>Age</td>
@@ -182,74 +184,87 @@ $Rep = $RP->getRep($id); // Reputation
                 </thead>
                 <tbody>
                   <tr editable>
-                    <td data-label>Facebook</td>
+                    <td data-labe="facebook">Facebook</td>
                     <td data-value="<?php echo $facebook;?>"><?php
                       if($facebook != "Private"){
                         echo "<a target='_blank' href='https://www.facebook.com/". $facebook ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-64.png' /></a>";
+                      }else{
+                        echo $facebook;
                       }
-                    ?></td>
+                  ?></td>
                   </tr>
                   <tr editable>
                     <td data-label="twitter">Twitter</td>
                     <td data-value="<?php echo $twitter;?>"><?php
                       if($twitter != "Private"){
-                        echo "<a target='_blank' href='https://www.twitter.com/". $twitter ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/46-facebook-64.png' /></a>";
+                        echo "<a target='_blank' href='https://www.twitter.com/". $twitter ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-64.png' /></a>";
+                      }else{
+                        echo $twitter;
                       }
-                    ?></td>
+                  ?></td>
                   </tr>
                   <tr editable>
-                    <td data-label="twitter">Twitter</td>
+                    <td data-label="google+">Google+</td>
                     <td data-value="<?php echo $gplus;?>"><?php
-                      if($twitter != "Private"){
-                        echo "<a target='_blank' href='https://plus.google.com/+". $gplus ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-64.png' /></a>";
+                      if($gplus != "Private"){
+                        echo "<a target='_blank' href='https://plus.google.com/+". $gplus ."'><img src='//cdn3.iconfinder.com/data/icons/picons-social/57/80-google-plus-64.png' /></a>";
+                      }else{
+                        echo $gplus;
                       }
-                    ?></td>
+                  ?></td>
                   </tr>
                 </tbody>
               </table>
-              <div style="display:inline-block;vertical-align:top;width:275px;">
-                <div class="profiles smallbox">
-                  <h>Other Profiles</h>
-                  <it editable><n>Pinterest</n><m>:</m><v><?php echo $pinterest;?></v></it>
-                </div>
-              </div>
             </div>
             <div class="noggler" hide id="reputation" <?php if($_GET['part']=="reputation"){echo "show";}?>>
-              <center style="font-size:30px;height:40px;"><?php echo $Rep['total'];?></center>
-              <div class="blocks">
-                <div class="block" style="width: 49%;">
-                  <?php
-                  foreach($RP->getTopPosts() as $r){
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Post Reputation</td>
+                    <td><?php echo $RP->getPostRep();?></td>
+                  </tr>
+                  <tr>
+                    <td>Comment Reputation</td>
+                    <td><?php echo $RP->getCommentRep();?></td>
+                  </tr>
+                  <tr>
+                    <td>Comment Likes Reputation</td>
+                    <td><?php echo $RP->getCommentLikeRep();?></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td><a style="font-size:30px;height:40px;"><?php echo $Rep['total'];?></a></td>
+                  </tr>
+                </tfoot>
+              </table>
+              <div class="row">
+                <div class="col m4">
+                  <div class="collection">
+                    <?php
+                    foreach($RP->getTopPosts() as $r){
                   ?>
-                    <div class="blocks item">
-                      <div class="block rep"><?php echo $r['rep'];?></div>
-                      <a class="block" href="<?php echo O_URL ;?>/view/<?php echo $r['id'];?>">Post # <?php echo $r['id'];?></a>
-                    </div>
-                  <?php
-                  }
+                      <a href="<?php echo O_URL;?>/view/<?php echo $r['id'];?>" class="collection-item">Post # <?php echo $r['id'];?><span class="badge"><?php echo $r['rep'];?></span></a>
+                    <?php
+                    }
                   ?>
+                  </div>
                 </div>
-                <div class="block" style="width: 49%;">
-                  <?php
-                  foreach($RP->getTopComments() as $r){
+                <div class="col m8">
+                  <div class="collection">
+                    <?php
+                    $topComments = $RP->getTopComments();
+                    if(count($topComments) !== 0){
+                      echo "<a class='collection-header'><h4>Top Comments</h4></a>";
+                    }
+                    foreach($topComments as $r){
                   ?>
-                    <div class="blocks item">
-                      <div class="block rep"><?php echo $r['rep'];?></div>
-                      <a class="block" href="<?php echo Open::URL("view/{$r['pid']}#{$r['id']}");?>">
-                        <?php
-                        $c = $r['cmt'];
-                        if(strlen($c) > 10){
-                          echo substr($c, 0, 10);
-                        }else{
-                          echo $c;
-                        }
-                        /* The above code should be in one line */
-                        ?>
-                      </a>
-                    </div>
-                  <?php
-                  }
+                      <a href="<?php echo O_URL;?>/view/<?php echo $r['id'];?>" class="collection-item truncate">"<?php echo $r['cmt'];?>"<span class="badge"><?php echo $r['rep'];?></span></a>
+                    <?php
+                    }
                   ?>
+                  </div>
                 </div>
               </div>
             </div>
@@ -281,7 +296,7 @@ $Rep = $RP->getRep($id); // Reputation
                 $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `uid` = ?");
                 $sql->execute(array($id));
                 echo "<div><div>Following</div><b style='font-size:20px;'>{$sql->fetchColumn()}</b></div>";
-                ?>
+              ?>
               </div>
               <div class="followers" style="text-align:center;">
                 <?php
@@ -294,7 +309,7 @@ $Rep = $RP->getRep($id); // Reputation
                 $sql = $OP->dbh->prepare("SELECT COUNT(1) FROM `conn` WHERE `fid` = ?");
                 $sql->execute(array($id));
                 echo "<div><b style='font-size:20px;'>{$sql->fetchColumn()}</b><div>Followers</div></div>";
-                ?>
+              ?>
               </div>
             </div>
           </div>

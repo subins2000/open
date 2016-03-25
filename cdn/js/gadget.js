@@ -49,6 +49,7 @@ open.chat.check = function (type){
     });
   }
 };
+
 $(".msgEditor").smention(open.host + "/ajax/getUsers",{
   avatar:true,
   width:300
@@ -81,11 +82,9 @@ $(".msggt .close").live("click", function(){
 });
 
 /* Close the chat sidebar */
-$(".chatgt #users-nav .cusgt .close").live("click", function(){
-  $(".content").attr("style", "");
-  $("#users-nav").hide();
+$("#users-nav .cusgt .close").live("click", function(){
+  $(".openugt").sideNav("show");
   $(".openugt").show();
-  $(".msggt").css("right", "30px");
   localStorage['chatgtopen'] = 0;
 });
 
@@ -100,15 +99,24 @@ $(".chatgt .openugt").live("click",function(){
 
 $(".chatgt .openugt").sideNav({
   edge: 'right',
-  menuWidth: 200
+  menuWidth: 200,
+  closeOnClick: false
+});
+
+$(".chatgt .openugt").on("click", function(){
+  $("#sidenav-overlay").hide();
+  $(this).hide();
+  $(".openugt").sideNav("hide");
+  localStorage['chatgtopen'] = 1;
 });
 
 /**
  * Display the "Open Chat" button if the sidebar is hidden
  */
 if(localStorage['chatgtopen'] == 0){
-  $("#users-nav").hide();
+  $(".openugt").sideNav("hide");
   $(".openugt").show();
 }else{
-  //$(".chatgt .openugt").sideNav("show");
+  $(".chatgt .openugt").sideNav("show");
+  $(".openugt").hide();
 }

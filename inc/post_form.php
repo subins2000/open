@@ -19,7 +19,7 @@ while($r = $sql->fetch()){
 }
 if( loggedIn ){
 ?>
-  <div class="short_news" id="2016-03-12 01:05" hide>
+  <div class="short_news" id="2016-03-25 05:49" hide>
     <h4>New</h4>
     <p>New UI for Open</p>
     <p style="border-top:1px solid black;margin-top:5px;">Current Version : <b>0.6</b></p>
