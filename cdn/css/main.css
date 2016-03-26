@@ -58,6 +58,7 @@ nav .chat{
 }
 .side-nav{
   margin-top: 64px;
+  width: 200px;
 }
 i, i + span{
   display: inline-block;

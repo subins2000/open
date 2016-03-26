@@ -81,7 +81,7 @@ if(loggedIn){
           $sTitle = str_split($title, 25);
           $sTitle = $sTitle[0] . $extra;
           echo '<li class="collection-item">';
-            echo '<a href="'. $url .'" title="'. $title .'">'. $sTitle .'</a>';
+            echo '<a href="'. $url .'" class="truncate" title="'. $title .'">'. $sTitle .'</a>';
           echo "</li>";
         }
         $OP->dbh->query("DELETE FROM `trend` WHERE `hits` = (SELECT MIN(`hits`) FROM (SELECT * FROM `trend` HAVING COUNT(`hits`) > 150) x);");

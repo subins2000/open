@@ -34,6 +34,6 @@
       </div>
     </div>
   </div>
-  <a class="openugt" data-activates="users-nav" href="#">Open Chat</a>
+  <a class="btn openugt" data-activates="users-nav" href="#">Chat</a>
 </div>
 <?php }?>
