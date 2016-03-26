@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="type" value="home"></meta>
     <?php $OP->head("Home", "ac,post_form,home,time,gadget", "home,post_form,ac,gadget");?>
   </head>
   <body>

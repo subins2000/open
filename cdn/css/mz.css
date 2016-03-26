@@ -9752,7 +9752,6 @@ select {
 }
 .side-nav.right-aligned {
   right: 0;
-  transform: translateX(105%);
   left: auto;
   transform: translateX(100%);
 }

@@ -11,10 +11,12 @@
   z-index:999;
 }
 #users-nav{
-  padding: 15px 10px;
+  padding: 0 10px;
+  height: calc(100% - 64px);
 }
 #users-nav .users{
   overflow-y: auto;
+  height: 80vh;
 }
 #users-nav .user{
   cursor: pointer;
@@ -69,9 +71,9 @@
 
 /* The small current user box at the top in chat sidebar */
 .cusgt {
-  margin-bottom: 5px;
   padding: 0px 5px 5px;
   background: white;
+  margin-top: 10px;
 }
 .cusgt img{
   vertical-align: top;

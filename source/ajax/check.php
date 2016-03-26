@@ -1,15 +1,17 @@
 <?php
+require_once "$docRoot/inc/render.php";
 Header("content-type: application/x-javascript");
+
 if(isset($_POST['u']) && $_POST['u'] != $who && $_POST['u'] != "undefined"){
  echo "window.location.reload();"; /* Reload The Page */
  exit;
 }
+
 if(loggedIn && $_P){
   if(isset($_POST['p']) && isset($_POST['pt']) && $_POST['p'] != "undefined" && $_POST['pt'] != "view"){
     /**
      * Are There New Posts ?
      */
-    require_once "$docRoot/inc/render.php";
     $id = $_POST['p'];
     $url = urldecode($_POST['cu']);
     $url = parse_url($url);
@@ -62,8 +64,8 @@ if(loggedIn && $_P){
       ));
     }
     if($sql->rowCount()!=0){
-      $postArr = $sql->fetchAll(PDO::FETCH_ASSOC);
-      $html = $OP->rendFilt(Render::post($postArr));
+      $postArr = $sql->fetchAll(\PDO::FETCH_ASSOC);
+      $html = $OP->rendFilt(\Render::post($postArr));
       /* Give a fadein effect on new posts */
       $effect = "";
       foreach($postArr as $id => $v){
@@ -84,18 +86,18 @@ if(loggedIn && $_P){
   $count = $sql->rowCount();
   if($count != 0){
   ?>
-  $("#nfn_button").text("<?php echo$count;?>");$("#nfn_button").removeClass("white").addClass("red");
+    $("#nfn_button").text("<?php echo$count;?>");$("#nfn_button").removeClass("white").addClass("red");
   <?php 
   }
   if(isset($_POST['fl'])){
-    $requestedFile=$_POST['fl'];
-    $_POST=$_POST[$_POST['fl']];
-    if($requestedFile=="mC"){
+    $requestedFile = $_POST['fl'];
+    $_POST = $_POST[$_POST['fl']];
+    if($requestedFile == "mC"){
       include "$docRoot/source/ajax/checkMsg.php";
     }
   }
 }else{
- header("Content-type: text/html");
- $OP->ser();
+  header("Content-type: text/html");
+  $OP->ser();
 }
 ?>

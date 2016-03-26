@@ -20,15 +20,27 @@
     <div class="users">
       <div>
         <?php
-        $sql=$OP->dbh->prepare("SELECT fid FROM conn WHERE uid=:who AND fid IN (SELECT uid FROM conn WHERE fid=:who)");
+        $chatUsers = array();
+        $sql=$OP->dbh->prepare("SELECT `fid` FROM `conn` WHERE `uid` = :who AND `fid` IN (SELECT `uid` FROM `conn` WHERE `fid` = :who)");
         $sql->execute(array(":who"=>$who));
         while($r=$sql->fetch()){
-          $id=$r['fid'];
-          $fname=get("fname", $id,false);
-          $name=get("name", $id,false);
-          $img=get("avatar", $id);
-          $st=get("status", $id);
-          echo "<div class='user' id='$id'><img height='32' width='32' src='$img'/><span class='status $st'>$st</span><span class='name' title='$name'>$fname</span></div>";
+          $id = $r['fid'];
+          $chatUsers[$id] = array(
+            "fname" => get("fname", $id, false),
+            "name" => get("name", $id, false),
+            "avatar" => get("avatar", $id),
+            "status" => get("status", $id)
+          );
+        }
+        uasort($chatUsers, function($a, $b) {
+          if($a['status'] == "off" && $b['status'] == "on"){
+            return 1;
+          }else{
+            return -1;
+          }
+        });
+        foreach($chatUsers as $id => $user){
+          echo "<div class='user' id='$id'><img height='32' width='32' src='{$user['avatar']}'/><span class='status {$user['status']}'>{$user['status']}</span><span class='name' title='{$user['name']}'>{$user['fname']}</span></div>";
         }
         ?>
       </div>

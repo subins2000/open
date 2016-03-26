@@ -137,7 +137,7 @@ class Open{
         return O_URL ."/$userID";
       }elseif($key == "status"){
         $data = $data['seen'];
-        if($data < date("Y-m-d H:i:s",strtotime('-20 seconds', time()))){
+        if($data < date("Y-m-d H:i:s",strtotime('-15 seconds', time()))){
           return "off";
         }else{
           return "on";
