@@ -164,7 +164,7 @@ class Render {
           $html .= "</div>";
         $html .= "</div>";
         
-        if($last != $i - 1 && rand(0, 20) % 5 == 0){
+        if($last != $i - 1 && rand(0, 20) % 6 == 0){
           $html .= require docRoot . "/inc/suggest.php";
           $last = $i;
         }
