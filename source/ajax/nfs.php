@@ -16,9 +16,9 @@ if(isset($_POST['load'])){
   $nfs.="<a href='". Open::URL("/notifications") ."' style='text-align:center;display:block;'>See All Notifications</a><br/>";
 ?>
 $(".notifications .loading").hide();
-$(".notifications .nfs").html("<?php echo $nfs;?>");
 $(".notifications #nfn_button").text("0");
 $(".notifications #nfn_button").removeClass("red");
+$(".notifications .nfs").html("<?php echo $nfs;?>");
 <?php  
  }
 }

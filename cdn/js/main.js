@@ -128,7 +128,9 @@ open.notify = function(message, type){
   });
 };
 
-/* Show dialog boxes. If a URL is going to be passed to show an iframe, don't set `notFrame` to boolean true */
+/**
+ * Show dialog boxes. If a URL is going to be passed to show an iframe, don't set `notFrame` to boolean true
+ */
 open.dialog = function(content, notFrame){
   if( content == "close" ){
     $("#dialog #content #close").click(); // Close Dialog box
