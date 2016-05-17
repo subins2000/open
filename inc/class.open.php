@@ -242,11 +242,13 @@ class Open{
    * --------------------
   */
  
-  /* For making clean URLs */
+  /**
+   * Make www.subinsb.com to http://www.subinsb.com
+   */
   private function goodURL($matches){
     $ots = "";
     $url = str_replace("\n", "", str_replace("\s", "", $matches[0]));
-    if($matches[2]=='http://' || $matches[2]=='https://' || $matches[2]=='www'){
+    if($matches[2] == 'http://' || $matches[2] == 'https://' || $matches[2] == 'www'){
       $t = $matches[1];
     }else{
       $t = $matches[2];
@@ -255,10 +257,10 @@ class Open{
       $t = str_replace("\n", "", $t);
       $ots = "\n";
     }
-    if($matches[2] == 'www'){
-      $url = "http://$u";
+    if($matches[2] === 'www'){
+      $url = "http://$url";
     }
-    return '<a href="'.$url.'">'.$t.'</a>'.$ots;
+    return '<a href="'. $url .'">'. $t .'</a>'. $ots;
   }
  
   /* Makes @1 into <a href='//open.sim/1'>@SubinSiby</a> */
@@ -540,7 +542,7 @@ class Open{
   */
   public static function sendEMail($mail, $subject, $content, $opth = false){
     $extra = "";
-    if($opth == true){
+    if($opth === true){
       $extra = "<p style='margin-top: 20px;'>This email is sent by an application you have authorized via Open Auth (Opth)</p>";
     }
     

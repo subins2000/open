@@ -82,7 +82,7 @@
               $OP->ser("You Already Have An Account!", "There is already an account registered with the E-Mail you have given.<cl/><a href='". O_URL ."/me/ResetPassword' class='btn red'>Forgot Password ?</a>");
             }
             $secretToken = $OP->encrypt($email . $cfg['keys']['email_verification']);
-            if(CLEAN_HOST == "open.sim"){
+            if(CLEAN_HOST == "op" . "en.sim"){
               echo $secretToken;
             }
             

@@ -13,6 +13,7 @@ if(isset($_POST['api_key']) && isset($_POST['api_secret']) && isset($user_token)
     echo "false";
     exit;
   }
+  
   $sql = $OP->dbh->prepare("SELECT `uid`, `permissions` FROM `opth_session` WHERE `access_token` = ? AND `sid` = ?");
   $sql->execute(array($user_token, $sid));
   $data = $sql->fetch(PDO::FETCH_ASSOC);
@@ -33,11 +34,11 @@ if(isset($_POST['api_key']) && isset($_POST['api_secret']) && isset($user_token)
     )
   );
 
-  if(substr($what, 0, 7) == "action-"){
+  if(substr($what, 0, 7) === "action-"){
     $what = substr_replace($what, "", 0, 7);
     
     if(isset($obtainable_values[$what])){
-      if($what == "email" && isset($given_scopes[$obtainable_values[$what][0]]) && isset($_POST['subject']) && isset($_POST['body']) && $_POST['subject'] != null  && $_POST['body'] != null){
+      if($what === "email" && isset($given_scopes[$obtainable_values[$what][0]]) && isset($_POST['subject']) && isset($_POST['body']) && $_POST['subject'] != null  && $_POST['body'] != null){
         $sql = $OP->dbh->prepare("SELECT `username` FROM `users` WHERE `id` = ?");
         $sql->execute(array($uid));
         
