@@ -9,7 +9,7 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
     '%252F',
     '%255C'
   ), urlencode($_GET['q']));
-  $To        = $_GET['q'] == "" ? "" : "/{$_GET['q']}";
+  $To = $_GET['q'] == "" ? "" : "/{$_GET['q']}";
   $OP->redirect("/find$To", 301);
   /* See $OP->redirect() in config.php */
 }
@@ -48,10 +48,9 @@ if ($_SERVER['SCRIPT_NAME'] == "/find.php" && isset($_GET['q'])) {
         if ($q != '' && $p == '1') {
           $sql = $OP->dbh->prepare("SELECT id FROM users WHERE name LIKE :q AND id!=:who ORDER BY id LIMIT :limit");
           $sql->bindValue(':limit', $limit, PDO::PARAM_INT);
-          $sql->execute(array(
-            ":who" => $who,
-            ":q" => "%$q%"
-          ));
+          $sql->bindValue(":who", $who);
+          $sql->bindValue(":q", "%$q%");
+          $sql->execute();
         }else if ($p != "1") {
           $start = ($p - 1) * 10;
           if ($q == "") {
